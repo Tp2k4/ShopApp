@@ -226,7 +226,7 @@ public class ProductController {
 
         String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
 
-        Path uploadDir = Paths.get("upload/product/images");
+        Path uploadDir = Paths.get("Backend/upload/product/images");
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
         }
@@ -240,7 +240,7 @@ public class ProductController {
     @GetMapping("/images/{imageName}")
     public ResponseEntity<?> viewImage(@PathVariable String imageName) {
         try {
-            Path imagePath = Paths.get("upload/product/images/" + imageName);
+            Path imagePath = Paths.get("Backend/upload/product/images/" + imageName);
             UrlResource resource = new UrlResource(imagePath.toUri());
             return resource.exists() ? ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(resource)
                     : ResponseEntity.badRequest().body("Image not found");
