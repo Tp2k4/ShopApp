@@ -14,7 +14,7 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
       width="200px"
       {...rest}
     >
-      <NavLabel label="Trang chủ" link="/home-manager" />
+      <NavLabel label="Trang chủ" link="/home-manager" order="first" />
       <NavLabel label="Quản lí tài khoản" link="/account-manager" />
       <NavLabel label="Quản lí sản phẩm" link="/product-manager" />
       <NavLabel label="Quản lí kho" link="/inventory-manager" />
