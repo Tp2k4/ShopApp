@@ -1,11 +1,10 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 
-import com.gms.gmshopbackend.model.HeadphoneSpecs;
 import com.gms.gmshopbackend.model.KeyboardSpecs;
 import com.gms.gmshopbackend.model.Product;
-import com.gms.gmshopbackend.repository.HeadphoneSpecsRepository;
 import com.gms.gmshopbackend.repository.KeyboardSpecsRepository;
+import com.gms.gmshopbackend.service.inter.IKeyboardSpecsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

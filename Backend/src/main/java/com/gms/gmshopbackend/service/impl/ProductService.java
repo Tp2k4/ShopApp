@@ -1,15 +1,14 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
 import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
 import com.gms.gmshopbackend.response.ProductResponse;
+import com.gms.gmshopbackend.service.inter.IProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

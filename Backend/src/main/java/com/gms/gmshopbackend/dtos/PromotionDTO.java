@@ -2,8 +2,7 @@ package com.gms.gmshopbackend.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -13,15 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class PromotionDTO {
+    @JsonProperty(value = "name")
     private String name;
+    @JsonProperty(value = "type")
     private String type;
-    private String status;
+//    @JsonProperty(value = "status")
+//    private String status;
 
     @JsonProperty(value = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @JsonProperty(value = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
+    @JsonProperty(value = "list_product")
     private List<ProductPromotionDTO> listProduct;
 }

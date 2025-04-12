@@ -1,6 +1,5 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.inter;
 
-import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.response.InventoryResponse;
 

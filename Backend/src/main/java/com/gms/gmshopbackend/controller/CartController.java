@@ -1,13 +1,12 @@
 package com.gms.gmshopbackend.controller;
 
 import com.gms.gmshopbackend.dtos.ProductCartDTO;
-import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
 import com.gms.gmshopbackend.repository.CartItemRepository;
 import com.gms.gmshopbackend.response.CartItemResponse;
-import com.gms.gmshopbackend.service.CartItemService;
-import com.gms.gmshopbackend.service.CartService;
+import com.gms.gmshopbackend.service.impl.CartItemService;
+import com.gms.gmshopbackend.service.impl.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

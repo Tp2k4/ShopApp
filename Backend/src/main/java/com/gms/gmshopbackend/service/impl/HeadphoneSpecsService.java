@@ -1,4 +1,4 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 
 import com.gms.gmshopbackend.model.HeadphoneSpecs;
@@ -6,6 +6,7 @@ import com.gms.gmshopbackend.model.HeadphoneSpecs;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.repository.HeadphoneSpecsRepository;
 
+import com.gms.gmshopbackend.service.inter.IHeadphoneSpecsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

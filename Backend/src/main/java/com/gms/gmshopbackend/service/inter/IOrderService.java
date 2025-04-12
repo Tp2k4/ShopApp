@@ -1,4 +1,4 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.inter;
 
 import com.gms.gmshopbackend.dtos.OrderDTO;
 import com.gms.gmshopbackend.model.Order;

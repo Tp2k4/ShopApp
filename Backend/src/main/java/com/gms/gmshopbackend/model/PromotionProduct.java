@@ -26,9 +26,12 @@ public class PromotionProduct {
 
     @OneToOne
     @JoinColumn(name = "promotion_id")
-    private Promotion promotion;
+    private Promotion promotionId;
 
     @Column(name = "discount_percent", precision = 5, scale = 2) // DECIMAL(5,2)
-    private BigDecimal discoutnPercent;
+    private BigDecimal discountPercent;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
 
 }

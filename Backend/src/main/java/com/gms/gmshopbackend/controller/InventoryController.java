@@ -2,7 +2,7 @@ package com.gms.gmshopbackend.controller;
 
 
 import com.gms.gmshopbackend.response.InventoryResponse;
-import com.gms.gmshopbackend.service.InventoryService;
+import com.gms.gmshopbackend.service.impl.InventoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

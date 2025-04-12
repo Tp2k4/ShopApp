@@ -1,6 +1,5 @@
 package com.gms.gmshopbackend.controller;
 
-import co.elastic.clients.elasticsearch.nodes.Http;
 import com.github.javafaker.Faker;
 import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
@@ -8,23 +7,19 @@ import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
 import com.gms.gmshopbackend.response.ProductResponse;
 import com.gms.gmshopbackend.response.ProductResponseList;
-import com.gms.gmshopbackend.service.ProductService;
-import lombok.AllArgsConstructor;
+import com.gms.gmshopbackend.service.impl.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

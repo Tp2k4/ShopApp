@@ -1,7 +1,6 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.inter;
 
 import com.gms.gmshopbackend.dtos.UserDTO;
-import com.gms.gmshopbackend.dtos.UserLoginDTO;
 import com.gms.gmshopbackend.model.User;
 
 public interface IUserService {

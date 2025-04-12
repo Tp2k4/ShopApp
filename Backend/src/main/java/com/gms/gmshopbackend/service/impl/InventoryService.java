@@ -1,14 +1,14 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.repository.InventoryRepository;
 import com.gms.gmshopbackend.repository.ProductRepository;
 import com.gms.gmshopbackend.response.InventoryResponse;
+import com.gms.gmshopbackend.service.inter.IInventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

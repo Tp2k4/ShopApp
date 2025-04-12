@@ -1,9 +1,10 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 
 import com.gms.gmshopbackend.model.MouseSpecs;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.repository.MouseSpecsRepository;
+import com.gms.gmshopbackend.service.inter.IMouseSpecsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

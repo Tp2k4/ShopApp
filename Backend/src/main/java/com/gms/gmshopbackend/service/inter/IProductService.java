@@ -1,4 +1,4 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.inter;
 
 import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
@@ -7,7 +7,6 @@ import com.gms.gmshopbackend.model.ProductImage;
 import com.gms.gmshopbackend.response.ProductResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

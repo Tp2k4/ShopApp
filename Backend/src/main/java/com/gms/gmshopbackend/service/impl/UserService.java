@@ -1,4 +1,4 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 import com.gms.gmshopbackend.components.JwtTokenUtil;
 import com.gms.gmshopbackend.dtos.UserDTO;
@@ -6,14 +6,13 @@ import com.gms.gmshopbackend.model.Role;
 import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.RoleRepository;
 import com.gms.gmshopbackend.repository.UserRepository;
+import com.gms.gmshopbackend.service.inter.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 

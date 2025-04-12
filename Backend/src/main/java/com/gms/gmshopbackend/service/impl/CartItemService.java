@@ -1,4 +1,4 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 import com.gms.gmshopbackend.dtos.ProductCartDTO;
 import com.gms.gmshopbackend.model.Cart;
@@ -6,6 +6,7 @@ import com.gms.gmshopbackend.model.CartItem;
 import com.gms.gmshopbackend.repository.CartItemRepository;
 import com.gms.gmshopbackend.repository.CartRepository;
 import com.gms.gmshopbackend.repository.ProductRepository;
+import com.gms.gmshopbackend.service.inter.ICartItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -8,6 +8,7 @@ import com.gms.gmshopbackend.model.ProductImage;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,6 +42,8 @@ public class ProductResponse extends BaseResponse {
 
     private List<ProductImageResponse> productImages;
 
+    private BigDecimal discountPercent;
+
 
     public static ProductResponse fromProduct(Product product) {
         ProductResponse productResponse = ProductResponse.builder()
@@ -66,6 +69,7 @@ public class ProductResponse extends BaseResponse {
 
         productResponse.setCreatedAt(product.getCreatedAt());
         productResponse.setUpdatedAt(product.getUpdatedAt());
+        productResponse.setDiscountPercent(product.getDiscountPercent());
 
         return productResponse;
 

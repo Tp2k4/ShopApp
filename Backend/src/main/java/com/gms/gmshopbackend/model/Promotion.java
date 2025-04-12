@@ -2,7 +2,9 @@ package com.gms.gmshopbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,10 +25,10 @@ public class Promotion {
     private String type;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "endDate")
-    private Date endDate;
+    private LocalDate endDate;
 
     private String status;
 

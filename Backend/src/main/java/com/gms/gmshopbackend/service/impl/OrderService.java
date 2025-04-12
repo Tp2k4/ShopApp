@@ -1,9 +1,9 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
-import com.gms.gmshopbackend.dtos.CartItemDTO;
 import com.gms.gmshopbackend.dtos.OrderDTO;
 import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
+import com.gms.gmshopbackend.service.inter.IOrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

@@ -1,16 +1,17 @@
-package com.gms.gmshopbackend.service;
+package com.gms.gmshopbackend.service.impl;
 
 import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
 import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.CartRepository;
 import com.gms.gmshopbackend.repository.UserRepository;
+import com.gms.gmshopbackend.service.inter.ICartItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CartService implements ICartService {
+public class CartService implements ICartItemService.ICartService {
 
     private final CartRepository cartRepository;
     private final UserRepository userRepository;

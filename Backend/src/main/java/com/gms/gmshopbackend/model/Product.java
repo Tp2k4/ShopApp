@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -60,6 +61,9 @@ public class Product extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "headphone_specs_id")
     private HeadphoneSpecs headphoneSpecs;
+
+    @Column(name = "discount_percent")
+    private BigDecimal discountPercent;
 
 }
 
