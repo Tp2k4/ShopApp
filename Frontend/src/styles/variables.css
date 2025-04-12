@@ -1,0 +1,22 @@
+:root{
+    --primary-color: #1F4E79;
+    --secondary-color: #DEEBF7;
+    
+    --primary-hover: #316999;
+    --secondary-hover: #fafafa	;
+    
+    --background-color: #F2F2F2;
+    --line-color: #A5A5A5;
+    --link-text: #0000EE;
+
+    --big-gap: 24px;
+    --medium-gap: 16px;
+    --small-gap: 8px;
+
+    --logo: 36px;
+    --heading-1: 26px;
+    --heading-2: 20px;
+    --heading-3: 16px;
+    --body-text: 14px;
+    --caption: 12px;
+}
