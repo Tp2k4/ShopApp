@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-import Header from "../../shared/components/Header";
-import Navigation from "../../shared/components/Navigation";
+import Header from "../components/ui/Header";
+import Navigation from "../components/ui/Navigation";
 
-type ManagerLayoutProps = {
+interface ManagerLayoutProps {
   children?: ReactNode;
-};
+}
 
 function ManagerLayout({ children }: ManagerLayoutProps) {
   return (

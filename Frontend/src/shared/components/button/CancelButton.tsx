@@ -1,4 +1,4 @@
-interface ButtonProps {
+interface CancelButtonProps {
   text: string;
   width: string;
   className?: string;
@@ -11,10 +11,12 @@ function CancelButton({
   type,
   className = "",
   ...rest
-}: ButtonProps) {
+}: CancelButtonProps) {
   return (
     <button
-      className={`flex justify-center items-center h-8 bg-white border border-[var(--primary-color)] rounded-md px-4 py-2 text-[var(--primary-color)] hover:bg-[var(--secondary-hover)] cursor-pointer ${className}`}
+      className={`h-8 flex justify-center items-center bg-white 
+        border border-[var(--primary-color)] rounded-md px-2
+        text-[var(--primary-color)] hover:bg-[var(--secondary-hover)] cursor-pointer ${className}`}
       type="button"
       style={{ width: width }}
       {...rest}

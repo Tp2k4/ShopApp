@@ -1,8 +1,8 @@
-import Box from "../shared/components/Box";
-import Line from "../shared/components/Line";
-import Button from "../shared/components/Button";
-import CancelButton from "../shared/components/CancelButton";
-import InputField from "../shared/components/InputField";
+import Box from "../shared/components/ui/Box";
+import Line from "../shared/components/ui/Line";
+import Button from "../shared/components/button/Button";
+import CancelButton from "../shared/components/button/CancelButton";
+import InputField from "../shared/components/form/InputField";
 
 import { useNavigate } from "react-router-dom";
 
@@ -32,10 +32,10 @@ function ForgotPassword() {
         <div className="flex justify-end gap-[var(--small-gap)]">
           <CancelButton
             text="Hủy"
-            width="50px"
+            width="auto"
             onClick={() => navigate("/login")}
           />
-          <Button type="submit" text="Tìm kiếm" width="90px" />
+          <Button type="submit" text="Tìm kiếm" width="auto" />
         </div>
       </Box>
     </div>

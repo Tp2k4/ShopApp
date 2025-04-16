@@ -1,10 +1,13 @@
-import Box from "../shared/components/Box";
-import Line from "../shared/components/Line";
-import Button from "../shared/components/Button";
-import InputField from "../shared/components/InputField";
-import { Link } from "react-router-dom";
+import Box from "../shared/components/ui/Box";
+import Line from "../shared/components/ui/Line";
+import Button from "../shared/components/button/Button";
+import InputField from "../shared/components/form/InputField";
+
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <div className="flex w-[800px] gap-[var(--big-gap)]">
@@ -47,7 +50,12 @@ function Login() {
               Quên mật khẩu?
             </Link>
             <Line width="100%" />
-            <Button type="button" width="170px" text="Tạo tài khoản mới" />
+            <Button
+              onClick={() => navigate("/create-account")}
+              type="button"
+              width="129px"
+              text="Tạo tài khoản mới"
+            />
           </Box>
         </div>
       </div>

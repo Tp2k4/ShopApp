@@ -1,6 +1,6 @@
 import VerticalLine from "./VerticalLine";
-import Avatar from "../../shared/components/Avatar";
-import avatar from "../../assets/avatar/avatar.jpg";
+import Avatar from "./Avatar";
+import avatar from "../../../assets/avatar/avatar.jpg";
 
 interface HeaderProps {
   children?: React.ReactNode;
