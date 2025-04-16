@@ -9,6 +9,7 @@ import com.gms.gmshopbackend.model.PromotionStatus;
 import com.gms.gmshopbackend.repository.ProductRepository;
 import com.gms.gmshopbackend.repository.PromotionProductRepository;
 import com.gms.gmshopbackend.repository.PromotionRepository;
+import com.gms.gmshopbackend.response.PromotionResponse;
 import com.gms.gmshopbackend.service.inter.IPromotionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,30 @@ public class PromotionService implements IPromotionService {
     private final PromotionProductRepository promotionProductRepository;
 
     @Override
-    public List<Promotion> getAllPromotions() {
+    public List<PromotionResponse> getAllPromotions() {
         try {
-            return promotionRepository.findAll();
+                List<Promotion> promotions = promotionRepository.findAll();
+
+                return promotions.stream().map(promotion -> {
+                    List<ProductPromotionDTO> productList = promotionProductRepository.findByPromotionId(promotion).stream()
+                            .map(p -> new ProductPromotionDTO(
+                                    p.getProduct().getId(),
+                                    p.getDiscountPercent()
+                            ))
+                            .collect(Collectors.toList());
+
+                    return new PromotionResponse(
+                            promotion.getId(),
+                            promotion.getName(),
+                            promotion.getType(),
+                            promotion.getStatus(),
+                            promotion.getStartDate(),
+                            promotion.getEndDate(),
+                            productList
+                    );
+                }).collect(Collectors.toList());
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

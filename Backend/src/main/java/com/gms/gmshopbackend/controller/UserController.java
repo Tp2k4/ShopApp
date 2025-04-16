@@ -3,11 +3,13 @@ package com.gms.gmshopbackend.controller;
 import com.gms.gmshopbackend.dtos.UserDTO;
 import com.gms.gmshopbackend.dtos.UserLoginDTO;
 import com.gms.gmshopbackend.model.User;
+import com.gms.gmshopbackend.response.UserResponse;
 import com.gms.gmshopbackend.service.impl.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("${api.prefix}/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private final UserService userService;
 
@@ -29,7 +32,7 @@ public class UserController {
             }
 
             User user = userService.createUser(userDTO);
-            return ResponseEntity.ok().body(user);
+            return ResponseEntity.ok().body(UserResponse.fromUser(user));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -43,6 +46,52 @@ public class UserController {
             return ResponseEntity.ok().body(token);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/alls")
+    public ResponseEntity<?> getAllUsers() {
+        try{
+            List<UserResponse> users  = userService.getAllUsers();
+            return ResponseEntity.ok().body(users);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/admin/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+        User user = userService.getUserById(userId);
+        return ResponseEntity.ok().body(UserResponse.fromUser(user));
+    }
+
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestParam("email") String email) {
+        try {
+            userService.sendOtpIfUserExists(email);
+            return ResponseEntity.ok("OTP đã được gửi tới email.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestParam("email") String email, @RequestParam("otp") String otp) {
+        if (userService.verifyOtp(email, otp)) {
+            return ResponseEntity.ok("Xác thực OTP thành công.");
+        }
+        return ResponseEntity.badRequest().body("OTP sai hoặc hết hạn.");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestParam("email") String email,
+                                           @RequestParam("new-password") String newPassword) {
+        try {
+            userService.resetPassword(email, newPassword);
+            return ResponseEntity.ok("Đặt lại mật khẩu thành công.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

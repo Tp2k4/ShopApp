@@ -33,8 +33,7 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers(
-                                    String.format("%s/user/register", apiPrefix),
-                                    String.format("%s/user/login", apiPrefix)
+                                    String.format("%s/user/**", apiPrefix)
                             )
                             .permitAll()
                             .requestMatchers(PUT,

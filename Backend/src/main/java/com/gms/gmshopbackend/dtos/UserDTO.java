@@ -48,4 +48,6 @@ public class UserDTO {
     @JsonProperty(value = "role_id")
     private Long roleId;
 
+    private String email;
+
 }

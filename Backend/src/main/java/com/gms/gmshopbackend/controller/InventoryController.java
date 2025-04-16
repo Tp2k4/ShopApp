@@ -1,6 +1,7 @@
 package com.gms.gmshopbackend.controller;
 
 
+import com.gms.gmshopbackend.dtos.InventoryGroupByDateDTO;
 import com.gms.gmshopbackend.response.InventoryResponse;
 import com.gms.gmshopbackend.service.impl.InventoryService;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class InventoryController {
     public ResponseEntity<?> getInventory() {
         try {
 
-            List<InventoryResponse> inventoryList = inventoryService.getInventory();
+            List<InventoryGroupByDateDTO> inventoryList = inventoryService.getInventory();
             return ResponseEntity.ok(inventoryList);
         }catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

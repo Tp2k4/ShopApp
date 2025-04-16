@@ -85,4 +85,7 @@ public class User extends BaseEntity implements UserDetails {
     @JoinColumn (name = "role_id")
     private com.gms.gmshopbackend.model.Role role;
 
+    @Column(name = "email")
+    private String email;
+
 }

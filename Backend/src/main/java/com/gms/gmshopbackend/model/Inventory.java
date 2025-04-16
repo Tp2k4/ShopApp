@@ -3,7 +3,9 @@ package com.gms.gmshopbackend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -33,5 +35,11 @@ public class Inventory {
     private String transactionType;
 
     @Column(name = "transaction_date")
-    private Date transactionDate;
+    private LocalDate transactionDate;
+
+    @Column(name = "import_price")
+    private Double importPrice;
+
+    @Column(name = "sell_price")
+    private Double sellPrice;
 }

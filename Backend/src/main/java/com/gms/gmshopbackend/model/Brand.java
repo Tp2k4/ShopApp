@@ -20,6 +20,4 @@ public class Brand extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
-
-    private String description;
 }

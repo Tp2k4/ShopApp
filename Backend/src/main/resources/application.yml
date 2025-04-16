@@ -24,6 +24,20 @@ spring:
       max-request-size: 10MB
   main:
     allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: thophan357@gmail.com
+    password: ubsygfyidbcygsye
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    default-encoding: UTF-8
 
 api:
   prefix: api/v1/gmshop
@@ -33,4 +47,7 @@ api:
 jwt:
   expiration: 86400
   secretkey: 5+2eqXSVC4XDqxgu2rHXDRSGbRUgCfk9uuTKjoIw1N8=
+
+
+
 

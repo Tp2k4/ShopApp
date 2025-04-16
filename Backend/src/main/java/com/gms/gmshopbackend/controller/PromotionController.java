@@ -1,7 +1,9 @@
 package com.gms.gmshopbackend.controller;
 
+import com.gms.gmshopbackend.dtos.ProductPromotionDTO;
 import com.gms.gmshopbackend.dtos.PromotionDTO;
 import com.gms.gmshopbackend.model.Promotion;
+import com.gms.gmshopbackend.response.PromotionResponse;
 import com.gms.gmshopbackend.service.impl.PromotionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +57,7 @@ public class PromotionController {
     @GetMapping("")
     public ResponseEntity<?> getAllPromotions() {
         try{
-            List<Promotion> promotions = promotionService.getAllPromotions();
+            List<PromotionResponse> promotions = promotionService.getAllPromotions();
             return ResponseEntity.status(HttpStatus.OK).body(promotions);
         }catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
