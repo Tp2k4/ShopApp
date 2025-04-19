@@ -15,13 +15,13 @@ function ChangePassSuccess() {
         className="items-center flex flex-col gap-[var(--medium-gap)] p-[var(--medium-gap)]"
       >
         <div className="heading3 font-semibold">Đổi mật khẩu thành công!</div>
-        <Line width="100%" />
+        <Line width="w-full" />
         <div>Mật khẩu của bạn đã được đổi thành công!</div>
         <Button
           onClick={() => navigate("/login")}
           type="button"
           text="Quay về trang đăng nhập"
-          width="180px"
+          width="w-auto"
         />
       </Box>
     </div>

@@ -1,0 +1,40 @@
+[
+    {
+        "date": "01/02/2024",
+        "products": [
+            {
+                "productName": "Chuột Logitech",
+                "selledAmount": 3,
+                "importPrice": 150000,
+                "sellPrice": 200000,
+                "totalRevenue": 750000
+            },
+            {
+                "productName": "Chuột Logitech",
+                "selledAmount": 3,
+                "importPrice": 150000,
+                "sellPrice": 200000,
+                "totalRevenue": 750000
+            }
+        ]
+    },
+    {
+        "date": "02/02/2024",
+        "products": [
+            {
+                "productName": "Chuột Logitech",
+                "selledAmount": 3,
+                "importPrice": 150000,
+                "sellPrice": 200000,
+                "totalRevenue": 750000
+            },
+            {
+                "productName": "Chuột Logitech",
+                "selledAmount": 3,
+                "importPrice": 150000,
+                "sellPrice": 200000,
+                "totalRevenue": 750000
+            }
+        ]
+    }
+]

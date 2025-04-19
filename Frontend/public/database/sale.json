@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name" : "Black Friday 6",
+        "type" : "Percent",
+        "state": "Sắp diễn ra",
+        "startDate" : "2025-04-12",
+        "endDate" : "2025-05-12",
+        "products":[
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            },
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            },
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name" : "Black Friday 6",
+        "type" : "Percent",
+        "state": "Sắp diễn ra",
+        "startDate" : "2025-04-12",
+        "endDate" : "2025-05-12",
+        "products":[
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            },
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            },
+            {
+                "productName": "Chuột Logitect",
+                "link": "https://...",
+                "discountPercentage": 30.0
+            }
+        ]
+    }
+]

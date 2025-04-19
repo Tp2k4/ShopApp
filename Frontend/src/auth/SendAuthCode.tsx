@@ -15,12 +15,12 @@ function SendAuthCode() {
     <div className="w-screen h-screen flex justify-center items-center">
       <Box
         width="450px"
-        height="auto"
+        height="h-auto"
         className="flex flex-col gap-[var(--medium-gap)] p-[var(--medium-gap)]"
       >
         {/*  */}
         <div className="heading3 font-semibold">Đặt lại mật khẩu của bạn</div>
-        <Line width="100%" />
+        <Line width="w-full" />
 
         {/*  */}
         <div>
@@ -29,7 +29,7 @@ function SendAuthCode() {
         </div>
 
         {/*  */}
-        <div className="flex flex-col gap-[var(--small-gap)]">
+        <div className="flex flex-col items-start gap-[var(--small-gap)]">
           <div className="w-full flex items-center gap-[var(--small-gap)]">
             <InputField className="w-1/2" type="text" placeholder="Nhập mã" />
             <div className="w-1/2">
@@ -37,7 +37,8 @@ function SendAuthCode() {
               <span className="text-blue-500">0123456789</span>
             </div>
           </div>
-          <Button type="submit" text="Gửi lại" width="58px" />
+
+          <Button type="submit" text="Gửi lại" width="w-auto" />
         </div>
 
         {/* Avatar */}
@@ -47,14 +48,14 @@ function SendAuthCode() {
         </div>
 
         {/*  */}
-        <Line width="100%" />
+        <Line width="w-full" />
         <div className="flex justify-end gap-[var(--small-gap)]">
           <CancelButton
             text="Hủy"
-            width="auto"
+            width="w-auto"
             onClick={() => navigate("/login")}
           />
-          <Button type="submit" text="Tìm kiếm" width="auto" />
+          <Button type="submit" text="Tìm kiếm" width="w-auto" />
         </div>
       </Box>
     </div>

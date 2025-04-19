@@ -17,7 +17,7 @@ function ResetPassword() {
         className="flex flex-col gap-[var(--medium-gap)] p-[var(--medium-gap)]"
       >
         <div className="heading3 font-semibold">Chọn mật khẩu mới</div>
-        <Line width="100%" />
+        <Line width="w-full" />
 
         {/* */}
         <div>
@@ -28,16 +28,16 @@ function ResetPassword() {
           <InputField type="password" placeholder="Điền mật khẩu mới" />
           <InputField type="password" placeholder="Nhập lại mật khẩu mới" />
         </div>
-        <Line width="100%" />
+        <Line width="w-full" />
 
         {/* */}
         <div className="flex justify-end gap-[var(--small-gap)]">
           <CancelButton
             text="Hủy"
-            width="auto"
+            width="w-auto"
             onClick={() => navigate("/login")}
           />
-          <Button type="submit" width="auto" text="Xác nhận" />
+          <Button type="submit" width="w-auto" text="Xác nhận" />
         </div>
       </Box>
     </div>

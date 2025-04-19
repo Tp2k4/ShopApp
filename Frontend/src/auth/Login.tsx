@@ -31,15 +31,15 @@ function Login() {
               method="POST"
             >
               <div className="w-full flex flex-col gap-[var(--small-gap)]">
-                <InputField width="100%" placeholder="username" type="text" />
+                <InputField width="w-full" placeholder="username" type="text" />
                 <InputField
-                  width="100%"
+                  width="w-full"
                   placeholder="password"
                   type="password"
                 />
               </div>
 
-              <Button type="submit" width="100%" text="Đăng nhập" />
+              <Button type="submit" width="w-full" text="Đăng nhập" />
             </form>
 
             {/*  */}
@@ -49,11 +49,11 @@ function Login() {
             >
               Quên mật khẩu?
             </Link>
-            <Line width="100%" />
+            <Line width="w-full" />
             <Button
               onClick={() => navigate("/create-account")}
               type="button"
-              width="129px"
+              width="w-auto"
               text="Tạo tài khoản mới"
             />
           </Box>

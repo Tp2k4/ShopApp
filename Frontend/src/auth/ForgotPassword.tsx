@@ -13,29 +13,29 @@ function ForgotPassword() {
     <div className="w-screen h-screen flex justify-center items-center">
       <Box
         width="350px"
-        height="auto"
+        height="w-auto"
         className="flex flex-col gap-[var(--medium-gap)] p-[var(--medium-gap)]"
       >
         {/*  */}
         <div className="heading3 font-semibold">Tìm kiếm tài khoản</div>
-        <Line width="100%" />
+        <Line width="w-full" />
 
         {/*  */}
         <div>
           Vui lòng nhập email hoặc số điện thoại di động để tìm kiếm tài khoảng
           của bạn
         </div>
-        <InputField width="100%" type="text" placeholder="sdt, email" />
-        <Line width="100%" />
+        <InputField width="w-full" type="text" placeholder="sdt, email" />
+        <Line width="w-full" />
 
         {/*  */}
         <div className="flex justify-end gap-[var(--small-gap)]">
           <CancelButton
             text="Hủy"
-            width="auto"
+            width="w-auto"
             onClick={() => navigate("/login")}
           />
-          <Button type="submit" text="Tìm kiếm" width="auto" />
+          <Button type="submit" text="Tìm kiếm" width="w-auto" />
         </div>
       </Box>
     </div>

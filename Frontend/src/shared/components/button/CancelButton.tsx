@@ -1,6 +1,6 @@
 interface CancelButtonProps {
   text: string;
-  width: string;
+  width?: string;
   className?: string;
   [key: string]: any;
 }
@@ -16,9 +16,8 @@ function CancelButton({
     <button
       className={`h-8 flex justify-center items-center bg-white 
         border border-[var(--primary-color)] rounded-md px-2
-        text-[var(--primary-color)] hover:bg-[var(--secondary-hover)] cursor-pointer ${className}`}
+        text-[var(--primary-color)] hover:bg-[var(--secondary-hover)] cursor-pointer ${width} ${className}`}
       type="button"
-      style={{ width: width }}
       {...rest}
     >
       {text}

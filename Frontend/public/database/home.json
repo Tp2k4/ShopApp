@@ -1,0 +1,9 @@
+{
+    "todayRevenue": 2.300, 
+    "soldQuantity": 230,
+    "lastestThreeMonthRevenue": {
+        "month1": 50.000,
+        "month2": 60.000,
+        "month3": 50.000
+    }
+}

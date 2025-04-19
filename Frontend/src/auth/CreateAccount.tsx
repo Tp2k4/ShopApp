@@ -2,8 +2,8 @@ import Box from "../shared/components/ui/Box";
 import Line from "../shared/components/ui/Line";
 import Button from "../shared/components/button/Button";
 import RadioButton from "../shared/components/form/RadioButton";
-import SelectButton from "../shared/components/button/SelectButton";
 import InputField from "../shared/components/form/InputField";
+import DateOfBirthPicker from "../shared/components/form/DateOfBirthPicker";
 
 import { Link } from "react-router-dom";
 
@@ -20,24 +20,20 @@ function CreateAccount() {
         </div>
 
         {/*  */}
-        <Line width="100%" />
+        <Line width="w-full" />
         <InputField placeholder="Họ và tên" type="text" />
 
         {/*  */}
 
         <div className="flex flex-col gap-[var(--small-gap)]">
-          <div>Ngày sinh:</div>
-          <div className="flex gap-[var(--small-gap)]">
-            <SelectButton className="w-1/3" text="8" />
-            <SelectButton className="w-1/3" text="8" />
-            <SelectButton className="w-1/3" text="8" />
-          </div>
+          <div className="caption">Ngày sinh:</div>
+          <DateOfBirthPicker width="w-full" />
         </div>
         <div className="flex flex-col gap-[var(--small-gap)]">
-          <div>Giới tính:</div>
+          <div className="caption">Giới tính:</div>
           <div className="flex gap-[var(--small-gap)] w-1/2">
-            <RadioButton className="w-1/2" name="gender" text="Nam" />
-            <RadioButton className="w-1/2" name="gender" text="Nữ" />
+            <RadioButton width="w-1/2" name="gender" text="Nam" />
+            <RadioButton width="w-1/2" name="gender" text="Nữ" />
           </div>
         </div>
 
@@ -49,9 +45,9 @@ function CreateAccount() {
         </div>
 
         {/*  */}
-        <Line width="100%" />
+        <Line width="w-full" />
         <div className="flex flex-col items-center gap-[var(--medium-gap)]">
-          <Button text="Đăng kí" type="submit" width="100px" />
+          <Button text="Đăng kí" type="submit" width="w-auto" />
           <Link
             className=" text-[var(--link-text)] hover:underline"
             to="/login"
