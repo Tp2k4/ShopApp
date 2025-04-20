@@ -4,6 +4,9 @@
     
     --primary-hover: #316999;
     --secondary-hover: #fafafa	;
+
+    --original-price-color: #7F7F7F;
+    --discounted-price-color: #00B050; 
     
     --background-color: #F2F2F2;
     --line-color: #A5A5A5;
@@ -20,4 +23,8 @@
     --heading-3: 16px;
     --body-text: 14px;
     --caption: 12px;
+
+    --caption-opacity: 0.6;
+
+
 }
