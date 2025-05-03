@@ -24,9 +24,7 @@ function Home() {
           <strong>Thống kê trong ngày</strong>
         </div>
         <div>
-          <strong>
-            Lịch làm việc trong tuần của nhân viên{home.todayRevenue}
-          </strong>
+          <strong>Lịch làm việc trong tuần của nhân viên</strong>
         </div>
         <div>
           <strong>Doanh thu 3 tháng gần nhất</strong>

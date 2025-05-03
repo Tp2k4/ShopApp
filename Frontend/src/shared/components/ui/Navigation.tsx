@@ -12,6 +12,7 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
   const location = useLocation(); // Lấy đường dẫn hiện tại
 
   const isActive = (path: string) => location.pathname === path;
+
   return (
     <Box
       className={`flex flex-col ${className}`}

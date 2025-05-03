@@ -17,7 +17,7 @@ import OrderConfirmation from "./employee/OrderConfirmation";
 
 import "boxicons/css/boxicons.min.css";
 import React from "react";
-import { createBrowserRouter, RouterProvider,  } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -47,5 +47,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
