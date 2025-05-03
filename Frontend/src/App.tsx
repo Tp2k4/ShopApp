@@ -15,9 +15,12 @@ import Statistics from "./manager/Statistics";
 import Order from "./employee/Order";
 import OrderConfirmation from "./employee/OrderConfirmation";
 
+import BuyHistory from "./user/BuyHistory";
+
 import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -36,6 +39,8 @@ const router = createBrowserRouter([
 
   { path: "/employee/order", element: <Order /> },
   { path: "/employee/order-confirmation", element: <OrderConfirmation /> },
+
+  { path: "/user/buy-history", element: <BuyHistory /> },
 ]);
 
 const App: React.FC = () => {

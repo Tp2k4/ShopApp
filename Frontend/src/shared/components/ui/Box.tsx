@@ -17,5 +17,4 @@ function Box({ width, height, children, className = "", ...rest }: BoxProps) {
     </div>
   );
 }
-
 export default Box;
