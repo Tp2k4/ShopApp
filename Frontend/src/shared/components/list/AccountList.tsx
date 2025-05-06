@@ -2,7 +2,7 @@ import Button from "../button/Button";
 import DetailButton from "../button/DetailButton";
 import Avatar from "../ui/Avatar";
 
-import { useToggleDetail } from "../../utils";
+import { useToggleDetail } from "../../utils/useToggleDetail";
 import React from "react";
 
 const NUM_COLUMNS = 7;

@@ -3,15 +3,14 @@
         "id": 1,
         "name": "Tai nghe vip pro",
         "amount": 10,
-        "company": "Logitech",
         "importPrice": 350000,
         "sellPrice": 400000,
         "state": "còn hàng",
-        "type": "headphone",
+        "type": "Tai nghe",
 
         "details": {
             "battery": "39 hrs",
-
+            "company": "Logitech",
             "warranty": "7 years warranty",
             "connectionType": "Wireless",
             "hasMic": "Có",
@@ -25,15 +24,15 @@
         "id": 2,
         "name": "Chuột vip pro",
         "amount": 10,
-        "company": "Logitech",
+        
         "importPrice": 350000,
         "sellPrice": 400000,
         "state": "sắp hết hàng",
-        "type": "mouse",
+        "type": "Chuột",
 
         "details": {
             "battery": "39 hrs",
-
+            "company": "Logitech",
             "warranty": "7 years warranty",
             "connectionType": "Wireless",
             "maxDpi": 3000,     
@@ -50,11 +49,11 @@
         "importPrice": 350000,
         "sellPrice": 400000,
         "state": "còn hàng",
-        "type": "keyboard",
+        "type": "Bàn phím",
 
         "details": {
             "battery": "39 hrs",
-
+            "company": "Logitech",
             "warranty": "7 years warranty",
             "connectionType": "Wireless",
             "numKeys": "Không",

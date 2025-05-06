@@ -14,8 +14,7 @@ function SearchField({
 }: SearchFieldProps) {
   return (
     <div
-      className="rounded-md relative flex items-center bg-[var(--secondary-color)]"
-      style={{ width }}
+      className={`rounded-md relative flex items-center bg-[var(--secondary-color)] ${width}`}
     >
       <InputField
         width={width}

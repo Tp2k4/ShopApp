@@ -29,3 +29,23 @@ function FilterButton({
 }
 
 export default FilterButton;
+
+// function FilterButton({ filter, selectedFilter, onSelect }) {
+//   return (
+//     <div className="flex gap-[var(--small-gap)]">
+//       {filter.map((filterName) => (
+//         <button
+//           key={filterName}
+//           onClick={() => onSelect(filterName)}
+//           className={`px-4 py-2 rounded ${
+//             selectedFilter === filterName
+//               ? 'bg-[var(--primary-color)] text-white'
+//               : 'bg-gray-200 hover:bg-gray-300'
+//           }`}
+//         >
+//           {filterName}
+//         </button>
+//       ))}
+//     </div>
+//   );
+// }

@@ -1,9 +1,11 @@
-import Box from "../shared/components/ui/Box";
-import Line from "../shared/components/ui/Line";
-import Button from "../shared/components/button/Button";
-import RadioButton from "../shared/components/form/RadioButton";
-import InputField from "../shared/components/form/InputField";
-import DateOfBirthPicker from "../shared/components/form/DateOfBirthPicker";
+import { Box, Line } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import {
+  RadioButton,
+  InputField,
+  DateOfBirthPicker,
+} from "../shared/components/form";
+import { ROUTES } from "../shared/paths";
 
 import { Link } from "react-router-dom";
 
@@ -50,7 +52,7 @@ function CreateAccount() {
           <Button text="Đăng kí" type="submit" width="w-auto" />
           <Link
             className=" text-[var(--link-text)] hover:underline"
-            to="/login"
+            to={ROUTES.AUTH.LOGIN}
           >
             Bạn đã có tài khoản?
           </Link>

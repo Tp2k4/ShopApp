@@ -1,4 +1,4 @@
-import ManagerLayout from "../shared/layout/ManagerLayout";
+import ManagerLayout from "./ManagerLayout";
 import Box from "../shared/components/ui/Box";
 
 import { useEffect, useState } from "react";
@@ -29,6 +29,9 @@ function Home() {
         <div>
           <strong>Doanh thu 3 tháng gần nhất</strong>
         </div>
+
+        {/* Tạm thời để không báo lỗi là không sử dụng home */}
+        {false && { home }}
       </Box>
     </ManagerLayout>
   );

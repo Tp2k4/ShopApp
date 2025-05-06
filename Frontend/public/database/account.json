@@ -5,7 +5,7 @@
         "name": "Le Vo",
         "phone": "0123456789",
         "state": "Khóa",
-        "role": "Nhân viên",
+        "role": "Employee",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
         "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
@@ -16,7 +16,7 @@
         "name": "Tran Nhat Nguyen",
         "phone": "0123456789",
         "state": "active",
-        "role": "Quản lí",
+        "role": "Manager",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
         "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
@@ -38,7 +38,7 @@
         "name": "Le Vo",
         "phone": "0123456789",
         "state": "Khóa",
-        "role": "Nhân viên",
+        "role": "Employee",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
         "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
@@ -49,7 +49,7 @@
         "name": "Tran Nhat Nguyen",
         "phone": "0123456789",
         "state": "active",
-        "role": "Quản lí",
+        "role": "Manager",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
         "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
