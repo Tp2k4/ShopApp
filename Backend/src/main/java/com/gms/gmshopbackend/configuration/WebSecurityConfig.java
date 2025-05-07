@@ -62,6 +62,8 @@ public class WebSecurityConfig {
                                     String.format("%s/inventory/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(POST,
                                     String.format("%s/inventory/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(POST,
+                                    String.format("%s/brands/**", apiPrefix)).hasRole("ADMIN")
 
 
 
@@ -70,5 +72,4 @@ public class WebSecurityConfig {
         });
         return http.build();
     }
-
 }

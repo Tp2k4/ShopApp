@@ -47,7 +47,7 @@ public class Product extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    private com.gms.gmshopbackend.model.Brand brand;
+    private Brand brand;
 
 
     @OneToOne

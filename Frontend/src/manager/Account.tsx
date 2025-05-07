@@ -1,21 +1,21 @@
 import ManagerLayout from "../shared/layout/ManagerLayout";
 import Box from "../shared/components/ui/Box";
 import Button from "../shared/components/button/Button";
-import SelectButton from "../shared/components/button/SelectButton";
+import FilterButton from "../shared/components/form/FilterButton";
 import SearchField from "../shared/components/form/SearchField";
-import List from "../shared/components/ui/List";
+import AccountList from "../shared/components/list/AccountList";
 
 import { useEffect, useState } from "react";
-import type { Account } from "../interface/account";
 
 function Account() {
-  const [dict, setDict] = useState<Account[]>([]);
+  const [accounts, setAccounts] = useState<any[]>([]);
+  let filter = ["Tất cả", "Nhân viên", "User", "Quản lí"];
 
   useEffect(() => {
     fetch("/database/account.json")
       .then((res) => res.json())
-      .then((data) => setDict(data))
-      .catch((err) => console.error("Lỗi khi fetch account.json:", err));
+      .then((data) => setAccounts(data))
+      .catch((err) => console.error("Lỗi khi fetch json:", err));
   }, []);
 
   return (
@@ -26,17 +26,17 @@ function Account() {
         </div>
 
         {/* */}
-        <div className="px-[var(--medium-gap)] flex items-center justify-between w-full">
-          <Button type="button" text="Thêm tài khoản" width="auto" />
-
-          <div className="flex items-center gap-[var(--small-gap)]">
-            <SelectButton text="Nhân viên" />
-            <SearchField width="300px" />
+        <div className="flex flex-col gap-[var(--medium-gap)]">
+          <div className="px-[var(--medium-gap)] flex items-center justify-between w-full">
+            <Button type="button" text="Thêm tài khoản" width="auto" />
+            <div className="flex items-center gap-[var(--small-gap)]">
+              <FilterButton filter={filter} text="Tất cả" />
+              <SearchField width="300px" />
+            </div>
           </div>
-        </div>
 
-        {/* */}
-        <List dict={dict} />
+          <AccountList accounts={accounts} />
+        </div>
       </Box>
     </ManagerLayout>
   );

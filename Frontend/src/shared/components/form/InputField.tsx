@@ -15,10 +15,9 @@ function InputField({
 }: InputFieldProps) {
   return (
     <input
-      className={`h-8 rounded-md border border-[var(--secondary-color)] px-2 focus:outline-none focus:border-[var(--primary-color)] ${className}`}
+      className={`h-8 rounded-md border border-[var(--secondary-color)] px-2 focus:outline-none focus:border-[var(--primary-color)] ${width} ${className}`}
       type={type}
       placeholder={placeholder}
-      style={{ width }}
       {...rest}
     />
   );

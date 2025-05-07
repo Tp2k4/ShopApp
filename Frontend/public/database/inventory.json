@@ -1,0 +1,72 @@
+[
+    {
+        "transactionDate": "2025-04-08",
+        "products":[
+            {
+                "id": 1,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "export",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            },
+            {
+                "id": 2,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "import",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            },
+            {
+                "id": 3,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "import",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            }
+        ]
+    },
+    {
+        "transactionDate": "2025-04-09",
+        "products":[
+            {
+                "id": 1,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "import",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            },
+            {
+                "id": 2,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "export",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            },
+            {
+                "id": 3,
+                "productName": "Chuot logitech sieu cap vip pro",
+                "company": "Logitech",
+                "type": "mouse",
+                "transactionType": "export",
+                "amount": 3,
+                "importPrice": 300000,
+                "sellPrice": 350000
+            }
+        ]
+    }
+]

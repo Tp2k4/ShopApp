@@ -4,10 +4,12 @@ import com.gms.gmshopbackend.components.JwtTokenUtil;
 import com.gms.gmshopbackend.components.OtpInfo;
 import com.gms.gmshopbackend.components.OtpStore;
 import com.gms.gmshopbackend.dtos.UserDTO;
+import com.gms.gmshopbackend.dtos.UserResponseDTO;
 import com.gms.gmshopbackend.model.Role;
 import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.RoleRepository;
 import com.gms.gmshopbackend.repository.UserRepository;
+import com.gms.gmshopbackend.response.UserLoginResponse;
 import com.gms.gmshopbackend.response.UserResponse;
 import com.gms.gmshopbackend.service.inter.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -68,7 +70,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String login(String username, String password) {
+    public UserLoginResponse login(String username, String password) {
         Optional<User> user = userRepository.findByPhoneNumber(username);
 
         if(user.isEmpty()){
@@ -85,7 +87,14 @@ public class UserService implements IUserService {
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
         authenticationManager.authenticate(authToken);
-        return jwtTokenUtil.generateToken(existingUser);
+        String token = jwtTokenUtil.generateToken(existingUser);
+        UserLoginResponse userResponse = new UserLoginResponse();
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setUsername(user.get().getFullName());
+        userResponseDTO.setRole(user.get().getRole().getName());
+        userResponse.setToken(token);
+        userResponse.setUser(userResponseDTO);
+        return userResponse;
 
     }
 

@@ -10,7 +10,7 @@ interface ManagerLayoutProps {
 function ManagerLayout({ children }: ManagerLayoutProps) {
   return (
     <div className="w-screen h-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <Header />
+      <Header role="Quản lí" />
 
       <div className="flex w-[75%] h-full gap-[var(--medium-gap)]">
         <Navigation />

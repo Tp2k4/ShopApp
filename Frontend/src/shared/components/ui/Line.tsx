@@ -1,13 +1,10 @@
 interface LineProps {
-  width: string;
+  width?: string;
 }
 
 function Line({ width }: LineProps) {
   return (
-    <div
-      className="h-[0.5px] bg-[var(--line-color)] my-4"
-      style={{ width: width }}
-    ></div>
+    <div className={`h-[0.5px] bg-[var(--line-color)] my-4 ${width} `}></div>
   );
 }
 

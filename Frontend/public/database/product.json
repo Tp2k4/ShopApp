@@ -1,0 +1,64 @@
+[
+    {
+        "id": 1,
+        "name": "Tai nghe vip pro",
+        "amount": 10,
+        "importPrice": 350000,
+        "sellPrice": 400000,
+        "state": "còn hàng",
+        "type": "headphone",
+
+        "details": {
+            "battery": "39 hrs",
+            "company": "Logitech",
+            "warranty": "7 years warranty",
+            "connectionType": "Wireless",
+            "hasMic": "Có",
+            "noiseCancelling": "Không",
+            "color": "Hồng",
+            "led": "Có",
+            "weight": "100gr"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Chuột vip pro",
+        "amount": 10,
+        "importPrice": 350000,
+        "sellPrice": 400000,
+        "state": "sắp hết hàng",
+        "type": "mouse",
+
+        "details": {
+            "battery": "39 hrs",
+            "company": "Logitech",
+            "warranty": "7 years warranty",
+            "connectionType": "Wireless",
+            "maxDpi": 3000,     
+            "color": "Xanh",
+            "led": "Có",
+            "weight": "100gr"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Bàn phím vip pro",
+        "amount": 10,
+        "importPrice": 350000,
+        "sellPrice": 400000,
+        "state": "còn hàng",
+        "type": "keyboard",
+
+        "details": {
+            "battery": "39 hrs",
+            "company": "Logitech",
+            "warranty": "7 years warranty",
+            "connectionType": "Wireless",
+            "numKeys": "Không",
+            "color": "Đỏ",
+            "led": "Cớ",
+            "switchType": "GG",
+            "weight": "100gr"    
+        }
+    }
+]

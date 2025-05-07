@@ -36,8 +36,8 @@ public class ProductDTO {
     @JsonProperty(value = "stock_quantity")
     private int stockQuantity;
 
-//    @JsonProperty(value = "brand_id")
-//    private Long brandId;
+    @JsonProperty(value = "brand_id")
+    private Long brandId;
 
     @JsonProperty(value = "mouse_specs")
     private MouseSpecs mouseSpecsId;

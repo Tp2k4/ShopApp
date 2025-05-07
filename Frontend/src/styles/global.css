@@ -37,16 +37,21 @@ body{
 } 
 
 table {
-    margin-top: var(--medium-gap);
     border-collapse: collapse;
     width: 100%;
 }
 
-th, td {
+th {
     vertical-align: middle;
     text-align: left; 
-    padding: var(--small-gap) var(--medium-gap);
-    border-bottom: 1px solid #ccc;
+    padding: var(--medium-gap) var(--medium-gap);
+    border-bottom: 1px solid var(--line-color);
+}
+td {
+    vertical-align: middle;
+    text-align: left; 
+    padding: var(--medium-gap) var(--medium-gap);
+    
 }
 
 tr:nth-child(even) {
@@ -62,4 +67,15 @@ thead {
     top: 0;
     background-color: white;
     z-index: 1;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;   
+    appearance: none;         
+    padding-right: 30px;     
+  }
+  
+select::-ms-expand {
+    display: none; 
 }

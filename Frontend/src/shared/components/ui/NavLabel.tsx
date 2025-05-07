@@ -24,7 +24,7 @@ function NavLabel({
   return (
     <Link
       to={link}
-      className={`${rounded_top_first_label} w-full text-[var(--primary-color)] px-[var(--medium-gap)] py-[var(--small-gap)] hover:bg-[var(--primary-hover)] hover:text-white focus:bg-[var(--primary-color)] focus:text-white ${className}`}
+      className={`${rounded_top_first_label} w-full text-[var(--primary-color)] px-[var(--medium-gap)] py-[var(--small-gap)] hover:bg-[var(--primary-hover)] hover:text-white  active:text-white active:bg-[var(--primary-color)] ${className}`}
       {...rest}
     >
       {label}

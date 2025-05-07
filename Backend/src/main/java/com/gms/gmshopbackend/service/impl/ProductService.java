@@ -30,6 +30,7 @@ public class ProductService implements IProductService {
     private final KeyboardSpecsService keyboardSpecsService;
     private final CategoryRepository categoryRepository;
     private final ProductImageRepository productImageRepository;
+    private final BrandRepository brandRepository;
 
 
     @Override
@@ -42,11 +43,11 @@ public class ProductService implements IProductService {
     @Override
     public Product getProductById(Long id) {
         try {
-            Product existing_product = productRepository.findById(id).orElseThrow(
+            Product existingProduct = productRepository.findById(id).orElseThrow(
                     () -> new RuntimeException("Product not found")
             );
 
-            return existing_product;
+            return existingProduct;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -63,12 +64,19 @@ public class ProductService implements IProductService {
                 () -> new RuntimeException("Category not found")
         );
 
+        Brand brand = brandRepository.findById(productDTO.getBrandId()).orElseThrow(
+                () -> new RuntimeException("Brand not found")
+        );
+
+
+
         // Tạo đối tượng Product từ DTO
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
         product.setCategory(category);
+        product.setBrand(brand);
         product.setStockQuantity(productDTO.getStockQuantity());
         product.setThumbnail(productDTO.getThumbnail());
 

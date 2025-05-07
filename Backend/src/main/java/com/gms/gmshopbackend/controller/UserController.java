@@ -3,6 +3,7 @@ package com.gms.gmshopbackend.controller;
 import com.gms.gmshopbackend.dtos.UserDTO;
 import com.gms.gmshopbackend.dtos.UserLoginDTO;
 import com.gms.gmshopbackend.model.User;
+import com.gms.gmshopbackend.response.UserLoginResponse;
 import com.gms.gmshopbackend.response.UserResponse;
 import com.gms.gmshopbackend.service.impl.UserService;
 import jakarta.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("${api.prefix}/user")
@@ -42,8 +44,8 @@ public class UserController {
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
-            String token = userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
-            return ResponseEntity.ok().body(token);
+            UserLoginResponse userResponse = userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
+            return ResponseEntity.ok().body(userResponse);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -67,17 +69,20 @@ public class UserController {
 
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam("email") String email) {
+    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> email) {
         try {
-            userService.sendOtpIfUserExists(email);
-            return ResponseEntity.ok("OTP đã được gửi tới email.");
+            String emailStr = email.get("email");
+            userService.sendOtpIfUserExists(emailStr);
+            return ResponseEntity.ok("OK");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestParam("email") String email, @RequestParam("otp") String otp) {
+    public ResponseEntity<?> verifyOtp(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String otp = request.get("otp");
         if (userService.verifyOtp(email, otp)) {
             return ResponseEntity.ok("Xác thực OTP thành công.");
         }
@@ -85,8 +90,9 @@ public class UserController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestParam("email") String email,
-                                           @RequestParam("new-password") String newPassword) {
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String newPassword = request.get("new_password");
         try {
             userService.resetPassword(email, newPassword);
             return ResponseEntity.ok("Đặt lại mật khẩu thành công.");

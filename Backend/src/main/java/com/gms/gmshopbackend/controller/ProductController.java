@@ -37,6 +37,7 @@ public class ProductController {
     private final KeyboardSpecsRepository keyboardSpecsRepository;
     private final HeadphoneSpecsRepository headphoneSpecsRepository;
     private final CategoryRepository categoryRepository;
+    private final BrandRepository brandRepository;
 
     private final Random random = new Random();
     private final Faker faker = new Faker();
@@ -267,6 +268,17 @@ public class ProductController {
         }
 
     }
+//    @PutMapping("update_brand")
+//    public void updateProductBrand(){
+//        for(long id =1; id<= 945; id++){
+//            Product product = productService.getProductById(id);
+//            Brand brand = brandRepository.findById((long) faker.number().numberBetween(1,4)).orElseThrow(
+//                    () -> new RuntimeException("Brand not found")
+//            );
+//            product.setBrand(brand);
+//            productRepository.save(product);
+//        }
+//    }
 
 
 //    @PostMapping("/generate-products")

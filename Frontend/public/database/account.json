@@ -1,62 +1,70 @@
 [
     {
+        "id": 1,
         "username": "levo123",
         "name": "Le Vo",
         "phone": "0123456789",
         "state": "Khóa",
         "role": "Nhân viên",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     },
     {
+        "id": 2,
         "username": "nguyen123",
         "name": "Tran Nhat Nguyen",
         "phone": "0123456789",
         "state": "active",
         "role": "Quản lí",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     },
     {
+        "id": 3,
         "username": "tho123",
         "name": "Phan Van Tho",
         "phone": "0123456789",
         "state": "active",
         "role": "User",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     },
     {
+        "id": 4,
         "username": "levo123",
         "name": "Le Vo",
         "phone": "0123456789",
         "state": "Khóa",
         "role": "Nhân viên",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     },
     {
+        "id": 5,
         "username": "nguyen123",
         "name": "Tran Nhat Nguyen",
         "phone": "0123456789",
         "state": "active",
         "role": "Quản lí",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     },
     {
+        "id": 6,
         "username": "tho123",
         "name": "Phan Van Tho",
         "phone": "0123456789",
         "state": "active",
         "role": "User",
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
-        "gmail": "levo2k4@gmail.com",
+        "email": "levo2k4@gmail.com",
         "avatar": "./assets/avatar/avatar.jpg"
     }
 ]
+
+
