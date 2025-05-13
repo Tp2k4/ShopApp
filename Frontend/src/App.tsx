@@ -1,44 +1,45 @@
-import Login from "./auth/Login";
-import ForgotPassword from "./auth/ForgotPassword";
-import ResetPassword from "./auth/ResetPassword";
-import SendAuthCode from "./auth/SendAuthCode";
-import CreateAccount from "./auth/CreateAccount";
-import ChangePassSuccess from "./auth/ChangePassSuccess";
-
-import Home from "./manager/Home";
-import Account from "./manager/Account";
-import Product from "./manager/Product";
-import Sale from "./manager/Sale";
-import Inventory from "./manager/Inventory";
-import Statistics from "./manager/Statistics";
-
-import Order from "./employee/Order";
-import OrderConfirmation from "./employee/OrderConfirmation";
+import {
+  Login,
+  ForgotPassword,
+  ResetPassword,
+  SendAuthCode,
+  CreateAccount,
+  ChangePassSuccess,
+} from "./auth";
+import { Home, Account, Product, Sale, Inventory, Statistics } from "./manager";
+import { Order, OrderConfirmation } from "./employee";
+import { autoLogin } from "./service/authService";
+import { ROUTES } from "./shared/paths";
+import BuyHistory from "./user/BuyHistory";
 
 import "boxicons/css/boxicons.min.css";
 import React from "react";
-import { createBrowserRouter, RouterProvider,  } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
-  { path: "/login", element: <Login /> },
-  { path: "/forgot-password", element: <ForgotPassword /> },
-  { path: "/reset-password", element: <ResetPassword /> },
-  { path: "/create-account", element: <CreateAccount /> },
-  { path: "/send-auth-code", element: <SendAuthCode /> },
-  { path: "/change-pass-success", element: <ChangePassSuccess /> },
+  { path: ROUTES.AUTH.LOGIN, element: <Login /> },
+  { path: ROUTES.AUTH.FORGOT_PASSWORD, element: <ForgotPassword /> },
+  { path: ROUTES.AUTH.RESET_PASSWORD, element: <ResetPassword /> },
+  { path: ROUTES.AUTH.CREATE_ACCOUNT, element: <CreateAccount /> },
+  { path: ROUTES.AUTH.SEND_AUTH_CODE, element: <SendAuthCode /> },
+  { path: ROUTES.AUTH.CHANGE_PASS_SUCCESS, element: <ChangePassSuccess /> },
 
-  { path: "/home-manager", element: <Home /> },
-  { path: "/account-manager", element: <Account /> },
-  { path: "/product-manager", element: <Product /> },
-  { path: "/sale-manager", element: <Sale /> },
-  { path: "/inventory-manager", element: <Inventory /> },
-  { path: "/statistics-manager", element: <Statistics /> },
+  { path: ROUTES.MANAGER.HOME, element: <Home /> },
+  { path: ROUTES.MANAGER.ACCOUNT, element: <Account /> },
+  { path: ROUTES.MANAGER.PRODUCT, element: <Product /> },
+  { path: ROUTES.MANAGER.SALE, element: <Sale /> },
+  { path: ROUTES.MANAGER.INVENTORY, element: <Inventory /> },
+  { path: ROUTES.MANAGER.STATISTICS, element: <Statistics /> },
 
-  { path: "/employee/order", element: <Order /> },
-  { path: "/employee/order-confirmation", element: <OrderConfirmation /> },
+  { path: ROUTES.EMPLOYEE.ORDER, element: <Order /> },
+  { path: ROUTES.EMPLOYEE.ORDER_CONFIRMATION, element: <OrderConfirmation /> },
+
+  { path: ROUTES.USER.BUY_HISTORY, element: <BuyHistory /> },
 ]);
 
 const App: React.FC = () => {
+  autoLogin();
+
   return (
     <div>
       <RouterProvider router={router} />
@@ -47,5 +48,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-

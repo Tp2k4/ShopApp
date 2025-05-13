@@ -1,7 +1,5 @@
-import Box from "../shared/components/ui/Box";
-import Button from "../shared/components/button/Button";
-import Header from "../shared/components/ui/Header";
-import Line from "../shared/components/ui/Line";
+import { Box, Header, Line } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
 
 import { useEffect, useState } from "react";
 

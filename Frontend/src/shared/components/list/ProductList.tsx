@@ -2,7 +2,7 @@ import Button from "../button/Button";
 import DetailButton from "../button/DetailButton";
 
 import React from "react";
-import { useToggleDetail } from "../../utils";
+import { useToggleDetail } from "../../utils/useToggleDetail";
 
 const NUM_COLUMNS = 8;
 
@@ -15,7 +15,7 @@ interface ProductListProps<T = any> {
 
 const renderItemType = (details: any, type: string) => {
   switch (type) {
-    case "mouse":
+    case "Chuột":
       return (
         <div>
           <p>
@@ -52,7 +52,7 @@ const renderItemType = (details: any, type: string) => {
           </p>
         </div>
       );
-    case "keyboard":
+    case "Bàn phím":
       return (
         <div>
           <p>
@@ -93,7 +93,7 @@ const renderItemType = (details: any, type: string) => {
           </p>
         </div>
       );
-    case "headphone":
+    case "Tai nghe":
       return (
         <div>
           <p>

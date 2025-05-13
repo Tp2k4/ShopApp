@@ -1,8 +1,10 @@
 import Button from "../button/Button";
 import CancelButton from "../button/CancelButton";
 import DetailButton from "../button/DetailButton";
+import { handleDelete } from "../../../service/crudService/handleDelete";
+import { ROUTES } from "../../paths";
 
-import { useToggleDetail } from "../../utils";
+import { useToggleDetail } from "../../utils/useToggleDetail";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
@@ -10,6 +12,7 @@ const NUM_COLUMNS = 6;
 
 interface OrderListProps<T = any> {
   orders: T[];
+  setOrders: React.Dispatch<React.SetStateAction<any[]>>;
   children?: React.ReactNode;
   className?: string;
   [key: string]: any;
@@ -17,6 +20,7 @@ interface OrderListProps<T = any> {
 
 function OrderList({
   orders,
+  setOrders,
   children,
   className = "",
   ...rest
@@ -53,13 +57,24 @@ function OrderList({
                     text="Chi tiết"
                   />
                   <Button
-                    onClick={() => navigate("/employee/order-confirmation")}
+                    onClick={() => navigate(ROUTES.EMPLOYEE.ORDER_CONFIRMATION)}
                     className="text-[var(--caption)]"
                     type="button"
                     text="Lập hóa đơn"
                     width="w-auto"
                   />
-                  <CancelButton text="Hủy" type="submit" width="w-auto" />
+                  <CancelButton
+                    onClick={() =>
+                      handleDelete(
+                        order.id,
+                        "http://localhost:8080/employee/product/",
+                        setOrders
+                      )
+                    }
+                    text="Xóa"
+                    type="submit"
+                    width="w-auto"
+                  />
                 </div>
               </td>
             </tr>

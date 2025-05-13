@@ -1,0 +1,19 @@
+
+[
+    {
+        "name": "Tai nghe gaming vippro",
+        "type": "Hồng",
+        "amount": 1,
+        "state": "Đang giao hàng",
+        "originalPrice": 200000,    
+        "sellingPrice": 100000
+    },
+    {
+        "name": "Tai nghe gaming vippro",
+        "type": "Hồng",
+        "amount": 1,
+        "state": "Đang giao hàng",
+        "originalPrice": 200000,    
+        "sellingPrice": 300000
+    }
+]

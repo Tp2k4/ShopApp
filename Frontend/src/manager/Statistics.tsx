@@ -1,23 +1,19 @@
-import ManagerLayout from "../shared/layout/ManagerLayout";
-import Box from "../shared/components/ui/Box";
-import Button from "../shared/components/button/Button";
-import FilterButton from "../shared/components/form/FilterButton";
+import { Box } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { useGet } from "../service/crudService";
+import { FilterButton, InputField } from "../shared/components/form";
 import StatisticsList from "../shared/components/list/StatisticsList";
-import InputField from "../shared/components/form/InputField";
+import ManagerLayout from "./ManagerLayout";
 
 import { useEffect, useState } from "react";
 
 function Dashboard() {
-  const [statistics, setStatistics] = useState<any[]>([]);
+  //================ Nhận accounts từ API
+  const { data: statistics, setData: setStatistics } = useGet(
+    "/database/statistics.json"
+  );
 
-  useEffect(() => {
-    fetch("/database/statistics.json")
-      .then((res) => res.json())
-      .then((data) => setStatistics(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
-
-  const dateFilter = ["Ngày", "Tháng", "Năm"];
+  const filterOptions = ["Ngày", "Tháng", "Năm"];
 
   return (
     <ManagerLayout>
@@ -30,7 +26,7 @@ function Dashboard() {
         <div className="flex flex-col items-end gap-[var(--medium-gap)]">
           {/* */}
           <div className="flex items-start gap-[var(--medium-gap)] px-[var(--medium-gap)]">
-            <FilterButton filter={dateFilter} />
+            <FilterButton filter={filterOptions} />
 
             {/* Lọc ngày */}
             <div className="flex flex-col gap-[var(--small-gap)] items-start">
@@ -51,8 +47,8 @@ function Dashboard() {
                     width="w-[90px]"
                   />
                 </div>
+                <Button text="Lọc đơn" type="submit" width="w-auto" />
               </div>
-              <Button text="Lọc đơn" type="submit" width="w-auto" />
             </div>
           </div>
 

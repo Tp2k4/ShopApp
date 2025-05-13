@@ -1,5 +1,4 @@
-import VerticalLine from "./VerticalLine";
-import Avatar from "./Avatar";
+import { VerticalLine, Avatar } from "./";
 import avatar from "../../../assets/avatar/avatar.jpg";
 
 interface HeaderProps {
@@ -37,3 +36,6 @@ function Header({ children, role, className = "", ...rest }: HeaderProps) {
 }
 
 export default Header;
+<Header>
+  <div className="bg-white w-screen h-[1px]"></div>
+</Header>;

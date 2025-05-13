@@ -1,24 +1,20 @@
-import Box from "../shared/components/ui/Box";
-import Line from "../shared/components/ui/Line";
-import Button from "../shared/components/button/Button";
-import InputField from "../shared/components/form/InputField";
+import { Box, Line } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { InputField } from "../shared/components/form";
+import { handleLogin } from "../service/authService";
+import { ROUTES } from "../shared/paths";
 
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Login() {
-  const navigate = useNavigate();
-  const API = "http://localhost:8020/api/v1/gmshop/user/login"
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-  
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-  }
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   return (
     <div className="h-screen w-screen flex justify-center items-center">
@@ -39,21 +35,29 @@ function Login() {
             height="auto"
           >
             <form
-              action={API}
               className="w-full flex flex-col gap-[var(--medium-gap)]"
-              method="POST"
-              onSubmit={handleSubmit}
+              onSubmit={(event) =>
+                handleLogin(event, username, password, setIsError, setError)
+              }
             >
               <div className="w-full flex flex-col gap-[var(--small-gap)]">
-                <InputField width="w-full" placeholder="username" type="text" onChange={handelChange
-                    
-                  }/>
                 <InputField
+                  value={username}
+                  onChange={(event: any) => setUsername(event.target.value)}
+                  width="w-full"
+                  placeholder="username"
+                  type="text"
+                />
+                <InputField
+                  value={password}
+                  onChange={(event: any) => setPassword(event.target.value)}
                   width="w-full"
                   placeholder="password"
                   type="password"
-                  onChange={handelChange}
                 />
+                {isError && (
+                  <p className="caption text-red-500 px-2">{error}</p>
+                )}
               </div>
 
               <Button type="submit" width="w-full" text="Đăng nhập" />
@@ -62,13 +66,13 @@ function Login() {
             {/*  */}
             <Link
               className="text-[var(--link-text)] hover:underline"
-              to="/forgot-password"
+              to={ROUTES.AUTH.FORGOT_PASSWORD}
             >
               Quên mật khẩu?
             </Link>
             <Line width="w-full" />
             <Button
-              onClick={() => navigate("/create-account")}
+              onClick={() => navigate(ROUTES.AUTH.CREATE_ACCOUNT)}
               type="button"
               width="w-auto"
               text="Tạo tài khoản mới"
@@ -81,125 +85,3 @@ function Login() {
 }
 
 export default Login;
-
-
-// import Box from "../shared/components/ui/Box";
-// import Line from "../shared/components/ui/Line";
-// import Button from "../shared/components/button/Button";
-// import InputField from "../shared/components/form/InputField";
-
-// import { Link, useNavigate } from "react-router-dom";
-// import { useState } from "react";
-
-// function Login() {
-//   const navigate = useNavigate();
-//   const API = "http://localhost:8020/api/v1/gmshop/user/login";
-
-//   const [formValues, setFormValues] = useState({
-//     phone_number: "",
-//     password: ""
-//   });
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setFormValues((prev) => ({
-//       ...prev,
-//       [name]: value
-//     }));
-//   };
-
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-
-//     try {
-//       const res = await fetch(API, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(formValues)
-//       });
-
-//       if (res.ok) {
-//         const result = await res.json();
-//         console.log("Đăng nhập thành công:", result);
-
-//         // Lưu token vào localStorage
-//         localStorage.setItem("token", result.token);
-
-//         // Chuyển hướng người dùng
-//         navigate("/account-manager");
-//       } else {
-//         const errorText = await res.text();
-//         console.error("Đăng nhập thất bại:", errorText);
-//         alert(errorText);
-//       }
-//     } catch (err) {
-//       console.error("Lỗi kết nối:", err);
-//       alert("Lỗi kết nối đến server.");
-//     }
-//   };
-
-//   return (
-//     <div className="h-screen w-screen flex justify-center items-center">
-//       <div className="flex w-[800px] gap-[var(--big-gap)]">
-//         <div className="flex-1 flex flex-col justify-center">
-//           <div className="logo text-[var(--primary-color)]">GAMING GEAR</div>
-//           <div className="heading2">
-//             Giúp bạn mua sắm thỏa thích chuột, bàn phím, tai nghe, … với giá rẻ
-//           </div>
-//         </div>
-
-//         <div className="flex-1 flex justify-center">
-//           <Box
-//             className="flex flex-col items-center gap-[var(--medium-gap)] p-[var(--medium-gap)]"
-//             width="350px"
-//             height="auto"
-//           >
-//             <form
-//               className="w-full flex flex-col gap-[var(--medium-gap)]"
-//               onSubmit={handleSubmit}
-//             >
-//               <div className="w-full flex flex-col gap-[var(--small-gap)]">
-//                 <InputField
-//                   name="phone_number"
-//                   width="w-full"
-//                   placeholder="Số điện thoại"
-//                   type="text"
-//                   value={formValues.phone_number}
-//                   onChange={handleChange}
-//                 />
-//                 <InputField
-//                   name="password"
-//                   width="w-full"
-//                   placeholder="Mật khẩu"
-//                   type="password"
-//                   value={formValues.password}
-//                   onChange={handleChange}
-//                 />
-//               </div>
-
-//               <Button type="submit" width="w-full" text="Đăng nhập" />
-//             </form>
-
-//             <Link
-//               className="text-[var(--link-text)] hover:underline"
-//               to="/forgot-password"
-//             >
-//               Quên mật khẩu?
-//             </Link>
-//             <Line width="w-full" />
-//             <Button
-//               onClick={() => navigate("/create-account")}
-//               type="button"
-//               width="w-auto"
-//               text="Tạo tài khoản mới"
-//             />
-//           </Box>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;

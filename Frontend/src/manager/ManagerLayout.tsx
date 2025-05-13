@@ -1,7 +1,6 @@
-import { ReactNode } from "react";
+import { Header, Navigation } from "../shared/components/ui";
 
-import Header from "../components/ui/Header";
-import Navigation from "../components/ui/Navigation";
+import { ReactNode } from "react";
 
 interface ManagerLayoutProps {
   children?: ReactNode;

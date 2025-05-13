@@ -1,4 +1,4 @@
-import ManagerLayout from "../shared/layout/ManagerLayout";
+import ManagerLayout from "./ManagerLayout";
 import Box from "../shared/components/ui/Box";
 
 import { useEffect, useState } from "react";
@@ -24,13 +24,14 @@ function Home() {
           <strong>Thống kê trong ngày</strong>
         </div>
         <div>
-          <strong>
-            Lịch làm việc trong tuần của nhân viên{home.todayRevenue}
-          </strong>
+          <strong>Lịch làm việc trong tuần của nhân viên</strong>
         </div>
         <div>
           <strong>Doanh thu 3 tháng gần nhất</strong>
         </div>
+
+        {/* Tạm thời để không báo lỗi là không sử dụng home */}
+        {false && { home }}
       </Box>
     </ManagerLayout>
   );

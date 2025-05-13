@@ -1,6 +1,6 @@
-import Box from "../shared/components/ui/Box";
-import Line from "../shared/components/ui/Line";
-import Button from "../shared/components/button/Button";
+import { Box, Line } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { ROUTES } from "../shared/paths";
 
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function ChangePassSuccess() {
         <Line width="w-full" />
         <div>Mật khẩu của bạn đã được đổi thành công!</div>
         <Button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate(ROUTES.AUTH.LOGIN)}
           type="button"
           text="Quay về trang đăng nhập"
           width="w-auto"

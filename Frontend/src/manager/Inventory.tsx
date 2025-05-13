@@ -1,21 +1,21 @@
-import ManagerLayout from "../shared/layout/ManagerLayout";
-import Box from "../shared/components/ui/Box";
-import Button from "../shared/components/button/Button";
-import SelectButton from "../shared/components/form/SelectButton";
+import { Box } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { SelectButton, InputField } from "../shared/components/form";
+import { getProductNames } from "../shared/utils/getProductNames";
 import InventoryList from "../shared/components/list/InventoryList";
-import InputField from "../shared/components/form/InputField";
+import ManagerLayout from "./ManagerLayout";
+import PopupInventory from "../shared/components/pupup/PopupInventory";
 
-import { getProductNames } from "../shared/utils";
 import { useEffect, useState } from "react";
 
 function Inventory() {
-  const [inventories, setInventories] = useState<any[]>([]);
+  const [inventorys, setInventorys] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
     fetch("/database/inventory.json")
       .then((res) => res.json())
-      .then((data) => setInventories(data))
+      .then((data) => setInventorys(data))
       .catch((err) => console.error("Lỗi khi fetch json:", err));
   }, []);
 
@@ -27,6 +27,7 @@ function Inventory() {
   }, []);
 
   const listProductNames = getProductNames(products);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <ManagerLayout>
@@ -41,17 +42,12 @@ function Inventory() {
             {/* */}
             <div className="flex justify-between">
               <div className="flex flex-col items-start gap-[var(--small-gap)]">
-                <div className="flex gap-[var(--small-gap)]">
-                  <SelectButton dataset={listProductNames} width="w-[180px]" />
-
-                  <SelectButton dataset={["Nhập", "Xuất"]} width="w-[90px]" />
-                  <InputField
-                    placeholder="Số lượng"
-                    width="w-[90px]"
-                    type="text"
-                  />
-                </div>
-                <Button text="Thêm vào kho" type="submit" width="w-auto" />
+                <Button
+                  onClick={() => setShowPopup(true)}
+                  text="Thêm vào kho"
+                  type="submit"
+                  width="w-auto"
+                />
               </div>
 
               {/* */}
@@ -73,16 +69,23 @@ function Inventory() {
                       width="w-[90px]"
                     />
                   </div>
+                  <Button text="Lọc đơn" type="submit" width="w-auto" />
                 </div>
-
-                <Button text="Lọc đơn" type="submit" width="w-auto" />
               </div>
             </div>
           </div>
 
-          <InventoryList inventories={inventories} />
+          <InventoryList inventories={inventorys} />
         </div>
       </Box>
+
+      {/* Popup Screen, chức năng thêm sản phẩm nằm bên trong PopupProduct */}
+      {showPopup && (
+        <PopupInventory
+          setInventorys={setInventorys}
+          setShowPopup={setShowPopup}
+        />
+      )}
     </ManagerLayout>
   );
 }
