@@ -20,6 +20,7 @@ import BuyHistory from "./user/BuyHistory";
 import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider,  } from "react-router-dom";
+import UserProfile from "./user/UserProfile";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
   { path: "/employee/order-confirmation", element: <OrderConfirmation /> },
 
   { path: "/user/buy-history", element: <BuyHistory /> },
+  { path: "/user/profile", element: <UserProfile /> },
 ]);
 
 const App: React.FC = () => {
