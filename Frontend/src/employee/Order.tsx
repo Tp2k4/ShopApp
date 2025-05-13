@@ -1,20 +1,28 @@
-import Box from "../shared/components/ui/Box";
-import Button from "../shared/components/button/Button";
-import SearchField from "../shared/components/form/SearchField";
-import OrderList from "../shared/components/list/OrderList";
-import Header from "../shared/components/ui/Header";
+import { Box, Header } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { SearchField } from "../shared/components/form";
 
-import { useEffect, useState } from "react";
+import { useGet } from "../service/crudService";
+import { useSearch } from "../service/queryService";
+
+import OrderList from "../shared/components/list/OrderList";
+import PopupOrder from "../shared/components/pupup/PopupOrder";
+
+import { useState } from "react";
 
 function Order() {
-  const [orders, setOrders] = useState<any[]>([]);
+  // Nhận orders từ API
+  const { data: orders, setData: setOrders } = useGet("/database/order.json");
 
-  useEffect(() => {
-    fetch("/database/order.json")
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
+  // Tìm kiếm
+  const {
+    filteredItems: filteredBySearch,
+    searchQuery,
+    setSearchQuery,
+  } = useSearch(orders, "customerName");
+
+  // PopupScreen
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div className="w-screen h-screen flex flex-col items-center gap-[var(--medium-gap)]">
@@ -26,14 +34,28 @@ function Order() {
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="px-[var(--medium-gap)] flex items-center justify-between w-full">
-            <Button type="button" text="Thêm đơn hàng" width="auto" />
+            <Button
+              onClick={() => setShowPopup(true)}
+              type="button"
+              text="Thêm đơn hàng"
+              width="auto"
+            />
             <div className="flex items-center gap-[var(--small-gap)]">
-              <SearchField width="300px" />
+              <SearchField
+                value={searchQuery}
+                onChange={(e: any) => setSearchQuery(e.target.value)}
+                width="w-[300px]"
+              />
             </div>
           </div>
-          <OrderList orders={orders} />
+          <OrderList orders={filteredBySearch} setOrders={setOrders} />
         </div>
       </Box>
+
+      {/* Popup Screen, chức năng thêm sản phẩm nằm bên trong PopupProduct */}
+      {showPopup && (
+        <PopupOrder setOrders={setOrders} setShowPopup={setShowPopup} />
+      )}
     </div>
   );
 }

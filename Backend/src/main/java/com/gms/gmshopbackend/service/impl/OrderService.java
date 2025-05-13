@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,11 +37,6 @@ public class OrderService implements IOrderService {
     @Override
     @Transactional
     public OrderResponse createOrder(OrderDTO orderDTO, User user) {
-//        User user = userRepository.findById(orderDTO
-//                .getUserId())
-//                .orElseThrow(
-//                        () -> new RuntimeException("User not found")
-//                );
 
         modelMapper.typeMap(OrderDTO.class, Order.class).addMappings(mapper -> mapper.skip(Order::setId));
         Order order = new Order();
@@ -49,7 +45,7 @@ public class OrderService implements IOrderService {
         order.setUser(user);
         order.setOrderDate(LocalDate.now());
         order.setActive(true);
-        order.setStatus("Pending");
+        order.setStatus(String.valueOf(OrderStatus.PENDING));
         LocalDate shippingDate = LocalDate.now().plusDays(5);
         order.setShippingDate(shippingDate);
         orderRepository.save(order);
@@ -190,12 +186,24 @@ public class OrderService implements IOrderService {
     public void deleteOrder(Long id) {
         try{
             Optional<Order> existingOrder = orderRepository.findById(id);
-            if(existingOrder.isPresent()){
+            if(existingOrder.isPresent() && existingOrder.get().getStatus().equalsIgnoreCase("pending")){
                 existingOrder.get().setActive(false);
                 orderRepository.save(existingOrder.get());
-            }
+                List<OrderDetail> orderDetails = orderDetailRepository.findByOrder(existingOrder.get());
+                for(OrderDetail orderDetail : orderDetails){
+                    Product product = productRepository.findById(orderDetail.getProduct().getId()).orElseThrow(
+                            () -> new RuntimeException("Product not found")
+                    );
+                    inventoryService.importInventory(product.getId(), orderDetail.getNumberOfProducts());
+                }
+            }else{
+                throw new InvalidParameterException("Order was delivered, so you can not delete this order");
 
-        }catch (RuntimeException e){
+            }
+        }catch(InvalidParameterException e){
+            throw e;
+        }
+        catch (Exception e){
             throw new RuntimeException("Order not found");
         }
 
@@ -222,5 +230,17 @@ public class OrderService implements IOrderService {
                     products
             );
         }).collect(Collectors.toList());
+    }
+
+    public void staffChecked(Long orderId){
+        Order existingOrder = orderRepository.findById(orderId).orElseThrow(
+                () -> new RuntimeException("Order not found")
+        );
+        if(existingOrder.getStatus().equalsIgnoreCase("pending")){
+            existingOrder.setStatus(String.valueOf(OrderStatus.DELIVERED));
+            orderRepository.save(existingOrder);
+        }else{
+            throw new RuntimeException("Order is delivered, You couldn't change status of order");
+        }
     }
 }

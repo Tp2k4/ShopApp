@@ -1,5 +1,5 @@
-import Box from "./Box";
-import NavLabel from "./NavLabel";
+import { Box, NavLabel } from "./";
+import { ROUTES } from "../../paths";
 
 import { useLocation } from "react-router-dom";
 
@@ -9,9 +9,10 @@ interface NavigationProps {
 }
 
 function Navigation({ children, className = "", ...rest }: NavigationProps) {
-  const location = useLocation(); // Lấy đường dẫn hiện tại
+  const location = useLocation(); 
 
   const isActive = (path: string) => location.pathname === path;
+
   return (
     <Box
       className={`flex flex-col ${className}`}
@@ -21,58 +22,56 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
     >
       <NavLabel
         className={
-          isActive("/home-manager")
-            ? "bg-[var(--primary-color)] text-white"
-            : ""
+          isActive("/manager") ? "bg-[var(--primary-color)] text-white" : ""
         }
         label="Trang chủ"
-        link="/home-manager"
+        link={ROUTES.MANAGER.HOME}
         order="first"
       />
       <NavLabel
         className={
-          isActive("/account-manager")
+          isActive("/manager/account")
             ? "bg-[var(--primary-color)] text-white"
             : ""
         }
         label="Quản lí tài khoản"
-        link="/account-manager"
+        link={ROUTES.MANAGER.ACCOUNT}
       />
       <NavLabel
         className={
-          isActive("/product-manager")
+          isActive("/manager/product")
             ? "bg-[var(--primary-color)] text-white"
             : ""
         }
         label="Quản lí sản phẩm"
-        link="/product-manager"
+        link={ROUTES.MANAGER.PRODUCT}
       />
       <NavLabel
         className={
-          isActive("/inventory-manager")
+          isActive("/manager/inventory")
             ? "bg-[var(--primary-color)] text-white"
             : ""
         }
         label="Quản lí kho"
-        link="/inventory-manager"
+        link={ROUTES.MANAGER.INVENTORY}
       />
       <NavLabel
         className={
-          isActive("/sale-manager")
+          isActive("/manager/sale")
             ? "bg-[var(--primary-color)] text-white"
             : ""
         }
         label="Quản lí khuyến mãi"
-        link="/sale-manager"
+        link={ROUTES.MANAGER.SALE}
       />
       <NavLabel
         className={
-          isActive("/statistics-manager")
+          isActive("/manager/statistics")
             ? "bg-[var(--primary-color)] text-white"
             : ""
         }
         label="Quản lí thống kê"
-        link="/statistics-manager"
+        link={ROUTES.MANAGER.STATISTICS}
       />
     </Box>
   );

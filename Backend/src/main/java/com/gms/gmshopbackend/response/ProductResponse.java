@@ -30,8 +30,8 @@ public class ProductResponse extends BaseResponse {
     @JsonProperty("stock_quantity")
     private int stockQuantity;
 
-//    @JsonProperty("brand_id")
-//    private Brand brandId;
+    @JsonProperty("brand_id")
+    private String brandId;
 
     @JsonProperty("category_id")
     private Category categoryId;
@@ -48,7 +48,7 @@ public class ProductResponse extends BaseResponse {
     public static ProductResponse fromProduct(Product product) {
         ProductResponse productResponse = ProductResponse.builder()
                 .name(product.getName())
-//                .brandId(product.getBrand())
+                .brandId(product.getBrand().getName()==null?"No Brand":product.getBrand().getName())
                 .stockQuantity(product.getStockQuantity())
                 .price(product.getPrice())
                 .categoryId(product.getCategory())

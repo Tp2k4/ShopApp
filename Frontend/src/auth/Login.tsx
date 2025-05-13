@@ -1,11 +1,19 @@
-import Box from "../shared/components/ui/Box";
-import Line from "../shared/components/ui/Line";
-import Button from "../shared/components/button/Button";
-import InputField from "../shared/components/form/InputField";
+import { Box, Line } from "../shared/components/ui";
+import { Button } from "../shared/components/button";
+import { InputField } from "../shared/components/form";
+import { handleLogin } from "../service/authService";
+import { ROUTES } from "../shared/paths";
 
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   return (
@@ -28,15 +36,28 @@ function Login() {
           >
             <form
               className="w-full flex flex-col gap-[var(--medium-gap)]"
-              method="POST"
+              onSubmit={(event) =>
+                handleLogin(event, username, password, setIsError, setError)
+              }
             >
               <div className="w-full flex flex-col gap-[var(--small-gap)]">
-                <InputField width="w-full" placeholder="username" type="text" />
                 <InputField
+                  value={username}
+                  onChange={(event: any) => setUsername(event.target.value)}
+                  width="w-full"
+                  placeholder="username"
+                  type="text"
+                />
+                <InputField
+                  value={password}
+                  onChange={(event: any) => setPassword(event.target.value)}
                   width="w-full"
                   placeholder="password"
                   type="password"
                 />
+                {isError && (
+                  <p className="caption text-red-500 px-2">{error}</p>
+                )}
               </div>
 
               <Button type="submit" width="w-full" text="Đăng nhập" />
@@ -45,13 +66,13 @@ function Login() {
             {/*  */}
             <Link
               className="text-[var(--link-text)] hover:underline"
-              to="/forgot-password"
+              to={ROUTES.AUTH.FORGOT_PASSWORD}
             >
               Quên mật khẩu?
             </Link>
             <Line width="w-full" />
             <Button
-              onClick={() => navigate("/create-account")}
+              onClick={() => navigate(ROUTES.AUTH.CREATE_ACCOUNT)}
               type="button"
               width="w-auto"
               text="Tạo tài khoản mới"
@@ -64,4 +85,3 @@ function Login() {
 }
 
 export default Login;
-
