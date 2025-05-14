@@ -18,7 +18,6 @@ function SelectButton({
   return (
     <label
       className={`inline-flex justify-between items-center h-8 rounded-md border border-[var(--secondary-color)] px-2 focus:outline-none focus:border-[var(--primary-color)] ${width} ${className}`}
-      {...rest}
     >
       {text}
       <input
@@ -26,6 +25,7 @@ function SelectButton({
         type="radio"
         name={name}
         value={value}
+        {...rest}
       />
     </label>
   );

@@ -9,8 +9,9 @@ import ManagerLayout from "./ManagerLayout";
 import { useState } from "react";
 
 function Account() {
-  // Nhận orders từ API
-  const { data: sales, setData: setSales } = useGet("/database/sale.json");
+  const { data: sales, setData: setSales } = useGet(
+    "http://localhost:8020/api/v1/gmshop/promotion"
+  );
 
   // Tìm kiếm
   const {

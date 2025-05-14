@@ -5,26 +5,18 @@ import { getProductNames } from "../shared/utils/getProductNames";
 import InventoryList from "../shared/components/list/InventoryList";
 import ManagerLayout from "./ManagerLayout";
 import PopupInventory from "../shared/components/pupup/PopupInventory";
+import { useGet } from "../service/crudService";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Inventory() {
-  const [inventorys, setInventorys] = useState<any[]>([]);
-  const [products, setProducts] = useState<any[]>([]);
+  const { data: inventories, setData: setInventories } = useGet(
+    "http://localhost:8020/api/v1/gmshop/inventory"
+  );
 
-  useEffect(() => {
-    fetch("/database/inventory.json")
-      .then((res) => res.json())
-      .then((data) => setInventorys(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
-
-  useEffect(() => {
-    fetch("/database/product.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
+  const { data: products, setData: setProducts } = useGet(
+    "http://localhost:8020/api/v1/gmshop/user/alls"
+  );
 
   const listProductNames = getProductNames(products);
   const [showPopup, setShowPopup] = useState(false);
@@ -75,14 +67,14 @@ function Inventory() {
             </div>
           </div>
 
-          <InventoryList inventories={inventorys} />
+          <InventoryList inventories={inventories} />
         </div>
       </Box>
 
       {/* Popup Screen, chức năng thêm sản phẩm nằm bên trong PopupProduct */}
       {showPopup && (
         <PopupInventory
-          setInventorys={setInventorys}
+          setInventorys={setInventories}
           setShowPopup={setShowPopup}
         />
       )}

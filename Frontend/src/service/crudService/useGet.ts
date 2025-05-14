@@ -2,25 +2,28 @@ import { useState, useEffect } from "react";
 
 export const useGet = (
     apiPath: string,
-    token = localStorage.getItem("token") || "",
 ) => {
     const [data, setData] = useState<any>([]);
 
+    const token = localStorage.getItem("token");
+
     useEffect(()=>{
+
         const fetchData = async () => {
             try{
                 const response = await fetch(apiPath, {
                     method: "GET",
                     headers: {
-                    Authorization: `Bearer ${token}`, 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
                     },
                 });
 
                 if(response.ok){
-                    const json = await response.json()
-                    setData(json)
+                    const data = await response.json()
+                    setData(data)
                 } else {
-                    alert("Lỗi khi thêm sản phẩm.")
+                    alert("Lỗi không lấy được tài khoản")
                 }
             } catch (error) {
                 alert(error)

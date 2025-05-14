@@ -25,7 +25,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
       <div className="rounded-md z-50 flex flex-col gap-[var(--medium-gap)] bg-white p-[var(--big-gap)]">
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="flex flex-col gap-[var(--medium-gap)]">
-            <div>Thông tin tài khoảng:</div>
+            <div>Thông tin:</div>
 
             {/* Sản phẩm */}
             <LabeledInputField

@@ -1,31 +1,22 @@
 import { Box, Line, Avatar } from "../shared/components/ui";
 import { Button, CancelButton } from "../shared/components/button";
 import { InputField } from "../shared/components/form";
-import { sendOtp, verifyOtp } from "../service/authService/handleSendAuthCode";
+import { handleVerifyOtp } from "../service/authService/handleVerifyOtp";
 import { ROUTES } from "../shared/paths";
 import avatar from "../assets/avatar/avatar.jpg";
 
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function SendAuthCode() {
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
 
-  const [authCode, setAuthCode] = useState("");
+  const [otp, setOtp] = useState("");
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (email) {
-      sendOtp(email);
-    } else {
-      setIsError(true);
-      setError("Email không hợp lệ.");
-    }
-  }, [email]);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -48,12 +39,14 @@ function SendAuthCode() {
         <div className="flex flex-col items-start gap-[var(--small-gap)]">
           <form
             className="flex flex-col gap-[var(--small-gap)]"
-            // onSubmit={verifyOtp(email, authCode)}
+            onSubmit={(e) =>
+              handleVerifyOtp(e, email, otp, setIsError, setError, navigate)
+            }
           >
             <div className="w-full flex items-center gap-[var(--small-gap)]">
               <InputField
-                value={authCode}
-                onChange={(e: any) => setAuthCode(e.target.value)}
+                value={otp}
+                onChange={(e: any) => setOtp(e.target.value)}
                 className="w-1/2"
                 type="text"
                 placeholder="Nhập mã"
@@ -68,24 +61,26 @@ function SendAuthCode() {
             <div>
               <Button type="submit" text="Gửi lại" width="w-auto" />
             </div>
+
+            {/* Avatar */}
+            <div className="w-full flex flex-col items-center gap-[var(--small-gap)]">
+              <Avatar src={avatar} />
+              <div className="heading3">Lê Võ</div>
+            </div>
+
+            {/*  */}
+            <Line width="w-full" />
+            <div className="flex justify-end gap-[var(--small-gap)]">
+              <CancelButton
+                text="Hủy"
+                width="w-auto"
+                onClick={() => navigate(ROUTES.AUTH.LOGIN)}
+              />
+              <Button type="submit" text="Tìm kiếm" width="w-auto" />
+            </div>
+
+            {/*  */}
           </form>
-        </div>
-
-        {/* Avatar */}
-        <div className="w-full flex flex-col items-center gap-[var(--small-gap)]">
-          <Avatar src={avatar} />
-          <div className="heading3">Lê Võ</div>
-        </div>
-
-        {/*  */}
-        <Line width="w-full" />
-        <div className="flex justify-end gap-[var(--small-gap)]">
-          <CancelButton
-            text="Hủy"
-            width="w-auto"
-            onClick={() => navigate(ROUTES.AUTH.LOGIN)}
-          />
-          <Button type="submit" text="Tìm kiếm" width="w-auto" />
         </div>
       </Box>
     </div>
@@ -93,7 +88,6 @@ function SendAuthCode() {
 }
 
 export default SendAuthCode;
-
 
 // import { useState } from "react";
 // import Box from "../shared/components/ui/Box";
@@ -108,7 +102,7 @@ export default SendAuthCode;
 
 // function SendAuthCode() {
 //   const navigate = useNavigate();
-//   const [authCode, setAuthCode] = useState("");
+//   const [otp, setOtp] = useState("");
 //   const [error, setError] = useState("");
 //   const [phoneNumber, setPhoneNumber] = useState("000000001");
 
@@ -118,27 +112,27 @@ export default SendAuthCode;
 
 //   const handleSubmit = async (e: React.FormEvent) => {
 //     e.preventDefault();
-  
-//     if (authCode.length !== 6) {
+
+//     if (otp.length !== 6) {
 //       setError("Mã xác thực phải có 6 ký tự.");
 //       return;
 //     }
-  
-//     const email = localStorage.getItem("email") || ""; 
+
+//     const email = localStorage.getItem("email") || "";
 //     if (!email) {
 //       setError("Không tìm thấy email để xác thực.");
 //       return;
 //     }
-  
+
 //     try {
 //       const res = await fetch("http://localhost:8020/api/v1/gmshop/user/verify-otp", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
 //         },
-//         body: JSON.stringify({ email, otp: authCode }),
+//         body: JSON.stringify({ email, otp: otp }),
 //       });
-  
+
 //       if (res.ok) {
 //         const result = await res.text();
 //         console.log("OTP hợp lệ:", result);
@@ -152,16 +146,15 @@ export default SendAuthCode;
 //       setError("Không thể kết nối tới máy chủ.");
 //     }
 //   };
-  
 
 //   const handleResendCode = async () => {
 //     const email = localStorage.getItem("email") || "";
-  
+
 //     if (!email) {
 //       alert("Không tìm thấy email trong bộ nhớ!");
 //       return;
 //     }
-  
+
 //     try {
 //       const res = await fetch("http://localhost:8020/api/v1/gmshop/user/forgot-password", {
 //         method: "POST",
@@ -170,7 +163,7 @@ export default SendAuthCode;
 //         },
 //         body: JSON.stringify({ email: email }),
 //       });
-  
+
 //       if (res.ok) {
 //         // Nếu gửi thành công
 //         console.log("Gửi lại mã xác thực đến: ", email);
@@ -185,7 +178,6 @@ export default SendAuthCode;
 //       alert("Không thể kết nối tới máy chủ. Vui lòng thử lại sau.");
 //     }
 //   };
-  
 
 //   return (
 //     <div className="w-screen h-screen flex justify-center items-center">
@@ -209,7 +201,7 @@ export default SendAuthCode;
 //                 className="w-1/2"
 //                 type="text"
 //                 placeholder="Nhập mã"
-//                 value={authCode}
+//                 value={otp}
 //                 onChange={handleAuthCodeChange}
 //               />
 //               <div className="w-1/2">

@@ -2,7 +2,8 @@ import {ROUTES} from "../../shared/paths"
 
 export const handleResetPassword = async (
     e: React.FormEvent,   
-    newPassword: string,
+    email: string|null,
+    new_password: string,
     newPasswordConfirm: string,
     setIsError: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>,
@@ -10,22 +11,22 @@ export const handleResetPassword = async (
 ) => {
     e.preventDefault();
 
-    if(newPassword !== newPasswordConfirm){
+    if(new_password !== newPasswordConfirm){
         setIsError(true);
         setError("Mật khẩu không trùng khớp.")
         return;
     }
-    if (!newPassword || !newPasswordConfirm ) {
+    if (!new_password || !newPasswordConfirm ) {
         setIsError(true);
         setError("Vui lòng nhập đầy đủ thông tin.");
         return;
     }
 
     try{
-        const response = await fetch("http://localhost:8080/reset-password", {
+        const response = await fetch("http://localhost:8020/api/v1/gmshop/user/reset-password", {
             method: "POST", 
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({newPassword, newPasswordConfirm})
+            body: JSON.stringify({email, new_password})
         })
 
         if (!response.ok){
