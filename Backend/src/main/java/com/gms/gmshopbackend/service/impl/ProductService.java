@@ -4,6 +4,7 @@ import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
 import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
+import com.gms.gmshopbackend.response.ProductNameResponse;
 import com.gms.gmshopbackend.response.ProductResponse;
 import com.gms.gmshopbackend.service.inter.IProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -188,5 +190,11 @@ public class ProductService implements IProductService {
 
         return productImageRepository.saveAll(productImages);
 
+    }
+
+    @Override
+    public List<ProductNameResponse> getProductNames() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(ProductNameResponse::fromProduct).collect(Collectors.toList());
     }
 }

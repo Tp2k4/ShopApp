@@ -31,4 +31,31 @@ public class RevenueController {
         }
     }
 
+    @GetMapping("/today-revenue")
+    public ResponseEntity<?> getTodayRevenue() {
+        try{
+            return new ResponseEntity<>(revenueService.getTodayRevenue(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/last-three-month-revenue")
+    public ResponseEntity<?> getLastThreeMonthRevenue() {
+        try{
+            return new ResponseEntity<>(revenueService.getLastThreeMonthRevenue(), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }
+
+
+
+
+
+
+
+
