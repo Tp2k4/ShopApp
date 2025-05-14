@@ -7,8 +7,8 @@ function UserProfile() {
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
       <Header role="user" />
 
-      <div className="flexW justify-center gap-[var(--medium-gap)]  w-[75%] h-full">
-        <UserProfileNavigation className=" width" />
+      <div className="flex justify-center gap-[var(--medium-gap)] w-[75%] h-full">
+        <UserProfileNavigation className="w-[25%] h-[400px]" />
         <Box
           className="flex flex-col gap-[var(--medium-gap)] p-[var(--medium-gap)]"
           width="75%"

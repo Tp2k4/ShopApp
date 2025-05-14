@@ -35,8 +35,8 @@ const router = createBrowserRouter([
   { path: ROUTES.EMPLOYEE.ORDER, element: <Order /> },
   { path: ROUTES.EMPLOYEE.ORDER_CONFIRMATION, element: <OrderConfirmation /> },
 
-  { path: "/user/buy-history", element: <BuyHistory /> },
-  { path: "/user/profile", element: <UserProfile /> },
+  { path: ROUTES.USER.BUY_HISTORY, element: <BuyHistory /> },
+  { path: ROUTES.USER.USER_PROFILE, element: <UserProfile /> },
 ]);
 
 const App: React.FC = () => {
