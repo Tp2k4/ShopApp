@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO) {
         try {
-            UserLoginResponse userResponse = userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
+            UserLoginResponse userResponse = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
             return ResponseEntity.ok().body(userResponse);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -97,6 +97,17 @@ public class UserController {
             userService.resetPassword(email, newPassword);
             return ResponseEntity.ok("Đặt lại mật khẩu thành công.");
         } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<?> updateUserId(@RequestBody UserDTO userDTO, @PathVariable Long userId) {
+        try{
+            User user = userService.updateUser(userId, userDTO);
+            return ResponseEntity.ok().body(UserResponse.fromUser(user));
+
+        }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

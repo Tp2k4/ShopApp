@@ -5,6 +5,7 @@ import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
 import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
+import com.gms.gmshopbackend.response.ProductNameResponse;
 import com.gms.gmshopbackend.response.ProductResponse;
 import com.gms.gmshopbackend.response.ProductResponseList;
 import com.gms.gmshopbackend.service.impl.ProductService;
@@ -29,6 +30,7 @@ import java.util.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/product")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
@@ -268,6 +270,19 @@ public class ProductController {
         }
 
     }
+
+    @GetMapping("/admin/product-name-list")
+    public ResponseEntity<?> getProductNameList() {
+        try{
+            List<ProductNameResponse> product_list = productService.getProductNames();
+            return ResponseEntity.ok(product_list);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+
+
 //    @PutMapping("update_brand")
 //    public void updateProductBrand(){
 //        for(long id =1; id<= 945; id++){

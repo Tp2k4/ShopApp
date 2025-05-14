@@ -26,26 +26,10 @@ public class InventoryService implements IInventoryService {
 
 
     @Override
-    public List<InventoryGroupByDateDTO> getInventory() {
+    public List<InventoryResponse> getInventory() {
         try {
             List<Inventory> inventories = inventoryRepository.findAll();
-
-            // Group theo transactionDate
-            Map<LocalDate, List<Inventory>> grouped = inventories.stream()
-                    .collect(Collectors.groupingBy(Inventory::getTransactionDate));
-
-            // Tạo kết quả trả về theo định dạng mong muốn
-            return grouped.entrySet().stream()
-                    .map(entry -> {
-                        LocalDate date = entry.getKey();
-                        List<InventoryResponse> products = entry.getValue().stream()
-                                .map(InventoryResponse::fromInventory)
-                                .collect(Collectors.toList());
-
-                        return new InventoryGroupByDateDTO(date, products); // chú ý tên class DTO ở đây
-                    })
-                    .sorted(Comparator.comparing(InventoryGroupByDateDTO::getTransactionDate)) // sửa đúng class name
-                    .collect(Collectors.toList());
+            return inventories.stream().map(InventoryResponse::fromInventory).collect(Collectors.toList());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -61,6 +45,7 @@ public class InventoryService implements IInventoryService {
                 .transactionType("export")
                 .quantity(nop)
                 .transactionDate(LocalDate.now())
+                .sellPrice((double) product.getPrice())
                 .build();
 
         inventoryRepository.save(newInventory);
@@ -79,12 +64,24 @@ public class InventoryService implements IInventoryService {
                 .transactionType("import")
                 .quantity(nop)
                 .transactionDate(LocalDate.now())
+                .importPrice((double) product.getPrice())
                 .build();
 
         product.setStockQuantity(product.getStockQuantity() + nop);
         productRepository.save(product);
         inventoryRepository.save(newInventory);
         return InventoryResponse.fromInventory(newInventory);
+    }
+
+    @Override
+    public List<InventoryResponse> getInventoryByDate(LocalDate from, LocalDate to) {
+        try{
+            List<Inventory> inventories = inventoryRepository.findByTransactionDateBetween(from, to);
+            return inventories.stream().map(InventoryResponse::fromInventory).collect(Collectors.toList());
+
+        }catch(RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

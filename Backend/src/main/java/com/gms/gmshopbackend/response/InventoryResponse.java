@@ -41,7 +41,7 @@ public class InventoryResponse {
         InventoryResponse inventoryResponse = InventoryResponse.builder()
                 .id(inventory.getId())
                 .productName(inventory.getProductName())
-                .brand(String.valueOf(inventory.getProductId().getBrand()))
+                .brand(String.valueOf(inventory.getProductId().getBrand().getName()))
                 .category(inventory.getProductId().getCategory().getName())
                 .transactionType(inventory.getTransactionType())
                 .quantity(inventory.getQuantity())

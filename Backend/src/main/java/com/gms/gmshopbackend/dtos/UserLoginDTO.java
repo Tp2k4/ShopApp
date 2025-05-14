@@ -12,9 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class UserLoginDTO {
-    @JsonProperty(value = "phone_number")
-    @NotBlank(message = "phone number not be blank")
-    private String phoneNumber;
+    @JsonProperty(value = "email")
+    @NotBlank(message = "email not be blank")
+    private String email;
 
     @NotBlank(message = "password not be blank")
     private String password;

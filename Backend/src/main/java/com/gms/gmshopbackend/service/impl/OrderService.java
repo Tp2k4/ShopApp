@@ -53,6 +53,7 @@ public class OrderService implements IOrderService {
         List<OrderDetail> orderDetails = new ArrayList<>();
         List<CartItem> cartItems = cartItemRepository.findByCartIdAndIsSelectedTrue(cart);
         List<ProductOrderResponseDTO> products = new ArrayList<>();
+        double total = 0;
         for (CartItem cartItem : cartItems) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
@@ -70,6 +71,7 @@ public class OrderService implements IOrderService {
             productRepository.save(product);
             orderDetail.setPrice(product.getPrice());
             orderDetail.setTotalMoney(product.getPrice() * quantity);
+            total += orderDetail.getTotalMoney();
 
             orderDetails.add(orderDetail);
             inventoryService.exportInventory(product, quantity);
@@ -89,7 +91,8 @@ public class OrderService implements IOrderService {
 
 
         orderDetailRepository.saveAll(orderDetails);
-
+        order.setTotalMoney((float) total);
+        orderRepository.save(order);
 
         return new OrderResponse(
                 order.getId(),

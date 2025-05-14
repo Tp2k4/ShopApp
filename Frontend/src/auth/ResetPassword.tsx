@@ -4,10 +4,14 @@ import { InputField } from "../shared/components/form";
 import { handleResetPassword } from "../service/authService/handleResetPassword";
 import { ROUTES } from "../shared/paths";
 
+import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function ResetPassword() {
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
+
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [isError, setIsError] = useState(false);
@@ -36,6 +40,7 @@ function ResetPassword() {
           onSubmit={(e) =>
             handleResetPassword(
               e,
+              email,
               newPassword,
               newPasswordConfirm,
               setIsError,
@@ -76,7 +81,6 @@ function ResetPassword() {
 }
 
 export default ResetPassword;
-
 
 // import React, { useState } from "react";
 // import { useNavigate, useLocation } from "react-router-dom";

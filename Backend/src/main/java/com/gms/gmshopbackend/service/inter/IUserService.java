@@ -13,5 +13,6 @@ public interface IUserService {
     public UserLoginResponse login(String username, String password);
     public List<UserResponse> getAllUsers();
     public User getUserById(Long id);
+    public User updateUser(Long userId, UserDTO userDTO);
 
 }

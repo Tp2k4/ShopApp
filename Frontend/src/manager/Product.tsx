@@ -1,19 +1,31 @@
 import { FilterButton, SearchField } from "../shared/components/form";
 import { Box } from "../shared/components/ui";
 import { Button } from "../shared/components/button";
-import { useGet } from "../service/crudService";
 import { useFilter, useSearch } from "../service/queryService";
 import ManagerLayout from "./ManagerLayout";
 import ProductList from "../shared/components/list/ProductList";
 import PopupProduct from "../shared/components/pupup/PopupProduct";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useGetProduct } from "../service/crudService/useGetProduct";
 
 function Product() {
   //================ Nhận products từ API
-  const { data: products, setData: setProducts } = useGet(
-    "http://localhost:8020/api/v1/gmshop/product?page=2&limit=10"
+  const { data: productDatas, setData: setProductDatas } = useGetProduct(
+    "http://localhost:8020/api/v1/gmshop/product",
+    {
+      page: "1",
+      limit: "10",
+    }
   );
+
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (productDatas?.products) {
+      setProducts(productDatas.products);
+    }
+  }, [productDatas]);
 
   //================ Lọc và tìm kiếm
   const filterOptions = ["Tất cả", "Chuột", "Bàn phím", "Tai nghe"];

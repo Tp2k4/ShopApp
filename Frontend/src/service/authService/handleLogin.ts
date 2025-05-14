@@ -2,7 +2,7 @@ import {ROUTES} from "../../shared/paths"
 
 export const handleLogin = async (
     e: React.FormEvent,   
-    phone_number: string,
+    email: string,
     password: string,
     setIsError: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>,
@@ -17,7 +17,7 @@ export const handleLogin = async (
             headers: { 
                 "Content-Type": "application/json",
              },
-            body: JSON.stringify({ phone_number, password }),
+            body: JSON.stringify({ email, password }),
         });
       
         if (!response.ok) {
@@ -25,7 +25,7 @@ export const handleLogin = async (
             setError("Tài khoản hoặc mật khẩu không chính xác.");
             return;
         }
-    
+
         const data = await response.json();
         const role = data.user.role;
         localStorage.setItem("token", data.token);

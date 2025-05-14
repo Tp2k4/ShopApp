@@ -57,9 +57,11 @@ public class UserService implements IUserService {
                .facebookAccountId(Math.toIntExact(userDTO.getFacebookAccountId()))
                .googleAccountId(Math.toIntExact(userDTO.getGoogleAccountId()))
                .email(userDTO.getEmail())
+               .isActive(true)
                .build();
+        Long roleId = userDTO.getRoleId()==null?2:userDTO.getRoleId();
 
-        Role role = roleRepository.findById(userDTO.getRoleId()).orElse(null);
+        Role role = roleRepository.findById(roleId).orElse(null);
         newUser.setRole(role);
 
         if(userDTO.getGoogleAccountId() == 0 && userDTO.getFacebookAccountId() == 0){
@@ -70,8 +72,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserLoginResponse login(String username, String password) {
-        Optional<User> user = userRepository.findByPhoneNumber(username);
+    public UserLoginResponse login(String email, String password) {
+        Optional<User> user = userRepository.findByEmail(email);
 
         if(user.isEmpty()){
             throw new RuntimeException("User not found");
@@ -85,7 +87,7 @@ public class UserService implements IUserService {
             throw new BadCredentialsException("Invalid username or password");
         }
 
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(existingUser.getPhoneNumber(), password);
         authenticationManager.authenticate(authToken);
         String token = jwtTokenUtil.generateToken(existingUser);
         UserLoginResponse userResponse = new UserLoginResponse();
@@ -113,6 +115,27 @@ public class UserService implements IUserService {
                 () -> new RuntimeException("User not found")
         );
         return existingUser;
+    }
+
+    @Override
+    public User updateUser(Long userId, UserDTO userDTO) {
+        User existingUser = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("User not found")
+        );
+        if(userRepository.existsByPhoneNumber(userDTO.getPhoneNumber())){
+            throw new RuntimeException("Phone number already exists");
+        }
+        if(userRepository.existsByEmail(userDTO.getEmail())){
+            throw new RuntimeException("Email already exists");
+        }
+        existingUser.setFullName(userDTO.getFullName());
+        existingUser.setPhoneNumber(userDTO.getPhoneNumber());
+        existingUser.setAddress(userDTO.getAddress());
+        existingUser.setDateOfBirth(userDTO.getDateOfBirth());
+        existingUser.setEmail(userDTO.getEmail());
+
+
+        return userRepository.save(existingUser);
     }
 
 

@@ -40,9 +40,9 @@ function AccountList({
           <React.Fragment key={index}>
             <tr>
               <td>{account.id}</td>
-              <td>{account.username}</td>
+              <td>{account.userName}</td>
               <td>{account.name}</td>
-              <td>{account.phone}</td>
+              <td>{account.phoneNumber}</td>
               <td>{account.state}</td>
               <td>{account.role}</td>
               <td className="!py-0">
