@@ -29,6 +29,7 @@ import java.util.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/product")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
     private final ProductService productService;
     private final ProductRepository productRepository;
