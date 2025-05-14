@@ -1,7 +1,12 @@
 import SelectButton from "./SelectButton";
 import { useState, useEffect } from "react";
 
-const DateOfBirthPicker = (props: { width: string }) => {
+interface Props {
+  width: string;
+  setDateOfBirth: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const DateOfBirthPicker: React.FC<Props> = ({ width, setDateOfBirth }) => {
   //Lấy năm hiện tại
   const current_year = new Date().getFullYear();
 
@@ -23,8 +28,19 @@ const DateOfBirthPicker = (props: { width: string }) => {
     if (day > days) setDay(1);
   }, [year, month]);
 
+  // Gộp lại thành chuỗi dd-mm-yyyy
+  useEffect(() => {
+    // Hàm này để thêm số 0 phía trước nếu số < 10, ví dụ: 1/1/2023 -> 01/01/2023
+    const pad = (n: number) => (n < 10 ? `0${n}` : n);
+
+    // Format lại định dạng dd-mm-yyyy
+    const formatted = `${year}-${pad(month)}-${pad(day)}`;
+
+    setDateOfBirth(formatted);
+  }, [day, month, year]);
+
   return (
-    <div className={`${props.width} flex gap-[var(--small-gap)]`}>
+    <div className={`${width} flex gap-[var(--small-gap)]`}>
       {/* Ngày */}
       <SelectButton
         width="w-1/3"

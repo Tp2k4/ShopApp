@@ -32,7 +32,7 @@ export const handleForgotPassword = async (
         // const data = await response.json();
         // console.log("Tài khoản tìm thấy:", data);
 
-        navigate(`${ROUTES.AUTH.SEND_AUTH_CODE}?"email"=${email}`);
+        navigate(`${ROUTES.AUTH.SEND_AUTH_CODE}?email=${email}`);
 
     } catch (error) {
         setIsError(true);

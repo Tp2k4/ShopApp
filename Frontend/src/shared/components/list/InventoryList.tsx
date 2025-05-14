@@ -42,7 +42,7 @@ function AccountList({
               </td>
               <td>
                 {inventory.products.map((product: any) => (
-                  <div>{product.company}</div>
+                  <div>{product.brand}</div>
                 ))}
               </td>
               <td>

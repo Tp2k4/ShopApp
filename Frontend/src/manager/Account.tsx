@@ -12,7 +12,7 @@ import { useState } from "react";
 function Account() {
   //================ Nhận accounts từ API
   const { data: accounts, setData: setAccounts } = useGet(
-    ""
+    "http://localhost:8020/api/v1/gmshop/user/alls"
   );
 
   //================ Lọc và tìm kiếm
