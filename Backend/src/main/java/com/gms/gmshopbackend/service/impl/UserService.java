@@ -57,6 +57,7 @@ public class UserService implements IUserService {
                .facebookAccountId(Math.toIntExact(userDTO.getFacebookAccountId()))
                .googleAccountId(Math.toIntExact(userDTO.getGoogleAccountId()))
                .email(userDTO.getEmail())
+               .isActive(userDTO.isActive())
                .build();
 
         Role role = roleRepository.findById(userDTO.getRoleId()).orElse(null);
