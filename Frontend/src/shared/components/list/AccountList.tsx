@@ -1,6 +1,5 @@
 import Button from "../button/Button";
 import DetailButton from "../button/DetailButton";
-import Avatar from "../ui/Avatar";
 
 import { useToggleDetail } from "../../utils/useToggleDetail";
 import React from "react";
@@ -71,7 +70,6 @@ function AccountList({
                     <p>
                       <strong>Email: </strong> {account.email}{" "}
                     </p>
-                    <Avatar src={account.avatar} size="24px" />
                   </div>
                 </td>
               </tr>

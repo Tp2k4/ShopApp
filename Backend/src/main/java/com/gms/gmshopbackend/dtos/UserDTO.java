@@ -1,5 +1,6 @@
 package com.gms.gmshopbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -37,6 +38,7 @@ public class UserDTO {
     private boolean isActive;
 
     @JsonProperty(value = "date_of_birth")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
 
     @JsonProperty(value = "facebook_account_id")

@@ -1,14 +1,13 @@
-import { VerticalLine, Avatar } from "./";
-import avatar from "../../../assets/avatar/avatar.jpg";
+import { VerticalLine } from "./";
 
 interface HeaderProps {
   children?: React.ReactNode;
-  role?: string;
+  name?: string;
   className?: string;
   [key: string]: any;
 }
 
-function Header({ children, role, className = "", ...rest }: HeaderProps) {
+function Header({ children, name, className = "", ...rest }: HeaderProps) {
   return (
     <div
       className={`flex justify-center bg-white w-screen ${className}`}
@@ -21,13 +20,14 @@ function Header({ children, role, className = "", ...rest }: HeaderProps) {
             Gaming Gear
           </div>
           <VerticalLine height="25px" color="var(--primary-color)" />
-          <div className="text-black heading2 font-medium">{role}</div>
+          <div className="text-black heading2 font-medium">{name}</div>
         </div>
 
         {/* Right */}
         <div className="flex items-center gap-[var(--small-gap)]">
-          <Avatar size="45px" src={avatar} />
-          <div>{role}</div>
+          <div className="text-black bg-[var(--secondary-color)] px-[var(--small-gap)] py-[var(--smallest-gap)] rounded-sm">
+            Xin chào {name}
+          </div>
         </div>
       </div>
       {children}
@@ -36,6 +36,3 @@ function Header({ children, role, className = "", ...rest }: HeaderProps) {
 }
 
 export default Header;
-<Header>
-  <div className="bg-white w-screen h-[1px]"></div>
-</Header>;
