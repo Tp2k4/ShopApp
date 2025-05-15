@@ -149,7 +149,7 @@ public class ProductController {
 
     }
 
-    @PostMapping("")
+    @PostMapping("create-product")
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO) {
         try {
             Product product = productService.createProduct(productDTO);
