@@ -26,7 +26,6 @@ function AccountList({
       <thead>
         <tr>
           <th>Stt</th>
-          <th>Username</th>
           <th>Họ và tên</th>
           <th>Số điện thoại</th>
           <th>Trạng thái</th>
@@ -39,7 +38,6 @@ function AccountList({
           <React.Fragment key={index}>
             <tr>
               <td>{account.id}</td>
-              <td>{account.userName}</td>
               <td>{account.name}</td>
               <td>{account.phoneNumber}</td>
               <td>{account.state}</td>

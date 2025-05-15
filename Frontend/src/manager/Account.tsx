@@ -16,7 +16,7 @@ function Account() {
   );
 
   //================ Lọc và tìm kiếm
-  const filterOptions = ["All", "Manager", "Employee", "User"];
+  const filterOptions = ["all", "admin", "employee", "user"];
 
   // Lọc
   const {

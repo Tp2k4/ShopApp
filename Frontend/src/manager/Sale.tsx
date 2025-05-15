@@ -1,7 +1,7 @@
 import { SearchField } from "../shared/components/form";
 import { Button } from "../shared/components/button";
 import { Box } from "../shared/components/ui";
-import { useGet } from "../service/crudService";
+import { useGet, handleUpdate } from "../service/crudService";
 import { useSearch } from "../service/queryService";
 import PopupSale from "../shared/components/pupup/PopupSale";
 import SaleList from "../shared/components/list/SaleList";
