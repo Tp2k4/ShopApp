@@ -53,7 +53,9 @@ public class ProductResponse extends BaseResponse {
                 .price(product.getPrice())
                 .categoryId(product.getCategory())
                 .thumbnail(product.getThumbnail())
-                .productImages(product.getProductImages()
+                .productImages(product.getProductImages()==null?
+                        new ArrayList<>():
+                        product.getProductImages()
                         .stream()
                         .map(ProductImageResponse::fromProductImage)
                         .collect(Collectors.toList()))
