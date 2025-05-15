@@ -35,18 +35,21 @@ public class InventoryResponse {
 
     private Double sellPrice;
 
+    private LocalDate date;
+
 
     public static InventoryResponse fromInventory(Inventory inventory) {
 
         InventoryResponse inventoryResponse = InventoryResponse.builder()
                 .id(inventory.getId())
                 .productName(inventory.getProductName())
-                .brand(String.valueOf(inventory.getProductId().getBrand()))
+                .brand(String.valueOf(inventory.getProductId().getBrand().getName()))
                 .category(inventory.getProductId().getCategory().getName())
                 .transactionType(inventory.getTransactionType())
                 .quantity(inventory.getQuantity())
                 .importPrice(inventory.getImportPrice())
                 .sellPrice(inventory.getSellPrice())
+                .date(inventory.getTransactionDate())
                 .build();
 
         return inventoryResponse;

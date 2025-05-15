@@ -1,6 +1,6 @@
 import { LabeledInputField } from "../form/LabeledInputField";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { SelectButton } from "../../components/form";
+import { SelectButton, ImportImage } from "../../components/form";
 import { Button, CancelButton } from "../../components/button";
 
 import { useState, useEffect } from "react";
@@ -11,8 +11,7 @@ interface PopupProductProps {
 }
 
 const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
-  const types = ["Chuột", "Bàn phím", "Tai nghe"];
-  const [selectedType, setSelectedType] = useState<string>("");
+  const [imageURLs, setImageURLs] = useState<string[]>([]);
 
   // State quản lý thông tin sản phẩm
   const [newProductInfo, setNewProductInfo] = useState({
@@ -34,18 +33,20 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
   // State quản lý thông số kỹ thuật đặc thù
   const [specificInfo, setSpecificInfo] = useState<any>({});
   const [newProduct, setNewProduct] = useState<any>({});
+  const types = ["mouse", "keyboard", "headphone"];
+  const [selectedType, setSelectedType] = useState<string>("");
 
   // Reset specificInfo khi loại sản phẩm thay đổi
   useEffect(() => {
     const type = newProductInfo.type;
     switch (type) {
-      case "Chuột":
+      case "mouse":
         setSpecificInfo({ maxDpi: "" });
         break;
-      case "Bàn phím":
+      case "keyboard":
         setSpecificInfo({ numkeys: "", switchType: "" });
         break;
-      case "Tai nghe":
+      case "headphone":
         setSpecificInfo({ hasMic: "", noiseCancelling: "" });
         break;
       default:
@@ -304,9 +305,9 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
 
         <div className="flex flex-col gap-[var(--medium-gap)]">
           {/* Thêm ảnh */}
-          <div>
-            <Button type="button" text="Thêm ảnh" />
-          </div>
+
+          <ImportImage imageURLs={imageURLs} setImageURLs={setImageURLs} />
+
           <div className="flex gap-[var(--small-gap)]">
             <Button
               onClick={() =>

@@ -26,6 +26,8 @@ public class ProductDTO {
     @Min(value = 1, message = "Price must be greater than 0")
     private float price;
 
+    private float originalPrice;
+
     private String thumbnail;
 
     private String description;

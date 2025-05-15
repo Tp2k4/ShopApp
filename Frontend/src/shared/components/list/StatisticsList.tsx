@@ -29,38 +29,18 @@ function StatisticsList({
       </thead>
       <tbody>
         {statistics.map((statistic, index) => (
-          <React.Fragment key={index}>
-            <tr className="border-b border-[var(--line-color)]">
-              <td className="!align-top">{statistic.date}</td>
-              <td>
-                {statistic.products.map((product: any) => (
-                  <div>{product.productName}</div>
-                ))}
-              </td>
-              <td>
-                {statistic.products.map((product: any) => (
-                  <div>{product.selledAmount}</div>
-                ))}
-              </td>
-              <td>
-                {statistic.products.map((product: any) => (
-                  <div>{product.importPrice}</div>
-                ))}
-              </td>
-
-              <td>
-                {statistic.products.map((product: any) => (
-                  <div>{product.sellPrice}</div>
-                ))}
-              </td>
-              <td className="!text-right text-red-500">
-                {statistic.products.map((product: any) => (
-                  <div>{product.totalRevenue}</div>
-                ))}
-              </td>
-            </tr>
-          </React.Fragment>
+          <tr key={index}>
+            <td>{statistic.date}</td>
+            <td>{statistic.productName}</td>
+            <td>{statistic.quantity}</td>
+            <td>{statistic.importPrice}</td>
+            <td>{statistic.sellPrice}</td>
+            <td className="!text-right text-red-500">
+              {statistic.totalRevenue}
+            </td>
+          </tr>
         ))}
+
         <tr className="border-b border-[var(--line-color)]">
           <td colSpan={NUM_COLUMNS - 1}>
             <div className="heading3 font-bold">Tổng:</div>

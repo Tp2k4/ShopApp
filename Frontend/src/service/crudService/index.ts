@@ -3,3 +3,5 @@ export * from "./handleCreate";
 export * from "./handleCancelCreate";
 export * from "./useGet";
 export * from "./handleUpdate";
+export * from "./useGetProducts";
+export * from "./useGetParams";

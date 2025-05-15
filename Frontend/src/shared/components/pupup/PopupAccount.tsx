@@ -19,7 +19,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
     email: "",
     address: "",
     is_active: 1,
-    role_id: "",
+    role_id: 2,
     facebook_account_id: 0,
     google_account_id: 0,
   });
@@ -105,11 +105,11 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Role */}
             <LabeledInputField
-              value={newAccountInfo.role_id}
+              value={String(newAccountInfo.role_id)}
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  role_id: e.target.value,
+                  role_id: parseInt(e.target.value, 10),
                 })
               }
               label="Role: "
@@ -139,8 +139,8 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
                   handleCreate(
                     "http://localhost:8020/api/v1/gmshop/user/register",
                     newAccountInfo,
-                    setAccounts,
-                    setNewAccountInfo
+                    setNewAccountInfo,
+                    setAccounts
                   )
                 }
                 type="submit"

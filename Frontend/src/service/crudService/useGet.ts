@@ -23,7 +23,7 @@ export const useGet = (
                     const data = await response.json()
                     setData(data)
                 } else {
-                    alert("Lỗi không lấy được tài khoản")
+                    alert("Lỗi không lấy được dữ liệu")
                 }
             } catch (error) {
                 alert(error)

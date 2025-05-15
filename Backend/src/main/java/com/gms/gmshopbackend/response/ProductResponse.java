@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = false)
 public class ProductResponse extends BaseResponse {
 
+
+    private long id;
+
     private String name;
     private float price;
 
@@ -34,9 +37,11 @@ public class ProductResponse extends BaseResponse {
     private String brandId;
 
     @JsonProperty("category_id")
-    private Category categoryId;
+    private String categoryId;
 
     private SpecsResponse specs;
+
+    private Double originPrice;
 
     private String thumbnail;
 
@@ -47,12 +52,14 @@ public class ProductResponse extends BaseResponse {
 
     public static ProductResponse fromProduct(Product product) {
         ProductResponse productResponse = ProductResponse.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .brandId(product.getBrand().getName()==null?"No Brand":product.getBrand().getName())
                 .stockQuantity(product.getStockQuantity())
                 .price(product.getPrice())
-                .categoryId(product.getCategory())
+                .categoryId(product.getCategory().getName()==null?"No Category":product.getCategory().getName())
                 .thumbnail(product.getThumbnail())
+                .originPrice(product.getOriginPrice())
                 .productImages(product.getProductImages()
                         .stream()
                         .map(ProductImageResponse::fromProductImage)

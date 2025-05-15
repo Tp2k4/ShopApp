@@ -1,8 +1,8 @@
 export const handleCreate = async (
     apiPath: string,
     newItemInfo: any,
+    setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
-    setNewItemInfo: React.Dispatch<React.SetStateAction<any>>
 ) => {
 
     try{

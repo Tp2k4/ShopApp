@@ -69,6 +69,8 @@ public class WebSecurityConfig {
                             .requestMatchers(GET,
                                     String.format("%s/product/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
                             .requestMatchers(GET,
+                                    String.format("%s/product/admin/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(GET,
                                     String.format("%s/product/category/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
                             .requestMatchers(POST,
                                     String.format("%s/product/**", apiPrefix)).hasRole("ADMIN")
@@ -84,6 +86,8 @@ public class WebSecurityConfig {
                                     String.format("%s/inventory/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(POST,
                                     String.format("%s/brands/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(GET,
+                                    String.format("%s/revenue/**", apiPrefix)).hasRole("ADMIN")
 
 
 

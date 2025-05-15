@@ -25,75 +25,38 @@ function AccountList({
           <th>Loại</th>
           <th>SL nhập</th>
           <th>SL Xuất</th>
-          <th>Giá nhập</th>
+          <th>Giá gốc</th>
           <th>Giá bán</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         {inventories.map((inventory, index) => (
-          <React.Fragment key={index}>
-            <tr className="border-b border-[var(--line-color)]">
-              <td className="!align-top">{inventory.transactionDate}</td>
-              <td>
-                {inventory.products.map((product: any) => (
-                  <div>{product.productName}</div>
-                ))}
-              </td>
-              <td>
-                {inventory.products.map((product: any) => (
-                  <div>{product.brand}</div>
-                ))}
-              </td>
-              <td>
-                {inventory.products.map((product: any) => (
-                  <div>{product.type}</div>
-                ))}
-              </td>
+          <tr key={index}>
+            <td>{inventory.date}</td>
+            <td>{inventory.productName}</td>
+            <td>{inventory.brand}</td>
+            <td>{inventory.transactionType}</td>
 
-              <td>
-                {inventory.products.map((product: any) =>
-                  product.transactionType === "import" ? (
-                    <div>{product.amount}</div>
-                  ) : (
-                    <div>-</div>
-                  )
-                )}
-              </td>
+            {inventory.transactionType === "import" ? (
+              <td>{inventory.quantity}</td>
+            ) : (
+              <td>{inventory.quantity}</td>
+            )}
 
-              <td>
-                {inventory.products.map((product: any) =>
-                  product.transactionType === "export" ? (
-                    <div>{product.amount}</div>
-                  ) : (
-                    <div>-</div>
-                  )
-                )}
-              </td>
-
-              <td>
-                {inventory.products.map((product: any) => (
-                  <div>{product.importPrice}</div>
-                ))}
-              </td>
-              <td>
-                {inventory.products.map((product: any) => (
-                  <div>{product.sellPrice}</div>
-                ))}
-              </td>
-
-              <td className="!py-0">
-                <div className="flex gap-[var(--small-gap)] justify-end">
-                  <Button
-                    className="text-[var(--caption)]"
-                    type="button"
-                    text="Chỉnh sửa"
-                    width="auto"
-                  />
-                </div>
-              </td>
-            </tr>
-          </React.Fragment>
+            <td>{inventory.importPrice}</td>
+            <td>{inventory.sellPrice}</td>
+            <td className="!py-0">
+              <div className="flex gap-[var(--small-gap)] justify-end">
+                <Button
+                  className="text-[var(--caption)]"
+                  type="button"
+                  text="Chỉnh sửa"
+                  width="auto"
+                />
+              </div>
+            </td>
+          </tr>
         ))}
       </tbody>
     </table>

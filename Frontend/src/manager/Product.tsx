@@ -5,13 +5,13 @@ import { useFilter, useSearch } from "../service/queryService";
 import ManagerLayout from "./ManagerLayout";
 import ProductList from "../shared/components/list/ProductList";
 import PopupProduct from "../shared/components/pupup/PopupProduct";
+import { useGetProducts } from "../service/crudService";
 
 import { useState, useEffect } from "react";
-import { useGetProduct } from "../service/crudService/useGetProduct";
 
 function Product() {
   //================ Nhận products từ API
-  const { data: productDatas, setData: setProductDatas } = useGetProduct(
+  const { data: productDatas } = useGetProducts(
     "http://localhost:8020/api/v1/gmshop/product",
     {
       page: "1",
@@ -21,6 +21,7 @@ function Product() {
 
   const [products, setProducts] = useState<any[]>([]);
 
+  // Cần set do productDatas có {totalPage, products}
   useEffect(() => {
     if (productDatas?.products) {
       setProducts(productDatas.products);
@@ -28,14 +29,14 @@ function Product() {
   }, [productDatas]);
 
   //================ Lọc và tìm kiếm
-  const filterOptions = ["Tất cả", "Chuột", "Bàn phím", "Tai nghe"];
+  const filterOptions = ["all", "mouse", "keyboard", "headphone"];
 
   // Lọc
   const {
     filteredItems: filteredByType,
     selectedFilter,
     setSelectedFilter,
-  } = useFilter(products, filterOptions, "type");
+  } = useFilter(products, filterOptions, "category_id");
 
   // Tìm kiếm
   const {

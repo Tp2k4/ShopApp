@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class InventoryController {
     public ResponseEntity<?> getInventory() {
         try {
 
-            List<InventoryGroupByDateDTO> inventoryList = inventoryService.getInventory();
+            List<InventoryResponse> inventoryList = inventoryService.getInventory();
             return ResponseEntity.ok(inventoryList);
         }catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,4 +40,15 @@ public class InventoryController {
         }
     }
 
+
+    @GetMapping("/date-date")
+    public ResponseEntity<?> getInventoryByDate(@RequestParam("from") LocalDate from, @RequestParam("to") LocalDate to) {
+        try{
+            List<InventoryResponse> inventoryList = inventoryService.getInventoryByDate(from, to);
+            return ResponseEntity.ok(inventoryList);
+
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

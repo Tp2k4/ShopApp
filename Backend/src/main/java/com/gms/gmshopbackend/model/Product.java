@@ -65,6 +65,9 @@ public class Product extends BaseEntity{
     @Column(name = "discount_percent")
     private BigDecimal discountPercent;
 
+    @Column(name = "origin_price")
+    private Double originPrice;
+
 }
 
 

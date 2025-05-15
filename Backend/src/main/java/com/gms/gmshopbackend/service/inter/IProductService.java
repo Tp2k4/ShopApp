@@ -4,6 +4,7 @@ import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.dtos.ProductImageDTO;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.model.ProductImage;
+import com.gms.gmshopbackend.response.ProductNameResponse;
 import com.gms.gmshopbackend.response.ProductResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,5 +20,6 @@ public interface IProductService {
     public Page<ProductResponse> getProductsByCategoryId(Long categoryId, PageRequest pageRequest);
     public Page<ProductResponse> searchProducts(String keyword, PageRequest pageRequest);
     public List<ProductImage> uploadProductImage(Long productId, List<ProductImageDTO> productImageDTO) throws Exception;
+    public List<ProductNameResponse> getProductNames();
 }
 
