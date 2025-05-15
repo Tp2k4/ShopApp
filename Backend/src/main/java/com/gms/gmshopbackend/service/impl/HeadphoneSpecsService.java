@@ -1,6 +1,7 @@
 package com.gms.gmshopbackend.service.impl;
 
 
+import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.model.HeadphoneSpecs;
 
 import com.gms.gmshopbackend.model.Product;
@@ -34,15 +35,15 @@ public class HeadphoneSpecsService implements IHeadphoneSpecsService {
     }
 
     @Override
-    public HeadphoneSpecs createHeadphoneSpecs(Product product, HeadphoneSpecs headphoneSpecs) {
+    public HeadphoneSpecs createHeadphoneSpecs(Product product, ProductDTO productDTO) {
         HeadphoneSpecs newHeadphoneSpecs = HeadphoneSpecs.builder()
-                .color(headphoneSpecs.getColor())
-                .battery(headphoneSpecs.getBattery())
-                .warranty(headphoneSpecs.getWarranty())
-                .hasMic(headphoneSpecs.isHasMic())
-                .noiseCancelling(headphoneSpecs.isNoiseCancelling())
-                .ConnectionType(headphoneSpecs.getConnectionType())
-                .weight(headphoneSpecs.getWeight())
+                .color(productDTO.getColor())
+                .battery(productDTO.getBattery())
+                .warranty(productDTO.getWarranty())
+                .hasMic(productDTO.isHasMic())
+                .noiseCancelling(productDTO.isNoiseCancelling())
+                .ConnectionType(productDTO.getConnectionType())
+                .weight(productDTO.getWeight())
                 .product(product)
                 .build();
 

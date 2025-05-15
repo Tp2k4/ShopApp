@@ -1,6 +1,7 @@
 package com.gms.gmshopbackend.service.impl;
 
 
+import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.model.KeyboardSpecs;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.repository.KeyboardSpecsRepository;
@@ -33,16 +34,16 @@ public class KeyboardSpecsService implements IKeyboardSpecsService {
     }
 
     @Override
-    public KeyboardSpecs createKeyboardSpecs(Product product, KeyboardSpecs keyboardSpecs) {
+    public KeyboardSpecs createKeyboardSpecs(Product product, ProductDTO productDTO) {
         KeyboardSpecs newKeyboardSpecs = KeyboardSpecs.builder()
-                .led(keyboardSpecs.isLed())
-                .color(keyboardSpecs.getColor())
-                .battery(keyboardSpecs.getBattery())
-                .connectionType(keyboardSpecs.getConnectionType())
-                .numKeys(keyboardSpecs.getNumKeys())
-                .switchType(keyboardSpecs.getSwitchType())
-                .warranty(keyboardSpecs.getWarranty())
-                .weight(keyboardSpecs.getWeight())
+                .led(productDTO.isLed())
+                .color(productDTO.getColor())
+                .battery(productDTO.getBattery())
+                .connectionType(productDTO.getConnectionType())
+                .numKeys(productDTO.getNumKeys())
+                .switchType(productDTO.getSwitchType())
+                .warranty(productDTO.getWarranty())
+                .weight(productDTO.getWeight())
                 .product(product)
                 .build();
 

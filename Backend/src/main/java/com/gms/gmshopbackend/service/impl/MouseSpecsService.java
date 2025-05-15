@@ -1,6 +1,7 @@
 package com.gms.gmshopbackend.service.impl;
 
 
+import com.gms.gmshopbackend.dtos.ProductDTO;
 import com.gms.gmshopbackend.model.MouseSpecs;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.repository.MouseSpecsRepository;
@@ -32,16 +33,16 @@ public class MouseSpecsService implements IMouseSpecsService {
     }
 
     @Override
-    public MouseSpecs createMouseSpecs(Product product,MouseSpecs mouseSpecs) {
+    public MouseSpecs createMouseSpecs(Product product, ProductDTO productDTO) {
         MouseSpecs newMouseSpecs = MouseSpecs.builder()
-                .led(mouseSpecs.isLed())
+                .led(productDTO.isLed())
                 .product(product)
-                .battery(mouseSpecs.getBattery())
-                .color(mouseSpecs.getColor())
-                .maxDpi(mouseSpecs.getMaxDpi())
-                .warranty(mouseSpecs.getWarranty())
-                .weight(mouseSpecs.getWeight())
-                .connectionType(mouseSpecs.getConnectionType())
+                .battery(productDTO.getBattery())
+                .color(productDTO.getColor())
+                .maxDpi(productDTO.getMaxDpi())
+                .warranty(productDTO.getWarranty())
+                .weight(productDTO.getWeight())
+                .connectionType(productDTO.getConnectionType())
                 .build();
 
         return repository.save(newMouseSpecs);

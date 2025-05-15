@@ -84,21 +84,21 @@ public class ProductService implements IProductService {
 
         Product savedProduct = productRepository.save(product);
 
-        if (productDTO.getMouseSpecsId() != null) {
+        if (product.getCategory().getName().equalsIgnoreCase("Mouse") ) {
             MouseSpecs newMouseSpecs = mouseSpecsService
-                    .createMouseSpecs(savedProduct, productDTO.getMouseSpecsId());
+                    .createMouseSpecs(savedProduct, productDTO);
             savedProduct.setMouseSpecs(newMouseSpecs);
         }
 
-        if (productDTO.getKeyboardSpecsId() != null) {
+        if (product.getCategory().getName().equalsIgnoreCase("Keyboard")) {
             KeyboardSpecs newKeyboardSpecs = keyboardSpecsService
-                    .createKeyboardSpecs(savedProduct, productDTO.getKeyboardSpecsId());
+                    .createKeyboardSpecs(savedProduct, productDTO);
             savedProduct.setKeyboardSpecs(newKeyboardSpecs);
         }
 
-        if (productDTO.getHeadphoneSpecsId() != null) {
+        if (product.getCategory().getName().equalsIgnoreCase("Headphone")) {
             HeadphoneSpecs newHeadphoneSpecs = headphoneSpecsService
-                    .createHeadphoneSpecs(savedProduct, productDTO.getHeadphoneSpecsId());
+                    .createHeadphoneSpecs(savedProduct, productDTO);
             savedProduct.setHeadphoneSpecs(newHeadphoneSpecs);
         }
 
@@ -127,16 +127,50 @@ public class ProductService implements IProductService {
             existing_product.setStockQuantity(productDTO.getStockQuantity());
             existing_product.setThumbnail(productDTO.getThumbnail());
 
+            Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(
+                    () -> new RuntimeException("Category not found")
+            );
 
-            if (productDTO.getMouseSpecsId() != null) {
-                existing_product.setMouseSpecs(productDTO.getMouseSpecsId());
-                mouseSpecsRepository.save(mouseSpecsService.updateMouseSpecs(productDTO.getMouseSpecsId()));
-            } else if (existing_product.getKeyboardSpecs() != null) {
-                existing_product.setKeyboardSpecs(productDTO.getKeyboardSpecsId());
-                keyboardSpecsRepository.save(keyboardSpecsService.updateKeyboardSpecs(productDTO.getKeyboardSpecsId()));
+            if (category.getName().equalsIgnoreCase("Mouse")) {
+                MouseSpecs newMouse = MouseSpecs.builder()
+                        .product(existing_product)
+                        .led(productDTO.isLed())
+                        .maxDpi(productDTO.getMaxDpi())
+                        .color(productDTO.getColor())
+                        .battery(productDTO.getBattery())
+                        .warranty(productDTO.getWarranty())
+                        .weight(productDTO.getWeight())
+                        .connectionType(productDTO.getConnectionType())
+                        .build();
+                existing_product.setMouseSpecs(newMouse);
+                mouseSpecsRepository.save(mouseSpecsService.updateMouseSpecs(newMouse));
+            } else if (category.getName().equalsIgnoreCase("Keyboard")) {
+                KeyboardSpecs newKeyBoard = KeyboardSpecs.builder()
+                        .product(existing_product)
+                        .led(productDTO.isLed())
+                        .numKeys(productDTO.getNumKeys())
+                        .color(productDTO.getColor())
+                        .battery(productDTO.getBattery())
+                        .warranty(productDTO.getWarranty())
+                        .weight(productDTO.getWeight())
+                        .connectionType(productDTO.getConnectionType())
+                        .switchType(productDTO.getSwitchType())
+                        .build();
+                existing_product.setKeyboardSpecs(newKeyBoard);
+                keyboardSpecsRepository.save(keyboardSpecsService.updateKeyboardSpecs(newKeyBoard));
             } else {
-                existing_product.setHeadphoneSpecs(productDTO.getHeadphoneSpecsId());
-                headphoneSpecsRepository.save(headphoneSpecsService.updateHeadphoneSpecs(productDTO.getHeadphoneSpecsId()));
+                HeadphoneSpecs newHeadphone = HeadphoneSpecs.builder()
+                        .product(existing_product)
+                        .noiseCancelling(productDTO.isNoiseCancelling())
+                        .hasMic(productDTO.isHasMic())
+                        .color(productDTO.getColor())
+                        .battery(productDTO.getBattery())
+                        .warranty(productDTO.getWarranty())
+                        .weight(productDTO.getWeight())
+
+                        .build();
+                existing_product.setHeadphoneSpecs(newHeadphone);
+                headphoneSpecsRepository.save(headphoneSpecsService.updateHeadphoneSpecs(newHeadphone));
             }
 
 

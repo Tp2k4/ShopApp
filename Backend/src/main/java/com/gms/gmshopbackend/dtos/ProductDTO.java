@@ -39,14 +39,20 @@ public class ProductDTO {
     @JsonProperty(value = "brand_id")
     private Long brandId;
 
-    @JsonProperty(value = "mouse_specs")
-    private MouseSpecs mouseSpecsId;
+    private String battery;
+    private String warranty;
+    private String connectionType;
+    private float weight;
+    private String color;
+    private boolean led;
+    private int maxDpi;
+    private boolean hasMic;
+    private boolean noiseCancelling;
+    private long numKeys;
+    private String switchType;
 
-    @JsonProperty(value = "keyboard_specs")
-    private KeyboardSpecs keyboardSpecsId;
 
-    @JsonProperty(value = "headphone_specs")
-    private HeadphoneSpecs headphoneSpecsId;
+
 
 
 
