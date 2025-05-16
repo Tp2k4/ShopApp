@@ -38,6 +38,10 @@ public class Product extends BaseEntity{
 
     private String description;
 
+    private String description_2;
+
+    private String desscription_3;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private com.gms.gmshopbackend.model.Category category;

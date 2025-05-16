@@ -1,5 +1,8 @@
 import { LabeledInputField } from "../form/LabeledInputField";
-import { handleCreate, handleCancelCreate } from "../../../service/crudService";
+import {
+  handleCreateProduct,
+  handleCancelCreate,
+} from "../../../service/crudService";
 import { SelectButton, ImportImage } from "../../components/form";
 import { Button, CancelButton } from "../../components/button";
 
@@ -11,56 +14,38 @@ interface PopupProductProps {
 }
 
 const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
+  // Thêm ảnh
   const [imageURLs, setImageURLs] = useState<string[]>([]);
+  const [files, setFiles] = useState<FileList | null>(null);
 
   // State quản lý thông tin sản phẩm
   const [newProductInfo, setNewProductInfo] = useState({
     name: "",
-    amount: "",
-    company: "",
-    importPrice: "",
-    sellPrice: "",
-    state: "",
-    type: "",
+    price: 0,
     battery: "",
     warranty: "",
     connectionType: "",
+    weight: 0,
+    brand_id: "",
     color: "",
-    led: "",
-    weight: "",
+    led: false,
+    maxDpi: 0,
+    hasMic: false,
+    noiseCancelling: false,
+    numKeys: 0,
+    switchType: "",
+    thumbnail: "",
+    stock_quantity: 0,
+    category_id: "",
+    importPrice: 0,
+    description1: "",
+    description2: "",
+    description3: "",
   });
 
   // State quản lý thông số kỹ thuật đặc thù
-  const [specificInfo, setSpecificInfo] = useState<any>({});
-  const [newProduct, setNewProduct] = useState<any>({});
   const types = ["mouse", "keyboard", "headphone"];
   const [selectedType, setSelectedType] = useState<string>("");
-
-  // Reset specificInfo khi loại sản phẩm thay đổi
-  useEffect(() => {
-    const type = newProductInfo.type;
-    switch (type) {
-      case "mouse":
-        setSpecificInfo({ maxDpi: "" });
-        break;
-      case "keyboard":
-        setSpecificInfo({ numkeys: "", switchType: "" });
-        break;
-      case "headphone":
-        setSpecificInfo({ hasMic: "", noiseCancelling: "" });
-        break;
-      default:
-        setSpecificInfo({});
-    }
-  }, [newProductInfo.type]);
-
-  // Cập nhật newProduct khi thông tin thay đổi
-  useEffect(() => {
-    setNewProduct({
-      ...newProductInfo,
-      ...specificInfo,
-    });
-  }, [newProductInfo, specificInfo]);
 
   return (
     <div className="fixed z-49 inset-0 flex items-center justify-center">
@@ -92,12 +77,12 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 <strong>Loại: </strong>
               </div>
               <SelectButton
-                value={newProductInfo.type}
+                value={newProductInfo.category_id}
                 onChange={(e: any) => {
                   setSelectedType(e.target.value);
                   setNewProductInfo({
                     ...newProductInfo,
-                    type: e.target.value,
+                    category_id: e.target.value,
                   });
                 }}
                 width="w-1/2"
@@ -107,11 +92,11 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
 
             {/* Hãng */}
             <LabeledInputField
-              value={newProductInfo.company}
+              value={newProductInfo.brand_id}
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  company: e.target.value,
+                  brand_id: e.target.value,
                 })
               }
               label="Hãng"
@@ -120,35 +105,74 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
 
             {/* Giá gốc */}
             <LabeledInputField
-              value={newProductInfo.importPrice}
+              value={String(newProductInfo.importPrice)}
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  importPrice: e.target.value,
+                  importPrice: parseFloat(e.target.value) || 0,
                 })
               }
               label="Giá gốc: "
-              placeholder="400000đ"
+              placeholder="400000"
             />
 
             {/* Giá bán */}
             <LabeledInputField
-              value={newProductInfo.sellPrice}
+              value={String(newProductInfo.price)}
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  sellPrice: e.target.value,
+                  price: parseFloat(e.target.value) || 0,
                 })
               }
               label="Giá bán: "
-              placeholder="500000đ"
+              placeholder="500000"
+            />
+
+            {/* Mô tả 1 */}
+            <LabeledInputField
+              value={newProductInfo.description1}
+              onChange={(e: any) =>
+                setNewProductInfo({
+                  ...newProductInfo,
+                  description1: e.target.value,
+                })
+              }
+              label="Mô tả 1: "
+              placeholder="..."
+            />
+
+            {/* Mô tả 2 */}
+            <LabeledInputField
+              value={newProductInfo.description2}
+              onChange={(e: any) =>
+                setNewProductInfo({
+                  ...newProductInfo,
+                  description2: e.target.value,
+                })
+              }
+              label="Mô tả 2: "
+              placeholder="..."
+            />
+
+            {/* Mô tả 3 */}
+            <LabeledInputField
+              value={newProductInfo.description3}
+              onChange={(e: any) =>
+                setNewProductInfo({
+                  ...newProductInfo,
+                  description3: e.target.value,
+                })
+              }
+              label="Mô tả 3: "
+              placeholder="..."
             />
           </div>
           {/* Right */}
           <div className="flex flex-col gap-[var(--medium-gap)] pl-[var(--big-gap)] ">
             <div>Thông số kĩ thuật:</div>
 
-            {/* Giá bán */}
+            {/* Pin */}
             <LabeledInputField
               value={newProductInfo.battery}
               onChange={(e: any) =>
@@ -158,7 +182,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 })
               }
               label="Pin: "
-              placeholder="..."
+              placeholder="1000"
             />
 
             {/* Bảo hành */}
@@ -171,7 +195,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 })
               }
               label="Bảo hành: "
-              placeholder="..."
+              placeholder="7 years"
             />
 
             {/* Loại kết nối */}
@@ -184,7 +208,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 })
               }
               label="Loại kết nối: "
-              placeholder="..."
+              placeholder="wireless"
             />
 
             {/* Màu */}
@@ -197,72 +221,72 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 })
               }
               label="Màu: "
-              placeholder="..."
+              placeholder="red"
             />
 
             {/* Led */}
             <LabeledInputField
-              value={newProductInfo.led}
+              value={String(newProductInfo.led)}
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  led: e.target.value,
+                  led: e.target.value === "true",
                 })
               }
               label="Led: "
-              placeholder="..."
+              placeholder="1: Có/ 0: Không"
             />
 
             {/* Trọng lượng */}
             <LabeledInputField
-              value={newProductInfo.weight}
+              value={String(newProductInfo.weight)}
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  weight: e.target.value,
+                  weight: parseFloat(e.target.value) || 0,
                 })
               }
               label="Trọng lượng: "
-              placeholder="..."
+              placeholder="1 (gram)"
             />
 
-            {selectedType === "Chuột" && (
+            {selectedType === "mouse" && (
               <div className="flex flex-col gap-[var(--medium-gap)]">
                 {/* Max DPI */}
                 <LabeledInputField
-                  value={specificInfo.maxDpi || ""}
+                  value={String(newProductInfo.maxDpi)}
                   onChange={(e: any) =>
-                    setSpecificInfo({
-                      ...specificInfo,
-                      maxDpi: e.target.value,
+                    setNewProductInfo({
+                      ...newProductInfo,
+                      maxDpi: parseFloat(e.target.value) || 0,
                     })
                   }
                   label="Max DPI: "
-                  placeholder="..."
+                  placeholder="1600"
                 />
               </div>
             )}
-            {selectedType === "Bàn phím" && (
+            {selectedType === "keyboard" && (
               <div className="flex flex-col gap-[var(--medium-gap)]">
                 {/* Có phím số */}
                 <LabeledInputField
-                  value={specificInfo.numkeys || ""}
+                  value={String(newProductInfo.numKeys)}
                   onChange={(e: any) =>
-                    setSpecificInfo({
-                      ...specificInfo,
-                      numkeys: e.target.value,
+                    setNewProductInfo({
+                      ...newProductInfo,
+                      numKeys: parseInt(e.target.value) || 0,
                     })
                   }
                   label="Có phím số: "
-                  placeholder="..."
+                  placeholder="100"
                 />
 
                 {/* Loại switch */}
                 <LabeledInputField
-                  value={specificInfo.switchType || ""}
+                  value={newProductInfo.switchType || ""}
                   onChange={(e: any) =>
-                    setSpecificInfo({
-                      ...specificInfo,
+                    setNewProductInfo({
+                      ...newProductInfo,
                       switchType: e.target.value,
                     })
                   }
@@ -271,32 +295,32 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 />
               </div>
             )}
-            {selectedType === "Tai nghe" && (
+            {selectedType === "headphone" && (
               <div className="flex flex-col gap-[var(--medium-gap)]">
                 {/* Có mic */}
                 <LabeledInputField
-                  value={specificInfo.hasMic || ""}
+                  value={String(newProductInfo.hasMic)}
                   onChange={(e: any) =>
-                    setSpecificInfo({
-                      ...specificInfo,
-                      hasMic: e.target.value,
+                    setNewProductInfo({
+                      ...newProductInfo,
+                      hasMic: e.target.value === "true",
                     })
                   }
                   label="Có mic: "
-                  placeholder="..."
+                  placeholder="1: Có/ 0: Không"
                 />
 
                 {/* Khử tiếng ồn */}
                 <LabeledInputField
-                  value={specificInfo.noiseCancelling || ""}
+                  value={String(newProductInfo.noiseCancelling)}
                   onChange={(e: any) =>
-                    setSpecificInfo({
-                      ...specificInfo,
-                      noiseCancelling: e.target.value,
+                    setNewProductInfo({
+                      ...newProductInfo,
+                      noiseCancelling: e.target.value === "true",
                     })
                   }
                   label="Khử tiếng ồn: "
-                  placeholder="..."
+                  placeholder="1: Có/ 0: Không"
                 />
               </div>
             )}
@@ -311,18 +335,20 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
           <div className="flex gap-[var(--small-gap)]">
             <Button
               onClick={() =>
-                handleCreate(
-                  "http://localhost:8080/product/create",
-                  newProduct,
-                  setProducts,
-                  setNewProduct
+                handleCreateProduct(
+                  "http://localhost:8020/api/v1/gmshop/product/create-product",
+                  newProductInfo,
+                  setNewProductInfo,
+                  setProducts
                 )
               }
               type="submit"
               text="Lưu"
             />
             <CancelButton
-              onClick={() => handleCancelCreate(setShowPopup, setNewProduct)}
+              onClick={() =>
+                handleCancelCreate(setShowPopup, setNewProductInfo)
+              }
               text="Hủy"
             />
           </div>
