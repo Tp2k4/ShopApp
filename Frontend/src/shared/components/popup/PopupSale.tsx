@@ -1,6 +1,6 @@
 import { LabeledInputField } from "../form";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../../components/button";
+import { Button, CancelButton } from "../button";
 import { Line } from "../ui";
 
 import { useState } from "react";
@@ -41,7 +41,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
           }
           label="Tên chương trình: "
           placeholder="Black Friday"
-          width="w-[240px]"
+          inputFieldWidth="w-[240px]"
         />
 
         {/* Loại khuyến mãi */}
@@ -55,7 +55,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
           }
           label="Loại khuyến mãi: "
           placeholder="Giảm theo %"
-          width="w-[240px]"
+          inputFieldWidth="w-[240px]"
         />
 
         {/* Từ ngày */}
@@ -69,7 +69,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
           }
           label="Từ ngày: "
           placeholder="01/01/2024"
-          width="w-[240px]"
+          inputFieldWidth="w-[240px]"
         />
 
         {/* Đến ngày */}
@@ -83,7 +83,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
           }
           label="Đến ngày: "
           placeholder="01/02/2024"
-          width="w-[240px]"
+          inputFieldWidth="w-[240px]"
         />
 
         <Line />

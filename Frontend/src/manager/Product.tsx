@@ -4,7 +4,7 @@ import { Button } from "../shared/components/button";
 import { useFilter, useSearch } from "../service/queryService";
 import ManagerLayout from "./ManagerLayout";
 import ProductList from "../shared/components/list/ProductList";
-import PopupProduct from "../shared/components/pupup/PopupProduct";
+import PopupProduct from "../shared/components/popup/PopupProduct";
 import { useGetProducts } from "../service/crudService";
 
 import { useState, useEffect } from "react";
