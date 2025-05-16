@@ -32,31 +32,8 @@ public class RevenueService implements IRevenueService {
     @Override
     public List<RevenueResponse> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
         List<Inventory> inventoryList = inventoryRepository.findByTransactionDateBetween(startDate, endDate);
+        return inventoryList.stream().map(RevenueResponse::fromDTO).collect(Collectors.toList());
 
-        Map<LocalDate, List<Inventory>> groupedByDate = inventoryList.stream()
-                .collect(Collectors.groupingBy(Inventory::getTransactionDate));
-
-        // Tạo kết quả trả về
-        return groupedByDate.entrySet().stream()
-                .map(entry -> {
-                    LocalDate date = entry.getKey();
-                    List<RevenueProductDTO> productDTOs = entry.getValue().stream()
-                            .map(inventory -> RevenueProductDTO.builder()
-                                    .productName(inventory.getProductName())
-                                    .quantity(inventory.getQuantity())
-                                    .importPrice(inventory.getImportPrice()!=null?inventory.getImportPrice():inventory.getProductId().getPrice())
-                                    .sellPrice(inventory.getSellPrice()!=null?inventory.getSellPrice():inventory.getProductId().getPrice())
-                                    .totalRevenue(inventory.getQuantity() * (inventory.getSellPrice()!=null?inventory.getSellPrice():inventory.getProductId().getPrice()))
-                                    .build())
-                            .collect(Collectors.toList());
-
-                    return RevenueResponse.builder()
-                            .date(date)
-                            .products(productDTOs)
-                            .build();
-                })
-                .sorted(Comparator.comparing(RevenueResponse::getDate))
-                .collect(Collectors.toList());
 
     }
 
@@ -99,5 +76,15 @@ public class RevenueService implements IRevenueService {
 
         return result;
     }
+
+    public List<RevenueResponse> getAll(){
+        try{
+            List<Inventory> inventoryList = inventoryRepository.findAll();
+            return inventoryList.stream().map(RevenueResponse::fromDTO).collect(Collectors.toList());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

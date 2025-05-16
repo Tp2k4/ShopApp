@@ -13,124 +13,113 @@ interface ProductListProps<T = any> {
   [key: string]: any;
 }
 
-const renderItemType = (details: any, type: string) => {
+const renderItemType = (specs: any, type: string) => {
   switch (type) {
-    case "Chuột":
+    case "mouse":
       return (
         <div>
           <p>
             <strong>Pin: </strong>
-            {details.battery}
-          </p>
-          <p>
-            <strong>Hãng: </strong>
-            {details.company}
+            {specs.battery}
           </p>
           <p>
             <strong>Bảo hành: </strong>
-            {details.warranty}
+            {specs.warranty}
           </p>
           <p>
             <strong>Loại kết nối: </strong>
-            {details.connectionType}
+            {specs.connectionType}
           </p>
           <p>
             <strong>DPI: </strong>
-            {details.maxDpi}
+            {specs.maxDpi}
           </p>
           <p>
             <strong>Màu: </strong>
-            {details.color}
+            {specs.color}
           </p>
           <p>
             <strong>Led: </strong>
-            {details.led}
+            {specs.led ? "Có" : "Không"}
           </p>
           <p>
             <strong>Cân nặng: </strong>
-            {details.weight}
+            {specs.weight}
           </p>
         </div>
       );
-    case "Bàn phím":
+    case "keyboard":
       return (
         <div>
           <p>
             <strong>Pin: </strong>
-            {details.battery}
-          </p>
-          <p>
-            <strong>Hãng: </strong>
-            {details.company}
+            {specs.battery}
           </p>
           <p>
             <strong>Bảo hành: </strong>
-            {details.warranty}
+            {specs.warranty}
           </p>
           <p>
             <strong>Loại kết nối: </strong>
-            {details.connectionType}
+            {specs.connectionType}
           </p>
           <p>
             <strong>Phím số: </strong>
-            {details.numKeys}
+            {specs.numKeys}
           </p>
           <p>
             <strong>Màu: </strong>
-            {details.color}
+            {specs.color}
           </p>
           <p>
             <strong>Led: </strong>
-            {details.led}
+            {specs.led ? "Có" : "Không"}
           </p>
           <p>
             <strong>Loại switch: </strong>
-            {details.switchType}
+            {specs.switchType}
           </p>
           <p>
             <strong>Cân nặng: </strong>
-            {details.weight}
+            {specs.weight}
           </p>
         </div>
       );
-    case "Tai nghe":
+    case "headphone":
       return (
         <div>
           <p>
             <strong>Pin: </strong>
-            {details.battery}
+            {specs.battery}
           </p>
-          <p>
-            <strong>Hãng: </strong>
-            {details.company}
-          </p>
+
           <p>
             <strong>Bảo hành: </strong>
-            {details.warranty}
+            {specs.warranty}
           </p>
           <p>
             <strong>Loại kết nối: </strong>
-            {details.connectionType}
+            {specs.connectionType}
           </p>
           <p>
             <strong>Mic: </strong>
-            {details.hasMic}
+            {specs.hasMic ? "Có" : "Không"}
           </p>
           <p>
             <strong>Khử tiếng ồn: </strong>
-            {details.noiseCancelling}
+            {specs.noiseCancelling ? "Có" : "Không"}
           </p>
           <p>
             <strong>Màu: </strong>
-            {details.color}
+            {specs.color}
           </p>
           <p>
             <strong>Led: </strong>
-            {details.led}
+            {specs.led ? "Có" : "Không"}
           </p>
           <p>
             <strong>Cân nặng: </strong>
-            {details.weight}
+            {specs.weight}
           </p>
         </div>
       );
@@ -148,59 +137,69 @@ function ProductList({
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (
-    <table className={` ${className}`} {...rest}>
-      <thead>
-        <tr>
-          <th>Stt</th>
-          <th>Tên sản phẩm</th>
-          <th>Phân loại</th>
-          <th>Số lượng</th>
-          <th>Giá gốc</th>
-          <th>Giá bán</th>
-          <th>Trạng thái</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((item, index) => (
-          <React.Fragment key={index}>
-            <tr>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.type}</td>
-              <td>{item.amount}</td>
-              <td>{item.importPrice}</td>
-              <td>{item.sellPrice}</td>
-              <td>{item.state}</td>
-              <td className="!py-0">
-                <div className="flex gap-[var(--small-gap)] justify-end">
-                  <DetailButton
-                    onClick={() => toggleDetail(index)}
-                    text="Chi tiết"
-                  />
-                  <Button
-                    className="text-[var(--caption)]"
-                    type="button"
-                    text="Chỉnh sửa"
-                    width="auto"
-                  />
-                </div>
-              </td>
-            </tr>
-
-            {openDetailIds.includes(index) && (
+    <div className="max-h-[600px] overflow-y-auto border-b border-[var(--line-color)]">
+      <table className={` ${className}`} {...rest}>
+        <thead>
+          <tr>
+            <th>Stt</th>
+            <th>Tên sản phẩm</th>
+            <th>Hãng</th>
+            <th>Phân loại</th>
+            <th>Số lượng</th>
+            <th>Giá gốc</th>
+            <th>Giá bán</th>
+            <th>Trạng thái</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((item, index) => (
+            <React.Fragment key={index}>
               <tr>
-                <td className="bg-white" colSpan={NUM_COLUMNS}>
-                  <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
-                    {renderItemType(item.details, item.type)}
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.brand_id}</td>
+                <td>{item.category_id}</td>
+                <td>{item.stock_quantity}</td>
+                <td>{item.originPrice}</td>
+                <td>{item.price}</td>
+                {/* Kiểm tra trạng thái hết hàng */}
+                <td className={item.stock_quantity <= 5 ? "text-red-500" : ""}>
+                  {item.stock_quantity === 0
+                    ? "Hết hàng"
+                    : item.stock_quantity <= 5
+                    ? "Sắp hết hàng"
+                    : "Còn hàng"}
+                </td>
+                <td className="!py-0">
+                  <div className="flex gap-[var(--small-gap)] justify-end">
+                    <DetailButton
+                      onClick={() => toggleDetail(index)}
+                      text="Chi tiết"
+                    />
+                    <Button
+                      className="text-[var(--caption)]"
+                      type="button"
+                      text="Chỉnh sửa"
+                      width="auto"
+                    />
                   </div>
                 </td>
               </tr>
-            )}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
+              {openDetailIds.includes(index) && (
+                <tr>
+                  <td className="bg-white" colSpan={NUM_COLUMNS}>
+                    <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
+                      {renderItemType(item.specs, item.category_id)}
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

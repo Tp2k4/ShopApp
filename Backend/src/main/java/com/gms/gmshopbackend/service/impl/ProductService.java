@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,13 +63,13 @@ public class ProductService implements IProductService {
         if (productRepository.existsByName(productDTO.getName())) {
             throw new RuntimeException("Product existed: " + productDTO.getName());
         }
-        Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(
+        Category category = (Category) categoryRepository.findByName(productDTO.getCategoryId()).orElseThrow(
                 () -> new RuntimeException("Category not found")
         );
 
-        Brand brand = brandRepository.findById(productDTO.getBrandId()).orElseThrow(
-                () -> new RuntimeException("Brand not found")
-        );
+
+
+        Brand brand = brandRepository.findByName(productDTO.getBrandId());
 
 
 
@@ -77,10 +78,14 @@ public class ProductService implements IProductService {
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
-        product.setCategory(category);
+        product.setCategory((Category) category);
         product.setBrand(brand);
         product.setStockQuantity(productDTO.getStockQuantity());
         product.setThumbnail(productDTO.getThumbnail());
+        product.setOriginPrice(productDTO.getImportPrice());
+        product.setDescription(productDTO.getDescription1());
+        product.setDescription_2(productDTO.getDescription2());
+        product.setDescription(productDTO.getDescription3());
 
         Product savedProduct = productRepository.save(product);
 
@@ -127,7 +132,7 @@ public class ProductService implements IProductService {
             existing_product.setStockQuantity(productDTO.getStockQuantity());
             existing_product.setThumbnail(productDTO.getThumbnail());
 
-            Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(
+            Category category = (Category) categoryRepository.findByName(productDTO.getCategoryId()).orElseThrow(
                     () -> new RuntimeException("Category not found")
             );
 

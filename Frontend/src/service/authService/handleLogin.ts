@@ -29,6 +29,8 @@ export const handleLogin = async (
         const data = await response.json();
         const role = data.user.role;
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
     
         if (role === "admin") {
             window.location.href = ROUTES.MANAGER.HOME;

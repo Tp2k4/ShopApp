@@ -13,6 +13,7 @@ import java.util.List;
 @SuperBuilder
 public class ProductResponseList {
 
+
     private List<ProductResponse> products;
     private int totalPages;
 

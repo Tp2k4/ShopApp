@@ -15,7 +15,7 @@ public class UserResponse {
     private String userName;
     private String name;
     private String phoneNumber;
-    private boolean state;
+    private String state;
     private String role;
     private String address;
     private String email;
@@ -27,7 +27,7 @@ public class UserResponse {
                 .userName(user.getUsername())
                 .name(user.getFullName())
                 .phoneNumber(user.getPhoneNumber())
-                .state(user.isActive())
+                .state(user.isActive() ? "Hoạt động" : "Khóa")
                 .address(user.getAddress())
                 .email(user.getEmail())
                 .role(user.getRole().getName())

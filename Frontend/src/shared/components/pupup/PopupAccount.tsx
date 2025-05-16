@@ -4,24 +4,25 @@ import { Button, CancelButton } from "../../components/button";
 
 import { useState } from "react";
 
-interface PopupProductProps {
+interface AccountProps {
   setAccounts: React.Dispatch<React.SetStateAction<any>>;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PopupAccount = ({ setAccounts, setShowPopup }: PopupProductProps) => {
+const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
   const [newAccountInfo, setNewAccountInfo] = useState({
-    username: "",
+    fullname: "",
     password: "",
-    name: "",
-    phone: "",
-    state: "",
-    role: "",
-    address: "",
+    date_of_birth: "",
+    // gender,
+    phone_number: "",
     email: "",
+    address: "",
+    is_active: 1,
+    role_id: 2,
+    facebook_account_id: 0,
+    google_account_id: 0,
   });
-
-  const [newAccount, setNewAccount] = useState<any>({});
 
   return (
     <div className="fixed z-49 inset-0 flex items-center justify-center">
@@ -32,17 +33,17 @@ const PopupAccount = ({ setAccounts, setShowPopup }: PopupProductProps) => {
           <div className="flex flex-col gap-[var(--medium-gap)]">
             <div>Thông tin tài khoảng:</div>
 
-            {/* Username */}
+            {/* Họ và tên */}
             <LabeledInputField
-              value={newAccountInfo.name}
+              value={newAccountInfo.fullname}
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  name: e.target.value,
+                  fullname: e.target.value,
                 })
               }
-              label="Username: "
-              placeholder="nguyenvana123"
+              label="Họ và tên: "
+              placeholder="Nguyễn Văn A"
               width="w-[240px]"
             />
 
@@ -60,27 +61,27 @@ const PopupAccount = ({ setAccounts, setShowPopup }: PopupProductProps) => {
               width="w-[240px]"
             />
 
-            {/* Họ và tên */}
+            {/* Ngày sinh */}
             <LabeledInputField
-              value={newAccountInfo.name}
+              value={newAccountInfo.date_of_birth}
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  name: e.target.value,
+                  date_of_birth: e.target.value,
                 })
               }
-              label="Họ và tên: "
-              placeholder="Nguyễn Văn A"
+              label="Ngày sinh: "
+              placeholder="2024/01/01"
               width="w-[240px]"
             />
 
             {/* Số điện thoại */}
             <LabeledInputField
-              value={newAccountInfo.phone}
+              value={newAccountInfo.phone_number}
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  phone: e.target.value,
+                  phone_number: e.target.value,
                 })
               }
               label="Số điện thoại: "
@@ -104,15 +105,15 @@ const PopupAccount = ({ setAccounts, setShowPopup }: PopupProductProps) => {
 
             {/* Role */}
             <LabeledInputField
-              value={newAccountInfo.role}
+              value={String(newAccountInfo.role_id)}
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  role: e.target.value,
+                  role_id: parseInt(e.target.value, 10),
                 })
               }
               label="Role: "
-              placeholder="Manager/ Employee/ User"
+              placeholder="1: Manager/ 3: Employee/ 2: User"
               width="w-[240px]"
             />
 
@@ -136,17 +137,19 @@ const PopupAccount = ({ setAccounts, setShowPopup }: PopupProductProps) => {
               <Button
                 onClick={() =>
                   handleCreate(
-                    "http://localhost:8080/account/create",
-                    newAccount,
-                    setAccounts,
-                    setNewAccount
+                    "http://localhost:8020/api/v1/gmshop/user/register",
+                    newAccountInfo,
+                    setNewAccountInfo,
+                    setAccounts
                   )
                 }
                 type="submit"
                 text="Lưu"
               />
               <CancelButton
-                onClick={() => handleCancelCreate(setShowPopup, setNewAccount)}
+                onClick={() =>
+                  handleCancelCreate(setShowPopup, setNewAccountInfo)
+                }
                 text="Hủy"
               />
             </div>

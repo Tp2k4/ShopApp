@@ -1,29 +1,26 @@
 import { useState, useEffect } from "react";
 
-export const useGet = (
-    apiPath: string,
+export const handleUpdate = (
+    apiPath?: string,
 ) => {
     const [data, setData] = useState<any>([]);
-
     const token = localStorage.getItem("token");
 
     useEffect(()=>{
-
         const fetchData = async () => {
             try{
-                const response = await fetch(apiPath, {
-                    method: "GET",
+                const response = await fetch("http://localhost:8020/api/v1/gmshop/promotion/set-promotion/3", {
+                    method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
+                      Authorization: `Bearer ${token}`, 
                     },
                 });
 
                 if(response.ok){
-                    const data = await response.json()
-                    setData(data)
+                    const json = await response.json()
+                    setData(json)
                 } else {
-                    alert("Lỗi không lấy được dữ liệu")
+                    alert("Lỗi khi thêm sản phẩm.")
                 }
             } catch (error) {
                 alert(error)

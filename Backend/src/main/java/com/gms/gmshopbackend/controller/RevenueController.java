@@ -19,6 +19,17 @@ import java.util.List;
 public class RevenueController {
 
     private final RevenueService revenueService;
+    @GetMapping("/alls")
+    public ResponseEntity<?> getAllsRevenue(){
+
+        try{
+            List<RevenueResponse> list = revenueService.getAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
     @GetMapping("/date-date")
@@ -31,6 +42,7 @@ public class RevenueController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/today-revenue")
     public ResponseEntity<?> getTodayRevenue() {
@@ -50,6 +62,7 @@ public class RevenueController {
         }
 
     }
+
 
 }
 

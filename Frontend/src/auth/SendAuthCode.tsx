@@ -1,4 +1,4 @@
-import { Box, Line, Avatar } from "../shared/components/ui";
+import { Box, Line } from "../shared/components/ui";
 import { Button, CancelButton } from "../shared/components/button";
 import { InputField } from "../shared/components/form";
 import { handleVerifyOtp } from "../service/authService/handleVerifyOtp";
@@ -54,7 +54,7 @@ function SendAuthCode() {
 
               <div className="w-1/2">
                 Chúng tôi đã gửi mã cho bạn đến:{" "}
-                <span className="text-blue-500">levo2k4@gmail.com</span>
+                <span className="text-blue-500">{email}</span>
               </div>
               {isError && <p className="caption text-red-500 px-2">{error}</p>}
             </div>
@@ -64,7 +64,6 @@ function SendAuthCode() {
 
             {/* Avatar */}
             <div className="w-full flex flex-col items-center gap-[var(--small-gap)]">
-              <Avatar src={avatar} />
               <div className="heading3">Lê Võ</div>
             </div>
 

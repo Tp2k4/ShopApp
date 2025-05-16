@@ -26,18 +26,20 @@ public class ProductDTO {
     @Min(value = 1, message = "Price must be greater than 0")
     private float price;
 
+    private float originalPrice;
+
     private String thumbnail;
 
     private String description;
 
     @JsonProperty(value = "category_id")
-    private Long categoryId;
+    private String categoryId;
 
     @JsonProperty(value = "stock_quantity")
     private int stockQuantity;
 
     @JsonProperty(value = "brand_id")
-    private Long brandId;
+    private String brandId;
 
     private String battery;
     private String warranty;
@@ -50,6 +52,10 @@ public class ProductDTO {
     private boolean noiseCancelling;
     private long numKeys;
     private String switchType;
+    private Double importPrice;
+    private String description1;
+    private String description2;
+    private String description3;
 
 
 

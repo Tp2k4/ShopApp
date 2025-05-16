@@ -35,6 +35,8 @@ public class InventoryResponse {
 
     private Double sellPrice;
 
+    private LocalDate date;
+
 
     public static InventoryResponse fromInventory(Inventory inventory) {
 
@@ -47,6 +49,7 @@ public class InventoryResponse {
                 .quantity(inventory.getQuantity())
                 .importPrice(inventory.getImportPrice())
                 .sellPrice(inventory.getSellPrice())
+                .date(inventory.getTransactionDate())
                 .build();
 
         return inventoryResponse;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-export const useGetProduct = (
+export const useGetProducts
+ = (
     apiPath: string,
     params?: Record<string, string | number | boolean>
 ) => {
@@ -28,7 +29,6 @@ export const useGetProduct = (
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
                     },
-                    // credentials: "include"
                 });
 
                 if (response.ok) {
@@ -47,6 +47,6 @@ export const useGetProduct = (
             }
         }
         fetchData();
-    }, [])
+    }, [apiPath, JSON.stringify(params)])
     return {data, setData};
 }
