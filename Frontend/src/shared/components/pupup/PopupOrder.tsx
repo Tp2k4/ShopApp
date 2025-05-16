@@ -1,4 +1,4 @@
-import { LabeledInputField } from "../form/LabeledInputField";
+import { LabeledInputField } from "../form";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
 import { Button, CancelButton } from "../../components/button";
 

@@ -7,8 +7,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: string;
 }
-
-export function LabeledInputField({
+function LabeledInputField({
   label,
   placeholder,
   value,
@@ -30,3 +29,5 @@ export function LabeledInputField({
     </div>
   );
 }
+
+export default LabeledInputField;

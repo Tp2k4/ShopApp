@@ -26,11 +26,7 @@ public class ProductDTO {
     @Min(value = 1, message = "Price must be greater than 0")
     private float price;
 
-    private float originalPrice;
-
     private String thumbnail;
-
-    private String description;
 
     @JsonProperty(value = "category_id")
     private String categoryId;
@@ -50,7 +46,7 @@ public class ProductDTO {
     private int maxDpi;
     private boolean hasMic;
     private boolean noiseCancelling;
-    private long numKeys;
+    private int numKeys;
     private String switchType;
     private Double importPrice;
     private String description1;

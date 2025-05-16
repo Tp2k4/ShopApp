@@ -1,5 +1,5 @@
-import { LabeledInputField } from "../form/LabeledInputField";
-import { handleCreate, handleCancelCreate } from "../../../service/crudService";
+import { LabeledInputField } from "../form";
+import { handleCreateAccount, handleCancelCreate } from "../../../service/crudService";
 import { Button, CancelButton } from "../../components/button";
 
 import { useState } from "react";
@@ -136,7 +136,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
             <div className="flex gap-[var(--small-gap)]">
               <Button
                 onClick={() =>
-                  handleCreate(
+                  handleCreateAccount(
                     "http://localhost:8020/api/v1/gmshop/user/register",
                     newAccountInfo,
                     setNewAccountInfo,
