@@ -6,7 +6,7 @@ import {
 import { SelectButton, ImportImage } from "../../components/form";
 import { Button, CancelButton } from "../../components/button";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface PopupProductProps {
   setProducts: React.Dispatch<React.SetStateAction<any>>;
@@ -16,7 +16,7 @@ interface PopupProductProps {
 const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
   // Thêm ảnh
   const [imageURLs, setImageURLs] = useState<string[]>([]);
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   // State quản lý thông tin sản phẩm
   const [newProductInfo, setNewProductInfo] = useState({
@@ -34,7 +34,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
     noiseCancelling: false,
     numKeys: 0,
     switchType: "",
-    thumbnail: "",
+    thumbnail: imageURLs[0] || "",
     stock_quantity: 0,
     category_id: "",
     importPrice: 0,
@@ -329,14 +329,26 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
 
         <div className="flex flex-col gap-[var(--medium-gap)]">
           {/* Thêm ảnh */}
-
-          <ImportImage imageURLs={imageURLs} setImageURLs={setImageURLs} />
+          {/* Cần imageURLs để giải phóng bộ nhớ tạm chứ URL sau khi đã thêm xong tại ImportImage */}
+          {/* setImageURLs và imageURLs để hiển thị tạm các hình dạng vuông nhỏ ngay dưới Popup */}
+          {/* setFiles để lấy files ảnh đã lưu trong ImportImage để truyền vào files, sau đó truyền vào handleCreateProduct */}
+          <ImportImage
+            imageURLs={imageURLs}
+            setImageURLs={setImageURLs}
+            setFiles={setFiles}
+          />
 
           <div className="flex gap-[var(--small-gap)]">
+            {/* handleCreateProduct nhận vào files là danh sách các ảnh để lưu về backend */}
+            {/* newProductInfo: lấy các thông tin đã được nhập từ trang Popup truyền về backend */}
+            {/* setNewProductInfo: sau khi gọi API thêm được sản phẩm xong, set các trường của thông tin sản phẩm về mặc định là các chuỗi rỗng */}
+            {/* setProducts: dùng để cập nhật "ngay lập tức" danh sách sản phẩm, thêm sản phẩm vừa được thêm vào ngay mà không cần load lại trang */}
+
             <Button
               onClick={() =>
                 handleCreateProduct(
                   "http://localhost:8020/api/v1/gmshop/product/create-product",
+                  files,
                   newProductInfo,
                   setNewProductInfo,
                   setProducts

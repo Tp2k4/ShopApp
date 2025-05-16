@@ -66,7 +66,7 @@ function Inventory() {
         </div>
 
         {/* */}
-        <div className="flex flex-col  gap-[var(--medium-gap)]">
+        <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="px-[var(--medium-gap)] flex flex-col gap-[var(--medium-gap)]">
             {/* */}
             <div className="flex justify-between">

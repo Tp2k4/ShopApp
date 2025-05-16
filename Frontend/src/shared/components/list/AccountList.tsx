@@ -22,60 +22,61 @@ function AccountList({
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (
-    <table className={` ${className}`} {...rest}>
-      <thead>
-        <tr>
-          <th>Stt</th>
-          <th>Họ và tên</th>
-          <th>Số điện thoại</th>
-          <th>Trạng thái</th>
-          <th>Vai trò</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {accounts.map((account, index) => (
-          <React.Fragment key={index}>
-            <tr>
-              <td>{account.id}</td>
-              <td>{account.name}</td>
-              <td>{account.phoneNumber}</td>
-              <td>{account.state}</td>
-              <td>{account.role}</td>
-              <td className="!py-0">
-                <div className="flex gap-[var(--small-gap)] justify-end">
-                  <DetailButton
-                    onClick={() => toggleDetail(index)}
-                    text="Chi tiết"
-                  />
-                  <Button
-                    className="text-[var(--caption)]"
-                    type="button"
-                    text="Chỉnh sửa"
-                    width="auto"
-                  />
-                </div>
-              </td>
-            </tr>
-
-            {openDetailIds.includes(index) && (
+    <div className="max-h-[600px] overflow-y-auto border-b border-[var(--line-color)]">
+      <table className={` ${className}`} {...rest}>
+        <thead>
+          <tr>
+            <th>Stt</th>
+            <th>Họ và tên</th>
+            <th>Số điện thoại</th>
+            <th>Trạng thái</th>
+            <th>Vai trò</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {accounts.map((account, index) => (
+            <React.Fragment key={index}>
               <tr>
-                <td className="bg-white" colSpan={NUM_COLUMNS}>
-                  <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
-                    <p>
-                      <strong>Địa chỉ: </strong> {account.address}{" "}
-                    </p>
-                    <p>
-                      <strong>Email: </strong> {account.email}{" "}
-                    </p>
+                <td>{account.id}</td>
+                <td>{account.name}</td>
+                <td>{account.phoneNumber}</td>
+                <td>{account.state}</td>
+                <td>{account.role}</td>
+                <td className="!py-0">
+                  <div className="flex gap-[var(--small-gap)] justify-end">
+                    <DetailButton
+                      onClick={() => toggleDetail(index)}
+                      text="Chi tiết"
+                    />
+                    <Button
+                      className="text-[var(--caption)]"
+                      type="button"
+                      text="Chỉnh sửa"
+                      width="auto"
+                    />
                   </div>
                 </td>
               </tr>
-            )}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
+              {openDetailIds.includes(index) && (
+                <tr>
+                  <td className="bg-white" colSpan={NUM_COLUMNS}>
+                    <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
+                      <p>
+                        <strong>Địa chỉ: </strong> {account.address}{" "}
+                      </p>
+                      <p>
+                        <strong>Email: </strong> {account.email}{" "}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

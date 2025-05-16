@@ -4,15 +4,26 @@ import { useEffect } from "react";
 interface ImportImageProps {
   imageURLs: string[];
   setImageURLs: React.Dispatch<React.SetStateAction<string[]>>;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
-const ImportImage = ({ imageURLs, setImageURLs }: ImportImageProps) => {
+const ImportImage = ({
+  imageURLs,
+  setImageURLs,
+  setFiles,
+}: ImportImageProps) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      // Thêm URL mới vào danh sách URL cũ
-      const newUrls = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
+    // Lấy các file ảnh từ input (thông qua e.target.files)
+    const newFiles = event.target.files;
+
+    if (newFiles) {
+      // Thêm các ảnh mới vào files, để truyền files ảnh này về backend
+      const filesArray = Array.from(newFiles);
+      setFiles((prev) => [...prev, ...filesArray]);
+
+      // Thêm URL mới vào, mục đích để hiển thị tạm thời các ô ảnh vuông bên dưới Popup
+      const newUrls = Array.from(newFiles).map((newFile) =>
+        URL.createObjectURL(newFile)
       );
       setImageURLs((prev) => [...prev, ...newUrls]);
     }
@@ -39,7 +50,7 @@ const ImportImage = ({ imageURLs, setImageURLs }: ImportImageProps) => {
         type="file"
         accept="image/*"
         multiple
-        onChange={handleImageChange}
+        onChange={(e) => handleImageChange(e)}
       />
       <div className="flex gap-[var(--small-gap)]">
         {imageURLs.map((url, index) => (

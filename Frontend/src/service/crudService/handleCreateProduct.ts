@@ -1,11 +1,19 @@
 export const handleCreateProduct = async (
+    
     apiPath: string,
+    files: File[],
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
 ) => {
-
+    // Lấy token
     const token = localStorage.getItem("token")
+
+    // Tạo formData, cần thiết cho việc truyền data về backend nếu data có chứa file
+    // Nếu data truyền về backend không có file, thì truyền bằng json như như bình thường
+    const formData = new FormData();
+    // Thêm tất cả ảnh từ files (files này có được setFiles bên ImportImage) vào formData
+    files.forEach(file => formData.append("productImages", file))
 
     try{    
         const response = await fetch(apiPath, {
@@ -17,8 +25,8 @@ export const handleCreateProduct = async (
             body: JSON.stringify(newItemInfo),
         })
 
+        // Kiểm tra nếu gọi thành công thì hiển thị ngay trên màn hình rồi đặt các trường thuộc tính thông tin về mặc định
         if(response.ok){
-
             //Giúp update ngay item đã thêm lên màn hình mà không cần phải load lại trang
             const addedItem = await response.json()
             setItems((prevItems) => [...prevItems, addedItem]);
@@ -38,14 +46,18 @@ export const handleCreateProduct = async (
             const json = await response.json()
             const productId = json.id
 
-            const res = await fetch(apiPath + "/" + productId, {
+            const responseForAddImage = await fetch(apiPath + "/" + productId, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                   },
-                body: JSON.stringify(newItemInfo),
+                body: formData,
             })
+
+            if (!responseForAddImage.ok){
+                alert("Lỗi khi gọi API thêm ảnh")
+            }
 
 
         } else {

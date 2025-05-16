@@ -48,13 +48,13 @@ function Dashboard() {
         </div>
 
         {/* */}
-        <div className="flex flex-col items-end gap-[var(--medium-gap)]">
+        <div className="flex flex-col gap-[var(--medium-gap)]">
           {/* */}
           <div className="flex items-start gap-[var(--medium-gap)] px-[var(--medium-gap)]">
             {/* Lọc ngày */}
-            <div className="flex flex-col gap-[var(--small-gap)] items-start">
+            <div className="w-full flex flex-col gap-[var(--small-gap)] items-end">
               <div className="flex gap-[var(--small-gap)]">
-                <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
+                <div className="flex items-center gap-[var(--smallest-gap)]">
                   <div>Từ: </div>
                   <InputField
                     value={startDate}
@@ -64,7 +64,7 @@ function Dashboard() {
                     width="w-[90px]"
                   />
                 </div>
-                <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
+                <div className="flex items-center gap-[var(--smallest-gap)]">
                   <div>Đến: </div>
                   <InputField
                     value={endDate}

@@ -137,69 +137,69 @@ function ProductList({
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (
-    <table className={` ${className}`} {...rest}>
-      <thead>
-        <tr>
-          <th>Stt</th>
-          <th>Tên sản phẩm</th>
-          <th>Hãng</th>
-          <th>Phân loại</th>
-          <th>Số lượng</th>
-          <th>Giá gốc</th>
-          <th>Giá bán</th>
-          <th>Trạng thái</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((item, index) => (
-          <React.Fragment key={index}>
-            <tr>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.brand_id}</td>
-              <td>{item.category_id}</td>
-              <td>{item.stock_quantity}</td>
-              <td>{item.originPrice}</td>
-              <td>{item.price}</td>
-
-              {/* Kiểm tra trạng thái hết hàng */}
-              <td className={item.stock_quantity <= 5 ? "text-red-500" : ""}>
-                {item.stock_quantity === 0
-                  ? "Hết hàng"
-                  : item.stock_quantity <= 5
-                  ? "Sắp hết hàng"
-                  : "Còn hàng"}
-              </td>
-              <td className="!py-0">
-                <div className="flex gap-[var(--small-gap)] justify-end">
-                  <DetailButton
-                    onClick={() => toggleDetail(index)}
-                    text="Chi tiết"
-                  />
-                  <Button
-                    className="text-[var(--caption)]"
-                    type="button"
-                    text="Chỉnh sửa"
-                    width="auto"
-                  />
-                </div>
-              </td>
-            </tr>
-
-            {openDetailIds.includes(index) && (
+    <div className="max-h-[600px] overflow-y-auto border-b border-[var(--line-color)]">
+      <table className={` ${className}`} {...rest}>
+        <thead>
+          <tr>
+            <th>Stt</th>
+            <th>Tên sản phẩm</th>
+            <th>Hãng</th>
+            <th>Phân loại</th>
+            <th>Số lượng</th>
+            <th>Giá gốc</th>
+            <th>Giá bán</th>
+            <th>Trạng thái</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((item, index) => (
+            <React.Fragment key={index}>
               <tr>
-                <td className="bg-white" colSpan={NUM_COLUMNS}>
-                  <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
-                    {renderItemType(item.specs, item.category_id)}
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.brand_id}</td>
+                <td>{item.category_id}</td>
+                <td>{item.stock_quantity}</td>
+                <td>{item.originPrice}</td>
+                <td>{item.price}</td>
+                {/* Kiểm tra trạng thái hết hàng */}
+                <td className={item.stock_quantity <= 5 ? "text-red-500" : ""}>
+                  {item.stock_quantity === 0
+                    ? "Hết hàng"
+                    : item.stock_quantity <= 5
+                    ? "Sắp hết hàng"
+                    : "Còn hàng"}
+                </td>
+                <td className="!py-0">
+                  <div className="flex gap-[var(--small-gap)] justify-end">
+                    <DetailButton
+                      onClick={() => toggleDetail(index)}
+                      text="Chi tiết"
+                    />
+                    <Button
+                      className="text-[var(--caption)]"
+                      type="button"
+                      text="Chỉnh sửa"
+                      width="auto"
+                    />
                   </div>
                 </td>
               </tr>
-            )}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </table>
+              {openDetailIds.includes(index) && (
+                <tr>
+                  <td className="bg-white" colSpan={NUM_COLUMNS}>
+                    <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
+                      {renderItemType(item.specs, item.category_id)}
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
