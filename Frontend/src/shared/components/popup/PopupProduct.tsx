@@ -3,8 +3,8 @@ import {
   handleCreateProduct,
   handleCancelCreate,
 } from "../../../service/crudService";
-import { SelectButton, ImportImage } from "../../components/form";
-import { Button, CancelButton } from "../../components/button";
+import { SelectButton, ImportImage } from "../form";
+import { Button, CancelButton } from "../button";
 
 import { useState } from "react";
 

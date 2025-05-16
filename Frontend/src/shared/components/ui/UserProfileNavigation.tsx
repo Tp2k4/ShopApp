@@ -34,9 +34,10 @@ function UserProfileNavigation({
         height="100%"
       >
         <div className="flex items-center justify-start gap-[var(--small-gap)]">
-          <IconNavLabel link={ROUTES.USER.USER_PROFILE}>
-            <i className="bxr  bx-user-circle"></i>
-          </IconNavLabel>
+          <IconNavLabel
+            link={ROUTES.USER.USER_PROFILE}
+            icon={<i className="bxr  bx-search-alt"></i>}
+          ></IconNavLabel>
           <ProfileNavLabel
             label="Thông tin tài khoản"
             link={ROUTES.USER.USER_PROFILE}
@@ -47,6 +48,10 @@ function UserProfileNavigation({
             }
           />
         </div>
+        <IconNavLabel
+          link={ROUTES.USER.BUY_HISTORY}
+          icon={<i className="bx bx-search-alt"></i>}
+        ></IconNavLabel>
         <ProfileNavLabel
           label="Lịch sử mua hàng"
           link={ROUTES.USER.BUY_HISTORY}
@@ -57,6 +62,7 @@ function UserProfileNavigation({
           }
         />
       </Box>
+      <i className="bx bx-search absolute right-2 text-[18px]"></i>
     </div>
   );
 }

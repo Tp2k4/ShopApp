@@ -1,6 +1,6 @@
 import { LabeledInputField } from "../form/LabeledInputField";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../../components/button";
+import { Button, CancelButton } from "../button";
 
 import { useState } from "react";
 
@@ -31,7 +31,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
       <div className="rounded-md z-50 flex flex-col gap-[var(--medium-gap)] bg-white p-[var(--big-gap)]">
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="flex flex-col gap-[var(--medium-gap)]">
-            <div>Thông tin tài khoảng:</div>
+            <div>Thông tin tài khoản:</div>
 
             {/* Họ và tên */}
             <LabeledInputField
@@ -44,7 +44,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Họ và tên: "
               placeholder="Nguyễn Văn A"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Mật khẩu */}
@@ -58,7 +58,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Mật khẩu: "
               placeholder="..."
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Ngày sinh */}
@@ -72,7 +72,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Ngày sinh: "
               placeholder="2024/01/01"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Số điện thoại */}
@@ -86,7 +86,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Số điện thoại: "
               placeholder="0123456789"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Email */}
@@ -100,7 +100,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Email: "
               placeholder="nguyenvana@example.com"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Role */}
@@ -114,7 +114,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Role: "
               placeholder="1: Manager/ 3: Employee/ 2: User"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Địa chỉ */}
@@ -128,7 +128,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               }
               label="Địa chỉ: "
               placeholder="123 đường nguyen van"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
           </div>
 

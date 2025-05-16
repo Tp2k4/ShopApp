@@ -1,6 +1,6 @@
 import { LabeledInputField } from "../form/LabeledInputField";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../../components/button";
+import { Button, CancelButton } from "../button";
 
 import { useState } from "react";
 
@@ -38,7 +38,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
               }
               label="Sản phẩm: "
               placeholder="Tai nghe Logitech"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Nhập/ Xuất */}
@@ -52,7 +52,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
               }
               label="Nhập/ Xuất: "
               placeholder="Nhập/ Xuất"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Số lượng */}
@@ -66,7 +66,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
               }
               label="Số lượng: "
               placeholder="10"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
           </div>
 

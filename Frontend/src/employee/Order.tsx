@@ -6,7 +6,7 @@ import { useGet } from "../service/crudService";
 import { useSearch } from "../service/queryService";
 
 import OrderList from "../shared/components/list/OrderList";
-import PopupOrder from "../shared/components/pupup/PopupOrder";
+import PopupOrder from "../shared/components/popup/PopupOrder";
 
 import { useState } from "react";
 
