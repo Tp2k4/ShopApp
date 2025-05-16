@@ -1,11 +1,9 @@
 import { LabeledInputField, SelectButton } from "../form";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-<<<<<<< HEAD:Frontend/src/shared/components/pupup/PopupInventory.tsx
+
 import { Button, CancelButton } from "../../components/button";
 import { useGet } from "../../../service/crudService";
-=======
-import { Button, CancelButton } from "../button";
->>>>>>> 0334971a51e4f7e2180036f6d02c033ea8029ba2:Frontend/src/shared/components/popup/PopupInventory.tsx
+
 
 
 import { useState, useEffect } from "react";
@@ -46,7 +44,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
             <div>Thông tin:</div>
 
             {/* Sản phẩm */}
-<<<<<<< HEAD:Frontend/src/shared/components/pupup/PopupInventory.tsx
+
             <div className="flex items-center">
               <div className="w-[180px]">
                 <strong>Sản phẩm: </strong>
@@ -63,21 +61,6 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
                 dataset={productListName}
               />
             </div>
-=======
-            <LabeledInputField
-              value={newInventoryInfo.product}
-              onChange={(e: any) =>
-                setNewInventoryInfo({
-                  ...newInventoryInfo,
-                  product: e.target.value,
-                })
-              }
-              label="Sản phẩm: "
-              placeholder="Tai nghe Logitech"
-              inputFieldWidth="w-[240px]"
-            />
->>>>>>> 0334971a51e4f7e2180036f6d02c033ea8029ba2:Frontend/src/shared/components/popup/PopupInventory.tsx
-
             {/* Nhập/ Xuất */}
             <LabeledInputField
               value={newInventoryInfo.transactionType}
@@ -88,13 +71,9 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
                 })
               }
               label="Nhập/ Xuất: "
-<<<<<<< HEAD:Frontend/src/shared/components/pupup/PopupInventory.tsx
               placeholder="import/ export"
-              width="w-[240px]"
-=======
-              placeholder="Nhập/ Xuất"
               inputFieldWidth="w-[240px]"
->>>>>>> 0334971a51e4f7e2180036f6d02c033ea8029ba2:Frontend/src/shared/components/popup/PopupInventory.tsx
+
             />
 
             {/* Số lượng */}

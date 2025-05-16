@@ -1,12 +1,7 @@
-<<<<<<< HEAD:Frontend/src/shared/components/pupup/PopupAccount.tsx
+
 import { LabeledInputField } from "../form";
 import { handleCreateAccount, handleCancelCreate } from "../../../service/crudService";
 import { Button, CancelButton } from "../../components/button";
-=======
-import { LabeledInputField } from "../form/LabeledInputField";
-import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../button";
->>>>>>> 0334971a51e4f7e2180036f6d02c033ea8029ba2:Frontend/src/shared/components/popup/PopupAccount.tsx
 
 import { useState } from "react";
 
