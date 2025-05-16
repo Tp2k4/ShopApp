@@ -1,21 +1,18 @@
 import { Link } from "react-router-dom";
 
-interface ProfileNavLabelProps {
-  label: string;
+interface IconNavLabelProps {
   link: string;
   className?: string;
+  children?: React.ReactNode;
   [key: string]: any;
 }
 
-function ProfileNavLabel({
-  label,
-  className = "",
-  link,
-  ...rest
-}: ProfileNavLabelProps) {
+function IconNavLabel({ label, link, children, ...rest }: IconNavLabelProps) {
   return (
-    <img src="..../assets/"
+    <Link to={link} {...rest}>
+      {children}
+    </Link>
   );
 }
 
-export default ProfileNavLabel;
+export default IconNavLabel;
