@@ -15,6 +15,7 @@ import BuyHistory from "./user/BuyHistory";
 import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserProfile from "./user/UserProfile";
 
 const router = createBrowserRouter([
   { path: ROUTES.AUTH.LOGIN, element: <Login /> },
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
   { path: ROUTES.EMPLOYEE.ORDER_CONFIRMATION, element: <OrderConfirmation /> },
 
   { path: ROUTES.USER.BUY_HISTORY, element: <BuyHistory /> },
+  { path: ROUTES.USER.USER_PROFILE, element: <UserProfile /> },
 ]);
 
 const App: React.FC = () => {
