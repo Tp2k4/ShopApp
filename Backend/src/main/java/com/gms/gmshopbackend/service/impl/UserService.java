@@ -125,9 +125,13 @@ public class UserService implements IUserService {
         if(userRepository.existsByPhoneNumber(userDTO.getPhoneNumber())){
             throw new RuntimeException("Phone number already exists");
         }
-        if(userRepository.existsByEmail(userDTO.getEmail())){
-            throw new RuntimeException("Email already exists");
+
+        if(!existingUser.getEmail().equals(userDTO.getEmail())){
+            if(userRepository.existsByEmail(userDTO.getEmail())){
+                throw new RuntimeException("Email already exists");
+            }
         }
+
         existingUser.setFullName(userDTO.getFullName());
         existingUser.setPhoneNumber(userDTO.getPhoneNumber());
         existingUser.setAddress(userDTO.getAddress());
