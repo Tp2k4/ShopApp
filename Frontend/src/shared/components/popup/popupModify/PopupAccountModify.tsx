@@ -5,7 +5,7 @@ import {
 } from "../../../../service/crudService";
 import { Button, CancelButton } from "../../../components/button";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface AccountProps {
   account: any;
@@ -31,17 +31,33 @@ const PopupAccountModify = ({
   };
 
   const [accountInfo, setAccountInfo] = useState({
-    fullname: account.name,
-    date_of_birth: account.dateOfBirth,
-    // gender,
-    phone_number: account.phoneNumber,
-    email: account.email,
-    address: account.address,
-    is_active: isActiveDict[account.state],
-    role_id: roleDict[account.role] ?? 2,
-    facebook_account_id: account.facebook_account_id,
-    google_account_id: account.google_account_id,
+    fullname: "",
+    date_of_birth: "",
+    phone_number: "",
+    email: "",
+    address: "",
+    is_active: 1,
+    role_id: 2,
+    facebook_account_id: "",
+    google_account_id: "",
   });
+
+  useEffect(() => {
+    if (!account) return;
+
+    setAccountInfo({
+      fullname: account.name,
+      date_of_birth: account.dateOfBirth,
+      //gender
+      phone_number: account.phoneNumber,
+      email: account.email,
+      address: account.address,
+      is_active: isActiveDict[account.state],
+      role_id: roleDict[account.role],
+      facebook_account_id: account.facebook_account_id,
+      google_account_id: account.google_account_id,
+    });
+  }, [account]);
 
   return (
     <div className="fixed z-49 inset-0 flex items-center justify-center">
@@ -54,7 +70,7 @@ const PopupAccountModify = ({
 
             {/* Họ và tên */}
             <LabeledInputField
-              value={accountInfo.fullname}
+              value={accountInfo.fullname || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -68,7 +84,7 @@ const PopupAccountModify = ({
 
             {/* Ngày sinh */}
             <LabeledInputField
-              value={accountInfo.date_of_birth}
+              value={accountInfo.date_of_birth || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -82,7 +98,7 @@ const PopupAccountModify = ({
 
             {/* Số điện thoại */}
             <LabeledInputField
-              value={accountInfo.phone_number}
+              value={accountInfo.phone_number || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -96,7 +112,7 @@ const PopupAccountModify = ({
 
             {/* Email */}
             <LabeledInputField
-              value={accountInfo.email}
+              value={accountInfo.email || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -110,7 +126,7 @@ const PopupAccountModify = ({
 
             {/* Role */}
             <LabeledInputField
-              value={String(accountInfo.role_id)}
+              value={String(accountInfo.role_id) || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -124,7 +140,7 @@ const PopupAccountModify = ({
 
             {/* Địa chỉ */}
             <LabeledInputField
-              value={accountInfo.address}
+              value={accountInfo.address || ""}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
@@ -149,7 +165,7 @@ const PopupAccountModify = ({
                     setAccounts
                   )
                 }
-                type="submit"
+                type="button"
                 text="Lưu"
               />
               <CancelButton

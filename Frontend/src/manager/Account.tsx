@@ -49,6 +49,9 @@ function Account() {
   const id = searchParams.get("id");
 
   // Sẽ lấy account đang được chỉnh sửa lưu vào modifyingAccount nếu có id được trả về từ params
+  /* Cần thêm accounts tại [id, accounts] ở dòng  useEffect bên dưới vì: lần đầu gọi API, 
+     accounts sẽ chưa có dữ liệu do chưa gọi API xong, do đó account = accounts.find(...) sẽ undefined,
+     vì vậy thêm accounts để account được gán lại giá trị khi đã gọi API xong. */
   useEffect(() => {
     if (id && accounts.length > 0) {
       const account = accounts.find((acc: any) => String(acc.id) === id);
