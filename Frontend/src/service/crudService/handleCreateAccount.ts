@@ -1,17 +1,15 @@
-export const handleCreate= async (
+export const handleCreateAccount = async (
     apiPath: string,
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
 ) => {
-  const token = localStorage.getItem("token")
 
     try{
         const response = await fetch(apiPath, {
             method: "POST", 
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
 
               },
             body: JSON.stringify(newItemInfo),

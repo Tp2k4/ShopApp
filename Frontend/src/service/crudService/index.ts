@@ -1,4 +1,5 @@
 export * from "./handleDelete";
+export * from "./handleCreateAccount";
 export * from "./handleCreate";
 export * from "./handleCancelCreate";
 export * from "./handleCreateProduct";

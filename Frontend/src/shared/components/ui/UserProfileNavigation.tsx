@@ -2,6 +2,7 @@ import Box from "./Box";
 import ProfileNavLabel from "./ProfileNavLabel";
 import { ROUTES } from "../../paths";
 import { useLocation } from "react-router-dom";
+import IconNavLabel from "./IconNavLabel";
 
 interface UserProfileNavigationProps {
   className?: string;
@@ -32,15 +33,25 @@ function UserProfileNavigation({
         width="auto"
         height="100%"
       >
-        <ProfileNavLabel
-          label="Thông tin tài khoản"
-          link={ROUTES.USER.USER_PROFILE}
-          className={
-            isActive(ROUTES.USER.USER_PROFILE)
-              ? "text-[var(--primary-color)]"
-              : ""
-          }
-        />
+        <div className="flex items-center justify-start gap-[var(--small-gap)]">
+          <IconNavLabel
+            link={ROUTES.USER.USER_PROFILE}
+            icon={<i className="bxr  bx-search-alt"></i>}
+          ></IconNavLabel>
+          <ProfileNavLabel
+            label="Thông tin tài khoản"
+            link={ROUTES.USER.USER_PROFILE}
+            className={
+              isActive(ROUTES.USER.USER_PROFILE)
+                ? "text-[var(--primary-color)]"
+                : ""
+            }
+          />
+        </div>
+        <IconNavLabel
+          link={ROUTES.USER.BUY_HISTORY}
+          icon={<i className="bx bx-search-alt"></i>}
+        ></IconNavLabel>
         <ProfileNavLabel
           label="Lịch sử mua hàng"
           link={ROUTES.USER.BUY_HISTORY}
@@ -51,6 +62,7 @@ function UserProfileNavigation({
           }
         />
       </Box>
+      <i className="bx bx-search absolute right-2 text-[18px]"></i>
     </div>
   );
 }

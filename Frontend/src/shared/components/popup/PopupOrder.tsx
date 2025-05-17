@@ -1,6 +1,6 @@
-import { LabeledInputField } from "../form/LabeledInputField";
+import { LabeledInputField } from "../form";
 import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../../components/button";
+import { Button, CancelButton } from "../button";
 
 import { useState } from "react";
 
@@ -44,7 +44,7 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
               }
               label="Tên khách: "
               placeholder="Nguyễn Văn A"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Số điện thoại */}
@@ -58,7 +58,7 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
               }
               label="Số điện thoại: "
               placeholder="0123456789"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Email */}
@@ -72,7 +72,7 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
               }
               label="Email: "
               placeholder="nguyenvana@example.com"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Ngày */}
@@ -86,7 +86,7 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
               }
               label="Ngày: "
               placeholder="01/01/2025"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             {/* Địa chỉ */}
@@ -100,7 +100,7 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
               }
               label="Địa chỉ: "
               placeholder="123 đường Nguyễn Văn A"
-              width="w-[240px]"
+              inputFieldWidth="w-[240px]"
             />
 
             <div className="flex gap-[var(--small-gap)]">

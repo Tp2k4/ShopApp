@@ -1,5 +1,6 @@
 package com.gms.gmshopbackend.service.impl;
 
+import com.gms.gmshopbackend.dtos.InventoryDTO;
 import com.gms.gmshopbackend.dtos.InventoryGroupByDateDTO;
 import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.model.Product;
@@ -23,6 +24,7 @@ public class InventoryService implements IInventoryService {
 
     private final InventoryRepository inventoryRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
 
     @Override
@@ -83,6 +85,42 @@ public class InventoryService implements IInventoryService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Inventory createInventory(InventoryDTO inventoryDTO) {
+        Product existingProduct = productRepository.findByName(inventoryDTO.getProductName());
+        if (existingProduct == null) {
+            throw new RuntimeException("Product not found with name: " + inventoryDTO.getProductName());
+        }
+
+        double importPrice = 0;
+        double sellPrice = 0;
+
+        if ("import".equalsIgnoreCase(inventoryDTO.getTransactionType())) {
+            importPrice = existingProduct.getOriginPrice() != null ? existingProduct.getOriginPrice() : 0;
+        } else if ("export".equalsIgnoreCase(inventoryDTO.getTransactionType())) {
+            sellPrice = existingProduct.getPrice();
+        }
+
+        Inventory newInventory = Inventory.builder()
+                .productId(existingProduct)
+                .productName(inventoryDTO.getProductName())
+                .transactionType(inventoryDTO.getTransactionType())
+                .quantity(inventoryDTO.getQuantity())
+                .transactionDate(LocalDate.now())
+                .importPrice(importPrice)
+                .sellPrice(sellPrice)
+                .build();
+
+        existingProduct.setStockQuantity(newInventory.getTransactionType().equals("export")?
+                existingProduct.getStockQuantity() - inventoryDTO.getQuantity():
+                existingProduct.getStockQuantity() + inventoryDTO.getQuantity());
+
+        productRepository.save(existingProduct);
+
+        return inventoryRepository.save(newInventory);
+    }
+
 }
 
 

@@ -12,7 +12,7 @@ export const handleCreateProduct = async (
     // Tạo formData, cần thiết cho việc truyền data về backend nếu data có chứa file
     // Nếu data truyền về backend không có file, thì truyền bằng json như như bình thường
     const formData = new FormData();
-    // Thêm tất cả ảnh từ files (files này có được setFiles bên ImportImage) vào formData
+    // Thêm tất cả ảnh từ formData (formData này có được setFiles bên ImportImage) vào filesfiles
     files.forEach(file => formData.append("productImages", file))
 
     try{    
@@ -28,8 +28,8 @@ export const handleCreateProduct = async (
         // Kiểm tra nếu gọi thành công thì hiển thị ngay trên màn hình rồi đặt các trường thuộc tính thông tin về mặc định
         if(response.ok){
             //Giúp update ngay item đã thêm lên màn hình mà không cần phải load lại trang
-            const addedItem = await response.json()
-            setItems((prevItems) => [...prevItems, addedItem]);
+            const newProductJson = await response.json()
+            setItems((prevItems) => [...prevItems, newProductJson]);
             
             // set tất cả các trường về mặt định ""
             setNewItemInfo((prevOrder: any) => {
@@ -43,15 +43,13 @@ export const handleCreateProduct = async (
             });
 
             // Gọi API thêm ảnh
-            const json = await response.json()
-            const productId = json.id
+            const productId = String(newProductJson.id)
 
-            const responseForAddImage = await fetch(apiPath + "/" + productId, {
+            const responseForAddImage = await fetch("http://localhost:8020/api/v1/gmshop/product/upload-img/" + productId, {
                 method: "POST", 
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
-                  },
+                },
                 body: formData,
             })
 

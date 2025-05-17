@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductNameResponse {
-    private Long id;
     private String productName;
 
     public static ProductNameResponse fromProduct(Product product) {
         ProductNameResponse productNameResponse = ProductNameResponse.builder()
-                .id(product.getId())
                 .productName(product.getName())
                 .build();
 

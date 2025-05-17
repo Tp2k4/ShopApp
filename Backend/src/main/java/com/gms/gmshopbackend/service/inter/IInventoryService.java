@@ -1,6 +1,8 @@
 package com.gms.gmshopbackend.service.inter;
 
+import com.gms.gmshopbackend.dtos.InventoryDTO;
 import com.gms.gmshopbackend.dtos.InventoryGroupByDateDTO;
+import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.response.InventoryResponse;
 
@@ -13,4 +15,5 @@ public interface IInventoryService {
 
     public InventoryResponse importInventory(Long productId, int quantity);
     public List<InventoryResponse> getInventoryByDate(LocalDate from, LocalDate to);
+    public Inventory createInventory(InventoryDTO inventoryDTO);
 }

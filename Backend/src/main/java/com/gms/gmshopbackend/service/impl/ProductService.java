@@ -77,7 +77,7 @@ public class ProductService implements IProductService {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
-        product.setDescription(productDTO.getDescription());
+        product.setDescription(productDTO.getDescription1());
         product.setCategory((Category) category);
         product.setBrand(brand);
         product.setStockQuantity(productDTO.getStockQuantity());
@@ -85,7 +85,7 @@ public class ProductService implements IProductService {
         product.setOriginPrice(productDTO.getImportPrice());
         product.setDescription(productDTO.getDescription1());
         product.setDescription_2(productDTO.getDescription2());
-        product.setDescription(productDTO.getDescription3());
+        product.setDescription_3(productDTO.getDescription3());
 
         Product savedProduct = productRepository.save(product);
 
@@ -128,7 +128,7 @@ public class ProductService implements IProductService {
 
             existing_product.setName(productDTO.getName());
             existing_product.setPrice(productDTO.getPrice());
-            existing_product.setDescription(productDTO.getDescription());
+            existing_product.setDescription(productDTO.getDescription1());
             existing_product.setStockQuantity(productDTO.getStockQuantity());
             existing_product.setThumbnail(productDTO.getThumbnail());
 
@@ -153,7 +153,7 @@ public class ProductService implements IProductService {
                 KeyboardSpecs newKeyBoard = KeyboardSpecs.builder()
                         .product(existing_product)
                         .led(productDTO.isLed())
-                        .numKeys(productDTO.getNumKeys())
+                        .numKeys((long)productDTO.getNumKeys())
                         .color(productDTO.getColor())
                         .battery(productDTO.getBattery())
                         .warranty(productDTO.getWarranty())

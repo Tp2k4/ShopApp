@@ -3,7 +3,7 @@ import { Button } from "../shared/components/button";
 import { FilterButton, SearchField } from "../shared/components/form";
 import { useGet } from "../service/crudService";
 import { useFilter, useSearch } from "../service/queryService";
-import PopupAccount from "../shared/components/pupup/PopupAccount";
+import PopupAccount from "../shared/components/popup/PopupAccount";
 import AccountList from "../shared/components/list/AccountList";
 import ManagerLayout from "./ManagerLayout";
 
