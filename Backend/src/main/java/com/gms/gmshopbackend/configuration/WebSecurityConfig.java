@@ -52,10 +52,11 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers(
-                                    String.format("%s/user/**", apiPrefix)
-                            )
-                            .permitAll()
+                    request
+                            
+                            .requestMatchers(
+                            String.format("%s/user/**", apiPrefix)
+                            ).permitAll()
                             .requestMatchers(PUT,
                                     String.format("%s/orders/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(POST,
