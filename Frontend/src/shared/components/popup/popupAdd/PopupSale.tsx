@@ -1,10 +1,13 @@
-import { LabeledInputField } from "../form";
-import { handleCreate, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../button";
-import { Line } from "../ui";
+import { LabeledInputField } from "../../form";
+import {
+  handleCreate,
+  handleCancelCreate,
+} from "../../../../service/crudService";
+import { Button, CancelButton } from "../../button";
+import { Line } from "../../ui";
 
 import { useState } from "react";
-import { InputField } from "../form";
+import { InputField } from "../../form";
 
 interface PopupProductProps {
   setSales: React.Dispatch<React.SetStateAction<any>>;

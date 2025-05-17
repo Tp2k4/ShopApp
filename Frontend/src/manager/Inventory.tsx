@@ -4,7 +4,7 @@ import { InputField } from "../shared/components/form";
 import { getProductNames } from "../shared/utils/getProductNames";
 import InventoryList from "../shared/components/list/InventoryList";
 import ManagerLayout from "./ManagerLayout";
-import PopupInventory from "../shared/components/popup/PopupInventory";
+import PopupInventory from "../shared/components/popup/popupAdd/PopupInventory";
 import { useGet, useGetParams } from "../service/crudService";
 
 import { useState, useEffect } from "react";

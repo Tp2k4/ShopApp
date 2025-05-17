@@ -1,10 +1,10 @@
-import { LabeledInputField } from "../form";
+import { LabeledInputField } from "../../form";
 import {
   handleCreateProduct,
   handleCancelCreate,
-} from "../../../service/crudService";
-import { SelectButton, ImportImage } from "../form";
-import { Button, CancelButton } from "../button";
+} from "../../../../service/crudService";
+import { SelectButton, ImportImage } from "../../form";
+import { Button, CancelButton } from "../../button";
 
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
   // Thêm ảnh
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
-    // State quản lý thông số kỹ thuật đặc thù
+  // State quản lý thông số kỹ thuật đặc thù
   const types = ["mouse", "keyboard", "headphone"];
   const [selectedType, setSelectedType] = useState<string>("mouse");
 
@@ -45,8 +45,6 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
     description2: "",
     description3: "",
   });
-
-
 
   return (
     <div className="fixed z-49 inset-0 flex items-center justify-center">

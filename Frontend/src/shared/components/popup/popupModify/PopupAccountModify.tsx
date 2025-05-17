@@ -1,28 +1,45 @@
+import { LabeledInputField } from "../../form";
+import {
+  handleModify,
+  handleCancelModify,
+} from "../../../../service/crudService";
+import { Button, CancelButton } from "../../../components/button";
 
-import { LabeledInputField } from "../form";
-import { handleCreateAccount, handleCancelCreate } from "../../../service/crudService";
-import { Button, CancelButton } from "../../components/button";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface AccountProps {
+  account: any;
   setAccounts: React.Dispatch<React.SetStateAction<any>>;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
-  const [newAccountInfo, setNewAccountInfo] = useState({
-    fullname: "",
-    password: "",
-    date_of_birth: "",
+const PopupAccountModify = ({
+  account,
+  setAccounts,
+  setShowPopup,
+}: AccountProps) => {
+  // set role từ admin/ user/ employee sang số 1/ 2/ 3
+  const roleDict: Record<string, number> = {
+    admin: 1,
+    user: 2,
+    employee: 3,
+  };
+
+  const isActiveDict: Record<string, number> = {
+    "Hoạt động": 1,
+    Khóa: 0,
+  };
+  const [accountInfo, setAccountInfo] = useState({
+    fullname: account.name,
+    date_of_birth: account.dateOfBirth,
     // gender,
-    phone_number: "",
-    email: "",
-    address: "",
-    is_active: 1,
-    role_id: 2,
-    facebook_account_id: 0,
-    google_account_id: 0,
+    phone_number: account.phoneNumber,
+    email: account.email,
+    address: account.address,
+    is_active: isActiveDict[account.state],
+    role_id: roleDict[account.role] ?? 2,
+    facebook_account_id: account.facebook_account_id,
+    google_account_id: account.google_account_id,
   });
 
   return (
@@ -36,10 +53,10 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Họ và tên */}
             <LabeledInputField
-              value={newAccountInfo.fullname}
+              value={accountInfo.fullname}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   fullname: e.target.value,
                 })
               }
@@ -48,26 +65,12 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               inputFieldWidth="w-[240px]"
             />
 
-            {/* Mật khẩu */}
-            <LabeledInputField
-              value={newAccountInfo.password}
-              onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
-                  password: e.target.value,
-                })
-              }
-              label="Mật khẩu: "
-              placeholder="..."
-              inputFieldWidth="w-[240px]"
-            />
-
             {/* Ngày sinh */}
             <LabeledInputField
-              value={newAccountInfo.date_of_birth}
+              value={accountInfo.date_of_birth}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   date_of_birth: e.target.value,
                 })
               }
@@ -78,10 +81,10 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Số điện thoại */}
             <LabeledInputField
-              value={newAccountInfo.phone_number}
+              value={accountInfo.phone_number}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   phone_number: e.target.value,
                 })
               }
@@ -92,10 +95,10 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Email */}
             <LabeledInputField
-              value={newAccountInfo.email}
+              value={accountInfo.email}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   email: e.target.value,
                 })
               }
@@ -106,10 +109,10 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Role */}
             <LabeledInputField
-              value={String(newAccountInfo.role_id)}
+              value={String(accountInfo.role_id)}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   role_id: parseInt(e.target.value, 10),
                 })
               }
@@ -120,10 +123,10 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
 
             {/* Địa chỉ */}
             <LabeledInputField
-              value={newAccountInfo.address}
+              value={accountInfo.address}
               onChange={(e: any) =>
-                setNewAccountInfo({
-                  ...newAccountInfo,
+                setAccountInfo({
+                  ...accountInfo,
                   address: e.target.value,
                 })
               }
@@ -137,10 +140,11 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
             <div className="flex gap-[var(--small-gap)]">
               <Button
                 onClick={() =>
-                  handleCreateAccount(
-                    "http://localhost:8020/api/v1/gmshop/user/register",
-                    newAccountInfo,
-                    setNewAccountInfo,
+                  handleModify(
+                    "http://localhost:8020/api/v1/gmshop/user/update/",
+                    account.id,
+                    accountInfo,
+                    setAccountInfo,
                     setAccounts
                   )
                 }
@@ -149,7 +153,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               />
               <CancelButton
                 onClick={() =>
-                  handleCancelCreate(setShowPopup, setNewAccountInfo)
+                  handleCancelModify(setShowPopup, setAccountInfo, account)
                 }
                 text="Hủy"
               />
@@ -161,4 +165,4 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
   );
 };
 
-export default PopupAccount;
+export default PopupAccountModify;

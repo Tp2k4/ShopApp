@@ -1,10 +1,11 @@
-import { LabeledInputField, SelectButton } from "../form";
-import { handleCreate, handleCancelCreate } from "../../../service/crudService";
+import { LabeledInputField, SelectButton } from "../../form";
+import {
+  handleCreate,
+  handleCancelCreate,
+} from "../../../../service/crudService";
 
-import { Button, CancelButton } from "../../components/button";
-import { useGet } from "../../../service/crudService";
-
-
+import { Button, CancelButton } from "../../../components/button";
+import { useGet } from "../../../../service/crudService";
 
 import { useState, useEffect } from "react";
 
@@ -14,17 +15,17 @@ interface PopupProductProps {
 }
 
 const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
-
   // Thông tin sản phẩm mới
   const [newInventoryInfo, setNewInventoryInfo] = useState({
     productName: "",
     transactionType: "",
     quantity: 0,
-
   });
-  
+
   // Gọi API để lấy danh sách sản phẩm
-  const {data: productList} = useGet("http://localhost:8020/api/v1/gmshop/product/admin/product-name-list");
+  const { data: productList } = useGet(
+    "http://localhost:8020/api/v1/gmshop/product/admin/product-name-list"
+  );
   // Lấy danh sách "tên" sản phẩm từ API
   const [productListName, setProductListName] = useState<String[]>([]);
   useEffect(() => {
@@ -73,12 +74,15 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
               label="Nhập/ Xuất: "
               placeholder="import/ export"
               inputFieldWidth="w-[240px]"
-
             />
 
             {/* Số lượng */}
             <LabeledInputField
-              value={newInventoryInfo.quantity === 0 ? "" : String(newInventoryInfo.quantity)}
+              value={
+                newInventoryInfo.quantity === 0
+                  ? ""
+                  : String(newInventoryInfo.quantity)
+              }
               onChange={(e: any) => {
                 const value = e.target.value;
                 setNewInventoryInfo({
