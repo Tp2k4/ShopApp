@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +18,7 @@ public class UserResponse {
     private String userName;
     private String name;
     private String phoneNumber;
+    private LocalDate dateOfBirth;
     private String state;
     private String role;
     private String address;
@@ -28,6 +32,7 @@ public class UserResponse {
                 .name(user.getFullName())
                 .phoneNumber(user.getPhoneNumber())
                 .state(user.isActive() ? "Hoạt động" : "Khóa")
+                .dateOfBirth(user.getDateOfBirth())
                 .address(user.getAddress())
                 .email(user.getEmail())
                 .role(user.getRole().getName())

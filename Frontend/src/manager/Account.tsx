@@ -56,7 +56,7 @@ function Account() {
         setModifyingAccount(account);
       }
     }
-  }, [id]);
+  }, [id, accounts]);
 
   return (
     <ManagerLayout>
