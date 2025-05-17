@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -39,7 +40,7 @@ public class UserDTO {
 
     @JsonProperty(value = "date_of_birth")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @JsonProperty(value = "facebook_account_id")
     private Long facebookAccountId;

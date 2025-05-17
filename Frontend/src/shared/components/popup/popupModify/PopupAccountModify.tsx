@@ -5,7 +5,7 @@ import {
 } from "../../../../service/crudService";
 import { Button, CancelButton } from "../../../components/button";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface AccountProps {
   account: any;
@@ -29,6 +29,7 @@ const PopupAccountModify = ({
     "Hoạt động": 1,
     Khóa: 0,
   };
+
   const [accountInfo, setAccountInfo] = useState({
     fullname: account.name,
     date_of_birth: account.dateOfBirth,
