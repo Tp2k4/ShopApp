@@ -39,7 +39,6 @@ public class UserDTO {
     private boolean isActive;
 
     @JsonProperty(value = "date_of_birth")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
     @JsonProperty(value = "facebook_account_id")
