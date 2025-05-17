@@ -31,7 +31,6 @@ public class UserDTO {
     @Size(max = 200)
     private String address;
 
-    @NotNull(message = "Password is required")
     @Size(max = 100)
     private String password;
 
@@ -39,7 +38,6 @@ public class UserDTO {
     private boolean isActive;
 
     @JsonProperty(value = "date_of_birth")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
     @JsonProperty(value = "facebook_account_id")
