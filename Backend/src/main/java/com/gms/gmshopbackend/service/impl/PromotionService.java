@@ -209,4 +209,15 @@ public class PromotionService implements IPromotionService {
         promotionRepository.save(existingPromotion);
         return existingPromotion;
     }
+
+    public Promotion getPromotionById(Long promotionId) {
+        try{
+            Promotion promotion = promotionRepository.findById(promotionId).orElseThrow(
+                    () -> new RuntimeException("Promotion not found")
+            );
+            return promotion;
+            }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }
