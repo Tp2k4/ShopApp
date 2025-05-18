@@ -3,16 +3,27 @@ package com.gms.gmshopbackend.controller;
 import com.gms.gmshopbackend.dtos.ProductPromotionDTO;
 import com.gms.gmshopbackend.dtos.PromotionDTO;
 import com.gms.gmshopbackend.model.Promotion;
+import com.gms.gmshopbackend.repository.PromotionRepository;
 import com.gms.gmshopbackend.response.PromotionResponse;
 import com.gms.gmshopbackend.service.impl.PromotionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("${api.prefix}/promotion")
@@ -21,6 +32,7 @@ import java.util.List;
 public class PromotionController {
 
     private final PromotionService promotionService;
+    private final PromotionRepository promotionRepository;
 
     @PostMapping("/create")
     public ResponseEntity<?> createPromotion(@RequestBody PromotionDTO promotionDTO) {
@@ -63,4 +75,67 @@ public class PromotionController {
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+    @PutMapping(value = "/upload-promotion-img/{promotionId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadPromotionThumbnail(@PathVariable Long promotionId,
+                                                      @RequestParam("thumbnail") MultipartFile file) {
+        try {
+            if (file == null || file.isEmpty()) {
+                return ResponseEntity.badRequest().body("No image uploaded");
+            }
+
+            if (file.getSize() > 10 * 1024 * 1024) {
+                return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
+                        .body("You cannot upload an image larger than 10MB");
+            }
+
+            if (!isImageFile(file)) {
+                return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+                        .body("File must be an image");
+            }
+
+            Promotion promotion = promotionService.getPromotionById(promotionId);
+            if (promotion == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Promotion not found");
+            }
+
+            String fileName = storePromotionFile(file);
+            promotion.setThumbnail(fileName);
+            promotionRepository.save(promotion);
+
+            return ResponseEntity.ok("Thumbnail uploaded successfully");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error uploading file: " + e.getMessage());
+        }
+    }
+
+    private boolean isImageFile(MultipartFile file) {
+        String contentType = file.getContentType();
+        return contentType != null && contentType.startsWith("image");
+    }
+
+    private String storePromotionFile(MultipartFile file) throws IOException {
+        if (!isImageFile(file) || file.getOriginalFilename() == null) {
+            throw new IOException("Invalid image file");
+        }
+
+        String originalFileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
+
+        Path uploadDir = Paths.get("Backend/upload/promotion");
+        if (!Files.exists(uploadDir)) {
+            Files.createDirectories(uploadDir);
+        }
+
+        Path destination = uploadDir.resolve(uniqueFileName);
+        Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+
+        return uniqueFileName;
+    }
+
+
+
 }

@@ -32,4 +32,6 @@ public class Promotion {
 
     private String status;
 
+    private String thumbnail;
+
 }
