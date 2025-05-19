@@ -1,7 +1,9 @@
 package com.gms.gmshopbackend.controller;
 
 
+import com.gms.gmshopbackend.dtos.InventoryDTO;
 import com.gms.gmshopbackend.dtos.InventoryGroupByDateDTO;
+import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.response.InventoryResponse;
 import com.gms.gmshopbackend.service.impl.InventoryService;
 import lombok.AllArgsConstructor;
@@ -48,6 +50,16 @@ public class InventoryController {
             return ResponseEntity.ok(inventoryList);
 
         }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/create-inventory")
+    public ResponseEntity<?> createInventory(@RequestBody InventoryDTO inventoryDTO) {
+        try{
+            Inventory inventory = inventoryService.createInventory(inventoryDTO);
+            return ResponseEntity.ok(InventoryResponse.fromInventory(inventory));
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

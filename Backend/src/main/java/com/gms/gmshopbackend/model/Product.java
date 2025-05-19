@@ -7,16 +7,15 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 @Table(name = "products")
-@Document(indexName = "products")
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,13 +33,14 @@ public class Product extends BaseEntity{
             mappedBy = "productId",
             cascade = {CascadeType.ALL}
     )
+    @ToString.Exclude
     private List<ProductImage> productImages;
 
     private String description;
 
     private String description_2;
 
-    private String desscription_3;
+    private String description_3;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

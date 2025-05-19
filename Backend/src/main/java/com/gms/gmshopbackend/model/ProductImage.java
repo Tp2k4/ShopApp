@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +18,8 @@ public class ProductImage {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    private com.gms.gmshopbackend.model.Product productId;
+    @ToString.Exclude
+    private Product productId;
 
     @Column(name = "image_url")
     private String imageUrl;

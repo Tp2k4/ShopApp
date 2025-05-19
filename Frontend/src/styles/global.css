@@ -51,10 +51,10 @@ table {
 }
 
 th {
+
     vertical-align: middle;
     text-align: left; 
     padding: var(--medium-gap) var(--medium-gap);
-    border-bottom: 1px solid var(--line-color);
 }
 td {
     vertical-align: middle;

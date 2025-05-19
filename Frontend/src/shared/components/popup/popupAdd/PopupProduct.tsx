@@ -1,10 +1,10 @@
-import { LabeledInputField } from "../form/LabeledInputField";
+import { LabeledInputField } from "../../form";
 import {
   handleCreateProduct,
   handleCancelCreate,
-} from "../../../service/crudService";
-import { SelectButton, ImportImage } from "../form";
-import { Button, CancelButton } from "../button";
+} from "../../../../service/crudService";
+import { SelectButton, ImportImage } from "../../form";
+import { Button, CancelButton } from "../../button";
 
 import { useState } from "react";
 
@@ -17,35 +17,34 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
   // Thêm ảnh
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
+  // State quản lý thông số kỹ thuật đặc thù
+  const types = ["mouse", "keyboard", "headphone"];
+  const [selectedType, setSelectedType] = useState<string>("mouse");
 
   // State quản lý thông tin sản phẩm
   const [newProductInfo, setNewProductInfo] = useState({
     name: "",
-    price: 0,
+    price: 0.0,
     battery: "",
     warranty: "",
     connectionType: "",
-    weight: 0,
+    weight: 0.0,
     brand_id: "",
     color: "",
-    led: false,
+    led: 0,
     maxDpi: 0,
-    hasMic: false,
-    noiseCancelling: false,
+    hasMic: 0,
+    noiseCancelling: 0,
     numKeys: 0,
     switchType: "",
     thumbnail: imageURLs[0] || "",
     stock_quantity: 0,
-    category_id: "",
-    importPrice: 0,
+    category_id: "mouse",
+    importPrice: 0.0,
     description1: "",
     description2: "",
     description3: "",
   });
-
-  // State quản lý thông số kỹ thuật đặc thù
-  const types = ["mouse", "keyboard", "headphone"];
-  const [selectedType, setSelectedType] = useState<string>("");
 
   return (
     <div className="fixed z-49 inset-0 flex items-center justify-center">
@@ -230,7 +229,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
               onChange={(e: any) =>
                 setNewProductInfo({
                   ...newProductInfo,
-                  led: e.target.value === "true",
+                  led: parseInt(e.target.value),
                 })
               }
               label="Led: "
@@ -258,7 +257,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                   onChange={(e: any) =>
                     setNewProductInfo({
                       ...newProductInfo,
-                      maxDpi: parseFloat(e.target.value) || 0,
+                      maxDpi: parseInt(e.target.value) || 0,
                     })
                   }
                   label="Max DPI: "
@@ -268,7 +267,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
             )}
             {selectedType === "keyboard" && (
               <div className="flex flex-col gap-[var(--medium-gap)]">
-                {/* Có phím số */}
+                {/* Số lượng phím */}
                 <LabeledInputField
                   value={String(newProductInfo.numKeys)}
                   onChange={(e: any) =>
@@ -277,7 +276,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                       numKeys: parseInt(e.target.value) || 0,
                     })
                   }
-                  label="Có phím số: "
+                  label="Số lượng phím: "
                   placeholder="100"
                 />
 
@@ -303,7 +302,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                   onChange={(e: any) =>
                     setNewProductInfo({
                       ...newProductInfo,
-                      hasMic: e.target.value === "true",
+                      hasMic: parseInt(e.target.value),
                     })
                   }
                   label="Có mic: "
@@ -316,7 +315,7 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                   onChange={(e: any) =>
                     setNewProductInfo({
                       ...newProductInfo,
-                      noiseCancelling: e.target.value === "true",
+                      noiseCancelling: parseInt(e.target.value),
                     })
                   }
                   label="Khử tiếng ồn: "

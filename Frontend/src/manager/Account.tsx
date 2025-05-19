@@ -3,11 +3,13 @@ import { Button } from "../shared/components/button";
 import { FilterButton, SearchField } from "../shared/components/form";
 import { useGet } from "../service/crudService";
 import { useFilter, useSearch } from "../service/queryService";
-import PopupAccount from "../shared/components/popup/PopupAccount";
+import PopupAccount from "../shared/components/popup/popupAdd/PopupAccount";
+import PopupAccountModify from "../shared/components/popup/popupModify/PopupAccountModify";
 import AccountList from "../shared/components/list/AccountList";
 import ManagerLayout from "./ManagerLayout";
+import { useSearchParams } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Account() {
   //================ Nhận accounts từ API
@@ -38,7 +40,26 @@ function Account() {
   );
 
   //================ PopupScreen
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupAdd, setShowPopupAdd] = useState(false);
+  const [showPopupModify, setShowPopupModify] = useState(false);
+
+  // Lấy tài khoản hiện đang được chọn để chỉnh sửa đưa vào AccountList
+  const [modifyingAccount, setModifyingAccount] = useState<any[]>([]);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  // Sẽ lấy account đang được chỉnh sửa lưu vào modifyingAccount nếu có id được trả về từ params
+  /* Cần thêm accounts tại [id, accounts] ở dòng  useEffect bên dưới vì: lần đầu gọi API, 
+     accounts sẽ chưa có dữ liệu do chưa gọi API xong, do đó account = accounts.find(...) sẽ undefined,
+     vì vậy thêm accounts để account được gán lại giá trị khi đã gọi API xong. */
+  useEffect(() => {
+    if (id && accounts.length > 0) {
+      const account = accounts.find((acc: any) => String(acc.id) === id);
+      if (account) {
+        setModifyingAccount(account);
+      }
+    }
+  }, [id, accounts]);
 
   return (
     <ManagerLayout>
@@ -51,7 +72,7 @@ function Account() {
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="px-[var(--medium-gap)] flex items-center justify-between w-full">
             <Button
-              onClick={() => setShowPopup(true)}
+              onClick={() => setShowPopupAdd(true)}
               type="button"
               text="Thêm tài khoản"
               width="auto"
@@ -71,13 +92,30 @@ function Account() {
             </div>
           </div>
 
-          <AccountList accounts={finalFilteredItems} />
+          <AccountList
+            accounts={finalFilteredItems}
+            setShowPopupModify={setShowPopupModify}
+          />
         </div>
       </Box>
 
-      {/* Popup Screen, chức năng thêm sản phẩm nằm bên trong PopupProduct */}
-      {showPopup && (
-        <PopupAccount setAccounts={setAccounts} setShowPopup={setShowPopup} />
+      {/* Popup Screen, chức năng thêm account nằm bên trong PopupAccount */}
+      {showPopupAdd && (
+        <PopupAccount
+          setAccounts={setAccounts}
+          setShowPopup={setShowPopupAdd}
+        />
+      )}
+
+      {/* Nhận vào account cần chỉnh sửa */}
+      {/* setAccounts để load ngay account vừa chỉnh lên giao diện mà không cần load lại trang */}
+      {/* setShowPopup để tắt Popup nếu nhấn hủy */}
+      {showPopupModify && (
+        <PopupAccountModify
+          account={modifyingAccount}
+          setAccounts={setAccounts}
+          setShowPopup={setShowPopupModify}
+        />
       )}
     </ManagerLayout>
   );

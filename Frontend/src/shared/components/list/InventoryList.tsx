@@ -24,8 +24,7 @@ function AccountList({
             <th>Tên sản phẩm</th>
             <th>Hãng</th>
             <th>Loại</th>
-            <th>SL nhập</th>
-            <th>SL Xuất</th>
+            <th>Số lượng</th>
             <th>Giá gốc</th>
             <th>Giá bán</th>
             <th></th>
@@ -38,11 +37,7 @@ function AccountList({
               <td>{inventory.productName}</td>
               <td>{inventory.brand}</td>
               <td>{inventory.transactionType}</td>
-              {inventory.transactionType === "import" ? (
-                <td>{inventory.quantity}</td>
-              ) : (
-                <td>{inventory.quantity}</td>
-              )}
+              <td>{inventory.quantity}</td>
               <td>{inventory.importPrice}</td>
               <td>{inventory.sellPrice}</td>
               <td className="!py-0">

@@ -122,17 +122,29 @@ public class UserService implements IUserService {
         User existingUser = userRepository.findById(userId).orElseThrow(
                 () -> new RuntimeException("User not found")
         );
-        if(userRepository.existsByPhoneNumber(userDTO.getPhoneNumber())){
-            throw new RuntimeException("Phone number already exists");
+        if(!existingUser.getPhoneNumber().equals(userDTO.getPhoneNumber())){
+            if(userRepository.existsByPhoneNumber(userDTO.getPhoneNumber())){
+                throw new RuntimeException("Phone number already exists");
+            }
         }
-        if(userRepository.existsByEmail(userDTO.getEmail())){
-            throw new RuntimeException("Email already exists");
+
+
+        if(!existingUser.getEmail().equals(userDTO.getEmail())){
+            if(userRepository.existsByEmail(userDTO.getEmail())){
+                throw new RuntimeException("Email already exists");
+            }
         }
+
+        Role role = roleRepository.findById(userDTO.getRoleId()).orElseThrow(
+                () -> new RuntimeException("Role not found")
+        );
+
         existingUser.setFullName(userDTO.getFullName());
         existingUser.setPhoneNumber(userDTO.getPhoneNumber());
         existingUser.setAddress(userDTO.getAddress());
         existingUser.setDateOfBirth(userDTO.getDateOfBirth());
         existingUser.setEmail(userDTO.getEmail());
+        existingUser.setRole(role);
 
 
         return userRepository.save(existingUser);

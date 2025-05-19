@@ -40,7 +40,7 @@ public class KeyboardSpecsService implements IKeyboardSpecsService {
                 .color(productDTO.getColor())
                 .battery(productDTO.getBattery())
                 .connectionType(productDTO.getConnectionType())
-                .numKeys(productDTO.getNumKeys())
+                .numKeys((long)productDTO.getNumKeys())
                 .switchType(productDTO.getSwitchType())
                 .warranty(productDTO.getWarranty())
                 .weight(productDTO.getWeight())

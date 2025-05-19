@@ -5,3 +5,4 @@ export { default as RadioButton } from "./RadioButton";
 export { default as SearchField } from "./SearchField";
 export { default as SelectButton } from "./SelectButton";
 export { default as ImportImage } from "./ImportImage";
+export { default as LabeledInputField } from "./LabeledInputField";

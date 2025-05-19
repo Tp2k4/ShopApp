@@ -3,7 +3,7 @@ import { Button } from "../shared/components/button";
 import { Box } from "../shared/components/ui";
 import { useGet, handleUpdate } from "../service/crudService";
 import { useSearch } from "../service/queryService";
-import PopupSale from "../shared/components/popup/PopupSale";
+import PopupSale from "../shared/components/popup/popupAdd/PopupSale";
 import SaleList from "../shared/components/list/SaleList";
 import ManagerLayout from "./ManagerLayout";
 import { useState } from "react";
