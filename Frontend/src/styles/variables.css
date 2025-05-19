@@ -24,7 +24,9 @@
     --body-text: 14px;
     --caption: 12px;
 
-    --caption-opacity: 0.6;
+    --icon-small: 18px;
+    --icon-big: 24px;
 
+    --caption-opacity: 0.6;
 
 }
