@@ -207,6 +207,58 @@ public class ProductController {
         }
     }
 
+    @PutMapping(value = "/update-img/{productId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateImage(
+            @PathVariable Long productId,
+            @RequestParam("productImages") List<MultipartFile> files) {
+        try {
+            if (files == null || files.isEmpty()) {
+                return ResponseEntity.badRequest().body("No files uploaded");
+            }
+
+            if (files.size() > ProductImage.MAX_IMAGE_PER_PRODUCT) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("You cannot upload more than " + ProductImage.MAX_IMAGE_PER_PRODUCT + " images per product");
+            }
+
+            List<ProductImageDTO> productImages = new ArrayList<>();
+
+            for (MultipartFile file : files) {
+                if (file.isEmpty()) continue;
+
+                if (file.getSize() > 10 * 1024 * 1024) {
+                    return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
+                            .body("Each image must be smaller than 10MB");
+                }
+
+                String contentType = file.getContentType();
+                if (contentType == null || !contentType.startsWith("image")) {
+                    return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+                            .body("Each file must be a valid image");
+                }
+
+                String fileName = storeFile(file);
+                productImages.add(ProductImageDTO.builder().imageUrl(fileName).build());
+            }
+
+            if (productImages.isEmpty()) {
+                return ResponseEntity.badRequest().body("No valid images to upload");
+            }
+
+            List<ProductImage> productImageList = productService.updateProductImages(productId, productImages);
+
+            // Update thumbnail
+            Product existingProduct = productService.getProductById(productId);
+            existingProduct.setThumbnail(productImageList.get(0).getImageUrl());
+            productRepository.save(existingProduct);
+
+            return ResponseEntity.ok("Updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
+
+
 
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();
@@ -264,7 +316,7 @@ public class ProductController {
                                                @RequestBody ProductDTO productDTO) {
         try {
             Product product = productService.updateProduct(id, productDTO);
-            return ResponseEntity.ok(product);
+            return ResponseEntity.ok(ProductResponse.fromProduct(product));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -277,6 +329,16 @@ public class ProductController {
             List<ProductNameResponse> product_list = productService.getProductNames();
             return ResponseEntity.ok(product_list);
         }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {
+        try{
+            productService.deleteProduct(productId);
+            return ResponseEntity.ok().build();
+        }catch(Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }

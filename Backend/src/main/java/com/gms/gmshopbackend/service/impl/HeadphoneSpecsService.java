@@ -17,8 +17,8 @@ public class HeadphoneSpecsService implements IHeadphoneSpecsService {
     private final HeadphoneSpecsRepository repository;
 
     @Override
-    public HeadphoneSpecs updateHeadphoneSpecs(HeadphoneSpecs headphoneSpecs) {
-        HeadphoneSpecs existing = repository.findById(headphoneSpecs.getId()).orElseThrow(
+    public HeadphoneSpecs updateHeadphoneSpecs(Long id, HeadphoneSpecs headphoneSpecs) {
+        HeadphoneSpecs existing = repository.findById(id).orElseThrow(
                 () -> new RuntimeException("There is no mouse specs with id " + headphoneSpecs.getId())
         );
         existing.setBattery(headphoneSpecs.getBattery());

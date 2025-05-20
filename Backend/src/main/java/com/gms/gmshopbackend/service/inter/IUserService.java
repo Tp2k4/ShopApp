@@ -15,4 +15,5 @@ public interface IUserService {
     public User getUserById(Long id);
     public User updateUser(Long userId, UserDTO userDTO);
 
+    void delete(Long userId);
 }

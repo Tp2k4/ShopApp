@@ -95,6 +95,7 @@ function Account() {
           <AccountList
             accounts={finalFilteredItems}
             setShowPopupModify={setShowPopupModify}
+            setAccounts={setAccounts}
           />
         </div>
       </Box>

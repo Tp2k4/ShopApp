@@ -49,6 +49,14 @@ public class ProductResponse extends BaseResponse {
 
     private BigDecimal discountPercent;
 
+    private String description_1;
+
+    private String description_2;
+
+    private String description_3;
+
+    private Boolean isActive;
+
 
     public static ProductResponse fromProduct(Product product) {
         ProductResponse productResponse = ProductResponse.builder()
@@ -59,6 +67,10 @@ public class ProductResponse extends BaseResponse {
                 .price(product.getPrice())
                 .categoryId(product.getCategory().getName()==null?"No Category":product.getCategory().getName())
                 .thumbnail(product.getThumbnail())
+                .description_1(product.getDescription())
+                .description_2(product.getDescription_2())
+                .description_3(product.getDescription_3())
+                .isActive(product.getIsActive())
 
                 .originPrice(product.getOriginPrice())
 

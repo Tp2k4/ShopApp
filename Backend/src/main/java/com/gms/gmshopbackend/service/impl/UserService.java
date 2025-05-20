@@ -150,6 +150,19 @@ public class UserService implements IUserService {
         return userRepository.save(existingUser);
     }
 
+    @Override
+    public void delete(Long userId) {
+        User existingUser = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("User not found")
+        );
+        try{
+            existingUser.setActive(false);
+            userRepository.save(existingUser);
+        }catch (Exception e){
+            throw new RuntimeException("Error deleting user");
+        }
+    }
+
 
     public void sendOtpIfUserExists(String email) {
         Optional<User> user = userRepository.findByEmail(email);

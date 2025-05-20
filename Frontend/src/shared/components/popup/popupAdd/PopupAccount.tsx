@@ -74,7 +74,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
                 })
               }
               label="Ngày sinh: "
-              placeholder="2024/01/01"
+              placeholder="2024-01-01"
               inputFieldWidth="w-[240px]"
             />
 

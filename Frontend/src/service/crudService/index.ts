@@ -9,3 +9,4 @@ export * from "./useGetProducts";
 export * from "./useGetParams";
 export * from "./handleCancelModify";
 export * from "./handleModify";
+export * from "./handleModifyProduct";

@@ -16,10 +16,11 @@ public interface IProductService {
     public Product getProductById(Long id);
     public Product createProduct(ProductDTO product);
     public Product updateProduct(Long id, ProductDTO product);
-    public void deleteProduct(int id);
+    public void deleteProduct(Long id);
     public Page<ProductResponse> getProductsByCategoryId(Long categoryId, PageRequest pageRequest);
     public Page<ProductResponse> searchProducts(String keyword, PageRequest pageRequest);
     public List<ProductImage> uploadProductImage(Long productId, List<ProductImageDTO> productImageDTO) throws Exception;
     public List<ProductNameResponse> getProductNames();
+    public List<ProductImage> updateProductImages(Long ProductId, List<ProductImageDTO> productImageDTO) throws Exception;
 }
 
