@@ -67,6 +67,12 @@ public class UserController {
         return ResponseEntity.ok().body(UserResponse.fromUser(user));
     }
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUserByUserId(@PathVariable Long userId) {
+        User user = userService.getUserById(userId);
+        return ResponseEntity.ok().body(UserResponse.fromUser(user));
+    }
+
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> email) {

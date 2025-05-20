@@ -3,7 +3,8 @@ import ProfileNavLabel from "./ProfileNavLabel";
 import { ROUTES } from "../../paths";
 import { useLocation } from "react-router-dom";
 import IconNavLabel from "./IconNavLabel";
-
+import { useGet } from "../../../service/crudService";
+import { useState } from "react";
 interface UserProfileNavigationProps {
   className?: string;
   children?: React.ReactNode;
@@ -16,6 +17,11 @@ function UserProfileNavigation({
 }: UserProfileNavigationProps) {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  //================ Nhận accounts từ API
+  const { data: userAccount, setData: setUserAccount } = useGet(
+    "http://localhost:8020/api/v1/gmshop/user/8"
+  );
+  localStorage.setItem("userAccount", JSON.stringify(userAccount));
   return (
     <div
       className={`flex flex-col gap-[var(--smallest-gap)] ${className}`}
@@ -26,7 +32,7 @@ function UserProfileNavigation({
         width="auto"
         height="auto"
       >
-        <div className="heading2">Le Vo</div>
+        <div className="heading2">{userAccount.name}</div>
       </Box>
       <Box
         className="flex flex-col items-start gap-[var(--medium-gap)] p-[var(--medium-gap)]"
@@ -51,7 +57,7 @@ function UserProfileNavigation({
         <div className="flex items-center gap-[var(--small-gap)]">
           <IconNavLabel
             link={ROUTES.USER.BUY_HISTORY}
-            icon={<i className="bx  bx-history icon-small"></i>}
+            icon={<i className="bx bx-history icon-small"></i>}
           ></IconNavLabel>
           <ProfileNavLabel
             label="Lịch sử mua hàng"

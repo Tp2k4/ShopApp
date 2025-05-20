@@ -19,5 +19,4 @@ public class BaseResponse {
 
     @JsonProperty(value = "updated_at")
     private LocalDateTime updatedAt;
-
 }
