@@ -15,8 +15,8 @@ public class KeyboardSpecsService implements IKeyboardSpecsService {
     private final KeyboardSpecsRepository repository;
 
     @Override
-    public KeyboardSpecs updateKeyboardSpecs(KeyboardSpecs keyboardSpecs) {
-        KeyboardSpecs existing = repository.findById(keyboardSpecs.getId()).orElseThrow(
+    public KeyboardSpecs updateKeyboardSpecs(Long id, KeyboardSpecs keyboardSpecs) {
+        KeyboardSpecs existing = repository.findById(id).orElseThrow(
                 () -> new RuntimeException("There is no mouse specs with id " + keyboardSpecs.getId())
         );
         existing.setBattery(keyboardSpecs.getBattery());

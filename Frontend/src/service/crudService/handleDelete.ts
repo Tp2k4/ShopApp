@@ -1,14 +1,20 @@
 export const handleDelete = async (
-    id: string,
+    
     apiPath: string,
+    id: string,
     setFunction: React.Dispatch<React.SetStateAction<any[]>>
 )=>{
+    const token = localStorage.getItem("token");
+
     try{
         const response = await fetch(`${apiPath}${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+
             },
+
         })
 
         if(response.ok){

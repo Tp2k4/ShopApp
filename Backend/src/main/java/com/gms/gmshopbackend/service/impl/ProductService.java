@@ -10,6 +10,7 @@ import com.gms.gmshopbackend.service.inter.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -128,7 +129,10 @@ public class ProductService implements IProductService {
 
             existing_product.setName(productDTO.getName());
             existing_product.setPrice(productDTO.getPrice());
+            existing_product.setOriginPrice(productDTO.getImportPrice());
             existing_product.setDescription(productDTO.getDescription1());
+            existing_product.setDescription_2(productDTO.getDescription2());
+            existing_product.setDescription_3(productDTO.getDescription3());
             existing_product.setStockQuantity(productDTO.getStockQuantity());
             existing_product.setThumbnail(productDTO.getThumbnail());
 
@@ -147,8 +151,9 @@ public class ProductService implements IProductService {
                         .weight(productDTO.getWeight())
                         .connectionType(productDTO.getConnectionType())
                         .build();
-                existing_product.setMouseSpecs(newMouse);
-                mouseSpecsRepository.save(mouseSpecsService.updateMouseSpecs(newMouse));
+
+                MouseSpecs updated = mouseSpecsService.updateMouseSpecs(existing_product.getMouseSpecs().getId(), newMouse);
+                existing_product.setMouseSpecs(updated);
             } else if (category.getName().equalsIgnoreCase("Keyboard")) {
                 KeyboardSpecs newKeyBoard = KeyboardSpecs.builder()
                         .product(existing_product)
@@ -161,8 +166,9 @@ public class ProductService implements IProductService {
                         .connectionType(productDTO.getConnectionType())
                         .switchType(productDTO.getSwitchType())
                         .build();
-                existing_product.setKeyboardSpecs(newKeyBoard);
-                keyboardSpecsRepository.save(keyboardSpecsService.updateKeyboardSpecs(newKeyBoard));
+
+                KeyboardSpecs updated = keyboardSpecsService.updateKeyboardSpecs(existing_product.getKeyboardSpecs().getId(), newKeyBoard);
+                existing_product.setKeyboardSpecs(updated);
             } else {
                 HeadphoneSpecs newHeadphone = HeadphoneSpecs.builder()
                         .product(existing_product)
@@ -174,14 +180,15 @@ public class ProductService implements IProductService {
                         .weight(productDTO.getWeight())
 
                         .build();
-                existing_product.setHeadphoneSpecs(newHeadphone);
-                headphoneSpecsRepository.save(headphoneSpecsService.updateHeadphoneSpecs(newHeadphone));
+
+                HeadphoneSpecs updated = headphoneSpecsService.updateHeadphoneSpecs(existing_product.getHeadphoneSpecs().getId(),newHeadphone);
+                existing_product.setHeadphoneSpecs(updated);
             }
 
 
             // Lưu vào database
-            Product updatedProduct = productRepository.save(existing_product);
-            return updatedProduct;
+            productRepository.save(existing_product);
+            return existing_product;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -189,7 +196,16 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(Long id) {
+        Product existing_product = productRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Product not found")
+        );
+        try{
+            existing_product.setIsActive(false);
+            productRepository.save(existing_product);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
 
 
     }
@@ -236,4 +252,29 @@ public class ProductService implements IProductService {
         List<Product> products = productRepository.findAll();
         return products.stream().map(ProductNameResponse::fromProduct).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ProductImage> updateProductImages(Long productId, List<ProductImageDTO> productImageDTOs) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + productId));
+
+        if (productImageDTOs.size() > ProductImage.MAX_IMAGE_PER_PRODUCT) {
+            throw new IllegalArgumentException("You can only upload up to "
+                    + ProductImage.MAX_IMAGE_PER_PRODUCT + " images");
+        }
+
+        // Delete old images
+        productImageRepository.deleteByProductId(product);
+
+        // Convert DTOs to entities
+        List<ProductImage> productImages = productImageDTOs.stream()
+                .map(dto -> ProductImage.builder()
+                        .productId(product)
+                        .imageUrl(dto.getImageUrl())
+                        .build())
+                .collect(Collectors.toList());
+
+        return productImageRepository.saveAll(productImages);
+    }
+
 }

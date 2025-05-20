@@ -9,15 +9,18 @@ import com.gms.gmshopbackend.service.inter.IMouseSpecsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MouseSpecsService implements IMouseSpecsService {
     private final MouseSpecsRepository repository;
 
     @Override
-    public MouseSpecs updateMouseSpecs(MouseSpecs mouseSpecs) {
-        MouseSpecs existing = repository.findById(mouseSpecs.getId()).orElseThrow(
-                () -> new RuntimeException("There is no mouse specs with id " + mouseSpecs.getId())
+    public MouseSpecs updateMouseSpecs(Long id, MouseSpecs mouseSpecs) {
+        MouseSpecs existing = repository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("No such mousespecs with id: " + id)
         );
         existing.setBattery(mouseSpecs.getBattery());
         existing.setLed(mouseSpecs.isLed());

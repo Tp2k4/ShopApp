@@ -72,6 +72,9 @@ public class Product extends BaseEntity {
     @Column(name = "origin_price")
     private Double originPrice;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
 }
 
 

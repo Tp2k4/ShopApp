@@ -1,6 +1,8 @@
-import Button from "../button/Button";
+import {Button, CancelButton} from "../button";
 import DetailButton from "../button/DetailButton";
 import { useToggleDetail } from "../../utils/useToggleDetail";
+import { handleDelete } from "../../../service/crudService";
+
 
 import { useSearchParams } from "react-router-dom";
 import React from "react";
@@ -9,6 +11,7 @@ const NUM_COLUMNS = 7;
 
 interface AccountListProps<T = any> {
   setShowPopupModify: React.Dispatch<React.SetStateAction<boolean>>;
+  setAccounts: React.Dispatch<React.SetStateAction<T[]>>;
   accounts: T[];
   children?: React.ReactNode;
   className?: string;
@@ -17,6 +20,7 @@ interface AccountListProps<T = any> {
 
 function AccountList({
   setShowPopupModify,
+  setAccounts,
   accounts,
   children,
   className = "",
@@ -69,6 +73,9 @@ function AccountList({
                         setShowPopupModify(true);
                       }}
                     />
+                    <CancelButton text="Xóa" onClick={()=> handleDelete("http://localhost:8020/api/v1/gmshop/user/delete/", account.id, setAccounts)}/>
+
+
                   </div>
                 </td>
               </tr>

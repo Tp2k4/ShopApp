@@ -1,4 +1,3 @@
-import { Button } from "../button";
 import { useEffect } from "react";
 
 interface ImportImageProps {
@@ -62,9 +61,7 @@ const ImportImage = ({
           />
         ))}
       </div>
-      <div>
-        <Button type="button" text="Thêm ảnh" />
-      </div>
+
     </div>
   );
 };

@@ -1,12 +1,16 @@
-import Button from "../button/Button";
+import {Button, CancelButton} from "../button";
 import DetailButton from "../button/DetailButton";
+import { handleDelete } from "../../../service/crudService";
 
 import React from "react";
 import { useToggleDetail } from "../../utils/useToggleDetail";
+import { useSearchParams } from "react-router-dom";
 
 const NUM_COLUMNS = 8;
 
 interface ProductListProps<T = any> {
+  setShowPopupModify: React.Dispatch<React.SetStateAction<boolean>>;
+  setProducts: React.Dispatch<React.SetStateAction<T[]>>;
   products: T[];
   children?: React.ReactNode;
   className?: string;
@@ -129,12 +133,15 @@ const renderItemType = (specs: any, type: string) => {
 };
 
 function ProductList({
+  setShowPopupModify,
+  setProducts,
   products,
   children,
   className = "",
   ...rest
 }: ProductListProps) {
   const { openDetailIds, toggleDetail } = useToggleDetail();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <div className="max-h-[600px] overflow-y-auto border-b border-[var(--line-color)]">
@@ -153,21 +160,21 @@ function ProductList({
           </tr>
         </thead>
         <tbody>
-          {products.map((item, index) => (
+          {products.map((product, index) => (
             <React.Fragment key={index}>
               <tr>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.brand_id}</td>
-                <td>{item.category_id}</td>
-                <td>{item.stock_quantity}</td>
-                <td>{item.originPrice}</td>
-                <td>{item.price}</td>
+                <td>{product.id}</td>
+                <td>{product.name}</td>
+                <td>{product.brand_id}</td>
+                <td>{product.category_id}</td>
+                <td>{product.stock_quantity}</td>
+                <td>{product.originPrice}</td>
+                <td>{product.price}</td>
                 {/* Kiểm tra trạng thái hết hàng */}
-                <td className={item.stock_quantity <= 5 ? "text-red-500" : ""}>
-                  {item.stock_quantity === 0
+                <td className={product.stock_quantity <= 5 ? "text-red-500" : ""}>
+                  {product.stock_quantity === 0
                     ? "Hết hàng"
-                    : item.stock_quantity <= 5
+                    : product.stock_quantity <= 5
                     ? "Sắp hết hàng"
                     : "Còn hàng"}
                 </td>
@@ -178,11 +185,22 @@ function ProductList({
                       text="Chi tiết"
                     />
                     <Button
-                      className="text-[var(--caption)]"
+                      className=""
                       type="button"
                       text="Chỉnh sửa"
                       width="auto"
+                      onClick={() => {
+                        setSearchParams((prev) => {
+                          const newParams = new URLSearchParams(prev);
+                          newParams.set("id", product.id);
+                          return newParams;
+                        });
+                        setShowPopupModify(true);
+                      }}
                     />
+
+                    <CancelButton text="Xóa" onClick={()=> handleDelete("http://localhost:8020/api/v1/gmshop/product/delete/", product.id, setProducts)}/>
+
                   </div>
                 </td>
               </tr>
@@ -190,7 +208,7 @@ function ProductList({
                 <tr>
                   <td className="bg-white" colSpan={NUM_COLUMNS}>
                     <div className="caption flex flex-col gap-[var(--small-gap)] border border-[var(--line-color)] rounded-md p-[var(--small-gap)]">
-                      {renderItemType(item.specs, item.category_id)}
+                      {renderItemType(product.specs, product.category_id)}
                     </div>
                   </td>
                 </tr>

@@ -6,8 +6,10 @@ import ManagerLayout from "./ManagerLayout";
 import ProductList from "../shared/components/list/ProductList";
 import PopupProduct from "../shared/components/popup/popupAdd/PopupProduct";
 import { useGetProducts } from "../service/crudService";
+import PopupProductModify from "../shared/components/popup/popupModify/PopupProductModify";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function Product() {
   //================ Nhận products từ API
@@ -52,6 +54,25 @@ function Product() {
 
   //================ PopupScreen
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopupModify, setShowPopupModify] = useState(false);
+
+    // Lấy tài khoản hiện đang được chọn để chỉnh sửa đưa vào AccountList
+  const [modifyingProduct, setModifyingProduct] = useState<any[]>([]);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  // Sẽ lấy product đang được chỉnh sửa lưu vào modifyingAccount nếu có id được trả về từ params
+  /* Cần thêm accounts tại [id, accounts] ở dòng  useEffect bên dưới vì: lần đầu gọi API, 
+     accounts sẽ chưa có dữ liệu do chưa gọi API xong, do đó product = accounts.find(...) sẽ undefined,
+     vì vậy thêm accounts để product được gán lại giá trị khi đã gọi API xong. */
+  useEffect(() => {
+    if (id && products.length > 0) {
+      const product = products.find((product: any) => String(product.id) === id);
+      if (product) {
+        setModifyingProduct(product);
+      }
+    }
+  }, [id, products]);
 
   return (
     <ManagerLayout>
@@ -80,16 +101,28 @@ function Product() {
                 onChange={(e: any) => setSearchQuery(e.target.value)}
                 width="w-[300px]"
               />
+              
             </div>
           </div>
 
-          <ProductList products={finalFilteredItems} />
+          <ProductList products={finalFilteredItems} setProducts={setProducts} setShowPopupModify={setShowPopupModify} />
         </div>
       </Box>
 
       {/* Popup Screen, chức năng thêm sản phẩm nằm bên trong PopupProduct */}
       {showPopup && (
         <PopupProduct setProducts={setProducts} setShowPopup={setShowPopup} />
+      )}
+
+      {/* Nhận vào product cần chỉnh sửa */}
+      {/* setProducts để load ngay product vừa chỉnh lên giao diện mà không cần load lại trang */}
+      {/* setShowPopup để tắt Popup nếu nhấn hủy */}
+      {showPopupModify && (
+        <PopupProductModify
+          product={modifyingProduct}
+          setProducts={setProducts}
+          setShowPopup={setShowPopupModify}
+        />
       )}
     </ManagerLayout>
   );
