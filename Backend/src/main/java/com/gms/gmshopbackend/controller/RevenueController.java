@@ -53,10 +53,10 @@ public class RevenueController {
         }
     }
 
-    @GetMapping("/last-three-month-revenue")
-    public ResponseEntity<?> getLastThreeMonthRevenue() {
+    @GetMapping("/last-six-month-revenue")
+    public ResponseEntity<?> getLastSixMonthRevenue() {
         try{
-            return new ResponseEntity<>(revenueService.getLastThreeMonthRevenue(), HttpStatus.OK);
+            return new ResponseEntity<>(revenueService.getLastSixMonthRevenue(), HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

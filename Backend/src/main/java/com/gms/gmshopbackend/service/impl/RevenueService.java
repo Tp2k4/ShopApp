@@ -51,9 +51,9 @@ public class RevenueService implements IRevenueService {
     }
 
     @Override
-    public List<RevenueResponseByMonth> getLastThreeMonthRevenue() {
+    public List<RevenueResponseByMonth> getLastSixMonthRevenue() {
         // Tính ngày bắt đầu từ đầu tháng 3 tháng trước
-        LocalDate fromDate = LocalDate.now().minusMonths(3).withDayOfMonth(1);
+        LocalDate fromDate = LocalDate.now().minusMonths(6).withDayOfMonth(1);
 
         // Lấy các đơn hàng từ thời điểm đó
         List<Order> orders = orderRepository.findByOrderDateAfter(fromDate);
@@ -67,7 +67,7 @@ public class RevenueService implements IRevenueService {
 
         // Tạo danh sách 3 tháng gần nhất (kể cả nếu không có đơn hàng vẫn có giá trị 0)
         List<RevenueResponseByMonth> result = new ArrayList<>();
-        for (int i = 2; i >= 0; i--) {
+        for (int i = 5; i >= 0; i--) {
             LocalDate month = LocalDate.now().minusMonths(i);
             String monthKey = month.getYear() + "-" + String.format("%02d", month.getMonthValue());
             Double revenue = revenueByMonth.getOrDefault(monthKey, 0.0);
