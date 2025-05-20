@@ -6,6 +6,7 @@ server:
 spring:
   datasource:
     url: jdbc:mariadb://localhost:3306/database_shopapp?useSSL=false&serverTimezone=UTC
+
     driver-class-name: org.mariadb.jdbc.Driver
 
     username: root
@@ -47,7 +48,3 @@ api:
 jwt:
   expiration: 86400
   secretkey: 5+2eqXSVC4XDqxgu2rHXDRSGbRUgCfk9uuTKjoIw1N8=
-
-
-
-

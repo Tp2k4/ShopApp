@@ -32,6 +32,14 @@ body{
     font-size: var(--body-text)
 } 
 
+.icon-small{
+    font-size: var(--icon-small)
+}
+
+.icon-big{
+    font-size: var(--icon-big)
+}
+
 .caption{
     font-size: var(--caption)
 } 

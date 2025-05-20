@@ -22,47 +22,48 @@ function UserProfileNavigation({
       {...rest}
     >
       <Box
-        className="flex items-center justify-start p-[var(--medium-gap)]"
+        className="flex items-center justify-start p-[var(--medium-gap)] gap-[var(--small-gap)]"
         width="auto"
         height="auto"
       >
-        <h2 className="text-[var(--heading-1)]">Le Vo</h2>
+        <div className="heading2">Le Vo</div>
       </Box>
       <Box
-        className="flex flex-col items-center justify-start gap-[var(--medium-gap)] p-[var(--medium-gap)]"
+        className="flex flex-col items-start gap-[var(--medium-gap)] p-[var(--medium-gap)]"
         width="auto"
         height="100%"
       >
-        <div className="flex items-center justify-start gap-[var(--small-gap)]">
+        <div className="flex items-center gap-[var(--small-gap)]">
           <IconNavLabel
             link={ROUTES.USER.USER_PROFILE}
-            icon={<i className="bxr  bx-search-alt"></i>}
+            icon={<i className="bx bx-user-circle icon-small"></i>}
           ></IconNavLabel>
           <ProfileNavLabel
             label="Thông tin tài khoản"
             link={ROUTES.USER.USER_PROFILE}
             className={
               isActive(ROUTES.USER.USER_PROFILE)
+                ? "font-bold text-[var(--primary-color)]"
+                : ""
+            }
+          />
+        </div>
+        <div className="flex items-center gap-[var(--small-gap)]">
+          <IconNavLabel
+            link={ROUTES.USER.BUY_HISTORY}
+            icon={<i className="bx  bx-history icon-small"></i>}
+          ></IconNavLabel>
+          <ProfileNavLabel
+            label="Lịch sử mua hàng"
+            link={ROUTES.USER.BUY_HISTORY}
+            className={
+              isActive(ROUTES.USER.BUY_HISTORY)
                 ? "text-[var(--primary-color)]"
                 : ""
             }
           />
         </div>
-        <IconNavLabel
-          link={ROUTES.USER.BUY_HISTORY}
-          icon={<i className="bx bx-search-alt"></i>}
-        ></IconNavLabel>
-        <ProfileNavLabel
-          label="Lịch sử mua hàng"
-          link={ROUTES.USER.BUY_HISTORY}
-          className={
-            isActive(ROUTES.USER.BUY_HISTORY)
-              ? "text-[var(--primary-color)]"
-              : ""
-          }
-        />
       </Box>
-      <i className="bx bx-search absolute right-2 text-[18px]"></i>
     </div>
   );
 }
