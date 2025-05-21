@@ -9,6 +9,6 @@ import java.util.List;
 public interface IRevenueService {
     public List<RevenueResponse> getRevenueByDate(LocalDate startDate, LocalDate endDate);
     public double getTodayRevenue();
-    public List<RevenueResponseByMonth> getLastThreeMonthRevenue();
+    public List<RevenueResponseByMonth> getLastSixMonthRevenue();
 }
 
