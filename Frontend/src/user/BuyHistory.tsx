@@ -1,7 +1,7 @@
 import Header from "../shared/components/ui/Header";
 import Box from "../shared/components/ui/Box";
 import { useEffect, useState } from "react";
-import OrderItems from "../shared/components/list/OrderItems";
+import OrderItems from "./OrderItems";
 import { useGet } from "../service/crudService";
 
 function BuyHistory() {
@@ -17,7 +17,7 @@ function BuyHistory() {
         width="75%"
         height="100%"
       >
-        {buyhistory.map((order) => (
+        {buyhistory.map((order: any) => (
           <OrderItems data={order} />
         ))}
       </Box>
