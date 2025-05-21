@@ -1,9 +1,13 @@
 {
-    "todayRevenue": 2.300, 
-    "soldQuantity": 230,
-    "lastestThreeMonthRevenue": {
+    "todayRevenue": 2300000, 
+    "todaySold": 30,
+    "totalUsers": 230,
+    "lastestSixMonthRevenue": {
         "month1": 50.000,
         "month2": 60.000,
-        "month3": 50.000
+        "month3": 50.000,
+        "month4": 50.000,
+        "month5": 50.000,
+        "month6": 50.000
     }
 }

@@ -138,4 +138,20 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/get-total-user")
+    public ResponseEntity<?> getTotalUser() {
+        try{
+            int numOfUser = 0;
+            List<User> userList = userRepository.findAll();
+            for(User user : userList) {
+                if (user.getRole().getName().equals("user") && user.isActive()) {
+                    numOfUser++;
+                }
+            }
+            return ResponseEntity.ok().body(numOfUser);
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

@@ -6,8 +6,15 @@ import {
   CreateAccount,
   ChangePassSuccess,
 } from "./auth";
-import { Home, Account, Product, Sale, Inventory, Statistics } from "./manager";
-import { Order, OrderConfirmation } from "./employee";
+import {
+  Home,
+  Account,
+  Product,
+  Sale,
+  Inventory,
+  Statistics,
+} from "./manager/pages";
+import { Order, OrderConfirmation } from "./employee/pages";
 import { autoLogin } from "./service/authService";
 import { ROUTES } from "./shared/paths";
 import BuyHistory from "./user/BuyHistory";

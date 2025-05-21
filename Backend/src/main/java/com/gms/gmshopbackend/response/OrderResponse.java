@@ -15,7 +15,8 @@ import java.util.List;
 @Builder
 public class OrderResponse {
     private Long id;
-    private String userName;
+    private String fullName;
+    private String email;
     private String phoneNumber;
     private LocalDate orderDate;
     private double totalPrice;

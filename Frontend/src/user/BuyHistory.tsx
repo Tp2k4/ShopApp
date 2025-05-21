@@ -1,6 +1,7 @@
 import Header from "../shared/components/ui/Header";
 import Box from "../shared/components/ui/Box";
-import OrderItems from "../shared/components/list/OrderItems";
+import { useEffect, useState } from "react";
+import OrderItems from "./OrderItems";
 import { useGet } from "../service/crudService";
 
 function BuyHistory() {

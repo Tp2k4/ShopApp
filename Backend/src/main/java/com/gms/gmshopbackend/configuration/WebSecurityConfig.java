@@ -58,13 +58,13 @@ public class WebSecurityConfig {
                             String.format("%s/user/**", apiPrefix)
                             ).permitAll()
                             .requestMatchers(PUT,
-                                    String.format("%s/orders/**", apiPrefix)).hasRole("ADMIN")
+                                    String.format("%s/orders/**", apiPrefix)).hasAnyRole("EMPLOYEE", "ADMIN")
                             .requestMatchers(POST,
                                     String.format("%s/orders/**", apiPrefix)).hasRole("USER")
                             .requestMatchers(GET,
                                     String.format("%s/orders/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(DELETE,
-                                    String.format("%s/orders/**", apiPrefix)).hasRole("ADMIN")
+                                    String.format("%s/orders/employee/**", apiPrefix)).hasRole("EMPLOYEE")
                             .requestMatchers(GET,
                                     String.format("%s/orders/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,

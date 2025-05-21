@@ -97,6 +97,7 @@ public class OrderService implements IOrderService {
         return new OrderResponse(
                 order.getId(),
                 order.getFullName(),
+                order.getEmail(),
                 order.getPhoneNumber(),
                 order.getOrderDate(),
                 order.getTotalMoney(),
@@ -129,6 +130,7 @@ public class OrderService implements IOrderService {
         return new OrderResponse(
                 order.getId(),
                 order.getFullName(),
+                order.getEmail(),
                 order.getPhoneNumber(),
                 order.getOrderDate(),
                 order.getTotalMoney(),
@@ -151,6 +153,7 @@ public class OrderService implements IOrderService {
             return new OrderResponse(
                     order.getId(),
                     order.getFullName(),
+                    order.getEmail(),
                     order.getPhoneNumber(),
                     order.getOrderDate(),
                     order.getTotalMoney(),
@@ -177,6 +180,7 @@ public class OrderService implements IOrderService {
         return new OrderResponse(
                 existingOrder.getId(),
                 existingOrder.getFullName(),
+                existingOrder.getEmail(),
                 existingOrder.getPhoneNumber(),
                 existingOrder.getOrderDate(),
                 existingOrder.getTotalMoney(),
@@ -189,8 +193,9 @@ public class OrderService implements IOrderService {
     public void deleteOrder(Long id) {
         try{
             Optional<Order> existingOrder = orderRepository.findById(id);
-            if(existingOrder.isPresent() && existingOrder.get().getStatus().equalsIgnoreCase("pending")){
+            if(existingOrder.isPresent() && existingOrder.get().getStatus().equalsIgnoreCase(OrderStatus.PENDING.toString())) {
                 existingOrder.get().setActive(false);
+                existingOrder.get().setStatus(OrderStatus.DELETED.toString());
                 orderRepository.save(existingOrder.get());
                 List<OrderDetail> orderDetails = orderDetailRepository.findByOrder(existingOrder.get());
                 for(OrderDetail orderDetail : orderDetails){
@@ -226,6 +231,7 @@ public class OrderService implements IOrderService {
             return new OrderResponse(
                     order.getId(),
                     order.getFullName(),
+                    order.getEmail(),
                     order.getPhoneNumber(),
                     order.getOrderDate(),
                     order.getTotalMoney(),

@@ -83,7 +83,7 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("/{orderId}")
+    @DeleteMapping("/employee/delete/{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable long orderId){
         try{
             orderService.deleteOrder(orderId);
@@ -110,7 +110,7 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/checked/{id}")
+    @PutMapping("/employee/checked/{id}")
     public ResponseEntity<?> staffChecked(@Valid @PathVariable Long orderId){
         try{
             orderService.staffChecked(orderId);
