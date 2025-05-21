@@ -73,7 +73,7 @@ function Dashboard() {
 
   return (
     <ManagerLayout>
-      <Box className="flex flex-col gap-[var(--mediun-gap)] px-[var(--medium-gap)]">
+      <Box className="rounded-none min-h-[calc(100vh_-_var(--header-height))] w-full flex flex-col gap-[var(--mediun-gap)] px-[var(--medium-gap)]">
         <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ THỐNG KÊ
         </div>

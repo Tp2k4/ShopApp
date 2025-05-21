@@ -63,8 +63,11 @@ function Account() {
 
   return (
     <ManagerLayout>
-      <Box className="px-[var(--medium-gap)]" height="100%" width="100%">
-        <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
+      <Box
+        className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
+        width="100%"
+      >
+        <div className="w-full  heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ TÀI KHOẢN
         </div>
 

@@ -1,6 +1,6 @@
 import { Header, Navigation } from "../shared/components/ui";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 interface ManagerLayoutProps {
   children?: ReactNode;
@@ -9,14 +9,24 @@ interface ManagerLayoutProps {
 function ManagerLayout({ children }: ManagerLayoutProps) {
   const userDataString = localStorage.getItem("user");
   const userData = userDataString ? JSON.parse(userDataString) : null;
+  const [navIsOpen, setNavIsOpen] = useState(true);
 
   return (
-    <div className="overflow-y-auto w-screen h-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <Header name={userData?.role || "Guest"} />
+    <div className="h-screen w-full flex flex-col overflow-hidden min-h-0">
+      <Header
+        setNavIsOpen={setNavIsOpen}
+        navIsOpen={navIsOpen}
+        className="border-b border-[var(--line-color)] "
+        name={userData?.role || "Guest"}
+      />
+      <div className="flex w-full h-[calc(100vh_-_var(--header-height))]">
+        <Navigation
+          className={`fixed left-0 top-[calc(var(--header-height))] z-40 rounded-none border-r border-[var(--line-color)] lg:flex lg:static lg:translate-x-0 ${
+            navIsOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        />
 
-      <div className="flex w-[75%] h-full gap-[var(--medium-gap)]">
-        <Navigation />
-        <main className="w-full h-full">{children}</main>
+        <main className="w-full overflow-y-auto">{children}</main>
       </div>
     </div>
   );

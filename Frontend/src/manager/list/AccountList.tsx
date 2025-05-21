@@ -32,7 +32,7 @@ function AccountList({
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (
-    <div className="max-h-[600px] overflow-y-auto ">
+    <div className="max-h-[600px] overflow-y-auto">
       <table className={` ${className}`} {...rest}>
         <thead>
           <tr>

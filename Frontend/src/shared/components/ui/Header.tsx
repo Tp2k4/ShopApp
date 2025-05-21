@@ -1,17 +1,25 @@
-import { VerticalLine } from "./";
 import { handleLogout } from "../../../service/authService/handleLogout";
 import { useState } from "react";
 import { Button } from "../button";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
+  setNavIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  navIsOpen: boolean;
   children?: React.ReactNode;
   name?: string;
   className?: string;
   [key: string]: any;
 }
 
-function Header({ children, name, className = "", ...rest }: HeaderProps) {
+function Header({
+  setNavIsOpen,
+  navIsOpen,
+  children,
+  name,
+  className = "",
+  ...rest
+}: HeaderProps) {
   const [showPopupLogOut, setShowPopupLogout] = useState(false);
   const navigate = useNavigate();
 
@@ -22,17 +30,19 @@ function Header({ children, name, className = "", ...rest }: HeaderProps) {
 
   return (
     <div
-      className={`flex justify-center bg-white w-screen ${className}`}
+      className={`h-[var(--header-height)] flex justify-center bg-white w-screen ${className}`}
       {...rest}
     >
-      <div className="flex justify-between w-[75%] h-full">
+      <div className="!mx-[var(--medium-gap)] flex justify-between  w-full h-full">
         {/* Left */}
-        <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
+        <div className=" flex items-center gap-[var(--medium-gap)] py-[12px]">
           <div className="heading2 font-bold text-[var(--primary-color)]">
             Gaming Gear
           </div>
-          <VerticalLine height="25px" color="var(--primary-color)" />
-          <div className="text-black heading2 font-medium">{name}</div>
+          <i
+            onClick={() => setNavIsOpen((prev) => !prev)}
+            className="bg-[var(--secondary-color)] rounded-md bx bx-menu text-[24px] p-[2px] block lg:hidden"
+          ></i>
         </div>
 
         {/* Right */}
