@@ -7,7 +7,7 @@ export const handleDelete = async (
     const token = localStorage.getItem("token");
 
     try{
-        const response = await fetch(`${apiPath}${id}`, {
+        const response = await fetch(apiPath + id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

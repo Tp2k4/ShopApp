@@ -1,27 +1,29 @@
 import { Box, Header, Line } from "../../shared/components/ui";
 import { Button } from "../../shared/components/button";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-// import emailjs from "@emailjs/browser";
+import { useGet } from "../../service/crudService";
 
+import { useEffect, useState, useRef } from "react";
 import React from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+// import emailjs from "@emailjs/browser";
 
 function OrderConfirmation() {
-  const [orders, setOrders] = useState<any[]>([]);
+  // Lấy thông tin employee hiện tại, mục đích là lấy tên hiển thị lên Header
+  const userDataString = localStorage.getItem("user");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const token = localStorage.getItem("token");
+
+  const { data: orders, setData: setOrders } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/getall"
+  );
+
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("id");
   const pdfRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetch("/database/order.json")
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
-
-  const order = orders.find((order) => order.id === Number(orderId));
+  const order = orders.find((order: any) => order.id === Number(orderId));
   if (!order) return <div>Đang tải...</div>;
 
   const generatePDF = async () => {
@@ -155,11 +157,11 @@ function OrderConfirmation() {
       // Prepare email template parameters
       const templateParams = {
         to_email: order.email,
-        to_name: order.customerName,
+        to_name: order.fullName,
         order_id: order.id,
         order_date: order.orderDate,
         total_price: order.totalPrice,
-        customer_name: order.customerName,
+        customer_name: order.fullName,
         customer_phone: order.phoneNumber,
         customer_address: order.address,
         products: order.products
@@ -197,7 +199,10 @@ function OrderConfirmation() {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <Header role="Nhân viên" />
+      <Header
+        className="border-b border-[var(--line-color)] "
+        name={userData.name}
+      />
       <Box
         className="flex flex-col gap-[var(--medium-gap)] p-[var(--big-gap)]"
         width="75%"
@@ -214,7 +219,7 @@ function OrderConfirmation() {
                 &lt;sales@gaminggear.com.vn&gt;
               </div>
               <div>
-                Đến: {order.customerName} &lt;{order.email}&gt;
+                Đến: {order.fullName} &lt;{order.email}&gt;
               </div>
             </div>
             <div>
@@ -229,7 +234,7 @@ function OrderConfirmation() {
             </div>
           </div>
           <div className="px-[var(--medium-gap)] flex flex-col gap-[var(--medium-gap)]">
-            <div>Xin chào {order.customerName}</div>
+            <div>Xin chào {order.fullName}</div>
             <div>
               Sản phẩm trong đơn hàng của Anh/chị tại cửa hàng{" "}
               <strong>GamingGear</strong> sẽ được giao tới địa chỉ nhận hang
@@ -255,7 +260,7 @@ function OrderConfirmation() {
                         <div>Địa chỉ: </div>
                       </div>
                       <div className="w-2/3">
-                        <div>{order.customerName}</div>
+                        <div>{order.fullName}</div>
                         <div>{order.phoneNumber}</div>
                         <div>{order.address}</div>
                       </div>
@@ -311,7 +316,23 @@ function OrderConfirmation() {
         </div>
 
         <div className="flex justify-between items-center">
-          <Button text="Tải xuống PDF" type="button" onClick={generatePDF} />
+          <Button
+            text="Tải xuống PDF"
+            type="button"
+            onClick={() => {
+              fetch(
+                `http://localhost:8020/api/v1/gmshop/orders/employee/checked/${orderId}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              generatePDF();
+            }}
+          />
           <div>
             <div className="text-right">Trân trọng</div>
             <div>

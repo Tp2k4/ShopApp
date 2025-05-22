@@ -17,7 +17,7 @@ function ManagerLayout({ children }: ManagerLayoutProps) {
         setNavIsOpen={setNavIsOpen}
         navIsOpen={navIsOpen}
         className="border-b border-[var(--line-color)] "
-        name={userData?.name || "Guest"}
+        name={userData?.name}
       />
       <div className="flex w-full h-[calc(100vh_-_var(--header-height))]">
         <Navigation

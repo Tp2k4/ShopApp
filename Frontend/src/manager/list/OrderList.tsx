@@ -41,7 +41,7 @@ function OrderList({
             <React.Fragment key={index}>
               <tr>
                 <td>{order.id}</td>
-                <td>{order.customerName}</td>
+                <td>{order.fullName}</td>
                 <td>{order.phoneNumber}</td>
                 <td>{order.email}</td>
                 <td>{order.orderDate}</td>

@@ -7,16 +7,12 @@ import { useGet } from "../../service/crudService";
 
 function Order() {
   //================ Nhận products từ API
-  const { data: orders } = useGet("/database/order.json");
+  const { data: orders } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/getall"
+  );
 
   //================ Lọc và tìm kiếm
-  const filterOptions = [
-    "all",
-    "Đang chuẩn bị",
-    "Đang giao hàng",
-    "Đã nhận hàng",
-    "Đã hủy",
-  ];
+  const filterOptions = ["all", "pending", "delivered", "shipping", "deleted"];
 
   // Lọc
   const {
@@ -30,7 +26,7 @@ function Order() {
     filteredItems: filteredBySearch,
     searchQuery,
     setSearchQuery,
-  } = useSearch(orders, "customerName");
+  } = useSearch(orders, "fullName");
 
   // Gộp 2 kết quả lọc và tìm kiếm
   const finalFilteredItems = filteredBySearch.filter((item) =>

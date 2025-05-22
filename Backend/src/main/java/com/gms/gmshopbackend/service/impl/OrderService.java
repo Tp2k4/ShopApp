@@ -100,6 +100,7 @@ public class OrderService implements IOrderService {
                 order.getEmail(),
                 order.getPhoneNumber(),
                 order.getOrderDate(),
+                order.getStatus(),
                 order.getTotalMoney(),
                 order.getAddress(),
                 products
@@ -133,6 +134,7 @@ public class OrderService implements IOrderService {
                 order.getEmail(),
                 order.getPhoneNumber(),
                 order.getOrderDate(),
+                order.getStatus(),
                 order.getTotalMoney(),
                 order.getAddress(),
                 products
@@ -156,6 +158,7 @@ public class OrderService implements IOrderService {
                     order.getEmail(),
                     order.getPhoneNumber(),
                     order.getOrderDate(),
+                    order.getStatus(),
                     order.getTotalMoney(),
                     order.getAddress(),
                     products
@@ -183,6 +186,7 @@ public class OrderService implements IOrderService {
                 existingOrder.getEmail(),
                 existingOrder.getPhoneNumber(),
                 existingOrder.getOrderDate(),
+                existingOrder.getStatus(),
                 existingOrder.getTotalMoney(),
                 existingOrder.getAddress(),
                 products
@@ -234,6 +238,7 @@ public class OrderService implements IOrderService {
                     order.getEmail(),
                     order.getPhoneNumber(),
                     order.getOrderDate(),
+                    order.getStatus(),
                     order.getTotalMoney(),
                     order.getAddress(),
                     products
