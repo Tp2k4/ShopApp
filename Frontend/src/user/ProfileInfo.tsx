@@ -1,8 +1,8 @@
-import { useGet } from "../../../service/crudService";
-import { Box } from "../ui";
+import { useGet } from "../service/crudService";
+import { Box } from "../shared/components/ui";
 import { useState, useEffect } from "react";
-import { Button } from "../button";
-import LabeledInputField from "./LabeledInputField";
+import { Button } from "../shared/components/button";
+import LabeledInputField from "../shared/components/form/LabeledInputField";
 
 interface ProfileInfoProps {
   className?: string;

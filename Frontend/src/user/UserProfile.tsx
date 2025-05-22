@@ -1,6 +1,6 @@
 import Header from "../shared/components/ui/Header";
 import UserProfileNavigation from "../shared/components/ui/UserProfileNavigation";
-import ProfileInfo from "../shared/components/form/ProfileInfo";
+import ProfileInfo from "./ProfileInfo";
 
 function UserProfile() {
   return (
