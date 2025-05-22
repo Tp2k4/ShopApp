@@ -7,6 +7,7 @@ import ProductList from "../list/ProductList";
 import PopupProduct from "../popup/popupAdd/PopupProduct";
 import { useGetProducts } from "../../service/crudService";
 import PopupProductModify from "../popup/popupModify/PopupProductModify";
+import PopupConfirmDelete from "../popup/pupupConfirmDelete/PopupConfirmDelete";
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -55,6 +56,8 @@ function Product() {
   //================ PopupScreen
   const [showPopup, setShowPopup] = useState(false);
   const [showPopupModify, setShowPopupModify] = useState(false);
+  const [showPopupConfirmDelete, setShowPopupConfirmDelete] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<string>("");
 
   // Lấy tài khoản hiện đang được chọn để chỉnh sửa đưa vào AccountList
   const [modifyingProduct, setModifyingProduct] = useState<any[]>([]);
@@ -114,6 +117,8 @@ function Product() {
               products={finalFilteredItems}
               setProducts={setProducts}
               setShowPopupModify={setShowPopupModify}
+              setShowPopupConfirmDelete={setShowPopupConfirmDelete}
+              setSelectedProductId={setSelectedProductId}
             />
           </div>
         </div>
@@ -132,6 +137,16 @@ function Product() {
           product={modifyingProduct}
           setProducts={setProducts}
           setShowPopup={setShowPopupModify}
+        />
+      )}
+
+      {/* Hiển thị hợp thoại xác nhận xóa */}
+      {showPopupConfirmDelete && (
+        <PopupConfirmDelete
+          apiPath="http://localhost:8020/api/v1/gmshop/product/delete/"
+          setItems={setProducts}
+          setShowPopup={setShowPopupConfirmDelete}
+          selectedItemId={selectedProductId}
         />
       )}
     </ManagerLayout>

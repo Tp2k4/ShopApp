@@ -2,33 +2,51 @@ import ManagerLayout from "../ManagerLayout";
 import Box from "../../shared/components/ui/Box";
 import ColumnChart from "../chart/ColumnChart";
 import { handleImportExcel } from "../utils/handleImportExcel";
+import { useGet } from "../../service/crudService";
 
 import { useEffect, useState } from "react";
 
 function Home() {
-  const [data, setData] = useState<any>();
+  // Lấy doanh thu 6 tháng gần nhất
+  const { data, setData } = useGet(
+    "http://localhost:8020/api/v1/gmshop/revenue/last-six-month-revenue"
+  );
 
-  useEffect(() => {
-    fetch("/database/home.json")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.error("Lỗi khi fetch json:", err));
-  }, []);
+  // Lấy doanh thu hôm nay
+  const { data: todayRevenue } = useGet(
+    "http://localhost:8020/api/v1/gmshop/revenue/today-revenue"
+  );
 
+  // Lấy tổng số đơn hàng bán được hôm nay
+  // const { data: todayOrders } = useGet(
+  //   "http://localhost:8020/api/v1/gmshop/revenue/last-six-month-revenue"
+  // );
+
+  // Lấy số người dùng hiện tại
+  const { data: totalUsers } = useGet(
+    "http://localhost:8020/api/v1/gmshop/user/get-total-user"
+  );
+
+  // Xử lí dữ liệu để truyền vào render Chart
   type ChartDataItem = { name: string; value: number };
   const [chartData, setChartData] = useState<ChartDataItem[]>([]);
+  type RevenueItem = {
+    month: string;
+    revenue: number | string;
+  };
   useEffect(() => {
-    if (data?.lastestSixMonthRevenue) {
-      const formattedData = Object.entries(data.lastestSixMonthRevenue).map(
-        ([month, value]) => ({
+    if (data) {
+      const formattedData = (data as RevenueItem[]).map(
+        ({ month, revenue }) => ({
           name: month,
-          value: Number(String(value).replace(/\./g, "")) || 0, // loại bỏ dấu chấm nếu cần
+          value: Number(String(revenue).replace(/\./g, "")) || 0,
         })
       );
       setChartData(formattedData);
     }
   }, [data]);
 
+  // Xử lí excel lịch làm việc của nhân viên
   const excelData = localStorage.getItem("excelData");
   const parsedData = excelData ? JSON.parse(excelData) : null;
   useEffect(() => {
@@ -49,18 +67,18 @@ function Home() {
           <div className="sm:w-1/3 flex flex-col border border-[var(--line-color)] rounded-md p-[var(--medium-gap)] gap-[var(--small-gap)]">
             <span>Tổng doanh thu hôm nay:</span>
             <span className="font-bold heading3">
-              {data?.todayRevenue?.toLocaleString("vi-VN") || "0"}
+              {todayRevenue.toLocaleString("vi-VN") || "0"}
             </span>
           </div>
           <div className="sm:w-1/3 flex flex-col border border-[var(--line-color)] rounded-md p-[var(--medium-gap)] gap-[var(--small-gap)]">
             <span>Tổng số đơn hàng hôm nay:</span>
-            <span className="font-bold heading3">{data?.todaySold || "0"}</span>
+
+            {/* Cần lấy lại API */}
+            <span className="font-bold heading3">{0}</span>
           </div>
           <div className="sm:w-1/3 flex flex-col border border-[var(--line-color)] rounded-md p-[var(--medium-gap)] gap-[var(--small-gap)]">
             <span>Tổng người dùng hiện tại:</span>
-            <span className="font-bold heading3">
-              {data?.totalUsers || "0"}
-            </span>
+            <span className="font-bold heading3">{totalUsers || "0"}</span>
           </div>
         </div>
 

@@ -153,15 +153,16 @@ const PopupAccountModify = ({
           <div className="flex flex-col gap-[var(--medium-gap)]">
             <div className="flex gap-[var(--small-gap)]">
               <Button
-                onClick={() =>
+                onClick={() => {
                   handleModify(
                     "http://localhost:8020/api/v1/gmshop/user/update/",
                     account.id,
                     accountInfo,
                     setAccountInfo,
                     setAccounts
-                  )
-                }
+                  );
+                  setShowPopup(false);
+                }}
                 type="button"
                 text="Lưu"
               />

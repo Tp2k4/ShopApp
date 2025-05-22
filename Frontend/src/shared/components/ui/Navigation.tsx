@@ -45,6 +45,15 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
       />
       <NavLabel
         className={
+          isActive("/manager/order")
+            ? "bg-[var(--primary-color)] text-white"
+            : ""
+        }
+        label="Quản lí đơn hàng"
+        link={ROUTES.MANAGER.ORDER}
+      />
+      <NavLabel
+        className={
           isActive("/manager/inventory")
             ? "bg-[var(--primary-color)] text-white"
             : ""

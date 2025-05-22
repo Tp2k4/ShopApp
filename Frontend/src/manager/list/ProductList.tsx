@@ -4,7 +4,6 @@ import {
   DetailButton,
 } from "../../shared/components/button";
 
-import { handleDelete } from "../../service/crudService";
 import { useToggleDetail } from "../../shared/utils/useToggleDetail";
 
 import React from "react";
@@ -14,7 +13,9 @@ const NUM_COLUMNS = 8;
 
 interface ProductListProps<T = any> {
   setShowPopupModify: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowPopupConfirmDelete: React.Dispatch<React.SetStateAction<boolean>>;
   setProducts: React.Dispatch<React.SetStateAction<T[]>>;
+  setSelectedProductId: React.Dispatch<React.SetStateAction<string>>;
   products: T[];
   children?: React.ReactNode;
   className?: string;
@@ -138,7 +139,9 @@ const renderItemType = (specs: any, type: string) => {
 
 function ProductList({
   setShowPopupModify,
+  setShowPopupConfirmDelete,
   setProducts,
+  setSelectedProductId,
   products,
   children,
   className = "",
@@ -195,24 +198,24 @@ function ProductList({
                       text="Chỉnh sửa"
                       width="auto"
                       onClick={() => {
-                        setSearchParams((prev) => {
-                          const newParams = new URLSearchParams(prev);
-                          newParams.set("id", product.id);
-                          return newParams;
-                        });
+                        setSearchParams(
+                          (prev) => {
+                            const newParams = new URLSearchParams(prev);
+                            newParams.set("id", product.id);
+                            return newParams;
+                          },
+                          { replace: true }
+                        );
                         setShowPopupModify(true);
                       }}
                     />
 
                     <CancelButton
                       text="Xóa"
-                      onClick={() =>
-                        handleDelete(
-                          "http://localhost:8020/api/v1/gmshop/product/delete/",
-                          product.id,
-                          setProducts
-                        )
-                      }
+                      onClick={() => {
+                        setSelectedProductId(product.id);
+                        setShowPopupConfirmDelete(true);
+                      }}
                     />
                   </div>
                 </td>

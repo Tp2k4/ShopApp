@@ -4,8 +4,8 @@ import { Button } from "../button";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
-  setNavIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  navIsOpen: boolean;
+  setNavIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  navIsOpen?: boolean;
   children?: React.ReactNode;
   name?: string;
   className?: string;
@@ -40,7 +40,7 @@ function Header({
             Gaming Gear
           </div>
           <i
-            onClick={() => setNavIsOpen((prev) => !prev)}
+            onClick={() => setNavIsOpen && setNavIsOpen((prev) => !prev)}
             className="bg-[var(--secondary-color)] rounded-md bx bx-menu text-[24px] p-[2px] block lg:hidden"
           ></i>
         </div>

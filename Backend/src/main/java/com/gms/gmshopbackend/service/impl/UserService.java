@@ -92,7 +92,7 @@ public class UserService implements IUserService {
         String token = jwtTokenUtil.generateToken(existingUser);
         UserLoginResponse userResponse = new UserLoginResponse();
         UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.setUsername(user.get().getFullName());
+        userResponseDTO.setName(user.get().getFullName());
         userResponseDTO.setRole(user.get().getRole().getName());
         userResponse.setToken(token);
         userResponse.setUser(userResponseDTO);

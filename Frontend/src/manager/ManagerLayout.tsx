@@ -9,7 +9,7 @@ interface ManagerLayoutProps {
 function ManagerLayout({ children }: ManagerLayoutProps) {
   const userDataString = localStorage.getItem("user");
   const userData = userDataString ? JSON.parse(userDataString) : null;
-  const [navIsOpen, setNavIsOpen] = useState(true);
+  const [navIsOpen, setNavIsOpen] = useState(false);
 
   return (
     <div className="h-screen w-full flex flex-col overflow-hidden min-h-0">
@@ -17,7 +17,7 @@ function ManagerLayout({ children }: ManagerLayoutProps) {
         setNavIsOpen={setNavIsOpen}
         navIsOpen={navIsOpen}
         className="border-b border-[var(--line-color)] "
-        name={userData?.role || "Guest"}
+        name={userData?.name || "Guest"}
       />
       <div className="flex w-full h-[calc(100vh_-_var(--header-height))]">
         <Navigation

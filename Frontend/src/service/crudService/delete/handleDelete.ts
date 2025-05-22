@@ -19,13 +19,14 @@ export const handleDelete = async (
 
         if(response.ok){
             setFunction((prevItems) => prevItems.filter(
-                (item) => item.id !== id
+                (item) => String(item.id) !== id
             ));
         } else {
-            alert("Lỗi khi xóa.")
+            const errorData = await response.json();
+            alert(`Lỗi khi xóa: ${errorData.message || 'Không xác định'}`);
         }
 
     } catch (error){
-        alert(error)
+        alert(`Lỗi khi xóa: ${error instanceof Error ? error.message : 'Không xác định'}`);
     }
 }
