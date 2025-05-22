@@ -82,7 +82,7 @@ export const handleLogin = async (
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-  
+
       if (role === "admin") {
           window.location.href = ROUTES.MANAGER.HOME;
       } else if (role === "user") {
