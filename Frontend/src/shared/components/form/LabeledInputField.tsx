@@ -14,21 +14,21 @@ function LabeledInputField({
   placeholder,
   value,
   onChange,
-  inputFieldWidth,
-  labelWidth,
-  className,
+  inputFieldWidth = "flex-1",
+  labelWidth = "w-[180px]",
+  className = "",
 }: Props) {
   return (
     <div className="flex items-center">
-      <div className={`${labelWidth || "w-[180px]"} ${className}`}>
+      <div className={`${labelWidth} ${className}`}>
         <strong>{label}</strong>
       </div>
       <InputField
         value={value}
         onChange={onChange}
-        width={inputFieldWidth || "w-1/2"}
         type="text"
         placeholder={placeholder}
+        className={inputFieldWidth}
       />
     </div>
   );

@@ -45,19 +45,17 @@ function Order() {
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-end w-full">
-            <div className="flex items-center gap-[var(--small-gap)]">
-              <FilterButton
-                value={selectedFilter}
-                onChange={(e: any) => setSelectedFilter(e.target.value)}
-                filter={filterOptions}
-              />
-              <SearchField
-                value={searchQuery}
-                onChange={(e: any) => setSearchQuery(e.target.value)}
-                width="w-[300px]"
-              />
-            </div>
+          <div className="flex justify-end gap-[var(--small-gap)]">
+            <FilterButton
+              value={selectedFilter}
+              onChange={(e: any) => setSelectedFilter(e.target.value)}
+              filter={filterOptions}
+            />
+            <SearchField
+              value={searchQuery}
+              onChange={(e: any) => setSearchQuery(e.target.value)}
+              width="w-[300px]"
+            />
           </div>
 
           <div className="border border-[var(--line-color)] rounded-md overflow-hidden">
