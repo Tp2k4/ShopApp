@@ -3,6 +3,7 @@ export * from "./create/handleCreateAccount";
 export * from "./create/handleCreate";
 export * from "./create/handleCancelCreate";
 export * from "./create/handleCreateProduct";
+export * from "./create/handleCreateSale";
 export * from "./get/useGet";
 export * from "./get/useGetProducts";
 export * from "./get/useGetParams";

@@ -89,6 +89,8 @@ public class WebSecurityConfig {
                                     String.format("%s/brands/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,
                                     String.format("%s/revenue/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(PUT,
+                                    String.format("%s/promotion/**", apiPrefix)).hasRole("ADMIN")
 
 
 

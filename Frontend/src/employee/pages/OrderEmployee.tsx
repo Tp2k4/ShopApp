@@ -60,13 +60,15 @@ function OrderEmployee() {
         </div>
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopup(true)}
-              type="button"
-              text="Thêm đơn hàng"
-              width="auto"
-            />
+          <div className=" flex flex-col gap-[var(--small-gap)] sm:flex sm:flex-row  sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopup(true)}
+                type="button"
+                text="Thêm đơn hàng"
+                width="auto"
+              />
+            </div>
             <div className="flex items-center gap-[var(--small-gap)]">
               <FilterButton
                 value={selectedFilter}

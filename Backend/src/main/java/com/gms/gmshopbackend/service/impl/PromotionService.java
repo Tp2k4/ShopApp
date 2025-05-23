@@ -37,7 +37,7 @@ public class PromotionService implements IPromotionService {
                 return promotions.stream().map(promotion -> {
                     List<ProductPromotionDTO> productList = promotionProductRepository.findByPromotionId(promotion).stream()
                             .map(p -> new ProductPromotionDTO(
-                                    p.getProduct().getId(),
+                                    p.getProduct().getName(),
                                     p.getDiscountPercent()
                             ))
                             .collect(Collectors.toList());
@@ -69,18 +69,21 @@ public class PromotionService implements IPromotionService {
         Promotion promotion = Promotion.builder()
                 .name(promotionDTO.getName())
                 .type(promotionDTO.getType())
-                .status(String.valueOf(PromotionStatus.INACTIVE))
                 .startDate(promotionDTO.getStartDate())
                 .endDate(promotionDTO.getEndDate())
                 .build();
 
+        if(LocalDate.now().isAfter(promotion.getStartDate()) && LocalDate.now().isBefore(promotion.getEndDate())) {
+            promotion.setStatus(String.valueOf(PromotionStatus.ACTIVE));
+        }else{
+            promotion.setStatus(String.valueOf(PromotionStatus.INACTIVE));
+        }
         promotionRepository.save(promotion);
         List<ProductPromotionDTO> listProducts = promotionDTO.getListProduct();
         List<PromotionProduct> newListProducts = new ArrayList<>();
+        List<Product> newProducts = new ArrayList<>();
         for (ProductPromotionDTO productPromotionDTO : listProducts) {
-            Product exProduct = productRepository.findById(productPromotionDTO.getProductId()).orElseThrow(
-                    () -> new RuntimeException("Product not found")
-            );
+            Product exProduct = productRepository.findByName(productPromotionDTO.getProductName());
             if (promotionProductRepository.existsByProductAndIsActiveTrue(exProduct)) {
                 throw new RuntimeException("Product is already active in another promotion");
             }
@@ -92,9 +95,14 @@ public class PromotionService implements IPromotionService {
                     .build();
 
             newListProducts.add(promoProduct);
+            if(promotion.getStatus().equals(String.valueOf(PromotionStatus.ACTIVE))) {
+                exProduct.setDiscountPercent(productPromotionDTO.getDiscountPercent());
+                newProducts.add(exProduct);
+            }
 
         }
         promotionProductRepository.saveAll(newListProducts);
+        productRepository.saveAll(newProducts);
         return promotion;
 
     }
@@ -124,28 +132,27 @@ public class PromotionService implements IPromotionService {
 
             // Danh sách để cập nhật/thêm/xóa
             List<PromotionProduct> toSave = new ArrayList<>();
-            Set<Long> incomingProductIds = new HashSet<>();
+            Set<String> incomingProductIds = new HashSet<>();
 
             for (ProductPromotionDTO dto : promotionDTO.getListProduct()) {
-                Long productId = dto.getProductId();
-                incomingProductIds.add(productId);
+                String productName = dto.getProductName();
+                incomingProductIds.add(productName);
 
-                Product exProduct = productRepository.findById(productId)
-                        .orElseThrow(() -> new RuntimeException("Product not found: ID = " + productId));
+                Product exProduct = productRepository.findByName(productName);
 
                 // Kiểm tra có promotion khác đang active không
-                if (!oldMap.containsKey(productId) && promotionProductRepository.existsByProductAndIsActiveTrue(exProduct)) {
-                    throw new RuntimeException("Product ID " + productId + " is already in an active promotion");
+                if (!oldMap.containsKey(productName) && promotionProductRepository.existsByProductAndIsActiveTrue(exProduct)) {
+                    throw new RuntimeException("Product ID " + productName + " is already in an active promotion");
                 }
 
                 // Nếu đã có → cập nhật discount nếu khác
-                if (oldMap.containsKey(productId)) {
-                    PromotionProduct existing = oldMap.get(productId);
+                if (oldMap.containsKey(productName)) {
+                    PromotionProduct existing = oldMap.get(productName);
                     if (existing.getDiscountPercent().compareTo(dto.getDiscountPercent()) != 0) {
                         existing.setDiscountPercent(dto.getDiscountPercent());
                         toSave.add(existing);
                     }
-                    oldMap.remove(productId); // Bỏ ra khỏi danh sách cần xóa
+                    oldMap.remove(productName); // Bỏ ra khỏi danh sách cần xóa
                 } else {
                     // Chưa có → thêm mới
                     PromotionProduct newPP = PromotionProduct.builder()

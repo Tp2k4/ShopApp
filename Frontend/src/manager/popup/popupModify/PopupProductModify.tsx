@@ -51,7 +51,7 @@ const PopupProductModify = ({
     setProductInfo({
       name: product.name,
       price: product.price || 0.0,
-      battery: product.specs.battery || "",
+      battery: product.specs?.battery || "",
       warranty: product.specs.warranty || "",
       connectionType: product.specs.connectionType || "",
       weight: product.specs.weight || 0.0,

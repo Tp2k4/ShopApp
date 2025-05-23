@@ -62,15 +62,12 @@ function SaleList({ sales, children, className = "", ...rest }: SaleListProps) {
                         <div key={index}>
                           <p>
                             <strong>Tên sản phẩm: </strong>
-                            {product.productName}
+                            {product.product_id}
                           </p>
-                          <p>
-                            <strong>Link: </strong>
-                            {product.link}
-                          </p>
+      
                           <p>
                             <strong>Giảm: </strong>
-                            {product.discountPercentage}
+                            {product.discount_percent}%
                           </p>
                         </div>
                       ))}
