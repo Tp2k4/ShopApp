@@ -1,4 +1,6 @@
 import TooltipWrapper from "../../utils/TooltipWrapper";
+import { Link } from "react-router-dom";
+import Icon from "../ui/DynamicIcon";
 interface IconButtonProps {
   text: string;
   tooltipposition?: "top" | "bottom" | "left" | "right";
@@ -6,6 +8,10 @@ interface IconButtonProps {
   type?: "button" | "submit" | "reset";
   children?: React.ReactNode;
   className?: string;
+  link: string;
+  iconName: string;
+  iconSize?: number | string;
+  iconColor?: string;
   [key: string]: any;
 }
 
@@ -15,7 +21,11 @@ function IconButton({
   type = "button",
   children,
   tooltipposition = "top",
+  iconSize = 18,
+  iconColor = "currentColor",
+  iconName,
   className = "",
+  link,
   ...rest
 }: IconButtonProps) {
   return (
@@ -23,11 +33,19 @@ function IconButton({
       {" "}
       <TooltipWrapper text={text} position={tooltipposition}>
         <button
-          className={`cursor-pointer absolute !mt-[var(--small-gap)] right-0 inline-flex justify-center items-center 
-        bg-[var(--primary-color)] rounded-md px-2 h-8 ${width} ${className}`}
+          className={`cursor-pointer !mt-[var(--small-gap)] inline-flex justify-center items-center 
+        bg-white px-2 h-8 hover:text-[var(--primary-hover)] ${width} ${className}`}
           type={type}
           {...rest}
         >
+          <Link to={link}></Link>
+          <Icon
+            name={iconName}
+            size={iconSize}
+            color={iconColor}
+            className="hover:text-[var(--primary-hover)]"
+          />
+          {text}
           {children}
         </button>
       </TooltipWrapper>

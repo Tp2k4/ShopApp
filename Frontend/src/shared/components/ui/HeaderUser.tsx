@@ -1,8 +1,7 @@
-import { VerticalLine } from "./";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../../service/authService/handleLogout";
 import IconButton from "../button/IconButton";
-import { MdLogout } from "react-icons/md";
+import { ROUTES } from "../../paths";
 interface HeaderUserProps {
   children?: React.ReactNode;
   name?: string;
@@ -28,17 +27,30 @@ function HeaderUser({
           <div className="heading2 font-bold text-[var(--primary-color)]">
             Gaming Gear
           </div>
-          <VerticalLine height="25px" color="var(--primary-color)" />
         </div>
-        <IconButton
-          text="Logout"
-          className="w-[10px]"
-          tooltipposition="bottom"
-          onClick={() => handleLogout(navigate)}
-        >
-          <MdLogout />
-          Đăng xuất
-        </IconButton>
+        <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
+          <IconButton
+            text="Lịch sử mua hàng"
+            tooltipposition="bottom"
+            iconName="BiHistory"
+            onClick={() => handleLogout(navigate)}
+            link={ROUTES.USER.BUY_HISTORY}
+          ></IconButton>
+          <IconButton
+            text="Tài khoản"
+            tooltipposition="bottom"
+            iconName="BiSolidUserCircle"
+            onClick={() => handleLogout(navigate)}
+            link={ROUTES.USER.USER_PROFILE}
+          ></IconButton>
+          <IconButton
+            text="Đăng xuất"
+            tooltipposition="bottom"
+            iconName="BiLogOut"
+            onClick={() => handleLogout(navigate)}
+            link={ROUTES.AUTH.LOGIN}
+          ></IconButton>
+        </div>
       </div>
       {children}
     </div>
