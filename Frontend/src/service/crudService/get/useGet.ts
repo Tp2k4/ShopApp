@@ -18,17 +18,22 @@ export const useGet = (
                         "Authorization": `Bearer ${token}`
                     },
                 });
-
-                if(response.ok){
-                    const data = await response.json()
-                    setData(data)
-                } else {
+                
+                if(!response.ok){
                     alert("Lỗi không lấy được dữ liệu")
+                    return
                 }
+                
+                const data = await response.json()
+                setData(data)
+                         
+                    
+                
             } catch (error) {
                 alert(error)
             }
         }
+   
         fetchData();
     }, [])
     return {data, setData};

@@ -64,7 +64,7 @@ function UserProfileNavigation({
             link={ROUTES.USER.BUY_HISTORY}
             className={
               isActive(ROUTES.USER.BUY_HISTORY)
-                ? "text-[var(--primary-color)]"
+                ? "font-bold text-[var(--primary-color)]"
                 : ""
             }
           />
