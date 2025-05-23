@@ -25,20 +25,25 @@ function Account() {
 
   return (
     <ManagerLayout>
-      <Box className="px-[var(--medium-gap)]" height="100%" width="100%">
+      <Box
+        className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
+        width="100%"
+      >
         <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ KHUYẾN MÃI
         </div>
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopup(true)}
-              type="button"
-              text="Thêm khuyến mãi"
-              width="auto"
-            />
+          <div className="flex flex-col gap-[var(--small-gap)] justify-start sm:flex sm:flex-row sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopup(true)}
+                type="button"
+                text="Thêm khuyến mãi"
+                width="auto"
+              />
+            </div>
 
             <SearchField
               value={searchQuery}

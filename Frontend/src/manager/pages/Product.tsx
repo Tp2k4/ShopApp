@@ -7,6 +7,7 @@ import ProductList from "../list/ProductList";
 import PopupProduct from "../popup/popupAdd/PopupProduct";
 import { useGetProducts } from "../../service/crudService";
 import PopupProductModify from "../popup/popupModify/PopupProductModify";
+import PopupConfirmDelete from "../popup/pupupConfirmDelete/PopupConfirmDelete";
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -55,6 +56,8 @@ function Product() {
   //================ PopupScreen
   const [showPopup, setShowPopup] = useState(false);
   const [showPopupModify, setShowPopupModify] = useState(false);
+  const [showPopupConfirmDelete, setShowPopupConfirmDelete] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<string>("");
 
   // Lấy tài khoản hiện đang được chọn để chỉnh sửa đưa vào AccountList
   const [modifyingProduct, setModifyingProduct] = useState<any[]>([]);
@@ -78,20 +81,25 @@ function Product() {
 
   return (
     <ManagerLayout>
-      <Box className="px-[var(--medium-gap)]" height="100%" width="100%">
+      <Box
+        className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
+        width="100%"
+      >
         <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ SẢN PHẨM
         </div>
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopup(true)}
-              type="button"
-              text="Thêm sản phẩm"
-              width="auto"
-            />
+          <div className="flex justify-start flex-col gap-[var(--small-gap)] sm:flex sm:flex-row sm:items-center sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopup(true)}
+                type="button"
+                text="Thêm sản phẩm"
+                width="auto"
+              />
+            </div>
             <div className="flex items-center gap-[var(--small-gap)]">
               <FilterButton
                 value={selectedFilter}
@@ -111,6 +119,8 @@ function Product() {
               products={finalFilteredItems}
               setProducts={setProducts}
               setShowPopupModify={setShowPopupModify}
+              setShowPopupConfirmDelete={setShowPopupConfirmDelete}
+              setSelectedProductId={setSelectedProductId}
             />
           </div>
         </div>
@@ -129,6 +139,16 @@ function Product() {
           product={modifyingProduct}
           setProducts={setProducts}
           setShowPopup={setShowPopupModify}
+        />
+      )}
+
+      {/* Hiển thị hợp thoại xác nhận xóa */}
+      {showPopupConfirmDelete && (
+        <PopupConfirmDelete
+          apiPath="http://localhost:8020/api/v1/gmshop/product/delete/"
+          setItems={setProducts}
+          setShowPopup={setShowPopupConfirmDelete}
+          selectedItemId={selectedProductId}
         />
       )}
     </ManagerLayout>

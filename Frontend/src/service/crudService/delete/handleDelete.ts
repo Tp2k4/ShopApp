@@ -7,7 +7,7 @@ export const handleDelete = async (
     const token = localStorage.getItem("token");
 
     try{
-        const response = await fetch(`${apiPath}${id}`, {
+        const response = await fetch(apiPath + id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -19,13 +19,14 @@ export const handleDelete = async (
 
         if(response.ok){
             setFunction((prevItems) => prevItems.filter(
-                (item) => item.id !== id
+                (item) => String(item.id) !== id
             ));
         } else {
-            alert("Lỗi khi xóa.")
+            const errorData = await response.json();
+            alert(`Lỗi khi xóa: ${errorData.message || 'Không xác định'}`);
         }
 
     } catch (error){
-        alert(error)
+        alert(`Lỗi khi xóa: ${error instanceof Error ? error.message : 'Không xác định'}`);
     }
 }

@@ -11,6 +11,7 @@ export const ROUTES = {
     MANAGER: {
       HOME: "/manager",
       ACCOUNT: "/manager/account",
+      ORDER: "/manager/order",
       INVENTORY: "/manager/inventory",
       PRODUCT: "/manager/product",
       SALE: "/manager/sale",

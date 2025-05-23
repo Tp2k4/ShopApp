@@ -4,7 +4,6 @@ import {
   DetailButton,
 } from "../../shared/components/button";
 import { useToggleDetail } from "../../shared/utils/useToggleDetail";
-import { handleDelete } from "../../service/crudService";
 
 import { useSearchParams } from "react-router-dom";
 import React from "react";
@@ -13,8 +12,10 @@ const NUM_COLUMNS = 7;
 
 interface AccountListProps<T = any> {
   setShowPopupModify: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowPopupConfirmDelete: React.Dispatch<React.SetStateAction<boolean>>;
   setAccounts: React.Dispatch<React.SetStateAction<T[]>>;
   accounts: T[];
+  setSelectedAccountId: React.Dispatch<React.SetStateAction<string>>;
   children?: React.ReactNode;
   className?: string;
   [key: string]: any;
@@ -22,8 +23,10 @@ interface AccountListProps<T = any> {
 
 function AccountList({
   setShowPopupModify,
+  setShowPopupConfirmDelete,
   setAccounts,
   accounts,
+  setSelectedAccountId,
   children,
   className = "",
   ...rest
@@ -32,7 +35,7 @@ function AccountList({
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (
-    <div className="max-h-[600px] overflow-y-auto ">
+    <div className="max-h-[600px] overflow-y-auto">
       <table className={` ${className}`} {...rest}>
         <thead>
           <tr>
@@ -66,23 +69,23 @@ function AccountList({
                       text="Chỉnh sửa"
                       width="auto"
                       onClick={() => {
-                        setSearchParams((prev) => {
-                          const newParams = new URLSearchParams(prev);
-                          newParams.set("id", account.id);
-                          return newParams;
-                        });
+                        setSearchParams(
+                          (prev) => {
+                            const newParams = new URLSearchParams(prev);
+                            newParams.set("id", account.id);
+                            return newParams;
+                          },
+                          { replace: true }
+                        );
                         setShowPopupModify(true);
                       }}
                     />
                     <CancelButton
                       text="Xóa"
-                      onClick={() =>
-                        handleDelete(
-                          "http://localhost:8020/api/v1/gmshop/user/delete/",
-                          account.id,
-                          setAccounts
-                        )
-                      }
+                      onClick={() => {
+                        setSelectedAccountId(account.id);
+                        setShowPopupConfirmDelete(true);
+                      }}
                     />
                   </div>
                 </td>

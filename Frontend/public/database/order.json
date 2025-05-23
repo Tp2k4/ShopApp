@@ -2,21 +2,22 @@
     {
         "id": 1,
         "customerName": "Trần Nhật Nguyên",
-        "phone": "0123456789",
+        "phoneNumber": "0123456789",
         "email": "tranduy2615@gmail.com",
-        "date": "12/02/2024",
+        "orderDate": "2024-02-12",
         "totalPrice": 350000,
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
+        "status": "Đã nhận hàng",
         "products": [
             {
                 "productName": "Tai nghe vippro",
-                "amount": 1,
-                "type": "Hồng"
+                "quantity": 1,
+                "color": "Hồng"
             },
             {
                 "productName": "Tai nghe vippro",
-                "amount": 1,
-                "type": "Xanh"
+                "quantity": 1,
+                "color": "Xanh"
             }
         ]
         
@@ -24,16 +25,53 @@
     {
         "id": 2,
         "customerName": "Le Vo",
-        "phone": "0123456789",
+        "phoneNumber": "0123456789",
         "email": "levo2k4@gmail.com",
-        "date": "12/02/2024",
+        "orderDate": "2024-02-12",
         "totalPrice": 350000,
         "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
+        "status": "Đang chuẩn bị",
         "products": [
             {
                 "productName": "Tai nghe vippro",
-                "amount": 1,
-                "type": "Hồng"
+                "quantity": 1,
+                "color": "Hồng"
+            }
+        ]
+    },
+    
+    {
+        "id": 3,
+        "customerName": "Le Vo",
+        "phoneNumber": "0123456789",
+        "email": "kisif1702@gmail.com",
+        "orderDate": "2024-02-12",
+        "totalPrice": 350000,
+        "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
+        "status": "Đã giao hàng",
+        "products": [
+            {
+                "productName": "Tai nghe vippro",
+                "quantity": 1,
+                "color": "Hồng"
+            }
+        ]
+    },
+    
+    {
+        "id": 4,
+        "customerName": "Le Vo",
+        "phoneNumber": "0123456789",
+        "email": "levo2k4@gmail.com",
+        "orderDate": "2024-02-12",
+        "totalPrice": 350000,
+        "address": "Hẻm 219, Nguyễn Văn Tăng, Phường Long Thạnh Mỹ, Tp Thủ Đức",
+        "status": "Đã Hủy",
+        "products": [
+            {
+                "productName": "Tai nghe vippro",
+                "quantity": 1,
+                "color": "Hồng"
             }
         ]
     }

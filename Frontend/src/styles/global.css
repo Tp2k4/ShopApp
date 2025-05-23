@@ -7,8 +7,13 @@ body{
     font-family: Arial, sans-serif;
     background-color: var(--background-color);
     font-size: var(--body-text);
-    height: 100vh;
-    width: 100vw;
+
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    margin: 0;
+    
 }
 
 .logo{
@@ -47,6 +52,7 @@ body{
 table {
     border-collapse: collapse;
     width: 100%;
+
 }
 
 th {
@@ -86,4 +92,8 @@ select {
   
 select::-ms-expand {
     display: none; 
+}
+
+.stable-scrollbar {
+    scrollbar-gutter: stable;
 }

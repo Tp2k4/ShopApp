@@ -5,10 +5,11 @@ import { useGet } from "../../service/crudService";
 import { useFilter, useSearch } from "../../service/queryService";
 import PopupAccount from "../popup/popupAdd/PopupAccount";
 import PopupAccountModify from "../popup/popupModify/PopupAccountModify";
+import PopupConfirmDelete from "../popup/pupupConfirmDelete/PopupConfirmDelete";
 import AccountList from "../list/AccountList";
 import ManagerLayout from "../ManagerLayout";
-import { useSearchParams } from "react-router-dom";
 
+import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function Account() {
@@ -42,6 +43,8 @@ function Account() {
   //================ PopupScreen
   const [showPopupAdd, setShowPopupAdd] = useState(false);
   const [showPopupModify, setShowPopupModify] = useState(false);
+  const [showPopupConfirmDelete, setShowPopupConfirmDelete] = useState(false);
+  const [selectedAccountId, setSelectedAccountId] = useState<string>("");
 
   // Lấy tài khoản hiện đang được chọn để chỉnh sửa đưa vào AccountList
   const [modifyingAccount, setModifyingAccount] = useState<any[]>([]);
@@ -63,20 +66,25 @@ function Account() {
 
   return (
     <ManagerLayout>
-      <Box className="px-[var(--medium-gap)]" height="100%" width="100%">
-        <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
+      <Box
+        className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
+        width="100%"
+      >
+        <div className="w-full  heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ TÀI KHOẢN
         </div>
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopupAdd(true)}
-              type="button"
-              text="Thêm tài khoản"
-              width="auto"
-            />
+          <div className="flex justify-start flex-col gap-[var(--small-gap)] sm:flex sm:flex-row sm:items-center sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopupAdd(true)}
+                type="button"
+                text="Thêm tài khoản"
+                width="auto"
+              />
+            </div>
             <div className="flex items-center gap-[var(--small-gap)]">
               <FilterButton
                 value={selectedFilter}
@@ -96,7 +104,9 @@ function Account() {
             <AccountList
               accounts={finalFilteredItems}
               setShowPopupModify={setShowPopupModify}
+              setShowPopupConfirmDelete={setShowPopupConfirmDelete}
               setAccounts={setAccounts}
+              setSelectedAccountId={setSelectedAccountId}
             />
           </div>
         </div>
@@ -118,6 +128,16 @@ function Account() {
           account={modifyingAccount}
           setAccounts={setAccounts}
           setShowPopup={setShowPopupModify}
+        />
+      )}
+
+      {/* Hiển thị hợp thoại xác nhận xóa */}
+      {showPopupConfirmDelete && (
+        <PopupConfirmDelete
+          apiPath="http://localhost:8020/api/v1/gmshop/user/delete/"
+          setItems={setAccounts}
+          setShowPopup={setShowPopupConfirmDelete}
+          selectedItemId={selectedAccountId}
         />
       )}
     </ManagerLayout>

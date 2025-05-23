@@ -127,10 +127,24 @@ const PopupAccountModify = ({
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
-                  role_id: parseInt(e.target.value, 10),
+                  role_id: parseInt(e.target.value, 10) || 0,
                 })
               }
               label="Role: "
+              placeholder="1: Manager/ 3: Employee/ 2: User"
+              inputFieldWidth="w-[240px]"
+            />
+
+            {/* Trạng thái */}
+            <LabeledInputField
+              value={String(accountInfo.is_active)}
+              onChange={(e: any) =>
+                setAccountInfo({
+                  ...accountInfo,
+                  is_active: parseInt(e.target.value, 10) || 0,
+                })
+              }
+              label="Trạng thái: "
               placeholder="1: Manager/ 3: Employee/ 2: User"
               inputFieldWidth="w-[240px]"
             />
@@ -153,15 +167,16 @@ const PopupAccountModify = ({
           <div className="flex flex-col gap-[var(--medium-gap)]">
             <div className="flex gap-[var(--small-gap)]">
               <Button
-                onClick={() =>
+                onClick={() => {
                   handleModify(
                     "http://localhost:8020/api/v1/gmshop/user/update/",
                     account.id,
                     accountInfo,
                     setAccountInfo,
                     setAccounts
-                  )
-                }
+                  );
+                  setShowPopup(false);
+                }}
                 type="button"
                 text="Lưu"
               />

@@ -61,55 +61,55 @@ function Inventory() {
 
   return (
     <ManagerLayout>
-      <Box className="px-[var(--medium-gap)]" height="100%" width="100%">
+      <Box
+        className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
+        width="100%"
+      >
         <div className="w-full heading3 font-bold text-[var(--primary-color)] text-center py-[var(--big-gap)]">
           QUẢN LÝ KHO
         </div>
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex flex-col gap-[var(--medium-gap)]">
+          <div className="flex flex-col gap-[var(--small-gap)] sm:flex sm:flex-row sm:justify-between">
+            <div>
+              <Button
+                onClick={() => setShowPopup(true)}
+                text="Thêm vào kho"
+                type="submit"
+                width="w-auto"
+              />
+            </div>
+
             {/* */}
-            <div className="flex justify-between">
-              <div className="flex flex-col items-start gap-[var(--small-gap)]">
+            <div className="flex flex-col items-start gap-[var(--small-gap)]">
+              <div className="flex gap-[var(--small-gap)]">
+                <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
+                  <div>Từ: </div>
+                  <InputField
+                    value={startDate}
+                    onChange={(e: any) => setStartDate(e.target.value)}
+                    type="text"
+                    placeholder="2024-01-01"
+                    className="w-[90px]"
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
+                  <div>Đến: </div>
+                  <InputField
+                    value={endDate}
+                    onChange={(e: any) => setEndDate(e.target.value)}
+                    type="text"
+                    placeholder="2024-01-30"
+                    className="w-[90px]"
+                  />
+                </div>
                 <Button
-                  onClick={() => setShowPopup(true)}
-                  text="Thêm vào kho"
+                  onClick={handleFilter}
+                  text="Lọc đơn"
                   type="submit"
                   width="w-auto"
                 />
-              </div>
-
-              {/* */}
-              <div className="flex flex-col items-start gap-[var(--small-gap)]">
-                <div className="flex gap-[var(--small-gap)]">
-                  <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
-                    <div>Từ: </div>
-                    <InputField
-                      value={startDate}
-                      onChange={(e: any) => setStartDate(e.target.value)}
-                      type="text"
-                      placeholder="2024-01-01"
-                      width="w-[90px]"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-[var(--smallest-gap)]">
-                    <div>Đến: </div>
-                    <InputField
-                      value={endDate}
-                      onChange={(e: any) => setEndDate(e.target.value)}
-                      type="text"
-                      placeholder="2024-01-30"
-                      width="w-[90px]"
-                    />
-                  </div>
-                  <Button
-                    onClick={handleFilter}
-                    text="Lọc đơn"
-                    type="submit"
-                    width="w-auto"
-                  />
-                </div>
               </div>
             </div>
           </div>

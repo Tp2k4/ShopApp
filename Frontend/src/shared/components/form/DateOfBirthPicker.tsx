@@ -43,7 +43,7 @@ const DateOfBirthPicker: React.FC<Props> = ({ width, setDateOfBirth }) => {
     <div className={`${width} flex gap-[var(--small-gap)]`}>
       {/* Ngày */}
       <SelectButton
-        width="w-1/3"
+        className="flex-1"
         value={day}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           setDay(Number(event.target.value))
@@ -53,7 +53,7 @@ const DateOfBirthPicker: React.FC<Props> = ({ width, setDateOfBirth }) => {
 
       {/* Tháng */}
       <SelectButton
-        width="w-1/3"
+        className="flex-1"
         value={month}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           setMonth(Number(event.target.value))
@@ -63,7 +63,7 @@ const DateOfBirthPicker: React.FC<Props> = ({ width, setDateOfBirth }) => {
 
       {/* Năm */}
       <SelectButton
-        width="w-1/3"
+        className="flex-1"
         value={year}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           setYear(Number(event.target.value))

@@ -111,9 +111,9 @@ public class OrderController {
     }
 
     @PutMapping("/employee/checked/{id}")
-    public ResponseEntity<?> staffChecked(@Valid @PathVariable Long orderId){
+    public ResponseEntity<?> staffChecked(@Valid @PathVariable Long id){
         try{
-            orderService.staffChecked(orderId);
+            orderService.staffChecked(id);
             return ResponseEntity.ok("Checked order successfully");
         }catch(Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

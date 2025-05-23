@@ -13,8 +13,9 @@ import {
   Sale,
   Inventory,
   Statistics,
+  Order,
 } from "./manager/pages";
-import { Order, OrderConfirmation } from "./employee/pages";
+import { OrderEmployee, OrderConfirmation } from "./employee/pages";
 import { autoLogin } from "./service/authService";
 import { ROUTES } from "./shared/paths";
 import BuyHistory from "./user/BuyHistory";
@@ -34,12 +35,13 @@ const router = createBrowserRouter([
 
   { path: ROUTES.MANAGER.HOME, element: <Home /> },
   { path: ROUTES.MANAGER.ACCOUNT, element: <Account /> },
+  { path: ROUTES.MANAGER.ORDER, element: <Order /> },
   { path: ROUTES.MANAGER.PRODUCT, element: <Product /> },
   { path: ROUTES.MANAGER.SALE, element: <Sale /> },
   { path: ROUTES.MANAGER.INVENTORY, element: <Inventory /> },
   { path: ROUTES.MANAGER.STATISTICS, element: <Statistics /> },
 
-  { path: ROUTES.EMPLOYEE.ORDER, element: <Order /> },
+  { path: ROUTES.EMPLOYEE.ORDER, element: <OrderEmployee /> },
   { path: ROUTES.EMPLOYEE.ORDER_CONFIRMATION, element: <OrderConfirmation /> },
 
   { path: ROUTES.USER.BUY_HISTORY, element: <BuyHistory /> },

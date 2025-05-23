@@ -9,15 +9,13 @@ interface NavigationProps {
 }
 
 function Navigation({ children, className = "", ...rest }: NavigationProps) {
-  const location = useLocation(); 
+  const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <Box
-      className={`flex flex-col ${className}`}
-      height="h-full"
-      width="200px"
+      className={`rounded-none h-full max-h-[calc(100vh_-_var(--header-height))] w-full min-w-44 max-w-50 flex flex-col ${className}`}
       {...rest}
     >
       <NavLabel
@@ -26,7 +24,6 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
         }
         label="Trang chủ"
         link={ROUTES.MANAGER.HOME}
-        order="first"
       />
       <NavLabel
         className={
@@ -45,6 +42,15 @@ function Navigation({ children, className = "", ...rest }: NavigationProps) {
         }
         label="Quản lí sản phẩm"
         link={ROUTES.MANAGER.PRODUCT}
+      />
+      <NavLabel
+        className={
+          isActive("/manager/order")
+            ? "bg-[var(--primary-color)] text-white"
+            : ""
+        }
+        label="Quản lí đơn hàng"
+        link={ROUTES.MANAGER.ORDER}
       />
       <NavLabel
         className={
