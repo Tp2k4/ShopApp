@@ -2,7 +2,7 @@ import { VerticalLine } from "./";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../../service/authService/handleLogout";
 import IconButton from "../button/IconButton";
-
+import { MdLogout } from "react-icons/md";
 interface HeaderUserProps {
   children?: React.ReactNode;
   name?: string;
@@ -36,7 +36,7 @@ function HeaderUser({
           tooltipposition="bottom"
           onClick={() => handleLogout(navigate)}
         >
-          <i className="bx bx-user-circle icon-small"></i>
+          <MdLogout />
           Đăng xuất
         </IconButton>
       </div>

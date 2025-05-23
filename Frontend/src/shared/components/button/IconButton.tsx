@@ -23,7 +23,8 @@ function IconButton({
       {" "}
       <TooltipWrapper text={text} position={tooltipposition}>
         <button
-          className={`cursor-pointer h-8 ${width} ${className}`}
+          className={`cursor-pointer absolute !mt-[var(--small-gap)] right-0 inline-flex justify-center items-center 
+        bg-[var(--primary-color)] rounded-md px-2 h-8 ${width} ${className}`}
           type={type}
           {...rest}
         >
