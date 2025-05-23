@@ -76,13 +76,15 @@ function Account() {
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopupAdd(true)}
-              type="button"
-              text="Thêm tài khoản"
-              width="auto"
-            />
+          <div className="flex justify-start flex-col gap-[var(--small-gap)] sm:flex sm:flex-row sm:items-center sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopupAdd(true)}
+                type="button"
+                text="Thêm tài khoản"
+                width="auto"
+              />
+            </div>
             <div className="flex items-center gap-[var(--small-gap)]">
               <FilterButton
                 value={selectedFilter}

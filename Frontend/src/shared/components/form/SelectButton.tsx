@@ -1,20 +1,18 @@
 interface SelectButtonProps {
   dataset: any[];
-  width?: string;
   className?: string;
   [key: string]: any;
 }
 
 function SelectButton({
   dataset = [],
-  width,
   className = "",
   ...rest
 }: SelectButtonProps) {
   return (
-    <div className={`relative h-8 ${width}`}>
+    <div className={`relative h-8 ${className}`}>
       <select
-        className={`w-full h-full rounded-md border border-[var(--secondary-color)] px-2 focus:outline-none focus:border-[var(--primary-color)] ${className}`}
+        className="w-full h-full rounded-md border border-[var(--secondary-color)] px-2 focus:outline-none focus:border-[var(--primary-color)] appearance-none"
         {...rest}
       >
         {dataset.map((data) => (

@@ -35,13 +35,15 @@ function Account() {
 
         {/* */}
         <div className="flex flex-col gap-[var(--medium-gap)]">
-          <div className=" flex items-center justify-between w-full">
-            <Button
-              onClick={() => setShowPopup(true)}
-              type="button"
-              text="Thêm khuyến mãi"
-              width="auto"
-            />
+          <div className="flex flex-col gap-[var(--small-gap)] justify-start sm:flex sm:flex-row sm:justify-between sm:w-full">
+            <div>
+              <Button
+                onClick={() => setShowPopup(true)}
+                type="button"
+                text="Thêm khuyến mãi"
+                width="auto"
+              />
+            </div>
 
             <SearchField
               value={searchQuery}

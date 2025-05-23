@@ -127,7 +127,7 @@ const PopupAccountModify = ({
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
-                  role_id: parseInt(e.target.value, 10),
+                  role_id: parseInt(e.target.value, 10) || 0,
                 })
               }
               label="Role: "
@@ -137,11 +137,11 @@ const PopupAccountModify = ({
 
             {/* Trạng thái */}
             <LabeledInputField
-              value={String(accountInfo.is_active) || ""}
+              value={String(accountInfo.is_active)}
               onChange={(e: any) =>
                 setAccountInfo({
                   ...accountInfo,
-                  is_active: parseInt(e.target.value, 10),
+                  is_active: parseInt(e.target.value, 10) || 0,
                 })
               }
               label="Trạng thái: "

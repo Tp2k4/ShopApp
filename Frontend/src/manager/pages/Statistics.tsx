@@ -92,7 +92,7 @@ function Dashboard() {
                     onChange={(e: any) => setStartDate(e.target.value)}
                     type="text"
                     placeholder="2024-01-01"
-                    width="w-[90px]"
+                    className="w-[90px]"
                   />
                 </div>
                 <div className="flex items-center gap-[var(--smallest-gap)]">
@@ -102,7 +102,7 @@ function Dashboard() {
                     onChange={(e: any) => setEndDate(e.target.value)}
                     type="text"
                     placeholder="2024-01-30"
-                    width="w-[90px]"
+                    className="w-[90px]"
                   />
                 </div>
                 <Button

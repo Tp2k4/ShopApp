@@ -38,33 +38,31 @@ function SendAuthCode() {
         {/*  */}
         <div className="flex flex-col items-start gap-[var(--small-gap)]">
           <form
-            className="flex flex-col gap-[var(--small-gap)]"
+            className="flex flex-col gap-[var(--medium-gap)]"
             onSubmit={(e) =>
               handleVerifyOtp(e, email, otp, setIsError, setError, navigate)
             }
           >
-            <div className="w-full flex items-center gap-[var(--small-gap)]">
-              <InputField
-                value={otp}
-                onChange={(e: any) => setOtp(e.target.value)}
-                className="w-1/2"
-                type="text"
-                placeholder="Nhập mã"
-              />
-
-              <div className="w-1/2">
-                Chúng tôi đã gửi mã cho bạn đến:{" "}
-                <span className="text-blue-500">{email}</span>
+            <div className="flex flex-col gap-[var(--small-gap)]">
+              <div className="w-full flex items-center gap-[var(--small-gap)]">
+                <InputField
+                  value={otp}
+                  onChange={(e: any) => setOtp(e.target.value)}
+                  className="w-1/2"
+                  type="text"
+                  placeholder="Nhập mã"
+                />
+                <div className="w-1/2">
+                  Chúng tôi đã gửi mã cho bạn đến:{" "}
+                  <span className="text-blue-500">{email}</span>
+                </div>
+                {isError && (
+                  <p className="caption text-red-500 px-2">{error}</p>
+                )}
               </div>
-              {isError && <p className="caption text-red-500 px-2">{error}</p>}
-            </div>
-            <div>
-              <Button type="submit" text="Gửi lại" width="w-auto" />
-            </div>
-
-            {/* Avatar */}
-            <div className="w-full flex flex-col items-center gap-[var(--small-gap)]">
-              <div className="heading3">Lê Võ</div>
+              <div>
+                <Button type="submit" text="Gửi lại" width="w-auto" />
+              </div>
             </div>
 
             {/*  */}

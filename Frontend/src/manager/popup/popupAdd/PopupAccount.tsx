@@ -112,7 +112,7 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
               onChange={(e: any) =>
                 setNewAccountInfo({
                   ...newAccountInfo,
-                  role_id: parseInt(e.target.value, 10),
+                  role_id: parseInt(e.target.value) || 0,
                 })
               }
               label="Role: "
