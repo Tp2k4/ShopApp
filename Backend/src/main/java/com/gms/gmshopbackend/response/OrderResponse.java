@@ -19,6 +19,7 @@ public class OrderResponse {
     private String email;
     private String phoneNumber;
     private LocalDate orderDate;
+    private String status;
     private double totalPrice;
     private String address;
     List<ProductOrderResponseDTO> products;

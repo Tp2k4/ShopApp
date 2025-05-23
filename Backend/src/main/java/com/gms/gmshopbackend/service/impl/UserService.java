@@ -143,6 +143,7 @@ public class UserService implements IUserService {
         existingUser.setPhoneNumber(userDTO.getPhoneNumber());
         existingUser.setAddress(userDTO.getAddress());
         existingUser.setDateOfBirth(userDTO.getDateOfBirth());
+        existingUser.setActive(userDTO.isActive());
         existingUser.setEmail(userDTO.getEmail());
         existingUser.setRole(role);
 

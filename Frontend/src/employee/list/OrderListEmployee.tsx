@@ -51,7 +51,7 @@ function OrderListEmployee({
             <React.Fragment key={index}>
               <tr>
                 <td>{order.id}</td>
-                <td>{order.customerName}</td>
+                <td>{order.fullName}</td>
                 <td>{order.phoneNumber}</td>
                 <td>{order.email}</td>
                 <td>{order.orderDate}</td>
@@ -77,12 +77,12 @@ function OrderListEmployee({
                     <CancelButton
                       onClick={() =>
                         handleDelete(
+                          "http://localhost:8020/api/v1/gmshop/orders/employee/delete/",
                           order.id,
-                          "http://localhost:8080/employee/product/",
                           setOrders
                         )
                       }
-                      text="Xóa"
+                      text="Hủy"
                       type="submit"
                       width="w-auto"
                     />

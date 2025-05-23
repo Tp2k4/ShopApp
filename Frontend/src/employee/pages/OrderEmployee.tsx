@@ -12,18 +12,16 @@ import { useState } from "react";
 
 function OrderEmployee() {
   // Nhận orders từ API
-  const { data: orders, setData: setOrders } = useGet("/database/order.json");
+  const { data: orders, setData: setOrders } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/getall"
+  );
+
+  // Lấy thông tin employee hiện tại, mục đích là lấy tên hiển thị lên Header
   const userDataString = localStorage.getItem("user");
   const userData = userDataString ? JSON.parse(userDataString) : null;
 
   //================ Lọc và tìm kiếm
-  const filterOptions = [
-    "all",
-    "Đang chuẩn bị",
-    "Đang giao hàng",
-    "Đã nhận hàng",
-    "Đã hủy",
-  ];
+  const filterOptions = ["all", "pending", "delivered", "shipping", "deleted"];
 
   // Lọc
   const {
@@ -37,7 +35,7 @@ function OrderEmployee() {
     filteredItems: filteredBySearch,
     searchQuery,
     setSearchQuery,
-  } = useSearch(orders, "customerName");
+  } = useSearch(orders, "fullName");
 
   // Gộp 2 kết quả lọc và tìm kiếm
   const finalFilteredItems = filteredBySearch.filter((item) =>
@@ -48,8 +46,11 @@ function OrderEmployee() {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center gap-[var(--medium-gap)] overflow-hidden min-h-0">
-      <Header name={userData?.role || "Guest"} />
+    <div className="w-screen h-screen flex flex-col items-center overflow-hidden min-h-0">
+      <Header
+        className="border-b border-[var(--line-color)] "
+        name={userData?.name}
+      />
       <Box
         className="rounded-none min-h-[calc(100vh_-_var(--header-height))] px-[var(--medium-gap)]"
         width="100%"

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 20, 2025 lúc 08:06 AM
+-- Thời gian đã tạo: Th5 22, 2025 lúc 12:07 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `database_shopapp`
+-- Cơ sở dữ liệu: `shopapp`
 --
 
 -- --------------------------------------------------------
@@ -2422,7 +2422,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`) VALUES
 (1, 'admin'),
-(2, 'user');
+(2, 'user'),
+(3, 'employee');
 
 -- --------------------------------------------------------
 
@@ -2482,7 +2483,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `phone_number`, `address`, `password`, `created_at`, `updated_at`, `is_active`, `date_of_birth`, `facebook_account_id`, `google_account_id`, `role_id`, `email`) VALUES
-(1, 'anh tho', '000000001', '128 la xuan oai', '$2a$10$Nv0Ghge1O2CbQLU55AdAEewPZ3uM4h2PjHyNDg49T85DlS8QutQhG', '2025-03-29 12:49:50', '2025-05-20 13:04:21', 0, '2004-02-23', 0, 0, 1, 'thophan357@gmail.com'),
+(1, 'anh tho dep trai', '000000001', '128 la xuan oai', '$2a$10$Nv0Ghge1O2CbQLU55AdAEewPZ3uM4h2PjHyNDg49T85DlS8QutQhG', '2025-03-29 12:49:50', '2025-05-22 16:53:52', 1, '2004-02-23', 0, 0, 1, 'thophan357@gmail.com'),
 (2, 'user test ', '000000002', '128 la xuan oai', '$2a$10$/9upQRdL/c.8mmSRthflb.uvUv.M5iQKP9JVdOSEFqwtsp/XXHXrS', '2025-04-01 21:13:58', '2025-05-17 17:42:02', 1, '2004-02-28', 0, 0, 2, 'thophan753@gmail.com'),
 (3, 'admin test', '000000009', 'admin', '$2a$10$jD1gPWMAY0ZF4vo5DRX/TOjvP4P7PMcwFNax04ljH1fVpX8k1by7S', '2025-04-02 22:19:30', '2025-05-19 17:29:57', 0, '2025-05-17', 0, 0, 2, 'ptho9006@gmail.com'),
 (4, 'Levo', '000000004', '128 la xuan oai', '$2a$10$IzSEShTF.ZK/VteFL68vl.fmQ0VJfT2kFbylZN8xG.Bnid3y5jDDq', '2025-04-16 22:41:57', '2025-04-16 22:46:05', 1, '2004-02-23', 0, 0, 2, 'n22dccn083@student.ptithcm.edu.vn'),
@@ -2490,8 +2491,9 @@ INSERT INTO `users` (`id`, `fullname`, `phone_number`, `address`, `password`, `c
 (6, 'Lê Võ', '234567890', '123', '$2a$10$mdEHyu3T0CCb1n3Te6jeBuhci.zcpS9V.UrNW4xhi5VeypEp4LcLG', '2025-05-15 12:26:21', '2025-05-15 12:26:21', 1, '0006-07-17', 0, 0, 2, 'kisif1702@gmail.com'),
 (7, 'Lê Võ', '12345435', '123', '$2a$10$0Es.NbYaIgPaBirEmnJ0IOLICsATH79BwMshpqQN7/ZXrFeNcoWIK', '2025-05-15 12:28:54', '2025-05-15 12:28:54', 1, '0006-07-17', 0, 0, 1, 'levo123@gmail.com'),
 (8, 'Le Vo', '666666666', '121', '$2a$10$pFUYO9xPe2HJ3u94E73Ucu4LoDo5EyK58GCh57FP1AdUdiYax1/52', '2025-05-16 15:22:33', '2025-05-16 15:22:33', 1, '0007-07-17', 0, 0, 1, 'aslkdk@gmail.com'),
-(9, 'e', '488484848', 'ưqw', '$2a$10$JbdADtx.DkzaFkfKLznQb.UUrZk4jZqr5lpUTJA./QjwlmhF.QGIu', '2025-05-16 16:15:50', '2025-05-16 16:15:50', 1, '0006-07-17', 0, 0, 2, 'uieiaew@gmail.com'),
-(10, 'Le Vo', '0987654321', '123', '$2a$10$m/HW3d8H58fMWKQTKSEK5.T4dygyfyLu/6LyDYdbeCS5O1j7KKZ/O', '2025-05-19 17:31:52', '2025-05-19 17:32:31', 0, '2024-02-10', 0, 0, 1, 'levo12345@gmail.com');
+(9, 'e', '488484848', 'ưqw', '$2a$10$JbdADtx.DkzaFkfKLznQb.UUrZk4jZqr5lpUTJA./QjwlmhF.QGIu', '2025-05-16 16:15:50', '2025-05-20 21:17:52', 0, '0006-07-17', 0, 0, 2, 'uieiaew@gmail.com'),
+(10, 'Le Vo', '0987654321', '123', '$2a$10$m/HW3d8H58fMWKQTKSEK5.T4dygyfyLu/6LyDYdbeCS5O1j7KKZ/O', '2025-05-19 17:31:52', '2025-05-19 17:32:31', 0, '2024-02-10', 0, 0, 1, 'levo12345@gmail.com'),
+(11, 'Phan Van tho', '012345678', '123 hoang huu nam', '$2a$10$B3WOOyr5al3Nmfqs5zqRiesEaLOcF/9dds1JDAI/7cztSRmpMsij2', '2025-05-22 16:53:15', '2025-05-22 16:53:15', 1, '2024-02-23', 0, 0, 2, 'abc@gmail.com');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -2731,7 +2733,7 @@ ALTER TABLE `tokens`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

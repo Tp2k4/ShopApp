@@ -135,6 +135,20 @@ const PopupAccountModify = ({
               inputFieldWidth="w-[240px]"
             />
 
+            {/* Trạng thái */}
+            <LabeledInputField
+              value={String(accountInfo.is_active) || ""}
+              onChange={(e: any) =>
+                setAccountInfo({
+                  ...accountInfo,
+                  is_active: parseInt(e.target.value, 10),
+                })
+              }
+              label="Trạng thái: "
+              placeholder="1: Manager/ 3: Employee/ 2: User"
+              inputFieldWidth="w-[240px]"
+            />
+
             {/* Địa chỉ */}
             <LabeledInputField
               value={accountInfo.address || ""}
