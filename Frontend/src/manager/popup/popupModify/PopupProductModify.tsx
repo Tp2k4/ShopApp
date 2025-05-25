@@ -52,7 +52,7 @@ const PopupProductModify = ({
       name: product.name,
       price: product.price || 0.0,
       battery: product.specs?.battery || "",
-      warranty: product.specs.warranty || "",
+      warranty: product.specs?.warranty || "",
       connectionType: product.specs.connectionType || "",
       weight: product.specs.weight || 0.0,
       brand_id: product.brand_id || "",
