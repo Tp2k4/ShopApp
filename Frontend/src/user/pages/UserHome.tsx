@@ -8,7 +8,10 @@ function UserHome() {
       <HeaderUser name="nguyên" />
       <div className="flex justify-center gap-[var(--medium-gap)] w-full h-full">
         <HomeSideBar />
-        <HomeBanner />
+        <div className="flex items-center justify-center w-auto h-full">
+          <HomeBanner />
+          <HomeBanner />
+        </div>
       </div>
     </div>
   );
