@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../../service/authService/handleLogout";
 import IconButton from "../button/IconButton";
 import { ROUTES } from "../../paths";
+import { SearchField } from "../form";
 interface HeaderUserProps {
   children?: React.ReactNode;
   name?: string;
@@ -33,6 +34,11 @@ function HeaderUser({
           </button>
         </div>
         <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
+          <SearchField
+            // value={searchQuery}
+            // onChange={(e: any) => setSearchQuery(e.target.value)}
+            width="300px"
+          />
           <IconButton
             text="Lịch sử mua hàng"
             tooltipposition="bottom"
