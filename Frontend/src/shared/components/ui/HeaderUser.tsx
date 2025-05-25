@@ -19,7 +19,7 @@ function HeaderUser({
   const navigate = useNavigate();
   return (
     <div
-      className={`flex justify-center bg-white w-screen ${className}`}
+      className={`h-[var(--header-height)] flex justify-center bg-white w-screen ${className}`}
       {...rest}
     >
       <div className="flex justify-between w-[90%] h-full">
