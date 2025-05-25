@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Builder
 public class ProductPromotionDTO {
     @JsonProperty(value = "product_id")
-    private Long productId;
+    private String productName;
 
     @JsonProperty(value = "discount_percent")
     private BigDecimal discountPercent;

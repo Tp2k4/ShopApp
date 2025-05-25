@@ -14,7 +14,6 @@ export const handleDelete = async (
                 "Authorization": `Bearer ${token}`
 
             },
-
         })
 
         if(response.ok){
