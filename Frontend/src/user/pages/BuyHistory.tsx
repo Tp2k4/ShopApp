@@ -1,8 +1,8 @@
-import HeaderUser from "../shared/components/ui/HeaderUser";
-import Box from "../shared/components/ui/Box";
-import OrderItems from "./OrderItems";
-import { useGet } from "../service/crudService";
-import UserProfileNavigation from "../shared/components/ui/UserProfileNavigation";
+import HeaderUser from "../../shared/components/ui/HeaderUser";
+import Box from "../../shared/components/ui/Box";
+import OrderItems from "../pagecontents/OrderItems";
+import { useGet } from "../../service/crudService";
+import UserProfileNavigation from "../../shared/components/ui/UserProfileNavigation";
 
 function BuyHistory() {
   const { data: buyhistory } = useGet("/database/buyhistory.json");
