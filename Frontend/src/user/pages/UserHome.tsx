@@ -9,8 +9,7 @@ function UserHome() {
       <div className="flex justify-center gap-[var(--medium-gap)] w-full h-full">
         {/* <HomeSideBar /> */}
         <div className="flex items-center justify-center w-auto h-auto gap-[var(--medium-gap)] flex-wrap">
-          <div className="grid grid-cols-2 ">
-          
+          <div className="grid grid-cols-2 "></div>
         </div>
       </div>
     </div>
