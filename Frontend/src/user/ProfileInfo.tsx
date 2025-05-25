@@ -9,6 +9,7 @@ interface ProfileInfoProps {
   children?: React.ReactNode;
   [key: string]: any;
 }
+
 function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
   const rawAccount = localStorage.getItem("userAccount");
   const account = rawAccount ? JSON.parse(rawAccount) : null;
@@ -25,6 +26,7 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
     google_account_id: "",
     password: "",
   });
+
   useEffect(() => {
     if (!account) return;
 
@@ -41,8 +43,9 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
       google_account_id: "",
       password: "123",
     });
-  }, [account]);
+  }, []);
   const [showPopupModify, setShowPopupModify] = useState(false);
+
   return (
     <div
       className={`flex flex-col gap-[var(--medium-gap)] ${className}`}
