@@ -26,6 +26,7 @@ export const ROUTES = {
     USER: {
       BUY_HISTORY: "/user/buy-history",
       USER_PROFILE: "/user/profile",
+      HOME: "/user/home",
     },
 }
 

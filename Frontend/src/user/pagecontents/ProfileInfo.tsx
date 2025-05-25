@@ -1,8 +1,8 @@
-import { useGet } from "../service/crudService";
-import { Box } from "../shared/components/ui";
+import { useGet } from "../../service/crudService";
+import { Box } from "../../shared/components/ui";
 import { useState, useEffect } from "react";
-import { Button } from "../shared/components/button";
-import LabeledInputField from "../shared/components/form/LabeledInputField";
+import { Button } from "../../shared/components/button";
+import LabeledInputField from "../../shared/components/form/LabeledInputField";
 
 interface ProfileInfoProps {
   className?: string;
@@ -14,6 +14,8 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
   const rawAccount = localStorage.getItem("userAccount");
   const account = rawAccount ? JSON.parse(rawAccount) : null;
   const token = localStorage.getItem("token");
+  const { data: userAccount } = useGet("/database/profile.json");
+  localStorage.setItem("userAccount", JSON.stringify(userAccount));
   const [updatedUserInfo, setUpdatedUserInfo] = useState<any>({
     fullname: "",
     date_of_birth: "",

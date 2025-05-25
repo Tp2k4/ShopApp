@@ -38,14 +38,15 @@ function IconButton({
           type={type}
           {...rest}
         >
-          <Link to={link}></Link>
-          <Icon
-            name={iconName}
-            size={iconSize}
-            color={iconColor}
-            className="hover:text-[var(--primary-hover)]"
-          />
-          {text}
+          <Link to={link} className="flex">
+            <Icon
+              name={iconName}
+              size={iconSize}
+              color={iconColor}
+              className="hover:text-[var(--primary-hover)]"
+            />
+            {text}
+          </Link>
           {children}
         </button>
       </TooltipWrapper>
