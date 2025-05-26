@@ -18,12 +18,15 @@ import {
 import { OrderEmployee, OrderConfirmation } from "./employee/pages";
 import { autoLogin } from "./service/authService";
 import { ROUTES } from "./shared/paths";
-import BuyHistory from "./user/BuyHistory";
+
+import BuyHistory from "./user/pages/BuyHistory";
+import UserProfile from "./user/pages/UserProfile";
+import UserHome from "./user/pages/UserHome";
 
 import "boxicons/css/boxicons.min.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import UserProfile from "./user/UserProfile";
+import ItemsDetail from "./user/pages/ItemsDetail";
 
 const router = createBrowserRouter([
   { path: ROUTES.AUTH.LOGIN, element: <Login /> },
@@ -46,6 +49,8 @@ const router = createBrowserRouter([
 
   { path: ROUTES.USER.BUY_HISTORY, element: <BuyHistory /> },
   { path: ROUTES.USER.USER_PROFILE, element: <UserProfile /> },
+  { path: ROUTES.USER.HOME, element: <UserHome /> },
+  { path: ROUTES.USER.ITEMS_DETAIL, element: <ItemsDetail /> },
 ]);
 
 const App: React.FC = () => {

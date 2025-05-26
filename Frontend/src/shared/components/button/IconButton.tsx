@@ -5,7 +5,6 @@ interface IconButtonProps {
   text: string;
   tooltipposition?: "top" | "bottom" | "left" | "right";
   width?: string;
-  type?: "button" | "submit" | "reset";
   children?: React.ReactNode;
   className?: string;
   link: string;
@@ -18,7 +17,6 @@ interface IconButtonProps {
 function IconButton({
   text,
   width,
-  type = "button",
   children,
   tooltipposition = "top",
   iconSize = 18,
@@ -29,27 +27,23 @@ function IconButton({
   ...rest
 }: IconButtonProps) {
   return (
-    <div>
-      {" "}
-      <TooltipWrapper text={text} position={tooltipposition}>
-        <button
-          className={`cursor-pointer !mt-[var(--small-gap)] inline-flex justify-center items-center 
-        bg-white px-2 h-8 hover:text-[var(--primary-hover)] ${width} ${className}`}
-          type={type}
-          {...rest}
-        >
-          <Link to={link}></Link>
+    <TooltipWrapper text={text} position={tooltipposition}>
+      <div
+        className={`cursor-pointer inline-flex justify-center bg-[var(--secondary-color)] rounded-md px-2 items-center h-8 hover:text-[var(--primary-hover)] ${width} ${className}`}
+        {...rest}
+      >
+        <Link to={link} className="flex items-center gap-[var(--smallest-gap)]">
           <Icon
             name={iconName}
             size={iconSize}
             color={iconColor}
             className="hover:text-[var(--primary-hover)]"
           />
-          {text}
-          {children}
-        </button>
-      </TooltipWrapper>
-    </div>
+          <div className="my-auto">{text}</div>
+        </Link>
+        {children}
+      </div>
+    </TooltipWrapper>
   );
 }
 

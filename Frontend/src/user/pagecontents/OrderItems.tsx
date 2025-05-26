@@ -1,5 +1,5 @@
-import { Line } from "../shared/components/ui";
-import { Button } from "../shared/components/button";
+import { Line } from "../../shared/components/ui";
+import { Button } from "../../shared/components/button";
 
 interface OrderItemsProps {
   data: any;

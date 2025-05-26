@@ -1,0 +1,22 @@
+{
+    "product_name": "Tai nghe vippro",
+    "original_price": "500.000đ",
+    "sell_price": "400.000đ",
+    "brand": "Logitect",
+    "description_1": "This is a description",
+    "description_2": "This is a description",
+    "description_3": "This is a description",
+    "image_1": "",
+    "image_2": "",
+    "image_3": "",
+    "specs": {
+        "battery": "1000",
+        "warranty":  "12 months",
+        "color": "Đen",
+        "led": "Có",
+        "weight": "100",
+        "hasMic": "Có",
+        "noiseCancelling": "Có",
+        "connectionType": "wired"
+    }
+}
