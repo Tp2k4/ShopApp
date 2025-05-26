@@ -47,7 +47,11 @@ body{
 
 .caption{
     font-size: var(--caption)
-} 
+}
+
+.items-spec{
+    font-size: var(--items-spec)
+}
 
 table {
     border-collapse: collapse;
