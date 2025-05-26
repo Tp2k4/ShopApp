@@ -23,17 +23,24 @@
     --heading-3: 16px;
     --body-text: 14px;
     --caption: 12px;
+    --items-spec: 10px;
 
     --icon-small: 18px;
     --icon-big: 24px;
 
     --caption-opacity: 0.6;
+    
 
     --header-height: 53px;
     --max-width-content: 1350px;
 
-    --big-banner-width: 512px;
+    --big-banner-width: 528px;
+    --big-banner-height:272px;
     --small-banner-width: 256px;
+
+    --itembox-width:227px;
+    --itembox-height: 400px;
+    --itemcard-width: 235px;
 
 
 }

@@ -3,7 +3,7 @@ import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 
 function ItemsDetail() {
-  const { data, setData } = useGet("/database/items.json");
+  const { data } = useGet("/database/items.json");
 
   return (
     <div className="h-screen w-screen flex flex-col gap-[var(--medium-gap)] overflow-x-hidden">
