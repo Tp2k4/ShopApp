@@ -1,21 +1,24 @@
-import sample from "../../assets/avatar/sample.jpg";
 import Icon from "../../shared/components/ui/DynamicIcon";
-export default function ItemCard() {
+interface ItemCardProps {
+  productInfo: any;
+}
+
+const ItemCard = ({ productInfo }: ItemCardProps) => {
   return (
     <div className="items-center justify-start min-w-[200px] h-auto flex flex-col bg-white p-[var(--semi-medium-gap)] rounded-md border-[var(--line-color)] border shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
       <div className=" flex flex-col items-start justify-start h-auto gap-[var(--small-gap)]">
         <img
-          src={sample}
+          src={`http://localhost:8020/backend/uploads/product/images/${productInfo.thumnail}`}
           alt="Item"
           className="object-cover w-full h-full rounded-sm"
         />
         <div className="w-full min-h-[75px] overflow-visible font-semibold text-left break-words heading3">
-          Tai nghe gaming gear siêu cấp vippro nghe là xuất
+          {productInfo.name}
         </div>
 
         <div className="flex items-end gap-[var(--small-gap)]">
           <div className="w-full font-semibold text-red-500 heading3">
-            500.000đ
+            {productInfo.price.toLocaleString("vi-VN")}đ
           </div>
           <div className="w-full text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] body-text">
             500.000đ
@@ -66,4 +69,6 @@ export default function ItemCard() {
       </div>
     </div>
   );
-}
+};
+
+export default ItemCard;
