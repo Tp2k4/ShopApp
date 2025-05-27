@@ -28,11 +28,11 @@ function ItemsDetail() {
             </div>
             <div>
               <strong>Bảo hành: </strong>
-              <span>{data.specs.warranty}</span>
+              <span>{data.specs?.warranty}</span>
             </div>
             <div>
               <strong>Loại: </strong>
-              <span>{data.specs.color}</span>
+              <span>{data.specs?.color}</span>
             </div>
           </div>
         </div>

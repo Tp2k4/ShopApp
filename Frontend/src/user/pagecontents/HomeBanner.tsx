@@ -5,7 +5,7 @@ export default function HomeBanner() {
     <img
       src={avatar}
       alt="Home Banner"
-      className="object-cover w-full h-full"
+      className="object-cover w-full h-full "
     />
   );
 }

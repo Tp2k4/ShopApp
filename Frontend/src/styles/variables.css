@@ -14,6 +14,7 @@
 
     --big-gap: 24px;
     --medium-gap: 16px;
+    --semi-medium-gap: 10px;
     --small-gap: 8px;
     --smallest-gap: 4px;
 
@@ -32,7 +33,7 @@
     
 
     --header-height: 53px;
-    --max-width-content: 1350px;
+    --max-width-content: 1200px;
 
     --big-banner-width: 528px;
     --big-banner-height:272px;
@@ -41,6 +42,8 @@
     --itembox-width:227px;
     --itembox-height: 400px;
     --itemcard-width: 235px;
+
+
 
 
 }
