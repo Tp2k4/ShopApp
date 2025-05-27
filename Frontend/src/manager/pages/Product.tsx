@@ -15,21 +15,17 @@ import { useSearchParams } from "react-router-dom";
 function Product() {
   //================ Nhận products từ API
   const { data: productDatas } = useGetProducts(
-    "http://localhost:8020/api/v1/gmshop/product",
-    {
-      page: "1",
-      limit: "10",
-    }
+    "http://localhost:8020/api/v1/gmshop/product"
   );
 
   const [products, setProducts] = useState<any[]>([]);
 
   // Cần set do productDatas có {totalPage, products}
-  useEffect(() => {
-    if (productDatas?.products) {
-      setProducts(productDatas.products);
-    }
-  }, [productDatas]);
+ useEffect(() => {
+  if (Array.isArray(productDatas)) {
+    setProducts(productDatas);
+  }
+}, [productDatas]);
 
   //================ Lọc và tìm kiếm
   const filterOptions = ["all", "mouse", "keyboard", "headphone"];

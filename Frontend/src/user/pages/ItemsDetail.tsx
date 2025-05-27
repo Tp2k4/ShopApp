@@ -4,6 +4,9 @@ import { Button } from "../../shared/components/button";
 
 function ItemsDetail() {
   const { data } = useGet("/database/items.json");
+   if (!data || !data.specs) {
+    return <div>Đang tải dữ liệu...</div>;
+  }
 
   return (
     <div className="h-screen w-screen flex flex-col gap-[var(--medium-gap)] overflow-x-hidden">

@@ -80,7 +80,13 @@ public class RevenueService implements IRevenueService {
     public List<RevenueResponse> getAll(){
         try{
             List<Inventory> inventoryList = inventoryRepository.findAll();
-            return inventoryList.stream().map(RevenueResponse::fromDTO).collect(Collectors.toList());
+            List<Inventory> sellList = new ArrayList<>();
+            for (Inventory inventory : inventoryList) {
+                if(inventory.getTransactionType().equalsIgnoreCase("export")){
+                    sellList.add(inventory);
+                }
+            }
+            return sellList.stream().map(RevenueResponse::fromDTO).collect(Collectors.toList());
         }catch (Exception e){
             throw new RuntimeException(e);
         }

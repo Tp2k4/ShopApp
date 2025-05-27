@@ -45,27 +45,19 @@ public class ProductController {
     private final Faker faker = new Faker();
 
     @GetMapping("")
-    public ResponseEntity<ProductResponseList> getAllProducts(@RequestParam("page") int page,
-                                                              @RequestParam("limit") int limit) {
-
-        PageRequest pageRequest = PageRequest.of(page, limit);
+    public ResponseEntity<?> getAllProducts() {
 
         try {
-            Page<ProductResponse> productsResponse = productService.getAllProducts(pageRequest);
+            List<ProductResponse> productsResponse = productService.getAllProducts();
 
-            if (productsResponse == null || productsResponse.isEmpty()) {
-                return ResponseEntity.noContent().build(); // Trả về 204 No Content nếu không có sản phẩm
-            }
+//            if (productsResponse == null || productsResponse.isEmpty()) {
+//                return ResponseEntity.noContent().build(); // Trả về 204 No Content nếu không có sản phẩm
+//            }
+//
+//            int totalPages = productsResponse.getTotalPages();
+//            List<ProductResponse> products = productsResponse.getContent();
 
-            int totalPages = productsResponse.getTotalPages();
-            List<ProductResponse> products = productsResponse.getContent();
-
-            return ResponseEntity.ok(
-                    ProductResponseList.builder()
-                            .products(products)
-                            .totalPages(totalPages)
-                            .build()
-            );
+            return ResponseEntity.ok(productsResponse);
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

@@ -11,13 +11,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Qualifier("jpaProductRepository")
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Override
-    Page<Product> findAll(Pageable pageable);
+    List<Product> findAll();
 
     boolean existsByName(String productName);
 
