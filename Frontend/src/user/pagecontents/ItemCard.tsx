@@ -8,7 +8,7 @@ const ItemCard = ({ productInfo }: ItemCardProps) => {
     <div className="items-center justify-start min-w-[200px] h-auto flex flex-col bg-white p-[var(--semi-medium-gap)] rounded-md border-[var(--line-color)] border shadow-sm hover:shadow-md transition-all duration-200 ease-in-out">
       <div className=" flex flex-col items-start justify-start h-auto gap-[var(--small-gap)]">
         <img
-          src={`http://localhost:8020/backend/uploads/product/images/${productInfo.thumnail}`}
+          src={`http://localhost:8020/images/${productInfo.thumbnail}`}
           alt="Item"
           className="object-cover w-full h-full rounded-sm"
         />
