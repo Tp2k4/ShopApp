@@ -46,6 +46,7 @@ public class WebSecurityConfig {
         return source;
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -57,6 +58,7 @@ public class WebSecurityConfig {
                             .requestMatchers(
                             String.format("%s/user/**", apiPrefix)
                             ).permitAll()
+                            .requestMatchers("/images/**").permitAll()
                             .requestMatchers(PUT,
                                     String.format("%s/orders/employee/**", apiPrefix)).hasAnyRole("EMPLOYEE", "ADMIN")
                             .requestMatchers(POST,
