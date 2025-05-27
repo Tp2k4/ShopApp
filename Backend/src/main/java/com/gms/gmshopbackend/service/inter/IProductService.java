@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 public interface IProductService {
-    public Page<ProductResponse> getAllProducts(PageRequest pageRequest);
+    public List<ProductResponse> getAllProducts();
     public Product getProductById(Long id);
     public Product createProduct(ProductDTO product);
     public Product updateProduct(Long id, ProductDTO product);

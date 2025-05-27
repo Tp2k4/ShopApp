@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,9 +37,9 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Page<ProductResponse> getAllProducts(PageRequest pageRequest) {
-        Page<Product> productPage =  productRepository.findAll(pageRequest);
-        return productPage.map(ProductResponse::fromProduct);
+    public List<ProductResponse> getAllProducts() {
+        List<Product> productPage =  productRepository.findAll();
+        return productPage.stream().map(ProductResponse::fromProduct).toList();
 
     }
 
