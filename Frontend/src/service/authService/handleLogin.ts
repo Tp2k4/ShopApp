@@ -86,8 +86,8 @@ export const handleLogin = async (
       if (role === "admin") {
           window.location.href = ROUTES.MANAGER.HOME;
       } else if (role === "user") {
-          //Cần chỉnh lại ROUTE
-          window.location.href = ROUTES.USER.USER_PROFILE;
+          
+          window.location.href = ROUTES.USER.HOME;
       } else if (role === "employee") {
           window.location.href = ROUTES.EMPLOYEE.ORDER;
       }

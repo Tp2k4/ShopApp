@@ -1,6 +1,5 @@
 import { Box, NavLabel } from "./";
 import { ROUTES } from "../../paths";
-
 import { useLocation } from "react-router-dom";
 
 interface NavigationProps {

@@ -15,7 +15,7 @@ function HomeSideBar({ children, className = "", ...rest }: HomeSideBarProps) {
 
   return (
     <Box
-      className={`rounded-none h-auto w-50 flex flex-col ${className}`}
+      className={`rounded-none h-auto w-full flex flex-col ${className}`}
       {...rest}
     >
       <NavLabel
