@@ -21,5 +21,6 @@ public class PromotionResponse {
     private String state;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String thumbnail;
     List<ProductPromotionDTO> products;
 }

@@ -9,7 +9,7 @@ const ItemCard = ({ productInfo }: ItemCardProps) => {
         <img
           src={`http://localhost:8020/images/${productInfo.thumbnail}`}
           alt="Item"
-          className="object-cover w-full h-full rounded-sm"
+          className="object-contain w-full aspect-[1/1] rounded-sm"
         />
         <div className="w-full min-h-[75px] overflow-visible font-semibold text-left break-words heading3">
           {productInfo.name}

@@ -49,6 +49,7 @@ public class PromotionService implements IPromotionService {
                             promotion.getStatus(),
                             promotion.getStartDate(),
                             promotion.getEndDate(),
+                            promotion.getThumbnail(),
                             productList
                     );
                 }).collect(Collectors.toList());
