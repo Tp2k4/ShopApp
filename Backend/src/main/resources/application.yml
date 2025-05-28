@@ -5,12 +5,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/gamingGear?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://root:NezcAZMsCYadNkSXxVcBdYCzhkHJvzfn@yamabiko.proxy.rlwy.net:22913/railway
 
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
     username: root
-    password:
+    password: NezcAZMsCYadNkSXxVcBdYCzhkHJvzfn
     jpa:
       show_sql: true
       hibernate:
