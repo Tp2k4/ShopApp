@@ -11,8 +11,7 @@ export const autoLogin = () => {
       handleAutoLogin(token);
     }
     // else{
-    //   if (window.location.pathname !== "/auth/login")
-    //     window.location.href = "/auth/login";
+    //   window.location.href = ROUTES.USER.HOME;
     // }
   }, []);
 
@@ -36,8 +35,8 @@ export const autoLogin = () => {
       if (role === "admin") {
         window.location.href = ROUTES.MANAGER.HOME;
       } else if (role === "user") {
-        //Cần chỉnh lại ROUTE
-        window.location.href = ROUTES.USER.BUY_HISTORY;
+        
+        window.location.href = ROUTES.USER.HOME;
       } else if (role === "employee") {
         window.location.href = ROUTES.EMPLOYEE.ORDER;
       }

@@ -19,10 +19,10 @@ function HeaderUser({
   const navigate = useNavigate();
   return (
     <div
-      className={`h-[var(--header-height)] flex justify-center bg-white w-screen ${className}`}
+      className={`h-[var(--header-height)] flex justify-center bg-white w-full ${className}`}
       {...rest}
     >
-      <div className="flex justify-between w-[90%] h-full">
+      <div className="flex justify-between w-[90%]  max-w-[1200px] h-full">
         {/* Left */}
         <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
           <button
