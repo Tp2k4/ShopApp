@@ -40,6 +40,12 @@ function HeaderUser({
             width="300px"
           />
           <IconButton
+            text="Giỏ hàng"
+            tooltipposition="bottom"
+            iconName="BiCart"
+            link={ROUTES.USER.SHOPPING_CART}
+          ></IconButton>
+          <IconButton
             text="Lịch sử mua hàng"
             tooltipposition="bottom"
             iconName="BiHistory"

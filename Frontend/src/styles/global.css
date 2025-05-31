@@ -68,8 +68,7 @@ th {
 td {
     vertical-align: middle;
     text-align: left; 
-    padding: var(--medium-gap) var(--medium-gap);
-    
+    padding: var(--medium-gap) var(--medium-gap); 
 }
 
 tr:nth-child(even) {
