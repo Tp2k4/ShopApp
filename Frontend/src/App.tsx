@@ -27,9 +27,15 @@ import ShoppingCart from "./user/pages/ShoppingCart";
 
 import "boxicons/css/boxicons.min.css";
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 const router = createBrowserRouter([
+  { path: "/", element: <Navigate to={ROUTES.USER.HOME} replace /> },
+
   { path: ROUTES.AUTH.LOGIN, element: <Login /> },
   { path: ROUTES.AUTH.FORGOT_PASSWORD, element: <ForgotPassword /> },
   { path: ROUTES.AUTH.RESET_PASSWORD, element: <ResetPassword /> },
@@ -52,6 +58,7 @@ const router = createBrowserRouter([
   { path: ROUTES.USER.USER_PROFILE, element: <UserProfile /> },
   { path: ROUTES.USER.HOME, element: <UserHome /> },
   { path: ROUTES.USER.ITEMS_DETAIL, element: <ItemsDetail /> },
+
   { path: ROUTES.USER.SHOPPING_CART, element: <ShoppingCart /> },
 ]);
 

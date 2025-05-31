@@ -42,7 +42,7 @@ function UserHome() {
         <div className="w-full h-full bg-white p-[var(--medium-gap)] rounded-md">
           <div className="grid grid-cols-5 auto-rows-auto gap-[var(--semi-medium-gap)] items-center justify-center">
             {productInfos.map((productInfo: any) => (
-              <ItemCard productInfo={productInfo} />
+              <ItemCard key={productInfo.id} productInfo={productInfo} />
             ))}
           </div>
         </div>

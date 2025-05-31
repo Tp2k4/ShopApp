@@ -1,13 +1,15 @@
 import { useState } from "react";
-import sample from "../../assets/avatar/sample.jpg";
-import sample2 from "../../assets/avatar/sample2.jpg";
-import sample3 from "../../assets/avatar/sample3.jpg";
-import sample4 from "../../assets/avatar/sample4.jpg";
 import Icon from "../../shared/components/ui/DynamicIcon";
 
-const images = [sample, sample2, sample3, sample4];
+interface ImageGalleryProps {
+  imagesSource: Array<{ productId: number; imageUrl: string }>;
+}
 
-export default function ImageGallery() {
+function ImageGallery({ imagesSource }: ImageGalleryProps) {
+  const images =
+    imagesSource?.map(
+      (item) => `http://localhost:8020/images/${item.imageUrl}`
+    ) || [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevImage = () => {
@@ -17,6 +19,13 @@ export default function ImageGallery() {
   const nextImage = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+  if (!images || images.length === 0) {
+    return (
+      <div className="flex items-center justify-center w-full bg-gray-100 rounded-lg aspect-video">
+        <span className="text-gray-500">Không có ảnh</span>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col w-full max-w-xl gap-4 mx-auto">
       {/* Ảnh chính */}
@@ -29,7 +38,7 @@ export default function ImageGallery() {
             <img
               key={index}
               src={img}
-              alt={`Ảnh ${index}`}
+              alt={`Ảnh ${index + 1}`}
               className="flex-shrink-0 object-cover w-full h-full"
             />
           ))}
@@ -52,25 +61,29 @@ export default function ImageGallery() {
         </button>
       </div>{" "}
       {/* Thumbnail */}
-      <div className="flex justify-center gap-2">
-        {images.map((img, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-16 aspect-square rounded overflow-hidden transition-all duration-300 ease-in-out border-2 hover:scale-105 ${
-              index === currentIndex
-                ? "border-[var(--primary-color)] opacity-100 scale-105"
-                : "border-transparent opacity-70 hover:opacity-100"
-            }`}
-          >
-            <img
-              src={img}
-              alt={`thumb-${index}`}
-              className="object-cover w-full h-full"
-            />
-          </button>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="flex justify-center gap-2">
+          {images.map((img, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-16 aspect-square rounded overflow-hidden transition-all duration-300 ease-in-out border-2 hover:scale-105 ${
+                index === currentIndex
+                  ? "border-[var(--primary-color)] opacity-100 scale-105"
+                  : "border-transparent opacity-70 hover:opacity-100"
+              }`}
+            >
+              <img
+                src={img}
+                alt={`thumb-${index}`}
+                className="object-cover w-full h-full"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
+export default ImageGallery;

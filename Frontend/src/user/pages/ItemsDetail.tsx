@@ -1,11 +1,12 @@
 import HeaderUser from "../../shared/components/ui/HeaderUser";
 import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
-
+import { useParams } from "react-router-dom";
 import ImageGallery from "../pagecontents/ImageGallery";
 
 function ItemsDetail() {
-  const { data } = useGet("/database/items.json");
+  const { category_id, id } = useParams();
+  const { data } = useGet(`http://localhost:8020/api/v1/gmshop/product/${id}`);
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
   }
@@ -16,14 +17,14 @@ function ItemsDetail() {
       <div className="pt-[calc(var(--medium-gap)_+_var(--header-height))] w-full gap-[var(--medium-gap)] flex flex-col max-w-[1200px]">
         <div className="flex flex-col w-full overflow-hidden rounded-md md:flex md:flex-row">
           <div className="h-auto w-full p-[var(--big-gap)] md:w-[50%] bg-white ]">
-            <ImageGallery />
+            <ImageGallery imagesSource={data.productImages} />
           </div>
           <div className="flex flex-col gap-[var(--small-gap)] items-start p-[var(--big-gap)] h-auto w-full md:w-[50%] heading3 bg-white">
-            <strong>{data.product_name}</strong>
+            <strong>{data.name}</strong>
 
             <div className="flex flex-col gap-[var(--small-gap)]">
-              <span>{data.sell_price}</span>
-              <span>{data.original_price}</span>
+              <span>{data.price?.toLocaleString("vi-VN")}đ</span>
+              <span>{data.originPrice?.toLocaleString("vi-VN")}đ</span>
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
               <Button text="Mua ngay" type="button" />
@@ -31,7 +32,7 @@ function ItemsDetail() {
             </div>
             <div>
               <strong>Hãng: </strong>
-              <span>{data.brand}</span>
+              <span>{data.brand_id}</span>
             </div>
             <div>
               <strong>Bảo hành: </strong>
@@ -45,33 +46,9 @@ function ItemsDetail() {
         </div>
         <div className="flex flex-col md:items-start md:flex-row gap-[var(--medium-gap)] w-full">
           <div className="md:w-[70%] w-full h-auto bg-white rounded-md p-[var(--big-gap)] flex flex-col gap-[var(--medium-gap)]">
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
+            <div>{data.description_1}</div>
+            <div>{data.description_2}</div>
+            <div>{data.description_3}</div>
           </div>
           <div className="md:w-[30%] w-full p-[var(--big-gap)] flex flex-col gap-[var(--medium-gap)] bg-white rounded-md h-auto ">
             <div className="font-bold heading3">Thông số kỹ thuật</div>
