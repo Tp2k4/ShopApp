@@ -2,12 +2,12 @@ import Icon from "../../shared/components/ui/DynamicIcon";
 interface CheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
-  label?: string;
+  className?: string;
 }
 
-const Checkbox = ({ checked, onChange, label }: CheckboxProps) => {
+const Checkbox = ({ checked, onChange, className = "" }: CheckboxProps) => {
   return (
-    <label className="flex items-center gap-2 cursor-pointer">
+    <label className={`flex items-center cursor-pointer ${className}`}>
       <div
         className={`
           w-5 h-5 border-2 rounded flex items-center justify-center transition-all
@@ -21,7 +21,6 @@ const Checkbox = ({ checked, onChange, label }: CheckboxProps) => {
       >
         {checked && <Icon name="BiCheck" size="16" />}
       </div>
-      {label && <span className="body-text">{label}</span>}
     </label>
   );
 };

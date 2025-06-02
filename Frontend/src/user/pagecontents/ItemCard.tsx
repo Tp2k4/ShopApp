@@ -28,7 +28,7 @@ const ItemCard = ({ productInfo }: ItemCardProps) => {
             {productInfo.price.toLocaleString("vi-VN")}đ
           </div>
           <div className="w-full text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] body-text">
-            500.000đ
+            {productInfo.originPrice.toLocaleString("vi-VN")}đ
           </div>
         </div>
 

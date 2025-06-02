@@ -3,6 +3,7 @@ import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 import { useParams } from "react-router-dom";
 import ImageGallery from "../pagecontents/ImageGallery";
+import AddItemsButton from "../../shared/components/button/AddItemsButton";
 
 function ItemsDetail() {
   const { category_id, id } = useParams();
@@ -32,7 +33,7 @@ function ItemsDetail() {
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
               <Button text="Mua ngay" type="button" />
-              <Button text="Thêm vào giỏ hàng" type="button" />
+              <AddItemsButton productId={data.id} price={data.price} />
             </div>
             <div>
               <strong>Hãng: </strong>

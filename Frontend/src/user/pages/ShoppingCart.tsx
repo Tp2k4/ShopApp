@@ -2,11 +2,15 @@ import HeaderUser from "../../shared/components/ui/HeaderUser";
 import { ROUTES } from "../../shared/paths";
 import { Link } from "react-router-dom";
 import CartProgressBar from "../pagecontents/CartProgressBar";
-import sample from "../../assets/avatar/sample.jpg";
-import CheckBox from "../pagecontents/CheckBox";
+import CartItemsBar from "../pagecontents/CartItemsBar";
 import { useState } from "react";
+import { useGet } from "../../service/crudService";
+
 export default function ShoppingCart() {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const { data: CartItemsInfos } = useGet(
+    "http://localhost:8020/api/v1/gmshop/cart/user"
+  );
+
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
       <HeaderUser />
@@ -19,20 +23,9 @@ export default function ShoppingCart() {
         </Link>
         <div className="flex flex-col items-center justify-start w-full h-full gap-[var(--medium-gap)] p-[var(--small-gap)] bg-white rounded-sm">
           <CartProgressBar currentStep="cart" />
-          <div className="flex justify-start p-[var(--medium-gap)] w-full gap-[var(--small-gap)]">
-            <div className="body-text">1.</div>
-            <div className="flex flex-col items-center ">
-              <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
-                <img
-                  src={sample}
-                  alt="product image"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div>Xoá</div>
-            </div>
-            <div className="body-text">Tên sản phẩm</div>
-          </div>
+          {CartItemsInfos.map((CartItemsInfos: any, index: number) => (
+            <CartItemsBar index={index + 1} CartItemsInfos={CartItemsInfos} />
+          ))}
         </div>
       </div>
     </div>
