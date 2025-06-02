@@ -3,6 +3,7 @@ package com.gms.gmshopbackend.service.impl;
 import com.gms.gmshopbackend.dtos.ProductCartDTO;
 import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
+import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.CartItemRepository;
 import com.gms.gmshopbackend.repository.CartRepository;
 import com.gms.gmshopbackend.repository.ProductRepository;
@@ -42,5 +43,36 @@ public class CartItemService implements ICartItemService {
     @Override
     public CartItem updateCartItem(CartItem cartItem) {
         return null;
+    }
+    @Override
+    public CartItem updateQuantity(Long cartItemId, int quantity, User user) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new RuntimeException("CartItem not found"));
+
+        // Kiểm tra quyền sở hữu
+        if (!cartItem.getCartId().getUserId().getId().equals(user.getId())) {
+            throw new RuntimeException("Permission denied");
+        }
+
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be positive");
+        }
+
+        cartItem.setQuantity(quantity);
+        return cartItemRepository.save(cartItem);
+    }
+
+    @Transactional
+    public CartItem toggleSelected(Long cartItemId, User user) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new RuntimeException("CartItem not found"));
+
+        // Kiểm tra quyền sở hữu
+        if (!cartItem.getCartId().getUserId().getId().equals(user.getId())) {
+            throw new RuntimeException("Permission denied");
+        }
+
+        cartItem.setSelected(!cartItem.isSelected());
+        return cartItemRepository.save(cartItem);
     }
 }

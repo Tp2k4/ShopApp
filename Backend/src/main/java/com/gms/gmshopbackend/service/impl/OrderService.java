@@ -38,62 +38,79 @@ public class OrderService implements IOrderService {
     @Transactional
     public OrderResponse createOrder(OrderDTO orderDTO, User user) {
 
-        modelMapper.typeMap(OrderDTO.class, Order.class).addMappings(mapper -> mapper.skip(Order::setId));
+        // Ánh xạ từ DTO sang entity, bỏ qua ID
+        modelMapper.typeMap(OrderDTO.class, Order.class)
+                .addMappings(mapper -> mapper.skip(Order::setId));
         Order order = new Order();
-
         modelMapper.map(orderDTO, order);
+
+        // Thiết lập thông tin đơn hàng
         order.setUser(user);
         order.setOrderDate(LocalDate.now());
         order.setActive(true);
-        order.setStatus(String.valueOf(OrderStatus.PENDING));
-        LocalDate shippingDate = LocalDate.now().plusDays(5);
-        order.setShippingDate(shippingDate);
-        orderRepository.save(order);
+        order.setStatus(OrderStatus.PENDING.name());
+        order.setShippingDate(LocalDate.now().plusDays(5));
+
+        // Kiểm tra giỏ hàng
         Cart cart = cartRepository.findByUserId(user);
-        List<OrderDetail> orderDetails = new ArrayList<>();
+        if (cart == null) {
+            throw new IllegalStateException("Cart not found for user: " + user.getId());
+        }
+
+        // Lấy các mục đã chọn
         List<CartItem> cartItems = cartItemRepository.findByCartIdAndIsSelectedTrue(cart);
+        if (cartItems.isEmpty()) {
+            throw new IllegalStateException("No items selected in the cart");
+        }
+
+        List<OrderDetail> orderDetails = new ArrayList<>();
         List<ProductOrderResponseDTO> products = new ArrayList<>();
         double total = 0;
+
         for (CartItem cartItem : cartItems) {
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setOrder(order);
-            Long productId = cartItem.getProduct().getId();
-            Product product = productRepository.findById(productId).orElseThrow(
-                    () -> new RuntimeException("Product not found")
-            );
-            orderDetail.setProduct(product);
+            Product product = productRepository.findById(cartItem.getProduct().getId())
+                    .orElseThrow(() -> new IllegalStateException("Product not found"));
+
             int quantity = cartItem.getQuantity();
-            if(product.getStockQuantity() < quantity) {
+            if (product.getStockQuantity() < quantity) {
                 throw new RuntimeException("Not enough stock for product: " + product.getName());
             }
-            orderDetail.setNumberOfProducts(quantity);
+
+            // Cập nhật tồn kho
             product.setStockQuantity(product.getStockQuantity() - quantity);
             productRepository.save(product);
-            orderDetail.setPrice(product.getPrice());
-            orderDetail.setTotalMoney(product.getPrice() * quantity);
-            total += orderDetail.getTotalMoney();
-
-            orderDetails.add(orderDetail);
             inventoryService.exportInventory(product, quantity);
 
-            ProductOrderResponseDTO newProduct = ProductOrderResponseDTO.builder()
+            // Tạo chi tiết đơn hàng
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(order);
+            orderDetail.setProduct(product);
+            orderDetail.setNumberOfProducts(quantity);
+            orderDetail.setPrice(product.getPrice());
+            orderDetail.setTotalMoney(product.getPrice() * quantity);
+            orderDetails.add(orderDetail);
+
+            total += orderDetail.getTotalMoney();
+
+            // Thêm vào danh sách phản hồi
+            products.add(ProductOrderResponseDTO.builder()
                     .productName(product.getName())
                     .quantity(quantity)
                     .color("Random")
-                    .build();
-            products.add(newProduct);
+                    .build());
         }
 
-
-        if (cart != null) {
-            cartItemRepository.deleteAllByCartIdAndIsSelectedTrue(cart);
-        }
-
-
-        orderDetailRepository.saveAll(orderDetails);
+        // Thiết lập tổng tiền và lưu đơn hàng
         order.setTotalMoney((float) total);
         orderRepository.save(order);
 
+        // Lưu chi tiết đơn hàng
+        orderDetailRepository.saveAll(orderDetails);
+
+        // Xóa các item đã chọn trong giỏ
+        cartItemRepository.deleteAllByCartIdAndIsSelectedTrue(cart);
+
+        // Trả về thông tin đơn hàng
         return new OrderResponse(
                 order.getId(),
                 order.getFullName(),
@@ -106,6 +123,7 @@ public class OrderService implements IOrderService {
                 products
         );
     }
+
 
     @Override
     public OrderResponse updateOrder(Long id, OrderDTO orderDTO) {
