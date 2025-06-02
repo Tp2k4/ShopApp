@@ -32,5 +32,6 @@ export const ROUTES = {
     },
 }
 
-export const API = {
+export const APIS = {
+
 };

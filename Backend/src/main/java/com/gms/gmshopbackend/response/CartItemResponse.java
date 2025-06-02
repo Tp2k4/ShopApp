@@ -2,6 +2,7 @@ package com.gms.gmshopbackend.response;
 
 
 import com.gms.gmshopbackend.model.CartItem;
+import com.gms.gmshopbackend.model.Product;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -19,8 +20,11 @@ public class CartItemResponse {
     private int quantity;
     private double totalPrice;
     private Long productId;
+    private String productImageUrl;
+    private Double originalPrice;
 
     public static CartItemResponse fromCartItem(CartItem cartItem) {
+        Product product = cartItem.getProduct();
         CartItemResponse cartItemResponse = CartItemResponse.builder()
                 .id(cartItem.getId())
                 .price(cartItem.getPrice())
@@ -28,6 +32,8 @@ public class CartItemResponse {
                 .totalPrice(cartItem.getTotalPrice())
                 .productName(cartItem.getProduct().getName())
                 .productId(cartItem.getProduct().getId())
+                .productImageUrl(product.getThumbnail())
+                .originalPrice(cartItem.getProduct().getOriginPrice())
                 .build();
 
         return cartItemResponse;
