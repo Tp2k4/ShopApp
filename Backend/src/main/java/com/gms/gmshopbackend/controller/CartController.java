@@ -3,6 +3,7 @@ package com.gms.gmshopbackend.controller;
 import com.gms.gmshopbackend.dtos.ProductCartDTO;
 import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
+import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.CartItemRepository;
 import com.gms.gmshopbackend.response.CartItemResponse;
 import com.gms.gmshopbackend.service.impl.CartItemService;
@@ -40,6 +41,7 @@ public class CartController {
         }
     }
 
+
     @PostMapping("")
     public ResponseEntity<?> addToCart(@AuthenticationPrincipal UserDetails userDetails,
                                        @RequestBody ProductCartDTO productCartDTO) {
@@ -51,10 +53,34 @@ public class CartController {
             CartItem cartItem = cartItemService.addCartItem(cart, productCartDTO);
 
             return ResponseEntity.ok().body(CartItemResponse.fromCartItem(cartItem));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 
-
     }
-}
+
+    @PutMapping("/update-quantity")
+        public ResponseEntity<?> updateQuantity(@RequestBody Long cartItemId,
+                                                @RequestBody int quantity,
+                                                @AuthenticationPrincipal User user) {
+            try {
+                CartItem updated = cartItemService.updateQuantity(cartItemId, quantity, user);
+                return ResponseEntity.ok(CartItemResponse.fromCartItem(updated));
+            } catch (RuntimeException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }
+
+        @PutMapping("/toggle-selected")
+        public ResponseEntity<?> toggleSelected(@RequestBody Long cartItemId,
+                                                @AuthenticationPrincipal User user) {
+            try {
+                CartItem updated = cartItemService.toggleSelected(cartItemId, user);
+                return ResponseEntity.ok(CartItemResponse.fromCartItem(updated));
+            } catch (RuntimeException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }
+    }
+
+

@@ -23,9 +23,13 @@ function ItemsDetail() {
           <div className="flex flex-col gap-[var(--small-gap)] items-start p-[var(--big-gap)] h-auto w-full md:w-[50%] heading3 bg-white">
             <strong>{data.name}</strong>
 
-            <div className="flex flex-col gap-[var(--small-gap)]">
-              <span>{data.price?.toLocaleString("vi-VN")}đ</span>
-              <span>{data.originPrice?.toLocaleString("vi-VN")}đ</span>
+            <div className="flex gap-[var(--small-gap)]">
+              <span className="font-semibold text-red-500 heading3">
+                {data.price?.toLocaleString("vi-VN")}đ
+              </span>
+              <span className="text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] heading3">
+                {data.originPrice?.toLocaleString("vi-VN")}đ
+              </span>
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
               <Button text="Mua ngay" type="button" />
