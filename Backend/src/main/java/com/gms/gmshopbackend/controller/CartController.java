@@ -5,6 +5,7 @@ import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
 import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.repository.CartItemRepository;
+import com.gms.gmshopbackend.repository.CartRepository;
 import com.gms.gmshopbackend.response.CartItemResponse;
 import com.gms.gmshopbackend.service.impl.CartItemService;
 import com.gms.gmshopbackend.service.impl.CartService;
@@ -26,6 +27,7 @@ public class CartController {
     private final CartService cartService;
     private final CartItemRepository cartItemRepository;
     private final CartItemService cartItemService;
+    private final CartRepository cartRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getCartByUser(@AuthenticationPrincipal UserDetails userDetails) {
@@ -70,8 +72,7 @@ public class CartController {
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
-
-        @PutMapping("/toggle-selected")
+    @PutMapping("/toggle-selected")
         public ResponseEntity<?> toggleSelected(@RequestBody Long cartItemId,
                                                 @AuthenticationPrincipal User user) {
             try {
@@ -81,6 +82,34 @@ public class CartController {
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
+
+    @GetMapping("/selected-cartitem")
+    public ResponseEntity<?> getSelectedCartItems(@AuthenticationPrincipal User user) {
+        try {
+            // Lấy giỏ hàng của user
+            Cart cart = cartRepository.findByUserId(user);
+            if (cart == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cart not found for user");
+            }
+
+            // Lấy danh sách cart item được chọn
+            List<CartItem> selectedItems = cartItemRepository.findByCartIdAndIsSelectedTrue(cart);
+
+            // Map sang DTO để trả về frontend
+            List<CartItemResponse> response = selectedItems.stream()
+                    .map(CartItemResponse::fromCartItem)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Lỗi khi lấy cart item đã chọn: " + e.getMessage());
+        }
+    }
+
+
     }
 
 
