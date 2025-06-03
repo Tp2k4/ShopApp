@@ -57,7 +57,7 @@ export default function ShoppingCart() {
         >
           &lt; Mua thêm sản phẩm khác
         </Link>
-        <div className="flex flex-col items-center justify-start w-full h-full gap-[var(--medium-gap)] p-[var(--small-gap)] bg-white rounded-sm">
+        <div className="flex flex-col items-center justify-start w-full h-full gap-[var(--medium-gap)] p-[var(--medium-gap)] bg-white rounded-sm">
           <CartProgressBar currentStep="cart" />
           <div className="overflow-y-auto overflow-x-hidden w-full h-[500px] flex flex-col gap-[var(--small-gap)]">
             {CartItemsInfos.map((CartItemInfos: any, index: number) => (
@@ -71,9 +71,11 @@ export default function ShoppingCart() {
 
           {/* Thông tin thanh toán */}
           <div className="flex justify-between w-full">
-            <div className="flex">
-              <div>Phương thức thanh toán:</div>
-              <div> Thanh toán khi nhận hàng</div>
+            <div className="flex items-center gap-[var(--medium-gap)]">
+              <div className="text-bold">Phương thức thanh toán:</div>
+              <div className="rounded-md border border-[var(--primary-hover)] p-[var(--small-gap)] w-fit h-fit">
+                Thanh toán khi nhận hàng
+              </div>
             </div>
             <div className="flex flex-col items-end">
               <div>
@@ -83,7 +85,10 @@ export default function ShoppingCart() {
                 Phí vận chuyển: <span>20.000đ</span>
               </div>
               <div>
-                Tổng thanh toán: {(totalPrice + 20000).toLocaleString("vi-VN")}đ
+                Tổng thanh toán:{" "}
+                <span className="text-red-500 heading2">
+                  {(totalPrice + 20000).toLocaleString("vi-VN")}đ
+                </span>
               </div>
               <Button
                 type="button"

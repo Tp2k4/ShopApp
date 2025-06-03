@@ -2,8 +2,9 @@ import HeaderUser from "../../shared/components/ui/HeaderUser";
 import { ROUTES } from "../../shared/paths";
 import { Link } from "react-router-dom";
 import CartProgressBar from "../pagecontents/CartProgressBar";
-
+import Line from "../../shared/components/ui/Line";
 import { useGet } from "../../service/crudService";
+import { Button } from "../../shared/components/button";
 
 export default function Payment() {
   const { data: UserInfos } = useGet(
@@ -14,8 +15,15 @@ export default function Payment() {
     localStorage.getItem("listCartItemsChecked") || "[]"
   );
 
+  // Tính tổng số tiền hàng
+  const totalPrice = listCartItemsChecked.reduce(
+    (total: number, item: any) =>
+      total + (Number(item.sellPrice) || 0) * (Number(item.quantity) || 0),
+    0
+  );
+
   return (
-    <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
+    <div className="w-screen flex flex-col items-center gap-[var(--medium-gap)]">
       <HeaderUser />
       <div className="w-[var(--max-width-content)] h-full flex flex-col items-start justify-center gap-[var(--medium-gap)] ">
         <Link
@@ -26,32 +34,92 @@ export default function Payment() {
         </Link>
         <div className="flex flex-col items-start justify-start w-full h-full gap-[var(--medium-gap)] p-[var(--medium-gap)] bg-white rounded-sm">
           <CartProgressBar currentStep="payment" />
-          <div className="">Thông tin người nhận</div>
-          <div className="flex flex-col items-start justify-start w-full h-full gap-[var(--smallest-gap)]">
-            <div>
-              <span className="font-bold">Tên:</span> {UserInfos.name}
-            </div>
-            <div>
-              <span className="font-bold">Sđt:</span> {UserInfos.phoneNumber}
-            </div>
-            <div>
-              <span className="font-bold">Địa chỉ:</span> {UserInfos.address}
+          <div className="font-bold text-red-500 heading3">
+            Thông tin người nhận
+          </div>
+          <div className="flex flex-col items-start justify-start w-full h-full gap-[var(--medium-gap)]">
+            <div className="gap-[var(--small-gap)]">
+              <div>
+                <span className="font-bold">Tên:</span> {UserInfos.name}
+              </div>
+              <div>
+                <span className="font-bold">Sđt:</span> {UserInfos.phoneNumber}
+              </div>
+              <div>
+                <span className="font-bold">Địa chỉ:</span> {UserInfos.address}
+              </div>
             </div>
 
             {/* Danh sách các sản phẩm */}
-            <div className="w-full h-full">
-              {listCartItemsChecked.map((item: any, index: number) => (
-                <div
-                  className="w-[100px] aspect-square rounded-md overflow-hidden"
-                  key={index}
-                >
-                  <img
-                    className="object-cover w-full h-full"
-                    src={`http://localhost:8020/images/${item.productImageUrl}`}
-                    alt="product image"
-                  ></img>
+            <div className="flex items-center justify-between w-full opacity-[var(--caption-opacity)]">
+              <div>Sản phẩm</div>
+              <div className="flex items-center justify-between w-1/3">
+                <div className="w-[70px] text-right">Đơn giá</div>
+                <div>Số lượng</div>
+                <div>Thành tiền</div>
+              </div>
+            </div>
+            <Line width="w-full" />
+            <div className="w-full h-[300px] overflow-y-auto overflow-x-hidden flex flex-col gap-[var(--small-gap)]">
+              <div className="w-full gap-[var(--small-gap)] flex flex-col">
+                {listCartItemsChecked.map((item: any, index: number) => (
+                  <div className="flex flex-col" key={index}>
+                    <div className="flex justify-between items-center gap-[var(--medium-gap)] w-full">
+                      <div className="flex gap-[var(--small-gap)] items-center">
+                        <div className="w-[100px] aspect-square rounded-md overflow-hidden">
+                          <img
+                            className="object-cover w-full h-full"
+                            src={`http://localhost:8020/images/${item.productImageUrl}`}
+                            alt="product image"
+                          ></img>
+                        </div>
+                        <div>{item.productName}</div>
+                      </div>
+                      <div className="flex justify-between w-1/3">
+                        <div className="w-[70px] text-right">
+                          {item.sellPrice.toLocaleString("vi-VN")}đ
+                        </div>
+                        <div>{item.quantity}</div>
+                        <div>
+                          {(item.sellPrice * item.quantity).toLocaleString(
+                            "vi-VN"
+                          )}
+                          đ
+                        </div>
+                      </div>
+                    </div>
+                    <Line width="w-full" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* phần thanh toán  */}
+            <div className="flex justify-between w-full ">
+              <div className="flex items-center gap-[var(--medium-gap)]">
+                <div className="text-bold">Phương thức thanh toán:</div>
+                <div className="rounded-md border border-[var(--primary-hover)] p-[var(--small-gap)] w-fit h-fit">
+                  Thanh toán khi nhận hàng
                 </div>
-              ))}
+              </div>
+              <div className="flex flex-col items-end">
+                <div>
+                  Tổng số tiền hàng: {totalPrice.toLocaleString("vi-VN")}đ
+                </div>
+                <div>
+                  Phí vận chuyển: <span>20.000đ</span>
+                </div>
+                <div>
+                  Tổng thanh toán:{" "}
+                  <span className="text-red-500 heading2">
+                    {(totalPrice + 20000).toLocaleString("vi-VN")}đ
+                  </span>
+                </div>
+                <Button
+                  type="button"
+                  text="Đặt hàng"
+                  onClick={() => {}}
+                ></Button>
+              </div>
             </div>
           </div>
         </div>
