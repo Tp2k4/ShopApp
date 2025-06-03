@@ -1,17 +1,23 @@
 package com.gms.gmshopbackend.controller;
 
-import com.gms.gmshopbackend.dtos.ProductPromotionDTO;
+
 import com.gms.gmshopbackend.dtos.PromotionDTO;
+import com.gms.gmshopbackend.model.Product;
 import com.gms.gmshopbackend.model.Promotion;
+import com.gms.gmshopbackend.model.PromotionProduct;
+import com.gms.gmshopbackend.repository.ProductRepository;
+import com.gms.gmshopbackend.repository.PromotionProductRepository;
 import com.gms.gmshopbackend.repository.PromotionRepository;
 import com.gms.gmshopbackend.response.PromotionResponse;
 import com.gms.gmshopbackend.service.impl.PromotionService;
-import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,18 +27,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("${api.prefix}/promotion")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 public class PromotionController {
 
     private final PromotionService promotionService;
     private final PromotionRepository promotionRepository;
+    private final ProductRepository productRepository;
+    private final PromotionProductRepository promotionProductRepository;
 
     @PostMapping("/create")
     public ResponseEntity<?> createPromotion(@RequestBody PromotionDTO promotionDTO) {
@@ -136,6 +144,31 @@ public class PromotionController {
         return uniqueFileName;
     }
 
+    @Scheduled(fixedRate = 300000)
+    @Transactional
+    public void checkExpiredPromotions() {
+        LocalDate now = LocalDate.now();
 
+        // Tìm promotion còn active nhưng đã hết hạn
+        List<Promotion> expiredPromotions = (List<Promotion>) promotionRepository.findByEndDateBefore(now);
+        if (!expiredPromotions.isEmpty()) {
+            List<Product> products = new ArrayList<>();
+            for (Promotion promotion : expiredPromotions) {
+                promotion.setStatus("inactive");
+                List<PromotionProduct> proList = promotionProductRepository.findByPromotionId(promotion);
+                for (PromotionProduct promotionProduct : proList) {
+                    Optional<Product> pro = productRepository.findById(promotionProduct.getProduct().getId());
+                    if (pro.isPresent()) {
+                        pro.get().setDiscountPercent(null);
+                        products.add(pro.get());
+                    }
+                }
+            }
+            productRepository.saveAll(products);
+            promotionRepository.saveAll(expiredPromotions);
+
+            System.out.println("Checked and updated expired promotions at " + now);
+        }
+    }
 
 }

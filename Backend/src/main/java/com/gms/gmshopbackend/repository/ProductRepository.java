@@ -1,6 +1,7 @@
 package com.gms.gmshopbackend.repository;
 
 import com.gms.gmshopbackend.model.Product;
+import com.gms.gmshopbackend.model.PromotionProduct;
 import com.gms.gmshopbackend.response.ProductResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -27,4 +28,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByNameContaining(String name, Pageable pageable);
 
     Product findByName(String name);
+
 }
