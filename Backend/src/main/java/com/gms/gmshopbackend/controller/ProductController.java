@@ -268,7 +268,7 @@ public class ProductController {
 
         String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
 
-        Path uploadDir = Paths.get("Backend/upload/product/images");
+        Path uploadDir = Paths.get("upload/product/images");
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
         }

@@ -133,7 +133,7 @@ public class PromotionController {
         String originalFileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
 
-        Path uploadDir = Paths.get("Backend/upload/promotion");
+        Path uploadDir = Paths.get("upload/promotion");
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
         }
