@@ -25,7 +25,7 @@ function ItemsDetail() {
 
             <div className="flex gap-[var(--small-gap)]">
               <span className="font-semibold text-red-500 heading3">
-                {data.price?.toLocaleString("vi-VN")}đ
+                {data.sellPrice?.toLocaleString("vi-VN")}đ
               </span>
               <span className="text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] heading3">
                 {data.price?.toLocaleString("vi-VN")}đ
