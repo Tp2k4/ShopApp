@@ -3,6 +3,11 @@ import { handleLogout } from "../../../service/authService/handleLogout";
 import IconButton from "../button/IconButton";
 import { ROUTES } from "../../paths";
 import { SearchField } from "../form";
+
+import PopupConfirm from "../../../user/popup/PopupConfirm";
+
+import { useState } from "react";
+
 interface HeaderUserProps {
   children?: React.ReactNode;
   name?: string;
@@ -18,7 +23,18 @@ function HeaderUser({
 }: HeaderUserProps) {
   const navigate = useNavigate();
 
-  const isLogin = (localStorage.getItem("token") ? true : false) || false;
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handle = (navigateLink: string) => {
+    const isLogin = localStorage.getItem("token") ? true : false;
+
+    if (isLogin) {
+      navigate(navigateLink);
+      return;
+    }
+
+    setShowPopup(true);
+  };
 
   return (
     <div
@@ -46,32 +62,38 @@ function HeaderUser({
             text="Giỏ hàng"
             tooltipposition="bottom"
             iconName="BiCart"
-            {...(isLogin
-              ? { link: ROUTES.USER.SHOPPING_CART }
-              : { onClick: () => navigate(ROUTES.AUTH.LOGIN) })}
+            onClick={() => {
+              handle(ROUTES.USER.SHOPPING_CART);
+            }}
           ></IconButton>
           <IconButton
             text="Lịch sử mua hàng"
             tooltipposition="bottom"
             iconName="BiHistory"
-            link={ROUTES.USER.BUY_HISTORY}
+            onClick={() => {
+              handle(ROUTES.USER.BUY_HISTORY);
+            }}
           ></IconButton>
           <IconButton
             text="Tài khoản"
             tooltipposition="bottom"
             iconName="BiSolidUserCircle"
-            link={ROUTES.USER.USER_PROFILE}
+            onClick={() => {
+              handle(ROUTES.USER.USER_PROFILE);
+            }}
           ></IconButton>
+
           <IconButton
             text="Đăng xuất"
             tooltipposition="bottom"
             iconName="BiLogOut"
             onClick={() => handleLogout(navigate)}
-            link={ROUTES.AUTH.LOGIN}
           ></IconButton>
         </div>
       </div>
       {children}
+
+      {showPopup && <PopupConfirm setShowPopup={setShowPopup} />}
     </div>
   );
 }

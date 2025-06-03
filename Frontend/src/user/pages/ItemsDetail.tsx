@@ -1,11 +1,17 @@
 import HeaderUser from "../../shared/components/ui/HeaderUser";
 import { useGet } from "../../service/crudService";
-import { Button } from "../../shared/components/button";
+
 import { useParams } from "react-router-dom";
 import ImageGallery from "../pagecontents/ImageGallery";
 import AddItemsButton from "../../shared/components/button/AddItemsButton";
+import { useState } from "react";
+import PopupConfirm from "../popup/PopupConfirm";
 
+import { ROUTES } from "../../shared/paths";
 function ItemsDetail() {
+  // Popup
+  const [showPopup, setShowPopup] = useState(false);
+
   const { category_id, id } = useParams();
   const { data } = useGet(`http://localhost:8020/api/v1/gmshop/product/${id}`);
   if (!data || !data.specs) {
@@ -32,8 +38,19 @@ function ItemsDetail() {
               </span>
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
-              <Button text="Mua ngay" type="button" />
-              <AddItemsButton productId={data.id} price={data.price} />
+              <AddItemsButton
+                text="Mua ngay"
+                productId={data.id}
+                price={data.price}
+                setShowPopup={setShowPopup}
+                link={ROUTES.USER.SHOPPING_CART}
+              />
+              <AddItemsButton
+                productId={data.id}
+                price={data.price}
+                text="Thêm vào giỏ hàng"
+                setShowPopup={setShowPopup}
+              />
             </div>
             <div>
               <strong>Hãng: </strong>
@@ -64,6 +81,11 @@ function ItemsDetail() {
                 </th>
                 <th>Giá trị</th>
               </tr>
+
+              <tr>
+                <td></td>
+              </tr>
+
               {data.specs &&
                 Object.entries(data.specs as Record<string, any>).map(
                   ([key, value]) => (
@@ -82,6 +104,8 @@ function ItemsDetail() {
           </div>
         </div>
       </div>
+
+      {showPopup && <PopupConfirm setShowPopup={setShowPopup} />}
     </div>
   );
 }
