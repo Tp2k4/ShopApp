@@ -25,7 +25,7 @@ export default function ShoppingCart() {
 
     setTotalPrice(
       listCartItemsChecked.reduce(
-        (total, item) => total + item.price * item.quantity,
+        (total, item) => total + item.sellPrice * item.quantity,
         0
       )
     );
