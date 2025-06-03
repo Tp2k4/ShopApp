@@ -54,10 +54,11 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> {
                     request
-                            
+
+                            .requestMatchers(GET,
+                                    String.format("%s/user/alls/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(
-                            String.format("%s/user/**", apiPrefix)
-                            ).permitAll()
+                            String.format("%s/user/**", apiPrefix)).permitAll()
                             .requestMatchers("/images/**").permitAll()
                             .requestMatchers(PUT,
                                     String.format("%s/orders/employee/**", apiPrefix)).hasAnyRole("EMPLOYEE", "ADMIN")
