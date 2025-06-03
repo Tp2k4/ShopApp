@@ -22,6 +22,7 @@ public class CartItemResponse {
     private Long productId;
     private String productImageUrl;
     private Double originalPrice;
+    private Long sellPrice;
 
     public static CartItemResponse fromCartItem(CartItem cartItem) {
         Product product = cartItem.getProduct();
@@ -34,6 +35,10 @@ public class CartItemResponse {
                 .productId(cartItem.getProduct().getId())
                 .productImageUrl(product.getThumbnail())
                 .originalPrice(cartItem.getProduct().getOriginPrice())
+                .sellPrice((long)((double) (product.getDiscountPercent() == null
+                        ? product.getPrice()
+                        : product.getPrice() * (1 - product.getDiscountPercent().floatValue() * 0.01f))))
+
                 .build();
 
         return cartItemResponse;
