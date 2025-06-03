@@ -11,6 +11,8 @@ export default function ShoppingCart() {
     "http://localhost:8020/api/v1/gmshop/cart/user"
   );
 
+  const [cartItemsChecked, setCartItemsChecked] = useState<any[]>([]);
+
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
       <HeaderUser />
@@ -23,9 +25,14 @@ export default function ShoppingCart() {
         </Link>
         <div className="flex flex-col items-center justify-start w-full h-full gap-[var(--medium-gap)] p-[var(--small-gap)] bg-white rounded-sm">
           <CartProgressBar currentStep="cart" />
-          {CartItemsInfos.map((CartItemsInfos: any, index: number) => (
-            <CartItemsBar index={index + 1} CartItemsInfos={CartItemsInfos} />
-          ))}
+          <div className="overflow-y-auto overflow-x-hidden w-full h-[500px] flex flex-col gap-[var(--small-gap)]">
+            {CartItemsInfos.map((CartItemsInfos: any, index: number) => (
+              <CartItemsBar index={index + 1} CartItemsInfos={CartItemsInfos} />
+            ))}
+          </div>
+
+          {/* Thông tin thanh toán */}
+          <div></div>
         </div>
       </div>
     </div>

@@ -8,7 +8,10 @@ interface CartItemsBarProps {
 
 function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const [quantity, setQuantity] = useState<number>(CartItemsInfos.quantity || 1);
+  const [quantity, setQuantity] = useState<number>(
+    CartItemsInfos.quantity || 1
+  );
+
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
@@ -40,7 +43,7 @@ function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
             <button
               onClick={() => setQuantity((q: number) => Math.max(1, q - 1))}
               disabled={quantity <= 1}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center w-8 h-8 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               -
             </button>
@@ -48,7 +51,7 @@ function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
               type="number"
               value={quantity}
               min="1"
-              onChange={e => {
+              onChange={(e) => {
                 const v = parseInt(e.target.value);
                 if (!isNaN(v) && v > 0) setQuantity(v);
               }}
@@ -56,7 +59,7 @@ function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
             />
             <button
               onClick={() => setQuantity((q: number) => q + 1)}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+              className="flex items-center justify-center w-8 h-8 border border-gray-300 rounded hover:bg-gray-100"
             >
               +
             </button>
