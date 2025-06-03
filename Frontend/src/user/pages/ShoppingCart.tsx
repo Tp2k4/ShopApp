@@ -5,8 +5,11 @@ import CartProgressBar from "../pagecontents/CartProgressBar";
 import CartItemsBar from "../pagecontents/CartItemsBar";
 import { useEffect, useState } from "react";
 import { useGet } from "../../service/crudService";
+import { Button } from "../../shared/components/button";
+import { useNavigate } from "react-router-dom";
 
 export default function ShoppingCart() {
+  const navigate = useNavigate();
   const { data: CartItemsInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/cart/user"
   );
@@ -31,6 +34,18 @@ export default function ShoppingCart() {
     );
     console.log(listCartItemsChecked);
   }, [listCartItemsChecked]);
+
+  const handleTransfer = () => {
+    if (listCartItemsChecked.length === 0) {
+      alert("Vui lòng chọn sản phẩm để thanh toán");
+      return;
+    }
+    localStorage.setItem(
+      "listCartItemsChecked",
+      JSON.stringify(listCartItemsChecked)
+    );
+    navigate(ROUTES.USER.PAYMENT);
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
@@ -70,6 +85,11 @@ export default function ShoppingCart() {
               <div>
                 Tổng thanh toán: {(totalPrice + 20000).toLocaleString("vi-VN")}đ
               </div>
+              <Button
+                type="button"
+                text="Đặt hàng"
+                onClick={handleTransfer}
+              ></Button>
             </div>
           </div>
         </div>
