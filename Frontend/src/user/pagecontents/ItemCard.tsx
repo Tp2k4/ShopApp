@@ -6,7 +6,7 @@ interface ItemCardProps {
 const ItemCard = ({ productInfo }: ItemCardProps) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/${productInfo.category_id}/${productInfo.id}`);
+    navigate(`/user/home/${productInfo.category_id}/${productInfo.id}`);
   };
   return (
     <div

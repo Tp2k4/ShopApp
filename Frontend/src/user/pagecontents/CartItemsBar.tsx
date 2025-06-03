@@ -1,16 +1,48 @@
 import CheckBox from "./CheckBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CartItemsBarProps {
+  setListCartItemsChecked: React.Dispatch<React.SetStateAction<any[]>>;
+
   index?: number;
-  CartItemsInfos: any;
+  CartItemInfos: any;
 }
 
-function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
+function CartItemsBar({
+  setListCartItemsChecked,
+  index,
+  CartItemInfos,
+}: CartItemsBarProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const [quantity, setQuantity] = useState<number>(
-    CartItemsInfos.quantity || 1
-  );
+  const [quantity, setQuantity] = useState<number>(CartItemInfos.quantity || 1);
+
+  const handleCheck = () => {
+    if (isChecked) {
+      setIsChecked(false);
+      setListCartItemsChecked((prev: any[]) =>
+        prev.filter((item) => item.productId !== CartItemInfos.productId)
+      );
+      return;
+    }
+    setListCartItemsChecked((prev: any[]) => [
+      ...prev,
+      { ...CartItemInfos, quantity },
+    ]);
+    setIsChecked(true);
+  };
+
+  useEffect(() => {
+    if (isChecked) {
+      setListCartItemsChecked((prev: any[]) =>
+        prev.map((item: any) => {
+          if (item.productId === CartItemInfos.productId) {
+            return { ...item, quantity };
+          }
+          return item;
+        })
+      );
+    }
+  }, [quantity, isChecked]);
 
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
@@ -19,24 +51,24 @@ function CartItemsBar({ index, CartItemsInfos }: CartItemsBarProps) {
         <div className="flex flex-col items-center ">
           <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
             <img
-              src={`http://localhost:8020/images/${CartItemsInfos.productImageUrl}`}
+              src={`http://localhost:8020/images/${CartItemInfos.productImageUrl}`}
               alt="product image"
               className="object-cover w-full h-full"
             />
           </div>
         </div>
-        <div className="body-text">{CartItemsInfos.productName}</div>
+        <div className="body-text">{CartItemInfos.productName}</div>
         <CheckBox
           checked={isChecked}
-          onChange={setIsChecked}
+          onChange={handleCheck}
           className="pl-50 pr-125"
         />
         <div className="flex flex-col ">
           <div className="text-right text-red-500 heading3">
-            {CartItemsInfos.price.toLocaleString("vi-VN")}đ
+            {CartItemInfos.price.toLocaleString("vi-VN")}đ
           </div>
           <div className="text-black opacity-[var(--caption-opacity)] body-text text-right line-through decoration-[1px]">
-            {CartItemsInfos.originalPrice.toLocaleString("vi-VN")}đ
+            {CartItemInfos.originalPrice.toLocaleString("vi-VN")}đ
           </div>
           {/* Thanh tăng giảm số lượng */}
           <div className="flex items-center justify-end gap-1 mt-2">

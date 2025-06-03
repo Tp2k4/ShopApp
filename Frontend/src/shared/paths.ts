@@ -27,8 +27,9 @@ export const ROUTES = {
       BUY_HISTORY: "/user/buy-history",
       USER_PROFILE: "/user/profile",
       HOME: "/user/home",
-      ITEMS_DETAIL: "/:category_id/:id",
-      SHOPPING_CART: "/user/shopping-cart"
+      ITEMS_DETAIL: "/user/home/:category_id/:id",
+      SHOPPING_CART: "/user/shopping-cart",
+      PAYMENT: "/user/payment",
     },
 }
 

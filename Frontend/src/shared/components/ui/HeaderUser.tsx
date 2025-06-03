@@ -17,6 +17,9 @@ function HeaderUser({
   ...rest
 }: HeaderUserProps) {
   const navigate = useNavigate();
+
+  const isLogin = (localStorage.getItem("token") ? true : false) || false;
+
   return (
     <div
       className={`h-[var(--header-height)] flex justify-center bg-white w-full ${className}`}
@@ -43,7 +46,9 @@ function HeaderUser({
             text="Giỏ hàng"
             tooltipposition="bottom"
             iconName="BiCart"
-            link={ROUTES.USER.SHOPPING_CART}
+            {...(isLogin
+              ? { link: ROUTES.USER.SHOPPING_CART }
+              : { onClick: () => navigate(ROUTES.AUTH.LOGIN) })}
           ></IconButton>
           <IconButton
             text="Lịch sử mua hàng"

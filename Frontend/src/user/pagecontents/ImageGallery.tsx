@@ -29,20 +29,31 @@ function ImageGallery({ imagesSource }: ImageGalleryProps) {
   return (
     <div className="flex flex-col w-full max-w-xl gap-4 mx-auto">
       {/* Ảnh chính */}
-      <div className="relative w-full overflow-hidden bg-gray-100 rounded-lg aspect-video">
+      <div className="relative w-full overflow-hidden bg-white rounded-lg aspect-video">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex h-full transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((img, index) => (
-            <img
+            <div
               key={index}
-              src={img}
-              alt={`Ảnh ${index + 1}`}
-              className="flex-shrink-0 object-cover w-full h-full"
-            />
+              className="flex items-center justify-center flex-shrink-0 w-full h-full"
+              style={{ minWidth: "100%" }}
+            >
+              <img
+                src={img}
+                alt={`Ảnh ${index + 1}`}
+                className="object-contain max-w-full max-h-full"
+                style={{
+                  display: "block",
+                  margin: "0 auto",
+                  maxHeight: "100%",
+                  maxWidth: "100%",
+                }}
+              />
+            </div>
           ))}
-        </div>{" "}
+        </div>
         <button
           onClick={prevImage}
           className="absolute left-0 flex items-center justify-center w-8 h-16 transition-all duration-300 -translate-y-1/2 rounded-r-full bg-[var(--background-color)]/60 top-1/2 hover:bg-[var(--background-color)]/80"
