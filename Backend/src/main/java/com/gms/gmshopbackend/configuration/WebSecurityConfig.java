@@ -70,11 +70,11 @@ public class WebSecurityConfig {
                             .requestMatchers(GET,
                                     String.format("%s/orders/**", apiPrefix)).hasAnyRole("ADMIN", "EMPLOYEE")
                             .requestMatchers(GET,
-                                    String.format("%s/product/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
-                            .requestMatchers(GET,
                                     String.format("%s/product/admin/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,
-                                    String.format("%s/product/category/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
+                                    String.format("%s/product/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/product/category/**", apiPrefix)).permitAll()
                             .requestMatchers(POST,
                                     String.format("%s/product/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(PUT,
@@ -82,9 +82,9 @@ public class WebSecurityConfig {
                             .requestMatchers(DELETE,
                                     String.format("%s/product/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,
-                                    String.format("%s/cart/user/**", apiPrefix)).hasRole("USER")
+                                    String.format("%s/cart/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(POST,
-                                    String.format("%s/cart/user/**", apiPrefix)).hasRole("USER")
+                                    String.format("%s/cart/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(GET,
                                     String.format("%s/inventory/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(POST,
@@ -95,6 +95,8 @@ public class WebSecurityConfig {
                                     String.format("%s/revenue/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(PUT,
                                     String.format("%s/promotion/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(GET,
+                                    String.format("%s/promotion/**", apiPrefix)).permitAll()
 
 
 

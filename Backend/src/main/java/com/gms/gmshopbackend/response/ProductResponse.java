@@ -41,7 +41,9 @@ public class ProductResponse extends BaseResponse {
 
     private SpecsResponse specs;
 
-    private Double originPrice;
+    private Double originalPrice;
+
+    private long sellPrice;
 
     private String thumbnail;
 
@@ -71,8 +73,11 @@ public class ProductResponse extends BaseResponse {
                 .description_2(product.getDescription_2())
                 .description_3(product.getDescription_3())
                 .isActive(product.getIsActive())
+                .originalPrice(product.getOriginPrice())
+                .sellPrice((long)((double) (product.getDiscountPercent() == null
+                                        ? product.getPrice()
+                                        : product.getPrice() * (1 - product.getDiscountPercent().floatValue() * 0.01f))))
 
-                .originPrice(product.getOriginPrice())
 
                 .productImages(product.getProductImages()==null?
                         new ArrayList<>():

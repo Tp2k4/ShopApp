@@ -55,8 +55,8 @@ public class OrderDTO {
 
     private boolean active;
 
-//    @JsonProperty(value = "cart_items")
-//    private List<CartItemDTO> cartItems;
+    @JsonProperty(value = "cart_items")
+    private List<CartItemDTO> cartItems;
 
 
 

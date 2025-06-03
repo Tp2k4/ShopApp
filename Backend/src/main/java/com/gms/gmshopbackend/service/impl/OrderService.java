@@ -1,5 +1,6 @@
 package com.gms.gmshopbackend.service.impl;
 
+import com.gms.gmshopbackend.dtos.CartItemDTO;
 import com.gms.gmshopbackend.dtos.OrderDTO;
 import com.gms.gmshopbackend.dtos.ProductOrderResponseDTO;
 import com.gms.gmshopbackend.model.*;
@@ -37,7 +38,6 @@ public class OrderService implements IOrderService {
     @Override
     @Transactional
     public OrderResponse createOrder(OrderDTO orderDTO, User user) {
-
         // Ánh xạ từ DTO sang entity, bỏ qua ID
         modelMapper.typeMap(OrderDTO.class, Order.class)
                 .addMappings(mapper -> mapper.skip(Order::setId));
@@ -58,18 +58,23 @@ public class OrderService implements IOrderService {
         }
 
         // Lấy các mục đã chọn
-        List<CartItem> cartItems = cartItemRepository.findByCartIdAndIsSelectedTrue(cart);
-        if (cartItems.isEmpty()) {
+        List<CartItemDTO> cartItems = orderDTO.getCartItems();
+        if (cartItems == null || cartItems.isEmpty()) {
             throw new IllegalStateException("No items selected in the cart");
         }
 
         List<OrderDetail> orderDetails = new ArrayList<>();
         List<ProductOrderResponseDTO> products = new ArrayList<>();
+        List<CartItem> orderItems = new ArrayList<>();
         double total = 0;
 
-        for (CartItem cartItem : cartItems) {
-            Product product = productRepository.findById(cartItem.getProduct().getId())
-                    .orElseThrow(() -> new IllegalStateException("Product not found"));
+        for (CartItemDTO cartItem : cartItems) {
+            // Lấy CartItem theo id, nếu không tìm thấy sẽ ném exception
+            CartItem cItem = cartItemRepository.findById(cartItem.getCartItemId())
+                    .orElseThrow(() -> new IllegalStateException("CartItem not found with id: " + cartItem.getCartItemId()));
+
+            Product product = productRepository.findById(cItem.getProduct().getId())
+                    .orElseThrow(() -> new IllegalStateException("Product not found with id: " + cItem.getProduct().getId()));
 
             int quantity = cartItem.getQuantity();
             if (product.getStockQuantity() < quantity) {
@@ -98,6 +103,7 @@ public class OrderService implements IOrderService {
                     .quantity(quantity)
                     .color("Random")
                     .build());
+            orderItems.add(cItem);
         }
 
         // Thiết lập tổng tiền và lưu đơn hàng
@@ -108,7 +114,7 @@ public class OrderService implements IOrderService {
         orderDetailRepository.saveAll(orderDetails);
 
         // Xóa các item đã chọn trong giỏ
-        cartItemRepository.deleteAllByCartIdAndIsSelectedTrue(cart);
+        cartItemRepository.deleteAll(orderItems);
 
         // Trả về thông tin đơn hàng
         return new OrderResponse(
@@ -123,6 +129,7 @@ public class OrderService implements IOrderService {
                 products
         );
     }
+
 
 
     @Override
