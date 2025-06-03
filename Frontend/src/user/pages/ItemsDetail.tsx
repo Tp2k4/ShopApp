@@ -28,7 +28,7 @@ function ItemsDetail() {
                 {data.price?.toLocaleString("vi-VN")}đ
               </span>
               <span className="text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] heading3">
-                {data.originPrice?.toLocaleString("vi-VN")}đ
+                {data.price?.toLocaleString("vi-VN")}đ
               </span>
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
