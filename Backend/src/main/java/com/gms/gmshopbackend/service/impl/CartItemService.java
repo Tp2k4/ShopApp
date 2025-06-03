@@ -24,6 +24,11 @@ public class CartItemService implements ICartItemService {
     private final CartItemRepository cartItemRepository;
     @Override
     public CartItem addCartItem(Cart cart, ProductCartDTO productCartDTO) {
+        CartItem existingCart = cartItemRepository.findByProductId(productCartDTO.getProductId());
+        if(existingCart != null) {
+            existingCart.setQuantity(existingCart.getQuantity() + 1);
+            return cartItemRepository.save(existingCart);
+        }
         CartItem cartItem = CartItem.builder()
                 .cartId(cart)
                 .price(productCartDTO.getPrice())
@@ -61,6 +66,19 @@ public class CartItemService implements ICartItemService {
         cartItem.setQuantity(quantity);
         return cartItemRepository.save(cartItem);
     }
+
+    @Override
+    public void deleteCartItem(Long cartItemId, User user) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new RuntimeException("CartItem not found"));
+        // Kiểm tra quyền sở hữu
+        if (!cartItem.getCartId().getUserId().getId().equals(user.getId())) {
+            throw new RuntimeException("Permission denied");
+        }
+
+        cartItemRepository.delete(cartItem);
+    }
+
 
     @Transactional
     public CartItem toggleSelected(Long cartItemId, User user) {

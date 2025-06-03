@@ -10,6 +10,8 @@ public interface ICartItemService {
     public CartItem updateCartItem(CartItem cartItem);
     public CartItem updateQuantity(Long cartItemId, int quantity, User user);
 
+    void deleteCartItem(Long cartItemId, User user);
+
     interface ICartService {
         public Cart getCartByUser(String user);
         public CartItem addCart(Long cartId, Long productId, Long quantity);

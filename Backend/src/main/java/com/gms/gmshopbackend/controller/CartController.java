@@ -109,6 +109,17 @@ public class CartController {
         }
     }
 
+    @DeleteMapping("/{cartitemid}")
+    public ResponseEntity<?> deleteCartItem(@PathVariable Long cartItemId, @AuthenticationPrincipal User user) {
+        try{
+            cartItemService.deleteCartItem(cartItemId, user);
+            return ResponseEntity.ok("Cart item deleted");
+        }catch(RuntimeException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+
 
     }
 
