@@ -70,11 +70,11 @@ public class WebSecurityConfig {
                             .requestMatchers(GET,
                                     String.format("%s/orders/**", apiPrefix)).hasAnyRole("ADMIN", "EMPLOYEE")
                             .requestMatchers(GET,
-                                    String.format("%s/product/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
-                            .requestMatchers(GET,
                                     String.format("%s/product/admin/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,
-                                    String.format("%s/product/category/**", apiPrefix)).hasAnyRole("ADMIN", "USER")
+                                    String.format("%s/product/**", apiPrefix)).permitAll()
+                            .requestMatchers(GET,
+                                    String.format("%s/product/category/**", apiPrefix)).permitAll()
                             .requestMatchers(POST,
                                     String.format("%s/product/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(PUT,

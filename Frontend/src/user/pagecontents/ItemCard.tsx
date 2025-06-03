@@ -25,10 +25,10 @@ const ItemCard = ({ productInfo }: ItemCardProps) => {
 
         <div className="flex items-end gap-[var(--small-gap)]">
           <div className="w-full font-semibold text-red-500 heading3">
-            {productInfo.price.toLocaleString("vi-VN")}đ
+            {productInfo.sellPrice.toLocaleString("vi-VN")}đ
           </div>
           <div className="w-full text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] body-text">
-            {productInfo.originPrice.toLocaleString("vi-VN")}đ
+            {productInfo.price.toLocaleString("vi-VN")}
           </div>
         </div>
 
