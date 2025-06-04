@@ -1,20 +1,38 @@
 import { useState } from "react";
+import { Button } from "./";
+import { useNavigate } from "react-router-dom";
 
 interface AddItemsButtonProps {
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  link?: string;
   productId: string;
   price: number;
   className?: string;
+  text: string;
+  [key: string]: any;
 }
 
 function AddItemsButton({
+  setShowPopup,
+  link,
   productId,
   price,
+  text,
   className = "",
+  ...rest
 }: AddItemsButtonProps) {
   const token = localStorage.getItem("token") || "";
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const navigate = useNavigate();
 
   const handleAddToCart = async () => {
+    const isLogin = token === "" ? false : true;
+
+    if (!isLogin) {
+      setShowPopup(true);
+      return;
+    }
+
     try {
       setIsAddingToCart(true);
 
@@ -47,17 +65,20 @@ function AddItemsButton({
     } finally {
       setIsAddingToCart(false);
     }
+
+    if (link) {
+      navigate(link);
+    }
   };
 
   return (
-    <button
+    <Button
       type="button"
-      className={`bg-[var(--primary-color)] text-white hover:bg-blue-600 ${className}`}
+      text={text}
       onClick={handleAddToCart}
       disabled={isAddingToCart}
-    >
-      {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
-    </button>
+      {...rest}
+    ></Button>
   );
 }
 

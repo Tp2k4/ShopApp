@@ -98,7 +98,25 @@ function CartItemsBar({
           </div>
         </div>
       </div>
-      <div className="pl-14">Xoá</div>
+      <button
+        type="button"
+        className="pl-14 opacity-[var(--caption-opacity)] hover:underline hover:opacity-100 w-fit"
+        onClick={async () => {
+          const res = await fetch(
+            `http://localhost:8020/api/v1/gmshop/cart/user/${CartItemInfos.productId}`,
+            { method: "DELETE" }
+          );
+          if (res.ok) {
+            setListCartItemsChecked((prev: any[]) =>
+              prev.filter((item) => item.productId !== CartItemInfos.productId)
+            );
+          } else {
+            alert("Xoá sản phẩm thất bại!");
+          }
+        }}
+      >
+        Xoá
+      </button>
     </div>
   );
 }

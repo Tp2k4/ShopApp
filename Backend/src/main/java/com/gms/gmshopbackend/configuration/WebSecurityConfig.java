@@ -86,6 +86,8 @@ public class WebSecurityConfig {
                                     String.format("%s/cart/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(POST,
                                     String.format("%s/cart/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
+                            .requestMatchers(DELETE,
+                                    String.format("%s/cart/user/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(GET,
                                     String.format("%s/inventory/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(POST,
