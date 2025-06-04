@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useGet } from "../../service/crudService";
 import HeaderUser from "../../shared/components/ui/HeaderUser";
 import HomeBanner from "../pagecontents/HomeBanner";
@@ -5,9 +6,20 @@ import HomeSideBar from "../pagecontents/HomeSideBar";
 import ItemCard from "../pagecontents/ItemCard";
 
 function UserHome() {
-  const { data: productInfos } = useGet(
+  const { data: productInfos, setData: setProductInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/product"
   );
+  const { data: thumbnails } = useGet(
+    "http://localhost:8020/api/v1/gmshop/promotion"
+  );
+
+  const [thumbnailList, setThumbnailList] = useState<any[]>([]);
+
+  useEffect(() => {
+    thumbnails.map((thumbnail: any) => {
+      setThumbnailList((prev) => [...prev, thumbnail]);
+    });
+  }, [thumbnails]);
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
@@ -18,22 +30,34 @@ function UserHome() {
             <HomeSideBar />
           </div>
           <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`}
+            />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[1].thumbnail}`}
+            />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[2].thumbnail}`}
+            />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[3].thumbnail}`}
+            />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`}
+            />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner />
+            <HomeBanner
+              imageSource={`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`}
+            />
             {/*  */}
           </div>
         </div>

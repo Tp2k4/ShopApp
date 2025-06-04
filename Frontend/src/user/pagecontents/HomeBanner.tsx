@@ -1,11 +1,13 @@
-import avatar from "../../assets/avatar/sample.jpg";
-
-export default function HomeBanner() {
+interface HomeBannerProps {
+  imageSource: string;
+}
+const HomeBanner = ({ imageSource }: HomeBannerProps) => {
   return (
     <img
-      src={avatar}
+      src={imageSource}
       alt="Home Banner"
       className="object-cover w-full h-full "
     />
   );
-}
+};
+export default HomeBanner;

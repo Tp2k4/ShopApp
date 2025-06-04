@@ -5,8 +5,11 @@ import CartProgressBar from "../pagecontents/CartProgressBar";
 import Line from "../../shared/components/ui/Line";
 import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
+import { useEffect, useState } from "react";
 
 export default function Payment() {
+  const token = localStorage.getItem("token");
+
   const { data: UserInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/user/get-user"
   );
@@ -21,6 +24,60 @@ export default function Payment() {
       total + (Number(item.sellPrice) || 0) * (Number(item.quantity) || 0),
     0
   );
+
+  interface cart_items {
+    quantity: number;
+    cart_item: number;
+  }
+
+  interface orderInfo {
+    user_id: number;
+    fullname: string;
+    phone_number: string;
+    address: string;
+    note: string;
+    total_money: number;
+    payment_method: string;
+    shipping_address: string;
+    tracking_number: string;
+    cart_items: cart_items[];
+  }
+
+  const [orderInfo, setOrderInfo] = useState<orderInfo>({
+    user_id: UserInfos.id,
+    fullname: UserInfos.name,
+    phone_number: UserInfos.phoneNumber,
+    address: UserInfos.address,
+    note: "",
+    total_money: 0, // Sẽ được tính sau
+    payment_method: "COD", // Thanh toán khi nhận hàng
+    shipping_address: UserInfos.address,
+    tracking_number: "", // Sẽ được cập nhật sau
+    cart_items: listCartItemsChecked.map((item: any) => ({
+      quantity: item.quantity,
+      cart_item: item.id,
+    })),
+  });
+
+  useEffect(() => {
+    setOrderInfo({
+      user_id: UserInfos.id,
+      fullname: UserInfos.name,
+      phone_number: UserInfos.phoneNumber,
+      address: UserInfos.address,
+      note: "",
+      total_money: totalPrice + 20000, // Sẽ được tính sau
+      payment_method: "COD", // Thanh toán khi nhận hàng
+      shipping_address: UserInfos.address,
+      tracking_number: "", // Sẽ được cập nhật sau
+      cart_items: listCartItemsChecked.map((item: any) => ({
+        quantity: item.quantity,
+        cart_item: item.id,
+      })),
+    });
+  }, [UserInfos, totalPrice]);
+
+  console.log("Order Info:", orderInfo);
 
   return (
     <div className="w-screen flex flex-col items-center gap-[var(--medium-gap)]">
@@ -93,6 +150,7 @@ export default function Payment() {
                 ))}
               </div>
             </div>
+
             {/* phần thanh toán  */}
             <div className="flex justify-between w-full ">
               <div className="flex items-center gap-[var(--medium-gap)]">
@@ -117,8 +175,17 @@ export default function Payment() {
                 <Button
                   type="button"
                   text="Đặt hàng"
-                  onClick={() => {}}
-                ></Button>
+                  onClick={() => {
+                    fetch("http://localhost:8020/api/v1/gmshop/orders", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                      },
+                      body: JSON.stringify(orderInfo),
+                    });
+                  }}
+                />
               </div>
             </div>
           </div>

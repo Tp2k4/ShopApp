@@ -59,6 +59,7 @@ public class WebSecurityConfig {
                             String.format("%s/user/**", apiPrefix)
                             ).permitAll()
                             .requestMatchers("/images/**").permitAll()
+                            .requestMatchers("/promotions/**").permitAll()
                             .requestMatchers(PUT,
                                     String.format("%s/orders/employee/**", apiPrefix)).hasAnyRole("EMPLOYEE", "ADMIN")
                             .requestMatchers(POST,
