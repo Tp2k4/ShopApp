@@ -1,4 +1,82 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import { useGet } from "../../service/crudService";
+// import HeaderUser from "../../shared/components/ui/HeaderUser";
+// import HomeBanner from "../pagecontents/HomeBanner";
+// import HomeSideBar from "../pagecontents/HomeSideBar";
+// import ItemCard from "../pagecontents/ItemCard";
+
+// function UserHome() {
+//   const { data: productInfos, setData: setProductInfos } = useGet(
+//     "http://localhost:8020/api/v1/gmshop/product"
+//   );
+//   const { data: thumbnails } = useGet(
+//     "http://localhost:8020/api/v1/gmshop/promotion"
+//   );
+
+//   const [thumbnailList, setThumbnailList] = useState<any[]>([]);
+
+//   useEffect(() => {
+//     thumbnails.map((thumbnail: any) => {
+//       setThumbnailList((prev) => [...prev, thumbnail]);
+//     });
+//   }, [thumbnails]);
+
+//   return (
+//     <div className="min-h-screen w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
+//       <HeaderUser name="nguyên" />
+//       <div className="flex justify-center gap-[var(--medium-gap)] w-[var(--max-width-content)] h-full">
+//         <div className="grid grid-cols-11 grid-rows-3 gap-[var(--medium-gap)] w-full h-full ">
+//           <div className="w-full h-full col-span-2 row-span-3 overflow-hidden bg-white rounded-md">
+//             <HomeSideBar />
+//           </div>
+//           <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[0].thumbnail}`}
+//             />
+//           </div>
+//           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[1].thumbnail}`}
+//             />
+//           </div>
+//           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[2].thumbnail}`}
+//             />
+//           </div>
+//           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[3].thumbnail}`}
+//             />
+//           </div>
+//           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[1].thumbnail}`}
+//             />
+//           </div>
+//           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+//             <HomeBanner
+//               imageSource={`http://localhost:8020/promotion/${thumbnailList[2].thumbnail}`}
+//             />
+//             {/*  */}
+//           </div>
+//         </div>
+//       </div>
+//       <div className="max-w-[var(--max-width-content)] h-auto">
+//         <div className="w-full h-full bg-white p-[var(--medium-gap)] rounded-md">
+//           <div className="grid grid-cols-5 auto-rows-auto gap-[var(--semi-medium-gap)] items-center justify-center">
+//             {productInfos.map((productInfo: any) => (
+//               <ItemCard key={productInfo.id} productInfo={productInfo} />
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default UserHome;
+import { useEffect } from "react";
 import { useGet } from "../../service/crudService";
 import HeaderUser from "../../shared/components/ui/HeaderUser";
 import HomeBanner from "../pagecontents/HomeBanner";
@@ -6,66 +84,51 @@ import HomeSideBar from "../pagecontents/HomeSideBar";
 import ItemCard from "../pagecontents/ItemCard";
 
 function UserHome() {
-  const { data: productInfos, setData: setProductInfos } = useGet(
+  const { data: productInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/product"
   );
   const { data: thumbnails } = useGet(
     "http://localhost:8020/api/v1/gmshop/promotion"
   );
 
-  const [thumbnailList, setThumbnailList] = useState<any[]>([]);
-
-  useEffect(() => {
-    thumbnails.map((thumbnail: any) => {
-      setThumbnailList((prev) => [...prev, thumbnail]);
-    });
-  }, [thumbnails]);
-
   return (
     <div className="min-h-screen w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
       <HeaderUser name="nguyên" />
       <div className="flex justify-center gap-[var(--medium-gap)] w-[var(--max-width-content)] h-full">
-        <div className="grid grid-cols-11 grid-rows-3 gap-[var(--medium-gap)] w-full h-full ">
+        <div className="grid grid-cols-11 grid-rows-3 gap-[var(--medium-gap)] w-full h-full">
           <div className="w-full h-full col-span-2 row-span-3 overflow-hidden bg-white rounded-md">
             <HomeSideBar />
           </div>
-          <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`}
-            />
-          </div>
-          <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[1].thumbnail}`}
-            />
-          </div>
-          <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[2].thumbnail}`}
-            />
-          </div>
-          <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[3].thumbnail}`}
-            />
-          </div>
-          <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`}
-            />
-          </div>
-          <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner
-              imageSource={`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`}
-            />
-            {/*  */}
-          </div>
+
+          {thumbnails?.length >= 4 && (
+            <>
+              <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[0].thumbnail}`} />
+              </div>
+              <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[1].thumbnail}`} />
+              </div>
+              <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[2].thumbnail}`} />
+              </div>
+              <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[3].thumbnail}`} />
+              </div>
+              <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[1].thumbnail}`} />
+              </div>
+              <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
+                <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnails[2].thumbnail}`} />
+              </div>
+            </>
+          )}
         </div>
       </div>
+
       <div className="max-w-[var(--max-width-content)] h-auto">
         <div className="w-full h-full bg-white p-[var(--medium-gap)] rounded-md">
           <div className="grid grid-cols-5 auto-rows-auto gap-[var(--semi-medium-gap)] items-center justify-center">
-            {productInfos.map((productInfo: any) => (
+            {productInfos?.map((productInfo: any) => (
               <ItemCard key={productInfo.id} productInfo={productInfo} />
             ))}
           </div>

@@ -2,6 +2,7 @@ package com.gms.gmshopbackend.repository;
 
 import com.gms.gmshopbackend.model.Cart;
 import com.gms.gmshopbackend.model.CartItem;
+import com.gms.gmshopbackend.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     void deleteAllByCartIdAndIsSelectedTrue(Cart cart);
 
     CartItem findByProductId(Long productId);
+
+
+    CartItem findByCartIdAndProduct(Cart cart, Product product);
 }

@@ -43,24 +43,24 @@ function HeaderUser({
   //================ Lọc và tìm kiếm
   const filterOptions = ["all", "pending", "delivered", "shipping", "deleted"];
 
-  // Lọc
-  const {
-    filteredItems: filteredByType,
-    selectedFilter,
-    setSelectedFilter,
-  } = useFilter(orders, filterOptions, "status");
+  // // Lọc
+  // const {
+  //   filteredItems: filteredByType,
+  //   selectedFilter,
+  //   setSelectedFilter,
+  // } = useFilter(orders, filterOptions, "status");
 
-  // Tìm kiếm
-  const {
-    filteredItems: filteredBySearch,
-    searchQuery,
-    setSearchQuery,
-  } = useSearch(orders, "fullName");
+  // // Tìm kiếm
+  // const {
+  //   filteredItems: filteredBySearch,
+  //   searchQuery,
+  //   setSearchQuery,
+  // } = useSearch(orders, "fullName");
 
-  // Gộp 2 kết quả lọc và tìm kiếm
-  const finalFilteredItems = filteredBySearch.filter((item) =>
-    filteredByType.includes(item)
-  );
+  // // Gộp 2 kết quả lọc và tìm kiếm
+  // const finalFilteredItems = filteredBySearch.filter((item) =>
+  //   filteredByType.includes(item)
+  // );
 
   return (
     <div
