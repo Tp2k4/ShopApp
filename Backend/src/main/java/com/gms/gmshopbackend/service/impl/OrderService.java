@@ -43,6 +43,7 @@ public class OrderService implements IOrderService {
                 .addMappings(mapper -> mapper.skip(Order::setId));
         Order order = new Order();
         modelMapper.map(orderDTO, order);
+        order.setEmail(user.getEmail());
 
         // Thiết lập thông tin đơn hàng
         order.setUser(user);

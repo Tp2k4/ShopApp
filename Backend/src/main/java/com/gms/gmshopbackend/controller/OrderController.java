@@ -39,7 +39,7 @@ public class OrderController {
 
 
     @PostMapping("")
-    public ResponseEntity<?> createOrder(@Valid @RequestBody OrderDTO orderDTO,
+    public ResponseEntity<?> createOrder(@RequestBody OrderDTO orderDTO,
                                          BindingResult bindingResult,
                                          @AuthenticationPrincipal User user) {
         try{

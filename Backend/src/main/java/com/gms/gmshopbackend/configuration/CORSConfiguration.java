@@ -21,6 +21,8 @@ public class CORSConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("file:upload/product/images/");
+        registry.addResourceHandler("/promotions/**")
+                .addResourceLocations("file:upload/promotion/");
     }
 }
 
