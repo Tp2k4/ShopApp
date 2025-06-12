@@ -57,64 +57,62 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Product createProduct(ProductDTO productDTO) {
+
         // Kiểm tra nếu sản phẩm đã tồn tại
         if (productRepository.existsByName(productDTO.getName())) {
             throw new RuntimeException("Product existed: " + productDTO.getName());
         }
-        Category category = (Category) categoryRepository.findByName(productDTO.getCategoryId()).orElseThrow(
-                () -> new RuntimeException("Category not found")
-        );
 
+        // Lấy category
+        Category category = (Category) categoryRepository.findByName(productDTO.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
 
-
+        // Lấy brand
         Brand brand = brandRepository.findByName(productDTO.getBrandId());
-
+        if(brand == null){
+            throw new RuntimeException("Brand not found");
+        }
 
 
         // Tạo đối tượng Product từ DTO
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
-        product.setDescription(productDTO.getDescription1());
-        product.setCategory((Category) category);
-        product.setBrand(brand);
-        product.setStockQuantity(productDTO.getStockQuantity());
-        product.setThumbnail(productDTO.getThumbnail());
         product.setOriginPrice(productDTO.getImportPrice());
         product.setDescription(productDTO.getDescription1());
         product.setDescription_2(productDTO.getDescription2());
         product.setDescription_3(productDTO.getDescription3());
+        product.setStockQuantity(productDTO.getStockQuantity());
+        product.setThumbnail(productDTO.getThumbnail());
+        product.setCategory(category);
+        product.setBrand(brand);
 
+        // ✅ Lưu sản phẩm trước, chưa set specs (tránh lỗi khóa ngoại ngược)
         Product savedProduct = productRepository.save(product);
 
-        if (product.getCategory().getName().equalsIgnoreCase("Mouse") ) {
-            MouseSpecs newMouseSpecs = mouseSpecsService
-                    .createMouseSpecs(savedProduct, productDTO);
+        // Tùy vào category, tạo specs tương ứng rồi gán lại
+        if (category.getName().equalsIgnoreCase("Mouse")) {
+            MouseSpecs newMouseSpecs = mouseSpecsService.createMouseSpecs(savedProduct, productDTO);
             savedProduct.setMouseSpecs(newMouseSpecs);
         }
 
-        if (product.getCategory().getName().equalsIgnoreCase("Keyboard")) {
-            KeyboardSpecs newKeyboardSpecs = keyboardSpecsService
-                    .createKeyboardSpecs(savedProduct, productDTO);
+        if (category.getName().equalsIgnoreCase("Keyboard")) {
+            KeyboardSpecs newKeyboardSpecs = keyboardSpecsService.createKeyboardSpecs(savedProduct, productDTO);
             savedProduct.setKeyboardSpecs(newKeyboardSpecs);
         }
 
-        if (product.getCategory().getName().equalsIgnoreCase("Headphone")) {
-            HeadphoneSpecs newHeadphoneSpecs = headphoneSpecsService
-                    .createHeadphoneSpecs(savedProduct, productDTO);
+        if (category.getName().equalsIgnoreCase("Headphone")) {
+            HeadphoneSpecs newHeadphoneSpecs = headphoneSpecsService.createHeadphoneSpecs(savedProduct, productDTO);
             savedProduct.setHeadphoneSpecs(newHeadphoneSpecs);
         }
 
-        try {
-            // Lưu vào database
-            Product newProduct = productRepository.save(savedProduct);
-            return newProduct;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+
+        // ✅ Lưu lại sản phẩm lần cuối sau khi đã gán specs
+        return productRepository.save(savedProduct);
     }
+
 
     @Override
 

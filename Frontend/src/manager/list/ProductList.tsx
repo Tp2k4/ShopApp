@@ -175,7 +175,7 @@ function ProductList({
                 <td>{product.brand_id}</td>
                 <td>{product.category_id}</td>
                 <td>{product.stock_quantity}</td>
-                <td>{product.originPrice}</td>
+                <td>{product.originalPrice}</td>
                 <td>{product.price}</td>
                 {/* Kiểm tra trạng thái hết hàng */}
                 <td
