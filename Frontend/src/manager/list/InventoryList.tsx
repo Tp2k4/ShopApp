@@ -38,8 +38,8 @@ function AccountList({
               <td>{inventory.brand}</td>
               <td>{inventory.transactionType}</td>
               <td>{inventory.quantity}</td>
-              <td>{inventory.importPrice}</td>
-              <td>{inventory.sellPrice}</td>
+              <td>{inventory.importPrice.toLocaleString("vi-VN")}</td>
+              <td>{inventory.sellPrice.toLocaleString("vi-VN")}</td>
               <td className="!py-0">
                 <div className="flex gap-[var(--small-gap)] justify-end">
                   <Button type="button" text="Chỉnh sửa" width="auto" />

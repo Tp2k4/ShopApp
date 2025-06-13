@@ -175,7 +175,7 @@ function ProductList({
                 <td>{product.brand_id}</td>
                 <td>{product.category_id}</td>
                 <td>{product.stock_quantity}</td>
-                <td>{product.originalPrice.toLocaleString("vi-VN")}</td>
+                <td>{product.originPrice.toLocaleString("vi-VN")}</td>
                 <td>{product.price.toLocaleString("vi-VN")}</td>
                 {/* Kiểm tra trạng thái hết hàng */}
                 <td
