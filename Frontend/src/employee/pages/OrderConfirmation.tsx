@@ -308,7 +308,7 @@ function OrderConfirmation() {
                   <div>
                     <strong>Tổng tiền:</strong>{" "}
                   </div>
-                  <div className="text-red-500">{order.totalPrice}đ</div>
+                  <div className="text-red-500">{order.totalPrice.toLocaleString("vi-VN")}đ</div>
                 </div>
               </div>
             </div>

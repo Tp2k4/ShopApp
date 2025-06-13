@@ -1,7 +1,6 @@
 import { LabeledInputField, InputField, SelectButton } from "../../../shared/components/form";
 import { handleCreateSale, handleCancelCreate, useGet } from "../../../service/crudService";
 import { Button, CancelButton } from "../../../shared/components/button";
-import { Line } from "../../../shared/components/ui";
 import ImportImage from "../../utils/ImportImage";
 
 import { useState, useEffect } from "react";
@@ -214,7 +213,8 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
                 files,
                 newSaleInfo,
                 setNewSaleInfo,
-                setSales
+                setSales,
+                setShowPopup
               )
             }}
             type="submit"

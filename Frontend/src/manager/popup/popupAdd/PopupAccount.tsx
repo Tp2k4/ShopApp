@@ -143,7 +143,8 @@ const PopupAccount = ({ setAccounts, setShowPopup }: AccountProps) => {
                     "http://localhost:8020/api/v1/gmshop/user/register",
                     newAccountInfo,
                     setNewAccountInfo,
-                    setAccounts
+                    setAccounts,
+                    setShowPopup
                   )
                 }
                 type="submit"

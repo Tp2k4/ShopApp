@@ -36,10 +36,10 @@ function StatisticsList({
                 <td>{statistic.date}</td>
                 <td>{statistic.productName}</td>
                 <td>{statistic.quantity}</td>
-                <td>{statistic.importPrice}</td>
-                <td>{statistic.sellPrice}</td>
+                <td>{statistic.importPrice.toLocaleString("vi-VN")}</td>
+                <td>{statistic.sellPrice.toLocaleString("vi-VN")}</td>
                 <td className="!text-right text-red-500">
-                  {statistic.totalRevenue}
+                  {statistic.totalRevenue.toLocaleString("vi-VN")}
                 </td>
               </tr>
             ))}

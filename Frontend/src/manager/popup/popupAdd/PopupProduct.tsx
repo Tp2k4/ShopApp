@@ -336,9 +336,11 @@ const PopupProduct = ({ setProducts, setShowPopup }: PopupProductProps) => {
                 handleCreateProduct(
                   "http://localhost:8020/api/v1/gmshop/product/create-product",
                   files,
+                  setFiles,
                   newProductInfo,
                   setNewProductInfo,
-                  setProducts
+                  setProducts,
+                  setShowPopup
                 )
               }
               type="submit"

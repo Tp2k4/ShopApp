@@ -107,7 +107,8 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
                     "http://localhost:8020/api/v1/gmshop/inventory/create-inventory",
                     newInventoryInfo,
                     setNewInventoryInfo,
-                    setInventorys
+                    setInventorys,
+                    setShowPopup
                   )
                 }
                 type="submit"

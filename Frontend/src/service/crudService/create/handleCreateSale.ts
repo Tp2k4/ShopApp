@@ -5,6 +5,7 @@ export const handleCreateSale = async (
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
+    setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     // Lấy token
     const token = localStorage.getItem("token")
@@ -56,6 +57,9 @@ export const handleCreateSale = async (
             if (!responseForAddImage.ok){
                 alert("Lỗi khi gọi API thêm ảnh")
             }
+
+            setShowPopup(false);
+            alert("Thêm thành công.")
 
 
         } else {
