@@ -1,4 +1,4 @@
-import HeaderUser from "../../shared/components/ui/HeaderUser";
+import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import { ROUTES } from "../../shared/paths";
 import { Link } from "react-router-dom";
 import CartProgressBar from "../pagecontents/CartProgressBar";
@@ -49,7 +49,7 @@ export default function ShoppingCart() {
 
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <HeaderUser />
+      <HeaderUserNoSearch />
       <div className="w-[var(--max-width-content)] h-full flex flex-col items-start justify-center gap-[var(--medium-gap)] ">
         <Link
           to={ROUTES.USER.HOME}

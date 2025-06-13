@@ -7,7 +7,6 @@ import { SearchField } from "../form";
 import PopupConfirm from "../../../user/popup/PopupConfirm";
 
 import { useState } from "react";
-import { useFilter, useSearch } from "../../../service/queryService";
 
 interface HeaderUserProps {
   children?: React.ReactNode;
@@ -22,6 +21,9 @@ function HeaderUser({
   name,
   className = "",
   setProductInfos,
+  // Thêm props searchQuery và setSearchQuery vào đây
+  searchQuery,
+  setSearchQuery,
   ...rest
 }: HeaderUserProps) {
   const navigate = useNavigate();
@@ -38,29 +40,6 @@ function HeaderUser({
 
     setShowPopup(true);
   };
-
-  // Lọc và tìm kiếm sản phẩm
-  //================ Lọc và tìm kiếm
-  const filterOptions = ["all", "pending", "delivered", "shipping", "deleted"];
-
-  // // Lọc
-  // const {
-  //   filteredItems: filteredByType,
-  //   selectedFilter,
-  //   setSelectedFilter,
-  // } = useFilter(orders, filterOptions, "status");
-
-  // // Tìm kiếm
-  // const {
-  //   filteredItems: filteredBySearch,
-  //   searchQuery,
-  //   setSearchQuery,
-  // } = useSearch(orders, "fullName");
-
-  // // Gộp 2 kết quả lọc và tìm kiếm
-  // const finalFilteredItems = filteredBySearch.filter((item) =>
-  //   filteredByType.includes(item)
-  // );
 
   return (
     <div
@@ -80,8 +59,8 @@ function HeaderUser({
         </div>
         <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
           <SearchField
-            // value={searchQuery}
-            // onChange={(e: any) => setSearchQuery(e.target.value)}
+            value={searchQuery}
+            onChange={(e: any) => setSearchQuery && setSearchQuery(e.target.value)}
             width="300px"
           />
           <IconButton

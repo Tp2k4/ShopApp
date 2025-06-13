@@ -1,4 +1,4 @@
-import HeaderUser from "../../shared/components/ui/HeaderUser";
+import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import Box from "../../shared/components/ui/Box";
 import OrderItems from "../pagecontents/OrderItems";
 import { useGet } from "../../service/crudService";
@@ -9,7 +9,7 @@ function BuyHistory() {
 
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <HeaderUser />
+      <HeaderUserNoSearch />
       <div className="flex gap-[var(--medium-gap)] w-[75%]">
         <UserProfileNavigation className="w-[25%] h-[auto]" />
         <Box

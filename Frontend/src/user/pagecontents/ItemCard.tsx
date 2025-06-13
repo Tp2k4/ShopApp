@@ -10,7 +10,7 @@ const ItemCard = ({ productInfo }: ItemCardProps) => {
   };
   return (
     <div
-      className="items-center justify-start min-w-[200px] h-auto flex flex-col bg-white p-[var(--semi-medium-gap)] rounded-md border-[var(--line-color)] border shadow-sm hover:shadow-md transition-all duration-200 ease-in-out"
+      className="items-center justify-start min-w-[200px] h-auto flex flex-col bg-white p-[var(--semi-medium-gap)] rounded-md border-[var(--line-color)] border shadow-sm hover:shadow-md transition-all duration-200 ease-in-out cursor-pointer hover:border-[var(--primary-color)]"
       onClick={handleClick}
     >
       <div className=" flex flex-col items-start justify-start w-full h-auto gap-[var(--small-gap)]">
