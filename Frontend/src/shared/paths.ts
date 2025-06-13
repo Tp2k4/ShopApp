@@ -30,6 +30,7 @@ export const ROUTES = {
       ITEMS_DETAIL: "/user/home/:category_id/:id",
       SHOPPING_CART: "/user/shopping-cart",
       PAYMENT: "/user/payment",
+      FINISH_ORDER: "/user/finish-order",
     },
 }
 

@@ -6,9 +6,12 @@ import Line from "../../shared/components/ui/Line";
 import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
   const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
 
   const { data: UserInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/user/get-user"
@@ -184,6 +187,8 @@ export default function Payment() {
                       },
                       body: JSON.stringify(orderInfo),
                     });
+                    localStorage.removeItem("listCartItemsChecked");
+                    navigate(ROUTES.USER.FINISH_ORDER);
                   }}
                 />
               </div>
