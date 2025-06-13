@@ -327,7 +327,8 @@ const PopupProductModify = ({
                     files,
                     productInfo,
                     setProductInfo,
-                    setProducts
+                    setProducts,
+                    setShowPopup,
                   )
                 }
                 type="button"

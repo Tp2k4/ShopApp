@@ -173,9 +173,10 @@ const PopupAccountModify = ({
                     account.id,
                     accountInfo,
                     setAccountInfo,
-                    setAccounts
+                    setAccounts,
+                    setShowPopup
                   );
-                  setShowPopup(false);
+                  
                 }}
                 type="button"
                 text="Lưu"

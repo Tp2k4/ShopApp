@@ -1,48 +1,45 @@
-import { Box, NavLabel } from "../../shared/components/ui";
-import { ROUTES } from "../../shared/paths";
-
-import { useLocation } from "react-router-dom";
+import { Box } from "../../shared/components/ui";
 
 interface HomeSideBarProps {
   className?: string;
+  selectedFilter: string;
+  setSelectedFilter: (filter: string) => void;
   [key: string]: any;
 }
 
-function HomeSideBar({ children, className = "", ...rest }: HomeSideBarProps) {
-  const location = useLocation();
-
-  const isActive = (path: string) => location.pathname === path;
+function HomeSideBar({
+  children,
+  className = "",
+  selectedFilter,
+  setSelectedFilter,
+  ...rest
+}: HomeSideBarProps) {
+  const filterOptions = [
+    { label: "Chuột", value: "mouse" },
+    { label: "Bàn phím", value: "keyboard" },
+    { label: "Tai nghe", value: "headphone" },
+    { label: "Tất cả", value: "all" },
+  ];
 
   return (
     <Box
       className={`rounded-none h-auto w-full flex flex-col ${className}`}
       {...rest}
     >
-      <NavLabel
-        className={
-          isActive("/manager") ? "bg-[var(--primary-color)] text-white" : ""
-        }
-        label="Chuột"
-        link={ROUTES.MANAGER.HOME}
-      />
-      <NavLabel
-        className={
-          isActive("/manager/account")
-            ? "bg-[var(--primary-color)] text-white"
-            : ""
-        }
-        label="Bàn phím"
-        link={ROUTES.MANAGER.ACCOUNT}
-      />
-      <NavLabel
-        className={
-          isActive("/manager/product")
-            ? "bg-[var(--primary-color)] text-white"
-            : ""
-        }
-        label="Tai nghe"
-        link={ROUTES.MANAGER.PRODUCT}
-      />
+      {filterOptions.map((option) => (
+        <button
+          key={option.value}
+          className={`text-left px-4 py-2 w-full transition-colors rounded-none border-b border-gray-100 last:border-b-0 ${
+            selectedFilter === option.value
+              ? "bg-[var(--primary-color)] text-white font-bold"
+              : "hover:bg-gray-100"
+          }`}
+          onClick={() => setSelectedFilter(option.value)}
+          type="button"
+        >
+          {option.label}
+        </button>
+      ))}
     </Box>
   );
 }

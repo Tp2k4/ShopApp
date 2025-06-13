@@ -17,8 +17,6 @@ function UserHome() {
 
   const [thumbnailList, setThumbnailList] = useState<any[]>([]);
 
-  console.log("Thumbnails:", thumbnails);
-
   useEffect(() => {
     thumbnails.map((thumbnail: any) => {
       setThumbnailList((prev) => [...prev, thumbnail]);
@@ -69,19 +67,19 @@ function UserHome() {
             <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
+            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[2].thumbnail}`} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
+            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[3].thumbnail}`} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
+            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
+            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[1].thumbnail}`} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[0].thumbnail}`} />
+            <HomeBanner imageSource={`http://localhost:8020/promotions/${thumbnailList[2].thumbnail}`} />
             {/*  */}
           </div>
         </div>

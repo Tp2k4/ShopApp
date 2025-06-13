@@ -25,6 +25,7 @@ import UserHome from "./user/pages/UserHome";
 import ItemsDetail from "./user/pages/ItemsDetail";
 import ShoppingCart from "./user/pages/ShoppingCart";
 import Payment from "./user/pages/Payment";
+import FinishOrder from "./user/pages/FinishOrder";
 
 import "boxicons/css/boxicons.min.css";
 import React from "react";
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
 
   { path: ROUTES.USER.SHOPPING_CART, element: <ShoppingCart /> },
   { path: ROUTES.USER.PAYMENT, element: <Payment /> },
+  { path: ROUTES.USER.FINISH_ORDER, element: <FinishOrder /> },
 ]);
 
 const App: React.FC = () => {

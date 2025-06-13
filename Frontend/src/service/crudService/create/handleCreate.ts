@@ -3,6 +3,7 @@ export const handleCreate= async (
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
+    setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const token = localStorage.getItem("token")
 
@@ -33,6 +34,9 @@ export const handleCreate= async (
               }
               return resetOrder;
           });
+
+          setShowPopup(false);
+          alert("Thêm thành công.")
 
         } else {
             alert("Lỗi khi thêm.")

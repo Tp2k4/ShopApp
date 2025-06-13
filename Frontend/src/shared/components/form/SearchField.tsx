@@ -17,7 +17,7 @@ function SearchField({
       className={`rounded-md relative flex items-center bg-[var(--secondary-color)] ${width}`}
     >
       <InputField
-        width={width}
+        className={width}
         type="text"
         placeholder="Tìm kiếm..."
         {...rest}

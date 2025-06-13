@@ -6,6 +6,7 @@ export const handleModifyProduct = async (
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
+    setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     // Lấy token
     const token = localStorage.getItem("token")
@@ -30,7 +31,11 @@ export const handleModifyProduct = async (
         if(response.ok){
             //Giúp update ngay item đã thêm lên màn hình mà không cần phải load lại trang
             const newProductJson = await response.json()
-            setItems((prevItems) => [...prevItems, newProductJson]);
+            setItems((prevItems) =>
+                prevItems.map((item) =>
+                    item.id === newProductJson.id ? newProductJson : item
+                )
+            );
             
             // set tất cả các trường về mặt định ""
             setNewItemInfo((prevOrder: any) => {
@@ -55,9 +60,12 @@ export const handleModifyProduct = async (
             })
 
             if (!responseForAddImage.ok){
-                alert("Lỗi khi gọi API chỉnh sửa ảnh")
+                alert("Đã chỉnh sửa thông tin sản phẩm thành công nhưng lỗi khi gọi API chỉnh sửa ảnh")
+            } else {
+                alert("Chỉnh sửa thành công.")
             }
-
+            
+             setShowPopup(false);
 
         } else {
             alert("Lỗi khi chỉnh sửa.")

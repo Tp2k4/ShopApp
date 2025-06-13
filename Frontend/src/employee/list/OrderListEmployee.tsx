@@ -56,7 +56,7 @@ function OrderListEmployee({
                 <td>{order.email}</td>
                 <td>{order.orderDate}</td>
                 <td>{order.status}</td>
-                <td className="text-red-500">{order.totalPrice}</td>
+                <td className="text-red-500">{order.totalPrice.toLocaleString("vi-VN")}</td>
                 <td className="!py-0">
                   <div className="flex gap-[var(--small-gap)] justify-end">
                     <DetailButton

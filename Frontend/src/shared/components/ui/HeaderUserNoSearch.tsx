@@ -7,23 +7,21 @@ import PopupConfirm from "../../../user/popup/PopupConfirm";
 
 import { useState } from "react";
 
-interface HeaderUserProps {
+interface HeaderUserNoSearchProps {
   children?: React.ReactNode;
   name?: string;
   className?: string;
-
   setProductInfos?: React.Dispatch<React.SetStateAction<any[]>>;
   [key: string]: any;
 }
 
-function HeaderUser({
+function HeaderUserNoSearch({
   children,
   name,
   className = "",
   setProductInfos,
-
   ...rest
-}: HeaderUserProps) {
+}: HeaderUserNoSearchProps) {
   const navigate = useNavigate();
 
   const [showPopup, setShowPopup] = useState(false);
@@ -55,40 +53,40 @@ function HeaderUser({
             Gaming Gear
           </button>
         </div>
+        <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
+          <IconButton
+            text="Giỏ hàng"
+            tooltipposition="bottom"
+            iconName="BiCart"
+            onClick={() => {
+              handle(ROUTES.USER.SHOPPING_CART);
+            }}
+          ></IconButton>
+          <IconButton
+            text="Lịch sử mua hàng"
+            tooltipposition="bottom"
+            iconName="BiHistory"
+            onClick={() => {
+              handle(ROUTES.USER.BUY_HISTORY);
+            }}
+          ></IconButton>
+          <IconButton
+            text="Tài khoản"
+            tooltipposition="bottom"
+            iconName="BiSolidUserCircle"
+            onClick={() => {
+              handle(ROUTES.USER.USER_PROFILE);
+            }}
+          ></IconButton>
 
-        <IconButton
-          text="Giỏ hàng"
-          tooltipposition="bottom"
-          iconName="BiCart"
-          onClick={() => {
-            handle(ROUTES.USER.SHOPPING_CART);
-          }}
-        ></IconButton>
-        <IconButton
-          text="Lịch sử mua hàng"
-          tooltipposition="bottom"
-          iconName="BiHistory"
-          onClick={() => {
-            handle(ROUTES.USER.BUY_HISTORY);
-          }}
-        ></IconButton>
-        <IconButton
-          text="Tài khoản"
-          tooltipposition="bottom"
-          iconName="BiSolidUserCircle"
-          onClick={() => {
-            handle(ROUTES.USER.USER_PROFILE);
-          }}
-        ></IconButton>
-
-        <IconButton
-          text="Đăng xuất"
-          tooltipposition="bottom"
-          iconName="BiLogOut"
-          onClick={() => handleLogout(navigate)}
-        ></IconButton>
+          <IconButton
+            text="Đăng xuất"
+            tooltipposition="bottom"
+            iconName="BiLogOut"
+            onClick={() => handleLogout(navigate)}
+          ></IconButton>
+        </div>
       </div>
-
       {children}
 
       {showPopup && <PopupConfirm setShowPopup={setShowPopup} />}
@@ -96,4 +94,4 @@ function HeaderUser({
   );
 }
 
-export default HeaderUser;
+export default HeaderUserNoSearch;

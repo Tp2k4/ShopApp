@@ -5,6 +5,7 @@ export const handleModify = async (
     itemInfo: any,
     setItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
+    setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
 
 ) => {
     const token = localStorage.getItem("token")
@@ -31,10 +32,12 @@ export const handleModify = async (
                 }
                 return resetOrder;
             });
-
+            alert("Sửa thông tin thành công.");
         } else {
-            alert("Failed to update.");
+            alert("Sửa thông tin thất bại.");
         }
+
+        setShowPopup(false);
     } catch (error){
         alert(error)
     }

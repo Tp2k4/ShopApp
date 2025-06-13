@@ -1,4 +1,4 @@
-import HeaderUser from "../../shared/components/ui/HeaderUser";
+import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import { ROUTES } from "../../shared/paths";
 import { Link } from "react-router-dom";
 import CartProgressBar from "../pagecontents/CartProgressBar";
@@ -6,9 +6,12 @@ import Line from "../../shared/components/ui/Line";
 import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
   const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
 
   const { data: UserInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/user/get-user"
@@ -81,7 +84,7 @@ export default function Payment() {
 
   return (
     <div className="w-screen flex flex-col items-center gap-[var(--medium-gap)]">
-      <HeaderUser />
+      <HeaderUserNoSearch />
       <div className="w-[var(--max-width-content)] h-full flex flex-col items-start justify-center gap-[var(--medium-gap)] ">
         <Link
           to={ROUTES.USER.HOME}
@@ -184,6 +187,8 @@ export default function Payment() {
                       },
                       body: JSON.stringify(orderInfo),
                     });
+                    localStorage.removeItem("listCartItemsChecked");
+                    navigate(ROUTES.USER.FINISH_ORDER);
                   }}
                 />
               </div>

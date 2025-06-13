@@ -2,9 +2,11 @@ export const handleCreateProduct = async (
     
     apiPath: string,
     files: File[],
+    setFiles: React.Dispatch<React.SetStateAction<File[]>>,
     newItemInfo: any,
     setNewItemInfo: React.Dispatch<React.SetStateAction<any>>,
     setItems: React.Dispatch<React.SetStateAction<any[]>>,
+    setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     // Lấy token
     const token = localStorage.getItem("token")
@@ -12,7 +14,7 @@ export const handleCreateProduct = async (
     // Tạo formData, cần thiết cho việc truyền data về backend nếu data có chứa file
     // Nếu data truyền về backend không có file, thì truyền bằng json như như bình thường
     const formData = new FormData();
-    // Thêm tất cả ảnh từ formData (formData này có được setFiles bên ImportImage) vào filesfiles
+    // Thêm tất cả ảnh từ formData (formData này có được setFiles bên ImportImage) vào files
     files.forEach(file => formData.append("productImages", file))
 
     try{    
@@ -53,9 +55,15 @@ export const handleCreateProduct = async (
                 body: formData,
             })
 
-            if (!responseForAddImage.ok){
-                alert("Lỗi khi gọi API thêm ảnh")
+            if (responseForAddImage.ok){
+                alert("Thêm thành công.");
+                setFiles([]);
+            } else {
+                alert("Đã thêm thông tin sản phẩm thành công nhưng lỗi khi gọi API thêm ảnh");
             }
+
+            setShowPopup(false); // chỉ gọi 1 lần
+
 
 
         } else {
