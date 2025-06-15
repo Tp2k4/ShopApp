@@ -139,11 +139,13 @@ public class UserService implements IUserService {
                 () -> new RuntimeException("Role not found")
         );
 
+
+
         existingUser.setFullName(userDTO.getFullName());
         existingUser.setPhoneNumber(userDTO.getPhoneNumber());
         existingUser.setAddress(userDTO.getAddress());
         existingUser.setDateOfBirth(userDTO.getDateOfBirth());
-        existingUser.setActive(userDTO.isActive());
+        existingUser.setActive(true);
         existingUser.setEmail(userDTO.getEmail());
         existingUser.setRole(role);
 

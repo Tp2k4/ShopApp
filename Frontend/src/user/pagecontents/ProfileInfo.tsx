@@ -39,8 +39,8 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
       phone_number: userAccountInfo.phoneNumber || "",
       email: userAccountInfo.email || "",
       address: userAccountInfo.address || "",
-      is_active: userAccountInfo.state || 1,
-      role_id: userAccountInfo.role || 2,
+      is_active:1,
+      role_id: 2,
       facebook_account_id: "",
       google_account_id: "",
     });

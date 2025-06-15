@@ -59,6 +59,8 @@ public class WebSecurityConfig {
                                     String.format("%s/user/alls/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(GET,
                                     String.format("%s/promotion/**", apiPrefix)).permitAll()
+                            .requestMatchers(PUT,
+                                    String.format("%s/user/update/**", apiPrefix)).hasAnyRole("USER", "ADMIN")
                             .requestMatchers(
                             String.format("%s/user/**", apiPrefix)).permitAll()
                             .requestMatchers("/images/**", "/promotions/**").permitAll()
@@ -100,6 +102,9 @@ public class WebSecurityConfig {
                                     String.format("%s/revenue/**", apiPrefix)).hasRole("ADMIN")
                             .requestMatchers(PUT,
                                     String.format("%s/promotion/**", apiPrefix)).hasRole("ADMIN")
+                            .requestMatchers(OPTIONS, "/**").permitAll()
+
+
 
 
 

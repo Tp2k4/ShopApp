@@ -6,6 +6,7 @@ export const handleModifyUserInfo = async (
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const token = localStorage.getItem("token");
+  console.log("Token:", token);
 
   try {
     const response = await fetch(apiPath + id, {
