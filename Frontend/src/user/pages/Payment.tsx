@@ -129,7 +129,7 @@ export default function Payment() {
                         <div className="w-[100px] aspect-square rounded-md overflow-hidden">
                           <img
                             className="object-cover w-full h-full"
-                            src={`http://localhost:8020/images/${item.productImageUrl}`}
+                            src={item.productImageUrl}
                             alt="product image"
                           ></img>
                         </div>

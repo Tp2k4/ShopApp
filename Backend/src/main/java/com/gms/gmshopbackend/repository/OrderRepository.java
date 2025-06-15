@@ -17,4 +17,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     Optional<Order> findById(Long integer);
 
     List<Order> findByOrderDateAfter(LocalDate fromdate);
+
+    List<Order> findByOrderDateBetween(LocalDate orderDateAfter, LocalDate orderDateBefore);
 }

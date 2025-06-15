@@ -41,12 +41,11 @@ public class RevenueService implements IRevenueService {
     public double getTodayRevenue() {
         double totalRevenue = 0;
         LocalDate today = LocalDate.now();
-        List<Inventory> todayInventoryList = inventoryRepository.findByTransactionDateBetween(today, today);
-        for (Inventory inventory : todayInventoryList) {
-            if(inventory.getTransactionType().equalsIgnoreCase("export")){
-                totalRevenue += inventory.getSellPrice()*inventory.getQuantity();
-            }
+        List<Order> order = orderRepository.findByOrderDateBetween(today, today);
+        for(Order orderItem : order) {
+            totalRevenue+=orderItem.getTotalMoney();
         }
+
         return totalRevenue;
     }
 
