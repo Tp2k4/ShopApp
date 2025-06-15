@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "../../shared/components/button";
 import LabeledInputField from "../../shared/components/form/LabeledInputField";
 import PopupModifyUserInfo from "../popup/PopupModifyUserInfo";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../shared/paths";
 
 interface ProfileInfoProps {
   className?: string;
@@ -26,26 +28,23 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
     role_id: 2,
     facebook_account_id: "",
     google_account_id: "",
-    password: "",
   });
 
   useEffect(() => {
     if (!userAccountInfo) return;
 
     setUpdatedUserInfo({
-      fullname: userAccountInfo.name,
-      date_of_birth: userAccountInfo.dateOfBirth,
-      //gender
-      phone_number: userAccountInfo.phoneNumber,
-      email: userAccountInfo.email,
-      address: userAccountInfo.address,
-      is_active: userAccountInfo.state,
-      role_id: userAccountInfo.role,
+      fullname: userAccountInfo.name || "",
+      date_of_birth: userAccountInfo.dateOfBirth || "",
+      phone_number: userAccountInfo.phoneNumber || "",
+      email: userAccountInfo.email || "",
+      address: userAccountInfo.address || "",
+      is_active: userAccountInfo.state || 1,
+      role_id: userAccountInfo.role || 2,
       facebook_account_id: "",
       google_account_id: "",
-      password: "123",
     });
-  }, []);
+  }, [userAccountInfo]);
 
   const [showPopupModify, setShowPopupModify] = useState(false);
 
@@ -57,8 +56,8 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
       {...rest}
     >
       <div className="flex flex-col gap-[var(--medium-gap)] w-full h-full">
-        <div className="text-[var(--text-color)] heading1 font-bold w-full h-auto">
-          Thông tin tài khoản
+        <div className="text-[var(--text-color)] heading2 w-full h-auto">
+          Thông tin tài khoản:
         </div>
 
         <div className="flex gap-[var(--medium-gap)] w-full h-[80%]">
@@ -96,6 +95,12 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
             </div>
 
             {/* Đổi mật khẩu */}
+            <Link
+              className="text-blue-600 hover:underline"
+              to={ROUTES.AUTH.FORGOT_PASSWORD}
+            >
+              Thay đổi mật khẩu
+            </Link>
 
             <Button
               text="Chỉnh sửa"
@@ -108,7 +113,12 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
 
       {/* Hiện popup chỉnh sửa thông tin tài khoản người dùng */}
       {showPopupModify && (
-        <PopupModifyUserInfo setShowPopup={setShowPopupModify} />
+        <PopupModifyUserInfo
+          userId={userAccountInfo.id}
+          updatedUserInfo={updatedUserInfo}
+          setUpdatedUserInfo={setUpdatedUserInfo}
+          setShowPopup={setShowPopupModify}
+        />
       )}
     </Box>
   );
