@@ -5,6 +5,7 @@ import com.gms.gmshopbackend.dtos.OrderDTO;
 import com.gms.gmshopbackend.dtos.ProductOrderResponseDTO;
 import com.gms.gmshopbackend.model.*;
 import com.gms.gmshopbackend.repository.*;
+import com.gms.gmshopbackend.response.OrderHistoryResponse;
 import com.gms.gmshopbackend.response.OrderResponse;
 import com.gms.gmshopbackend.service.inter.IOrderService;
 import lombok.RequiredArgsConstructor;
@@ -92,8 +93,8 @@ public class OrderService implements IOrderService {
             orderDetail.setOrder(order);
             orderDetail.setProduct(product);
             orderDetail.setNumberOfProducts(quantity);
-            orderDetail.setPrice(product.getPrice());
-            orderDetail.setTotalMoney(product.getPrice() * quantity);
+            orderDetail.setPrice((product.getDiscountPercent() == null) ? (1 * product.getPrice()) : (product.getDiscountPercent().floatValue() * product.getPrice()));
+            orderDetail.setTotalMoney(orderDetail.getPrice() * quantity);
             orderDetails.add(orderDetail);
 
             total += orderDetail.getTotalMoney();
@@ -270,6 +271,16 @@ public class OrderService implements IOrderService {
                     products
             );
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderHistoryResponse> orderHistory(User user) {
+        List<Order> orders = orderRepository.findByUserId(user.getId());
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        for(Order order : orders){
+            orderDetails.addAll(orderDetailRepository.findByOrder(order));
+        }
+        return orderDetails.stream().map(OrderHistoryResponse::fromOrderDetail).collect(Collectors.toList());
     }
 
     public void staffChecked(Long orderId){

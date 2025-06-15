@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findByOrder(Order order);
+
 }

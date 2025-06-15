@@ -3,8 +3,10 @@ package com.gms.gmshopbackend.controller;
 import com.gms.gmshopbackend.dtos.OrderDTO;
 import com.gms.gmshopbackend.model.Order;
 import com.gms.gmshopbackend.model.User;
+import com.gms.gmshopbackend.response.OrderHistoryResponse;
 import com.gms.gmshopbackend.response.OrderResponse;
 import com.gms.gmshopbackend.service.impl.OrderService;
+import com.gms.gmshopbackend.service.impl.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-
+    private final UserService userService;
 
 
     @GetMapping("/getall")
@@ -116,6 +118,16 @@ public class OrderController {
             orderService.staffChecked(id);
             return ResponseEntity.ok("Checked order successfully");
         }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("user/history")
+    public ResponseEntity<?> getOrderHistory(@AuthenticationPrincipal User user){
+        try{
+            List<OrderHistoryResponse> history = orderService.orderHistory(user);
+            return ResponseEntity.ok(history);
+        }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

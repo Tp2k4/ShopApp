@@ -34,13 +34,19 @@ public class CartItemService implements ICartItemService {
             existingCart.setQuantity(existingCart.getQuantity() + 1);
             return cartItemRepository.save(existingCart);
         }
+
+        if(product.getStockQuantity() < productCartDTO.getQuantity()) {
+            throw new RuntimeException("Stock quantity do not enough");
+        }
         CartItem cartItem = CartItem.builder()
                 .cartId(cart)
-                .price(productCartDTO.getPrice())
+                .price(product.getDiscountPercent()==null?1*product.getPrice(): (float) (product.getDiscountPercent().floatValue() * product.getOriginPrice()))
                 .quantity(productCartDTO.getQuantity())
                 .addedAt(LocalDateTime.now())
                 .product(product)
-                .totalPrice(productCartDTO.getPrice()*productCartDTO.getQuantity())
+                .totalPrice((product.getDiscountPercent()==null?1*product.getPrice():
+                        (float) (product.getDiscountPercent().floatValue() * product.getOriginPrice()))
+                        *productCartDTO.getQuantity())
                 .build();
 
         return cartItemRepository.save(cartItem);
