@@ -19,15 +19,9 @@ function UserProfileNavigation({
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   //================ Nhận accounts từ API
-  const { data: userAccount } = useGet("/database/profile.json");
-  useEffect(() => {
-    if (userAccount) {
-      localStorage.setItem("userAccount", JSON.stringify(userAccount));
-    }
-  }, [userAccount]);
-  if (!userAccount || userAccount.length === 0) {
-    return <div>Đang tải dữ liệu người dùng...</div>;
-  }
+  const { data: userAccountInfo } = useGet(
+    "http://localhost:8020/api/v1/gmshop/user/get-user"
+  );
 
   return (
     <div
@@ -35,11 +29,11 @@ function UserProfileNavigation({
       {...rest}
     >
       <Box
-        className="flex items-center justify-center p-[var(--medium-gap)] gap-[var(--small-gap)]"
+        className="flex items-center justify-start p-[var(--medium-gap)] gap-[var(--small-gap)]"
         width="auto"
         height="auto"
       >
-        <div className="heading2">{userAccount[0].name}</div>
+        <div className="heading2">{userAccountInfo.name}</div>
       </Box>
       <Box
         className="flex flex-col items-start gap-[var(--medium-gap)] p-[var(--medium-gap)]"
