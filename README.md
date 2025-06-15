@@ -50,4 +50,4 @@ npm run dev
 
 **Account admin**
 username: thophan357@gmail.com
-password: admin2
+password: admin
