@@ -39,6 +39,11 @@ spring:
 api:
   prefix: api/v1/gmshop
 
+cloudinary:
+  cloud_name: df40lpss5
+  api_key: 423287891566818
+  api_secret: bveeThgQEwJjVZB7FL7eTP-R53Q
+
 jwt:
   expiration: 86400
   secretkey: 5+2eqXSVC4XDqxgu2rHXDRSGbRUgCfk9uuTKjoIw1N8=

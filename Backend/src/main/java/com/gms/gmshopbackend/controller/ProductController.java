@@ -8,6 +8,7 @@ import com.gms.gmshopbackend.repository.*;
 import com.gms.gmshopbackend.response.ProductNameResponse;
 import com.gms.gmshopbackend.response.ProductResponse;
 import com.gms.gmshopbackend.response.ProductResponseList;
+import com.gms.gmshopbackend.service.impl.CloudinaryService;
 import com.gms.gmshopbackend.service.impl.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
@@ -40,6 +41,7 @@ public class ProductController {
     private final HeadphoneSpecsRepository headphoneSpecsRepository;
     private final CategoryRepository categoryRepository;
     private final BrandRepository brandRepository;
+    private final CloudinaryService cloudinaryService;
 
     private final Random random = new Random();
     private final Faker faker = new Faker();
@@ -182,7 +184,8 @@ public class ProductController {
                     return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("file must be an image");
                 }
 
-                String fileName = storeFile(file);
+//                String fileName = storeFile(file);
+                String fileName = cloudinaryService.uploadFile(file);
                 ProductImageDTO productImageDTO = ProductImageDTO.builder()
                         .imageUrl(fileName)
                         .build();
@@ -229,7 +232,8 @@ public class ProductController {
                             .body("Each file must be a valid image");
                 }
 
-                String fileName = storeFile(file);
+//                String fileName = storeFile(file);
+                String fileName = cloudinaryService.uploadFile(file);
                 productImages.add(ProductImageDTO.builder().imageUrl(fileName).build());
             }
 

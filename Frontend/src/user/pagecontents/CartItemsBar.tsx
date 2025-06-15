@@ -51,7 +51,7 @@ function CartItemsBar({
         <div className="flex flex-col items-center ">
           <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
             <img
-              src={`http://localhost:8020/images/${CartItemInfos.productImageUrl}`}
+              src={CartItemInfos.productImageUrl}
               alt="product image"
               className="object-cover w-full h-full"
             />

@@ -9,6 +9,7 @@ import com.gms.gmshopbackend.repository.ProductRepository;
 import com.gms.gmshopbackend.repository.PromotionProductRepository;
 import com.gms.gmshopbackend.repository.PromotionRepository;
 import com.gms.gmshopbackend.response.PromotionResponse;
+import com.gms.gmshopbackend.service.impl.CloudinaryService;
 import com.gms.gmshopbackend.service.impl.PromotionService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,7 @@ public class PromotionController {
     private final PromotionRepository promotionRepository;
     private final ProductRepository productRepository;
     private final PromotionProductRepository promotionProductRepository;
+    private final CloudinaryService cloudinaryService;
 
     @PostMapping("/create")
     public ResponseEntity<?> createPromotion(@RequestBody PromotionDTO promotionDTO) {
@@ -108,7 +110,8 @@ public class PromotionController {
                         .body("Promotion not found");
             }
 
-            String fileName = storePromotionFile(file);
+//            String fileName = storePromotionFile(file);
+            String fileName = cloudinaryService.uploadFile(file);
             promotion.setThumbnail(fileName);
             promotionRepository.save(promotion);
 

@@ -8,7 +8,7 @@ interface ImageGalleryProps {
 function ImageGallery({ imagesSource }: ImageGalleryProps) {
   const images =
     imagesSource?.map(
-      (item) => `http://localhost:8020/images/${item.imageUrl}`
+      (item) => item.imageUrl
     ) || [];
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -16,6 +16,7 @@ function UserHome() {
   );
 
   const [thumbnailList, setThumbnailList] = useState<any[]>([]);
+  console.log(thumbnailList);
 
   useEffect(() => {
     if (Array.isArray(thumbnails)) {
@@ -24,29 +25,23 @@ function UserHome() {
   }, [thumbnails]);
 
   // Lọc và tìm kiếm sản phẩm
-  //================ Lọc và tìm kiếm
   const filterOptions = ["all", "mouse", "keyboard", "headphone"];
 
-  // Lọc
   const {
     filteredItems: filteredByType,
     selectedFilter,
     setSelectedFilter,
   } = useFilter(productInfos, filterOptions, "category_id");
 
-  // Tìm kiếm
   const {
     filteredItems: filteredBySearch,
     searchQuery,
     setSearchQuery,
   } = useSearch(productInfos, "name");
 
-  // Gộp 2 kết quả lọc và tìm kiếm
   const finalFilteredItems = filteredBySearch.filter((item) =>
     filteredByType.includes(item)
   );
-
-  // {`http://localhost:8020/promotions/${thumbnailList[4].thumbnail}`}
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
@@ -64,29 +59,22 @@ function UserHome() {
             />
           </div>
           <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[0].thumbnail}` */}
+            <HomeBanner imageSource={thumbnailList[0]?.thumbnail || sample} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[2].thumbnail}` */}
+            <HomeBanner imageSource={thumbnailList[1]?.thumbnail || sample} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[3].thumbnail}` */}
+            <HomeBanner imageSource={thumbnailList[2]?.thumbnail || sample} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[4].thumbnail}` */}
+            <HomeBanner imageSource={thumbnailList[3]?.thumbnail || sample} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[1].thumbnail}` */}
+            <HomeBanner imageSource={thumbnailList[2]?.thumbnail || sample} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={sample} />
-            {/* `http://localhost:8020/promotions/${thumbnailList[2].thumbnail}` */}
-            {/*  */}
+            <HomeBanner imageSource={thumbnailList[1]?.thumbnail || sample} />
           </div>
         </div>
       </div>

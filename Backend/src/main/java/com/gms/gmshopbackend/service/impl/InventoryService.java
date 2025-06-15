@@ -47,7 +47,8 @@ public class InventoryService implements IInventoryService {
                 .transactionType("export")
                 .quantity(nop)
                 .transactionDate(LocalDate.now())
-                .sellPrice((double) product.getPrice())
+                .sellPrice((double) (product.getDiscountPercent()==null?product.getPrice():product.getPrice()* product.getDiscountPercent().floatValue()))
+                .importPrice(0.0)
                 .build();
 
         inventoryRepository.save(newInventory);
@@ -67,6 +68,7 @@ public class InventoryService implements IInventoryService {
                 .quantity(nop)
                 .transactionDate(LocalDate.now())
                 .importPrice((double) product.getPrice())
+                .sellPrice(0.0)
                 .build();
 
         product.setStockQuantity(product.getStockQuantity() + nop);
