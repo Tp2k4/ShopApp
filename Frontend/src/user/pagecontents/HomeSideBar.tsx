@@ -15,10 +15,10 @@ function HomeSideBar({
   ...rest
 }: HomeSideBarProps) {
   const filterOptions = [
+    { label: "Tất cả", value: "all" },
     { label: "Chuột", value: "mouse" },
     { label: "Bàn phím", value: "keyboard" },
     { label: "Tai nghe", value: "headphone" },
-    { label: "Tất cả", value: "all" },
   ];
 
   return (

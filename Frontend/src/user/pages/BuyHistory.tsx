@@ -5,7 +5,9 @@ import { useGet } from "../../service/crudService";
 import UserProfileNavigation from "../../shared/components/ui/UserProfileNavigation";
 
 function BuyHistory() {
-  const { data: buyhistory } = useGet("/database/buyhistory.json");
+  const { data: buyhistory } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/user/history"
+  );
 
   return (
     <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
