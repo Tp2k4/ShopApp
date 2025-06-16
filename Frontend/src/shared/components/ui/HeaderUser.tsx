@@ -27,11 +27,12 @@ function HeaderUser({
   ...rest
 }: HeaderUserProps) {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const [showPopup, setShowPopup] = useState(false);
 
   const handle = (navigateLink: string) => {
-    const isLogin = localStorage.getItem("token") ? true : false;
+    const isLogin = token ? true : false;
 
     if (isLogin) {
       navigate(navigateLink);
@@ -60,7 +61,9 @@ function HeaderUser({
         <div className=" flex items-center gap-[var(--small-gap)] py-[12px]">
           <SearchField
             value={searchQuery}
-            onChange={(e: any) => setSearchQuery && setSearchQuery(e.target.value)}
+            onChange={(e: any) =>
+              setSearchQuery && setSearchQuery(e.target.value)
+            }
             width="300px"
           />
           <IconButton
@@ -89,7 +92,7 @@ function HeaderUser({
           ></IconButton>
 
           <IconButton
-            text="Đăng xuất"
+            text={token ? "Đăng xuất" : "Đăng nhập"}
             tooltipposition="bottom"
             iconName="BiLogOut"
             onClick={() => handleLogout(navigate)}

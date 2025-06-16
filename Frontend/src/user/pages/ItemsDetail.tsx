@@ -1,4 +1,4 @@
-import HeaderUser from "../../shared/components/ui/HeaderUser";
+import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import { useGet } from "../../service/crudService";
 
 import { useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ function ItemsDetail() {
   // Popup
   const [showPopup, setShowPopup] = useState(false);
 
-  const { category_id, id } = useParams();
+  const { id } = useParams();
   const { data } = useGet(`http://localhost:8020/api/v1/gmshop/product/${id}`);
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
@@ -20,7 +20,7 @@ function ItemsDetail() {
 
   return (
     <div className="h-screen w-screen flex flex-col gap-[var(--medium-gap)] overflow-x-auto overflow-y-auto items-center">
-      <HeaderUser className="fixed top-0 z-50" />
+      <HeaderUserNoSearch className="fixed top-0 z-50" />
       <div className="pt-[calc(var(--medium-gap)_+_var(--header-height))] w-full gap-[var(--medium-gap)] flex flex-col max-w-[1200px]">
         <div className="flex flex-col w-full overflow-hidden rounded-md md:flex md:flex-row">
           <div className="h-auto w-full p-[var(--big-gap)] md:w-[50%] bg-white ]">

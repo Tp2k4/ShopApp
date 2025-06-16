@@ -15,7 +15,13 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
       <Line width="w-full" /> {/* đường kẻ ngang */}
       <div className="gap-[var(--medium-gap)] w-full flex items-center justify-between">
         <div className="flex  items-center gap-[var(--medium-gap)]">
-          <div className="w-[80px] h-[80px] bg-[var(--primary-color)] rounded-sm"></div>{" "}
+          <div className="w-[80px] h-[80px] bg-[var(--primary-color)] rounded-sm">
+            <img
+              src={data.thumbnail}
+              alt="product image"
+              className="object-cover w-full h-full"
+            />
+          </div>{" "}
           {/* ảnh sản phẩm */}
           <div className="flex flex-col">
             {" "}
@@ -41,7 +47,19 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
             {/* giá đã giảm */}
           </div>
           <div className="flex justify-end">
-            <Button text="Mua lại" type="button" width="w-auto" />
+            <Button
+              text="Mua lại"
+              type="button"
+              width="w-auto"
+              onClick={() => {
+                navigate(
+                  ROUTES.USER.ITEMS_DETAIL.replace(
+                    ":category_id",
+                    data.categoryId
+                  ).replace(":id", data.productId)
+                );
+              }}
+            />
           </div>{" "}
           {/* nút mua lại */}
         </div>
@@ -49,10 +67,5 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
     </div>
   );
 }
-
-// onClick={() => {navigate{ROUTES.USER.ITEMS_DETAIL
-//               .replace(":categoryId", data.categoryId)
-//               .replace(":itemId", data.orderId)
-//             }}}
 
 export default OrderItems;
