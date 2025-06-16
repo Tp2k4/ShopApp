@@ -59,22 +59,22 @@ function UserHome() {
             />
           </div>
           <div className="aspect-[195/100] h-full col-span-6 row-span-2 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[0]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[0]?.thumbnail} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[1]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[1]?.thumbnail} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[2]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[2]?.thumbnail} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[3]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[3]?.thumbnail} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[2]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[2]?.thumbnail} />
           </div>
           <div className="aspect-[2/1] col-span-3 row-span-1 rounded-md overflow-hidden">
-            <HomeBanner imageSource={thumbnailList[1]?.thumbnail || sample} />
+            <HomeBanner imageSource={thumbnailList[1]?.thumbnail} />
           </div>
         </div>
       </div>

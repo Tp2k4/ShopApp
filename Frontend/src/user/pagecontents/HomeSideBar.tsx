@@ -29,10 +29,10 @@ function HomeSideBar({
       {filterOptions.map((option) => (
         <button
           key={option.value}
-          className={`text-left px-4 py-2 w-full transition-colors rounded-none border-b border-gray-100 last:border-b-0 ${
+          className={`text-left px-4 py-2 w-full transition-colors rounded-none ${
             selectedFilter === option.value
-              ? "bg-[var(--primary-color)] text-white font-bold"
-              : "hover:bg-gray-100"
+              ? "bg-[var(--primary-color)] text-white "
+              : "hover:bg-[var(--primary-hover)] hover:text-white text-[var(--primary-color)]"
           }`}
           onClick={() => setSelectedFilter(option.value)}
           type="button"

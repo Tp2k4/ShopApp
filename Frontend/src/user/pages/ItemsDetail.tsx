@@ -27,7 +27,7 @@ function ItemsDetail() {
             <ImageGallery imagesSource={data.productImages} />
           </div>
           <div className="flex flex-col gap-[var(--small-gap)] items-start p-[var(--big-gap)] h-auto w-full md:w-[50%] heading3 bg-white">
-            <strong>{data.name}</strong>
+            <strong className="heading2">{data.name}</strong>
 
             <div className="flex gap-[var(--small-gap)]">
               <span className="font-semibold text-red-500 heading3">
@@ -66,8 +66,9 @@ function ItemsDetail() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:items-start md:flex-row gap-[var(--medium-gap)] w-full">
+        <div className="flex flex-col md:items-start md:flex-row gap-[var(--medium-gap)] -full">
           <div className="md:w-[70%] w-full h-auto bg-white rounded-md p-[var(--big-gap)] flex flex-col gap-[var(--medium-gap)]">
+            <div className="font-bold heading3">Thông tin mô tả</div>
             <div>{data.description_1}</div>
             <div>{data.description_2}</div>
             <div>{data.description_3}</div>
