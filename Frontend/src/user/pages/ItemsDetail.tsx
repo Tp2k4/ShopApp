@@ -39,17 +39,17 @@ function ItemsDetail() {
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
               <AddItemsButton
+                productId={data.id}
+                price={data.price}
+                text="Thêm vào giỏ hàng"
+                setShowPopup={setShowPopup}
+              />
+              <AddItemsButton
                 text="Mua ngay"
                 productId={data.id}
                 price={data.price}
                 setShowPopup={setShowPopup}
                 link={ROUTES.USER.SHOPPING_CART}
-              />
-              <AddItemsButton
-                productId={data.id}
-                price={data.price}
-                text="Thêm vào giỏ hàng"
-                setShowPopup={setShowPopup}
               />
             </div>
             <div>
@@ -82,25 +82,82 @@ function ItemsDetail() {
                 </th>
                 <th>Giá trị</th>
               </tr>
-
-              <tr>
-                <td></td>
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Màu sắc
+                </td>
+                <td>{data.specs.color || "Không có thông tin"}</td>
               </tr>
-
-              {data.specs &&
-                Object.entries(data.specs as Record<string, any>).map(
-                  ([key, value]) => (
-                    <tr
-                      className="border-b border-[var(--line-color)]"
-                      key={key}
-                    >
-                      <td className="border-r border-[var(--line-color)] w-1/2">
-                        {key}
-                      </td>
-                      <td>{value}</td>
-                    </tr>
-                  )
-                )}
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Dung lượng pin (mAh)
+                </td>
+                <td>{data.specs.battery || "Không có thông tin"}</td>
+              </tr>
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Thời gian bảo hành
+                </td>
+                <td>{data.specs.warranty || "Không có thông tin"}</td>
+              </tr>
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Loại kết nối
+                </td>
+                <td>{data.specs.connectionType || "Không có thông tin"} </td>
+              </tr>
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Cân nặng
+                </td>
+                <td>{data.specs.weight || "Không có thông tin"} </td>
+              </tr>
+              <tr className="border-b border-[var(--line-color)]">
+                <td className="border-r border-[var(--line-color)] w-1/2">
+                  Led
+                </td>
+                <td>{data.specs.led ? "Có" : "Không"} </td>
+              </tr>
+              {data.category_id === "keyboard" && (
+                <tr className="border-b border-[var(--line-color)]">
+                  <td className="border-r border-[var(--line-color)] w-1/2">
+                    Kiểu bàn phím
+                  </td>
+                  <td>{data.specs.numKeys} phím </td>
+                </tr>
+              )}
+              {data.category_id === "keyboard" && (
+                <tr className="border-b border-[var(--line-color)]">
+                  <td className="border-r border-[var(--line-color)] w-1/2">
+                    Loại công tắc (switch)
+                  </td>
+                  <td>{data.specs.switchType} </td>
+                </tr>
+              )}
+              {data.category_id === "mouse" && (
+                <tr className="border-b border-[var(--line-color)]">
+                  <td className="border-r border-[var(--line-color)] w-1/2">
+                    Độ phân giải tối đa (Max DPI)
+                  </td>
+                  <td>{data.specs.maxDpi}</td>
+                </tr>
+              )}
+              {data.category_id === "headphone" && (
+                <tr className="border-b border-[var(--line-color)]">
+                  <td className="border-r border-[var(--line-color)] w-1/2">
+                    Khử tiếng ồn
+                  </td>
+                  <td>{data.specs.noiseCancelling ? "Có" : "Không"}</td>
+                </tr>
+              )}
+              {data.category_id === "headphone" && (
+                <tr className="border-b border-[var(--line-color)]">
+                  <td className="border-r border-[var(--line-color)] w-1/2">
+                    Micro
+                  </td>
+                  <td>{data.specs.hasMic ? "Có" : "Không"}</td>
+                </tr>
+              )}
             </table>
           </div>
         </div>

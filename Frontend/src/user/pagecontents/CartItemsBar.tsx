@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 
 interface CartItemsBarProps {
   setListCartItemsChecked: React.Dispatch<React.SetStateAction<any[]>>;
-
   index?: number;
   CartItemInfos: any;
+  setCartItemsInfos: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 function CartItemsBar({
   setListCartItemsChecked,
   index,
   CartItemInfos,
+  setCartItemsInfos,
 }: CartItemsBarProps) {
   const [isChecked, setIsChecked] = useState(false);
   const [quantity, setQuantity] = useState<number>(CartItemInfos.quantity || 1);
@@ -111,6 +112,10 @@ function CartItemsBar({
             setListCartItemsChecked((prev: any[]) =>
               prev.filter((item) => item.productId !== CartItemInfos.productId)
             );
+            setCartItemsInfos((prev: any[]) =>
+              prev.filter((item) => item.productId !== CartItemInfos.productId)
+            );
+            alert("Xoá sản phẩm thành công!");
           } else {
             alert("Xoá sản phẩm thất bại!");
           }

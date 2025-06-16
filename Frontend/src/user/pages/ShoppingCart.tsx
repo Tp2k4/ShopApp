@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ShoppingCart() {
   const navigate = useNavigate();
-  const { data: CartItemsInfos } = useGet(
+  const { data: CartItemsInfos, setData: setCartItemsInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/cart/user"
   );
 
@@ -65,6 +65,7 @@ export default function ShoppingCart() {
                 setListCartItemsChecked={setListCartItemsChecked}
                 index={index + 1}
                 CartItemInfos={CartItemInfos}
+                setCartItemsInfos={setCartItemsInfos}
               />
             ))}
           </div>
