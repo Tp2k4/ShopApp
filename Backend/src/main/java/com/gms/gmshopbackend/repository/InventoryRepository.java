@@ -9,4 +9,5 @@ import java.util.List;
 public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
 
     List<Inventory> findByTransactionDateBetween(LocalDate transactionDateAfter, LocalDate transactionDateBefore);
+
 }
