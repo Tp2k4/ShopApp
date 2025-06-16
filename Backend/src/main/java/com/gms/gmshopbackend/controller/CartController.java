@@ -109,7 +109,7 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/{cartitemid}")
+    @DeleteMapping("/{cartItemId}")
     public ResponseEntity<?> deleteCartItem(@PathVariable Long cartItemId, @AuthenticationPrincipal User user) {
         try{
             cartItemService.deleteCartItem(cartItemId, user);

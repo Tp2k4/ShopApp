@@ -102,9 +102,10 @@ function CartItemsBar({
         type="button"
         className="pl-14 opacity-[var(--caption-opacity)] hover:underline hover:opacity-100 w-fit"
         onClick={async () => {
+          const token = localStorage.getItem("token");
           const res = await fetch(
-            `http://localhost:8020/api/v1/gmshop/cart/user/${CartItemInfos.productId}`,
-            { method: "DELETE" }
+            `http://localhost:8020/api/v1/gmshop/cart/user/${CartItemInfos.id}`,
+            { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
           );
           if (res.ok) {
             setListCartItemsChecked((prev: any[]) =>
