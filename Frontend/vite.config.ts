@@ -1,17 +1,26 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'static.json',    // File gốc
+          dest: ''               // dest: '' tức là dist/static.json
+        }
+      ]
+    })
   ],
   resolve: {
     alias: {
-      '@': path.resolve(new URL('.', import.meta.url).pathname, 'src'), // ← alias @ trỏ tới thư mục src
+      '@': path.resolve(__dirname, 'src'),
     },
   },
-})
+});
