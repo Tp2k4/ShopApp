@@ -110,7 +110,8 @@ const PopupOrder = ({ setOrders, setShowPopup }: PopupProductProps) => {
                     "http://localhost:8080/order/create",
                     newOrder,
                     setOrders,
-                    setNewOrder
+                    setNewOrder,
+                    setShowPopup
                   )
                 }
                 type="submit"
