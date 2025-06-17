@@ -46,7 +46,7 @@ function OrderEmployee() {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center overflow-hidden min-h-0">
+    <div className="w-screen h-screen flex flex-col items-center overflow-y-auto overflow-x-hidden min-h-0">
       <Header
         className="border-b border-[var(--line-color)] "
         name={userData?.name}
