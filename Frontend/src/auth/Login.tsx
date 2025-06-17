@@ -37,7 +37,7 @@ function Login() {
             <form
               className="w-full flex flex-col gap-[var(--medium-gap)]"
               onSubmit={(event) =>
-                handleLogin(event, username, password, setIsError, setError)
+                handleLogin(event, username, password, setIsError, setError, navigate)
               }
             >
               <div className="w-full flex flex-col gap-[var(--small-gap)]">
