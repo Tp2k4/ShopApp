@@ -44,7 +44,6 @@ function CreateAccount() {
               e,
               fullName,
               dateOfBirth,
-              gender,
               phoneNumber,
               email,
               password,
