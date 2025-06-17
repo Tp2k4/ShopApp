@@ -93,7 +93,7 @@ public class OrderService implements IOrderService {
             orderDetail.setOrder(order);
             orderDetail.setProduct(product);
             orderDetail.setNumberOfProducts(quantity);
-            orderDetail.setPrice((product.getDiscountPercent() == null) ? (1 * product.getPrice()) : (product.getDiscountPercent().floatValue() * product.getPrice()));
+            orderDetail.setPrice((product.getDiscountPercent() == null) ? (1 * product.getPrice()) : ((1 - product.getDiscountPercent().floatValue()*0.01f) * product.getPrice()));
             orderDetail.setTotalMoney(orderDetail.getPrice() * quantity);
             orderDetails.add(orderDetail);
 
@@ -281,6 +281,19 @@ public class OrderService implements IOrderService {
             orderDetails.addAll(orderDetailRepository.findByOrder(order));
         }
         return orderDetails.stream().map(OrderHistoryResponse::fromOrderDetail).collect(Collectors.toList());
+    }
+
+    @Override
+    public int getTodayOrders() {
+        LocalDate today = LocalDate.now();
+        int count = 0;
+        List<Order> orders = orderRepository.findByOrderDateBetween(today, today);
+        for(Order order : orders){
+            if(!order.getStatus().equalsIgnoreCase(OrderStatus.DELETED.toString())){
+                count++;
+            }
+        }
+        return count;
     }
 
     public void staffChecked(Long orderId){

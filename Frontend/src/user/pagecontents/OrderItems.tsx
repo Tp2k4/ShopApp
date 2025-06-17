@@ -45,7 +45,7 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
               {data.sellPrice.toLocaleString("vi-VN")}đ
             </div>{" "}
             {/* giá đã giảm */}
-          </div>
+          </div> 
           <div className="flex justify-end">
             <Button
               text="Mua lại"

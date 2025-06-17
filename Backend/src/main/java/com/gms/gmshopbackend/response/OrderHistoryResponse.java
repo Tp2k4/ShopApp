@@ -34,7 +34,7 @@ public class OrderHistoryResponse {
                 .orderId(orderDetail.getOrder().getId())
                 .orderStatus(orderDetail.getOrder().getStatus())
                 .productName(orderDetail.getProduct().getName())
-                .originPrice(orderDetail.getProduct().getOriginPrice())
+                .originPrice(orderDetail.getProduct().getPrice())
                 .sellPrice(orderDetail.getPrice())
                 .quantity(orderDetail.getNumberOfProducts())
                 .type(color)

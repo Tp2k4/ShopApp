@@ -6,6 +6,7 @@ import com.gms.gmshopbackend.model.Order;
 import com.gms.gmshopbackend.model.User;
 import com.gms.gmshopbackend.response.OrderHistoryResponse;
 import com.gms.gmshopbackend.response.OrderResponse;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface IOrderService {
     public List<OrderResponse> getOrdersByUserId(Long userId);
     public List<OrderHistoryResponse> orderHistory(User user);
 
+    public int getTodayOrders();
 }

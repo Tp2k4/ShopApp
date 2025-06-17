@@ -18,9 +18,9 @@ function Home() {
   );
 
   // Lấy tổng số đơn hàng bán được hôm nay
-  // const { data: todayOrders } = useGet(
-  //   "http://localhost:8020/api/v1/gmshop/revenue/last-six-month-revenue"
-  // );
+  const { data: todayOrders } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/today-orders"
+  );
 
   // Lấy số người dùng hiện tại
   const { data: totalUsers } = useGet(
@@ -72,9 +72,7 @@ function Home() {
           </div>
           <div className="sm:w-1/3 flex flex-col border border-[var(--line-color)] rounded-md p-[var(--medium-gap)] gap-[var(--small-gap)]">
             <span>Tổng số đơn hàng hôm nay:</span>
-
-            {/* Cần lấy lại API */}
-            <span className="font-bold heading3">{0}</span>
+            <span className="font-bold heading3">{todayOrders || "0"}</span>
           </div>
           <div className="sm:w-1/3 flex flex-col border border-[var(--line-color)] rounded-md p-[var(--medium-gap)] gap-[var(--small-gap)]">
             <span>Tổng người dùng hiện tại:</span>

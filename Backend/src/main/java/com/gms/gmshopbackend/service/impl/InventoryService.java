@@ -47,7 +47,7 @@ public class InventoryService implements IInventoryService {
                 .transactionType("export")
                 .quantity(nop)
                 .transactionDate(LocalDate.now())
-                .sellPrice((double) (product.getDiscountPercent()==null?product.getPrice():product.getPrice()* product.getDiscountPercent().floatValue()))
+                .sellPrice((double) (product.getDiscountPercent()==null?product.getPrice():product.getPrice()* (1-product.getDiscountPercent().floatValue()*0.01f)))
                 .importPrice(0.0)
                 .build();
 

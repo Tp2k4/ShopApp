@@ -25,33 +25,48 @@ public class CartItemService implements ICartItemService {
     private final CartItemRepository cartItemRepository;
     @Override
     public CartItem addCartItem(Cart cart, ProductCartDTO productCartDTO) {
-        Product product = productRepository.findById(productCartDTO
-                        .getProductId())
-                .orElseThrow(
-                        () -> new RuntimeException("Product not found"));
-        CartItem existingCart = cartItemRepository.findByCartIdAndProduct(cart, product);
-        if(existingCart != null) {
-            existingCart.setQuantity(existingCart.getQuantity() + 1);
-            return cartItemRepository.save(existingCart);
+        // Lấy sản phẩm từ DB
+        Product product = productRepository.findById(productCartDTO.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Kiểm tra số lượng phải > 0
+        int requestedQuantity = productCartDTO.getQuantity();
+        if (requestedQuantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than 0");
         }
 
-        if(product.getStockQuantity() < productCartDTO.getQuantity()) {
-            throw new RuntimeException("Stock quantity do not enough");
+        // Kiểm tra số lượng tồn kho
+        if (product.getStockQuantity() < requestedQuantity) {
+            throw new RuntimeException("Stock quantity is not enough");
         }
+
+        // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
+        CartItem existingCartItem = cartItemRepository.findByCartIdAndProduct(cart, product);
+        if (existingCartItem != null) {
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+            return cartItemRepository.save(existingCartItem);
+        }
+
+        // Tính giá đã giảm nếu có
+        float discountPercent = product.getDiscountPercent() != null
+                ? product.getDiscountPercent().floatValue()*0.01f
+                : 0.0f;
+        float discountedPrice = product.getPrice() * (1 - discountPercent);
+
+        // Tạo mới CartItem
         CartItem cartItem = CartItem.builder()
                 .cartId(cart)
-                .price(product.getDiscountPercent()==null?1*product.getPrice(): (float) (product.getDiscountPercent().floatValue() * product.getOriginPrice()))
-                .quantity(productCartDTO.getQuantity())
-                .addedAt(LocalDateTime.now())
                 .product(product)
-                .totalPrice((product.getDiscountPercent()==null?1*product.getPrice():
-                        (float) (product.getDiscountPercent().floatValue() * product.getOriginPrice()))
-                        *productCartDTO.getQuantity())
+                .quantity(requestedQuantity)
+                .price(product.getPrice())
+                .totalPrice(discountedPrice * requestedQuantity)
+                .isSelected(true)
+                .addedAt(LocalDateTime.now())
                 .build();
 
         return cartItemRepository.save(cartItem);
-
     }
+
 
     @Override
     public CartItem updateCartItem(CartItem cartItem) {

@@ -132,6 +132,15 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/today-orders")
+    public ResponseEntity<?> getTodayOrders(){
+        try{
+            return ResponseEntity.ok(orderService.getTodayOrders());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 
 }

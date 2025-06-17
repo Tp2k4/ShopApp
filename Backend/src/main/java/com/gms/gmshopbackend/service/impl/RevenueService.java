@@ -3,6 +3,7 @@ package com.gms.gmshopbackend.service.impl;
 import com.gms.gmshopbackend.dtos.RevenueProductDTO;
 import com.gms.gmshopbackend.model.Inventory;
 import com.gms.gmshopbackend.model.Order;
+import com.gms.gmshopbackend.model.OrderStatus;
 import com.gms.gmshopbackend.repository.InventoryRepository;
 import com.gms.gmshopbackend.repository.OrderRepository;
 import com.gms.gmshopbackend.response.RevenueResponse;
@@ -43,7 +44,9 @@ public class RevenueService implements IRevenueService {
         LocalDate today = LocalDate.now();
         List<Order> order = orderRepository.findByOrderDateBetween(today, today);
         for(Order orderItem : order) {
-            totalRevenue+=orderItem.getTotalMoney();
+            if(!orderItem.getStatus().equalsIgnoreCase(String.valueOf(OrderStatus.DELETED))) {
+                totalRevenue += orderItem.getTotalMoney();
+            }
         }
 
         return totalRevenue;
