@@ -15,7 +15,7 @@ function OrderConfirmation() {
   const token = localStorage.getItem("token");
 
   const { data: orders } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/getall"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/getall"
   );
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("id");
