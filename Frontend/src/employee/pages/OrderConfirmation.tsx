@@ -3,8 +3,7 @@ import { Button } from "../../shared/components/button";
 import { useSearchParams } from "react-router-dom";
 import { useGet } from "../../service/crudService";
 
-import { useEffect, useState, useRef } from "react";
-import React from "react";
+import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 // import emailjs from "@emailjs/browser";
@@ -15,10 +14,9 @@ function OrderConfirmation() {
   const userData = userDataString ? JSON.parse(userDataString) : null;
   const token = localStorage.getItem("token");
 
-  const { data: orders, setData: setOrders } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/getall"
+  const { data: orders } = useGet(
+    "http://localhost:8020/api/v1/gmshop/orders/getall"
   );
-
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("id");
   const pdfRef = useRef<HTMLDivElement>(null);
@@ -308,7 +306,9 @@ function OrderConfirmation() {
                   <div>
                     <strong>Tổng tiền:</strong>{" "}
                   </div>
-                  <div className="text-red-500">{order.totalPrice.toLocaleString("vi-VN")}đ</div>
+                  <div className="text-red-500">
+                    {order.totalPrice.toLocaleString("vi-VN")}đ
+                  </div>
                 </div>
               </div>
             </div>

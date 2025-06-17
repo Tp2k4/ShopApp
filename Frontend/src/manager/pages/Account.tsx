@@ -126,7 +126,6 @@ function Account() {
       {showPopupModify && (
         <PopupAccountModify
           account={modifyingAccount}
-          setAccounts={setAccounts}
           setShowPopup={setShowPopupModify}
         />
       )}

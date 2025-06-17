@@ -1,7 +1,5 @@
 import React from "react";
 
-const NUM_COLUMNS = 6;
-
 interface StatisticsProps<T = any> {
   statistics: T[];
   children?: React.ReactNode;
