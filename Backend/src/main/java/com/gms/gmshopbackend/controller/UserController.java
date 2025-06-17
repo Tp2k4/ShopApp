@@ -25,7 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("${api.prefix}/user")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://gaminggear.onrender.com")
 public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
