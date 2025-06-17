@@ -148,7 +148,7 @@ function ProductList({
   ...rest
 }: ProductListProps) {
   const { openDetailIds, toggleDetail } = useToggleDetail();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   return (
     <div className="max-h-[600px] overflow-y-auto ">

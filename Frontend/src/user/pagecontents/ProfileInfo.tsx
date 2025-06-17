@@ -2,7 +2,6 @@ import { useGet } from "../../service/crudService";
 import { Box } from "../../shared/components/ui";
 import { useState, useEffect } from "react";
 import { Button } from "../../shared/components/button";
-import LabeledInputField from "../../shared/components/form/LabeledInputField";
 import PopupModifyUserInfo from "../popup/PopupModifyUserInfo";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../shared/paths";
@@ -39,7 +38,7 @@ function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
       phone_number: userAccountInfo.phoneNumber || "",
       email: userAccountInfo.email || "",
       address: userAccountInfo.address || "",
-      is_active:1,
+      is_active: 1,
       role_id: 2,
       facebook_account_id: "",
       google_account_id: "",

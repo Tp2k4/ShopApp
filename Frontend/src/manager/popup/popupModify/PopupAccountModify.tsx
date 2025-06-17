@@ -6,15 +6,10 @@ import { useState, useEffect } from "react";
 
 interface AccountProps {
   account: any;
-  setAccounts: React.Dispatch<React.SetStateAction<any>>;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PopupAccountModify = ({
-  account,
-  setAccounts,
-  setShowPopup,
-}: AccountProps) => {
+const PopupAccountModify = ({ account, setShowPopup }: AccountProps) => {
   // set role từ admin/ user/ employee sang số 1/ 2/ 3
   const roleDict: Record<string, number> = {
     admin: 1,
@@ -173,18 +168,14 @@ const PopupAccountModify = ({
                     account.id,
                     accountInfo,
                     setAccountInfo,
-                    setAccounts,
                     setShowPopup
                   );
-                  
                 }}
                 type="button"
                 text="Lưu"
               />
               <CancelButton
-                onClick={() =>
-                  handleCancelModify(setShowPopup, setAccountInfo, account)
-                }
+                onClick={() => handleCancelModify(setShowPopup, setAccountInfo)}
                 text="Hủy"
               />
             </div>

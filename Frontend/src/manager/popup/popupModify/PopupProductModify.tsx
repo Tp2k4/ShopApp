@@ -328,16 +328,14 @@ const PopupProductModify = ({
                     productInfo,
                     setProductInfo,
                     setProducts,
-                    setShowPopup,
+                    setShowPopup
                   )
                 }
                 type="button"
                 text="Lưu"
               />
               <CancelButton
-                onClick={() =>
-                  handleCancelModify(setShowPopup, setProductInfo, product)
-                }
+                onClick={() => handleCancelModify(setShowPopup, setProductInfo)}
                 text="Hủy"
               />
             </div>

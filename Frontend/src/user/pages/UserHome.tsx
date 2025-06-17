@@ -5,10 +5,9 @@ import HomeBanner from "../pagecontents/HomeBanner";
 import HomeSideBar from "../pagecontents/HomeSideBar";
 import ItemCard from "../pagecontents/ItemCard";
 import { useFilter, useSearch } from "../../service/queryService";
-import sample from "../../assets/avatar/sample.jpg";
 
 function UserHome() {
-  const { data: productInfos, setData: setProductInfos } = useGet(
+  const { data: productInfos } = useGet(
     "http://localhost:8020/api/v1/gmshop/product"
   );
   const { data: thumbnails } = useGet(

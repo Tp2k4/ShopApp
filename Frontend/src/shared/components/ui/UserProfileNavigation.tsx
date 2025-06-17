@@ -4,7 +4,6 @@ import { ROUTES } from "../../paths";
 import { useLocation } from "react-router-dom";
 import IconNavLabel from "./IconNavLabel";
 import { useGet } from "../../../service/crudService";
-import { useEffect } from "react";
 
 interface UserProfileNavigationProps {
   className?: string;
