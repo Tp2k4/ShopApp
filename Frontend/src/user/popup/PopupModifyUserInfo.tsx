@@ -97,7 +97,7 @@ const PopupModifyUserInfo = ({
             <Button
               onClick={() =>
                 handleModifyUserInfo(
-                  "http://localhost:8020/api/v1/gmshop/user/update/",
+                  "https://gm-12tk.onrender.com/api/v1/gmshop/user/update/",
                   userId,
                   updatedUserInfo,
                   setUpdatedUserInfo,

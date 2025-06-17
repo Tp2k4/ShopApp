@@ -15,7 +15,7 @@ interface ProfileInfoProps {
 
 function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
   const { data: userAccountInfo } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/get-user"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-user"
   );
 
   const [updatedUserInfo, setUpdatedUserInfo] = useState<any>({

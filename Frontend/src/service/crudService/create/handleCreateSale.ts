@@ -46,7 +46,7 @@ export const handleCreateSale = async (
             // Gọi API thêm ảnh
             const saleId = String(newSaleJson.id)
 
-            const responseForAddImage = await fetch("http://localhost:8020/api/v1/gmshop/promotion/upload-promotion-img/" + saleId, {
+            const responseForAddImage = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/promotion/upload-promotion-img/" + saleId, {
                 method: "PUT", 
                 headers: {
                     "Authorization": `Bearer ${token}`

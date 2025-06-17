@@ -84,7 +84,7 @@ export default ForgotPassword;
 //     }
 
 //     try {
-//       const res = await fetch("http://localhost:8020/api/v1/gmshop/user/forgot-password", {
+//       const res = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/user/forgot-password", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",

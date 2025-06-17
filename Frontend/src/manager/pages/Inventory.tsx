@@ -18,12 +18,12 @@ function Inventory() {
 
   // Fetch API
   const { data: inventories, setData: setInventories } = useGet(
-    "http://localhost:8020/api/v1/gmshop/inventory"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/inventory"
   );
 
   // Fetch API theo ngày
   const { data: inventoriesFilterByDate, refetch } = useGetParams(
-    "http://localhost:8020/api/v1/gmshop/inventory/date-date",
+    "https://gm-12tk.onrender.com/api/v1/gmshop/inventory/date-date",
     {
       from: startDate,
       to: endDate,
@@ -33,7 +33,7 @@ function Inventory() {
 
   // Lấy danh sách sản phẩm để chọn trong mục thêm vào kho
   const { data: products } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/alls"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/alls"
   );
   const listProductNames = getProductNames(products);
   console.log("Danh sách sản phẩm:", listProductNames);

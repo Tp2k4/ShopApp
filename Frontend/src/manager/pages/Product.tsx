@@ -15,7 +15,7 @@ import { useSearchParams } from "react-router-dom";
 function Product() {
   //================ Nhận products từ API
   const { data: productDatas } = useGetProducts(
-    "http://localhost:8020/api/v1/gmshop/product"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/product"
   );
 
   const [products, setProducts] = useState<any[]>([]);
@@ -141,7 +141,7 @@ function Product() {
       {/* Hiển thị hợp thoại xác nhận xóa */}
       {showPopupConfirmDelete && (
         <PopupConfirmDelete
-          apiPath="http://localhost:8020/api/v1/gmshop/product/delete/"
+          apiPath="https://gm-12tk.onrender.com/api/v1/gmshop/product/delete/"
           setItems={setProducts}
           setShowPopup={setShowPopupConfirmDelete}
           selectedItemId={selectedProductId}

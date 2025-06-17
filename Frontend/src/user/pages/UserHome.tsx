@@ -9,10 +9,10 @@ import sample from "../../assets/avatar/sample.jpg";
 
 function UserHome() {
   const { data: productInfos, setData: setProductInfos } = useGet(
-    "http://localhost:8020/api/v1/gmshop/product"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/product"
   );
   const { data: thumbnails } = useGet(
-    "http://localhost:8020/api/v1/gmshop/promotion"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/promotion"
   );
 
   const [thumbnailList, setThumbnailList] = useState<any[]>([]);

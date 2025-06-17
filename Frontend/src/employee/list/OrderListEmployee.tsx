@@ -77,7 +77,7 @@ function OrderListEmployee({
                     <CancelButton
                       onClick={() =>
                         handleDelete(
-                          "http://localhost:8020/api/v1/gmshop/orders/employee/delete/",
+                          "https://gm-12tk.onrender.com/api/v1/gmshop/orders/employee/delete/",
                           order.id,
                           setOrders
                         )

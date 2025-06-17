@@ -13,7 +13,7 @@ function ItemsDetail() {
   const [showPopup, setShowPopup] = useState(false);
 
   const { id } = useParams();
-  const { data } = useGet(`http://localhost:8020/api/v1/gmshop/product/${id}`);
+  const { data } = useGet(`https://gm-12tk.onrender.com/api/v1/gmshop/product/${id}`);
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
   }

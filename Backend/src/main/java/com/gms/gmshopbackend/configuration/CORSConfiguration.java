@@ -11,7 +11,7 @@ public class CORSConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Cho phép tất cả các endpoint
-                .allowedOrigins("http://localhost:5173") // Cho phép frontend truy cập
+                .allowedOrigins("https://gaminggear.onrender.com") // Cho phép frontend truy cập
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Các phương thức được phép
                 .allowedHeaders("*") // Cho phép tất cả các header
                 .allowCredentials(true); // Cho phép gửi cookie/token

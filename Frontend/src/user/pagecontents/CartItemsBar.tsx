@@ -105,7 +105,7 @@ function CartItemsBar({
         onClick={async () => {
           const token = localStorage.getItem("token");
           const res = await fetch(
-            `http://localhost:8020/api/v1/gmshop/cart/user/${CartItemInfos.id}`,
+            `https://gm-12tk.onrender.com/api/v1/gmshop/cart/user/${CartItemInfos.id}`,
             { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
           );
           if (res.ok) {

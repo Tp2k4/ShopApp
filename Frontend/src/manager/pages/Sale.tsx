@@ -10,7 +10,7 @@ import { useState } from "react";
 
 function Account() {
   const { data: sales, setData: setSales } = useGet(
-    "http://localhost:8020/api/v1/gmshop/promotion"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/promotion"
   );
 
   // Tìm kiếm

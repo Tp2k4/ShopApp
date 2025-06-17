@@ -23,7 +23,7 @@ export const handleResetPassword = async (
     }
 
     try{
-        const response = await fetch("http://localhost:8020/api/v1/gmshop/user/reset-password", {
+        const response = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/user/reset-password", {
             method: "POST", 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({email, new_password})

@@ -6,7 +6,7 @@ import UserProfileNavigation from "../../shared/components/ui/UserProfileNavigat
 
 function BuyHistory() {
   const { data: buyhistory } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/user/history"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/user/history"
   );
 
   return (

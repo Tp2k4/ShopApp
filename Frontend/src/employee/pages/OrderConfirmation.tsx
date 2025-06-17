@@ -16,7 +16,7 @@ function OrderConfirmation() {
   const token = localStorage.getItem("token");
 
   const { data: orders, setData: setOrders } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/getall"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/getall"
   );
 
   const [searchParams] = useSearchParams();
@@ -321,7 +321,7 @@ function OrderConfirmation() {
             type="button"
             onClick={() => {
               fetch(
-                `http://localhost:8020/api/v1/gmshop/orders/employee/checked/${orderId}`,
+                `https://gm-12tk.onrender.com/api/v1/gmshop/orders/employee/checked/${orderId}`,
                 {
                   method: "PUT",
                   headers: {
