@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 function Account() {
   //================ Nhận accounts từ API
   const { data: accounts, setData: setAccounts } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/alls"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/alls"
   );
 
   //================ Lọc và tìm kiếm
@@ -133,7 +133,7 @@ function Account() {
       {/* Hiển thị hợp thoại xác nhận xóa */}
       {showPopupConfirmDelete && (
         <PopupConfirmDelete
-          apiPath="http://localhost:8020/api/v1/gmshop/user/delete/"
+          apiPath="https://gm-12tk.onrender.com/api/v1/gmshop/user/delete/"
           setItems={setAccounts}
           setShowPopup={setShowPopupConfirmDelete}
           selectedItemId={selectedAccountId}

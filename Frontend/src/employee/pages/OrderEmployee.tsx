@@ -13,7 +13,7 @@ import { useState } from "react";
 function OrderEmployee() {
   // Nhận orders từ API
   const { data: orders, setData: setOrders } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/getall"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/getall"
   );
 
   // Lấy thông tin employee hiện tại, mục đích là lấy tên hiển thị lên Header

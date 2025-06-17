@@ -35,7 +35,7 @@ export const handleCreateAccount = async (
 
   try {
     const response = await fetch(
-      "http://localhost:8020/api/v1/gmshop/user/register",
+      "https://gm-12tk.onrender.com/api/v1/gmshop/user/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

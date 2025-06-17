@@ -8,7 +8,7 @@ import { useGet } from "../../service/crudService";
 function Order() {
   //================ Nhận products từ API
   const { data: orders } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/getall"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/getall"
   );
 
   //================ Lọc và tìm kiếm

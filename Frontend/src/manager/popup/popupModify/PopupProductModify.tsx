@@ -322,7 +322,7 @@ const PopupProductModify = ({
               <Button
                 onClick={() =>
                   handleModifyProduct(
-                    "http://localhost:8020/api/v1/gmshop/product/",
+                    "https://gm-12tk.onrender.com/api/v1/gmshop/product/",
                     product.id,
                     files,
                     productInfo,

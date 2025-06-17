@@ -14,7 +14,7 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const { data: UserInfos } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/get-user"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-user"
   );
 
   const listCartItemsChecked = JSON.parse(
@@ -179,7 +179,7 @@ export default function Payment() {
                   type="button"
                   text="Đặt hàng"
                   onClick={() => {
-                    fetch("http://localhost:8020/api/v1/gmshop/orders", {
+                    fetch("https://gm-12tk.onrender.com/api/v1/gmshop/orders", {
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

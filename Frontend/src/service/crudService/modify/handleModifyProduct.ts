@@ -51,7 +51,7 @@ export const handleModifyProduct = async (
             // Gọi API chỉnh sửa ảnh
             const productId = String(newProductJson.id)
 
-            const responseForAddImage = await fetch("http://localhost:8020/api/v1/gmshop/product/update-img/" + productId, {
+            const responseForAddImage = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/product/update-img/" + productId, {
                 method: "PUT", 
                 headers: {
                     "Authorization": `Bearer ${token}`

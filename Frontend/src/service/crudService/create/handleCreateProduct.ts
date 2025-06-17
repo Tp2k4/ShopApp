@@ -47,7 +47,7 @@ export const handleCreateProduct = async (
             // Gọi API thêm ảnh
             const productId = String(newProductJson.id)
 
-            const responseForAddImage = await fetch("http://localhost:8020/api/v1/gmshop/product/upload-img/" + productId, {
+            const responseForAddImage = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/product/upload-img/" + productId, {
                 method: "POST", 
                 headers: {
                     "Authorization": `Bearer ${token}`

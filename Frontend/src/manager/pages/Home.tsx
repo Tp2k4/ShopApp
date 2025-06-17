@@ -9,22 +9,22 @@ import { useEffect, useState } from "react";
 function Home() {
   // Lấy doanh thu 6 tháng gần nhất
   const { data, setData } = useGet(
-    "http://localhost:8020/api/v1/gmshop/revenue/last-six-month-revenue"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/revenue/last-six-month-revenue"
   );
 
   // Lấy doanh thu hôm nay
   const { data: todayRevenue } = useGet(
-    "http://localhost:8020/api/v1/gmshop/revenue/today-revenue"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/revenue/today-revenue"
   );
 
   // Lấy tổng số đơn hàng bán được hôm nay
   const { data: todayOrders } = useGet(
-    "http://localhost:8020/api/v1/gmshop/orders/today-orders"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/orders/today-orders"
   );
 
   // Lấy số người dùng hiện tại
   const { data: totalUsers } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/get-total-user"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-total-user"
   );
 
   // Xử lí dữ liệu để truyền vào render Chart

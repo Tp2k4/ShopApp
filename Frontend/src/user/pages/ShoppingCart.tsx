@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function ShoppingCart() {
   const navigate = useNavigate();
   const { data: CartItemsInfos, setData: setCartItemsInfos } = useGet(
-    "http://localhost:8020/api/v1/gmshop/cart/user"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/cart/user"
   );
 
   // Theo dõi các sản phẩm trong giỏ hàng đã được chọn để hiển thị giá tổng tiền với truyền sang trang payment

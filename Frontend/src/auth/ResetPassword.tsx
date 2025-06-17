@@ -112,7 +112,7 @@ export default ResetPassword;
 //     }
 
 //     try {
-//       const res = await fetch("http://localhost:8020/api/v1/gmshop/user/reset-password", {
+//       const res = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/user/reset-password", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",

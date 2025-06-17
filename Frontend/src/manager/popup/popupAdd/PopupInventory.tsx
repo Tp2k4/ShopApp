@@ -27,7 +27,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
 
   // Gọi API để lấy danh sách sản phẩm
   const { data: productList } = useGet(
-    "http://localhost:8020/api/v1/gmshop/product/admin/product-name-list"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/product/admin/product-name-list"
   );
   // Lấy danh sách "tên" sản phẩm từ API
   const [productListName, setProductListName] = useState<String[]>([]);
@@ -104,7 +104,7 @@ const PopupInventory = ({ setInventorys, setShowPopup }: PopupProductProps) => {
               <Button
                 onClick={() =>
                   handleCreate(
-                    "http://localhost:8020/api/v1/gmshop/inventory/create-inventory",
+                    "https://gm-12tk.onrender.com/api/v1/gmshop/inventory/create-inventory",
                     newInventoryInfo,
                     setNewInventoryInfo,
                     setInventorys,

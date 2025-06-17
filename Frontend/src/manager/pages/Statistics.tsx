@@ -15,11 +15,11 @@ function Dashboard() {
 
   //================ Nhận accounts từ API
   const { data: statistics } = useGet(
-    "http://localhost:8020/api/v1/gmshop/revenue/alls"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/revenue/alls"
   );
 
   const { data: statisticsFilterByDate, refetch } = useGetParams(
-    "http://localhost:8020/api/v1/gmshop/revenue/date-date",
+    "https://gm-12tk.onrender.com/api/v1/gmshop/revenue/date-date",
     {
       start_date: startDate,
       end_date: endDate,

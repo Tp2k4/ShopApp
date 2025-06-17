@@ -19,7 +19,7 @@ function UserProfileNavigation({
   const isActive = (path: string) => location.pathname === path;
   //================ Nhận accounts từ API
   const { data: userAccountInfo } = useGet(
-    "http://localhost:8020/api/v1/gmshop/user/get-user"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-user"
   );
 
   return (

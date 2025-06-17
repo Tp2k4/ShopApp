@@ -17,7 +17,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
 
   // Gọi API để lấy danh sách sản phẩm
   const { data: productList } = useGet(
-    "http://localhost:8020/api/v1/gmshop/product/admin/product-name-list"
+    "https://gm-12tk.onrender.com/api/v1/gmshop/product/admin/product-name-list"
   );
   // Lấy danh sách "tên" sản phẩm từ API
   const [productListName, setProductListName] = useState<String[]>([]);
@@ -209,7 +209,7 @@ const PopupSale = ({ setSales, setShowPopup }: PopupProductProps) => {
             onClick={() =>{
               
               handleCreateSale(
-                "http://localhost:8020/api/v1/gmshop/promotion/create",
+                "https://gm-12tk.onrender.com/api/v1/gmshop/promotion/create",
                 files,
                 newSaleInfo,
                 setNewSaleInfo,
