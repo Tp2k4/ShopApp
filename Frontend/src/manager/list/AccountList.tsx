@@ -31,7 +31,7 @@ function AccountList({
   className = "",
   ...rest
 }: AccountListProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const { openDetailIds, toggleDetail } = useToggleDetail();
 
   return (

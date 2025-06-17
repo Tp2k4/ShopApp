@@ -36,6 +36,7 @@ function Inventory() {
     "http://localhost:8020/api/v1/gmshop/user/alls"
   );
   const listProductNames = getProductNames(products);
+  console.log("Danh sách sản phẩm:", listProductNames);
 
   // Xử lý khi nhấn nút lọc
   const handleFilter = () => {
