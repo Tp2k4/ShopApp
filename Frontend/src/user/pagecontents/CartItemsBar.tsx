@@ -48,7 +48,7 @@ function CartItemsBar({
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
-        <div className="w-[1/6] h-full">
+        <div className="w-[1/5] h-full">
           <div className="body-text">{index}.</div>
           <div className="flex flex-col items-center ">
             <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
@@ -64,9 +64,9 @@ function CartItemsBar({
         <CheckBox
           checked={isChecked}
           onChange={handleCheck}
-          className="w-full"
+          className="w-full pl-[50px]"
         />
-        <div className="flex flex-col w-[1/6]">
+        <div className="flex flex-col w-[1/5]">
           <div className="text-right text-red-500 heading3">
             {CartItemInfos.sellPrice.toLocaleString("vi-VN")}đ
           </div>
