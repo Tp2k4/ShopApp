@@ -9,6 +9,8 @@ import com.gms.gmshopbackend.repository.ProductRepository;
 import com.gms.gmshopbackend.response.InventoryResponse;
 import com.gms.gmshopbackend.service.inter.IInventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,6 +30,7 @@ public class InventoryService implements IInventoryService {
 
 
     @Override
+    @Cacheable("allInventories")
     public List<InventoryResponse> getInventory() {
         try {
             List<Inventory> inventories = inventoryRepository.findAll();
@@ -40,6 +43,7 @@ public class InventoryService implements IInventoryService {
 
 
     @Override
+    @CacheEvict(value = {"allInventories", "inventoryByDate"}, allEntries = true)
     public InventoryResponse exportInventory(Product product, int nop) {
         Inventory newInventory = Inventory.builder()
                 .productId(product)
@@ -57,6 +61,7 @@ public class InventoryService implements IInventoryService {
     }
 
     @Override
+    @CacheEvict(value = {"allInventories", "inventoryByDate"}, allEntries = true)
     public InventoryResponse importInventory(Long productId, int nop) {
         Product product = productRepository.findById(productId).orElseThrow(
                 () -> new RuntimeException("Product not found")
@@ -78,6 +83,7 @@ public class InventoryService implements IInventoryService {
     }
 
     @Override
+    @Cacheable(value = "inventoryByDate", key = "T(java.util.Objects).hash(#from, #to)")
     public List<InventoryResponse> getInventoryByDate(LocalDate from, LocalDate to) {
         try{
             List<Inventory> inventories = inventoryRepository.findByTransactionDateBetween(from, to);
@@ -89,6 +95,7 @@ public class InventoryService implements IInventoryService {
     }
 
     @Override
+    @CacheEvict(value = {"allInventories", "inventoryByDate"}, allEntries = true)
     public Inventory createInventory(InventoryDTO inventoryDTO) {
         Product existingProduct = productRepository.findByName(inventoryDTO.getProductName());
         if (existingProduct == null) {

@@ -11,6 +11,8 @@ import com.gms.gmshopbackend.service.inter.IOrderService;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,8 @@ public class OrderService implements IOrderService {
 
     @Override
     @Transactional
+    @CacheEvict(value = {"allOrders", "order", "ordersByUser", "orderHistory", "todayOrders"}, allEntries = true)
+
     public OrderResponse createOrder(OrderDTO orderDTO, User user) {
         // Ánh xạ từ DTO sang entity, bỏ qua ID
         modelMapper.typeMap(OrderDTO.class, Order.class)
@@ -169,6 +173,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable("allOrders")
     public List<OrderResponse> getAllOrders() {
         List<Order> orders =  orderRepository.findAll();
         return orders.stream().map(order -> {
@@ -195,6 +200,7 @@ public class OrderService implements IOrderService {
 
 
     @Override
+    @Cacheable(value = "order", key = "#id")
     public OrderResponse getOrderById(Long id) throws RuntimeException {
         Order existingOrder = orderRepository
                 .findById(id)
@@ -249,6 +255,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable(value = "ordersByUser", key = "#userId")
     public List<OrderResponse> getOrdersByUserId(Long userId) {
        List<Order> orders = orderRepository.findByUserId(userId);
         return orders.stream().map(order -> {
@@ -274,6 +281,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable(value = "orderHistory", key = "#user.id")
     public List<OrderHistoryResponse> orderHistory(User user) {
         List<Order> orders = orderRepository.findByUserId(user.getId());
         List<OrderDetail> orderDetails = new ArrayList<>();
@@ -284,6 +292,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable("todayOrders")
     public int getTodayOrders() {
         LocalDate today = LocalDate.now();
         int count = 0;
