@@ -13,6 +13,8 @@ import com.gms.gmshopbackend.response.UserLoginResponse;
 import com.gms.gmshopbackend.response.UserResponse;
 import com.gms.gmshopbackend.service.inter.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,6 +44,7 @@ public class UserService implements IUserService {
     private final MailService mailService;
 
     @Override
+    @CacheEvict(value = {"allUsers", "userById"}, allEntries = true)
     public User createUser(UserDTO userDTO) {
        String phoneNumber = userDTO.getPhoneNumber();
        if(userRepository.existsByPhoneNumber(phoneNumber)){
@@ -101,6 +104,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable("allUsers")
     public List<UserResponse> getAllUsers() {
        try{
            return userRepository.findAll().stream().map(UserResponse::fromUser).collect(Collectors.toList());
@@ -110,6 +114,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable(value = "userById", key = "#id")
     public User getUserById(Long id) {
         User existingUser = userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("User not found")
@@ -118,6 +123,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @CacheEvict(value = {"allUsers", "userById"}, key = "#userId", allEntries = true)
     public User updateUser(Long userId, UserDTO userDTO) {
         User existingUser = userRepository.findById(userId).orElseThrow(
                 () -> new RuntimeException("User not found")
@@ -154,6 +160,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @CacheEvict(value = {"allUsers", "userById"}, key = "#userId", allEntries = true)
     public void delete(Long userId) {
         User existingUser = userRepository.findById(userId).orElseThrow(
                 () -> new RuntimeException("User not found")

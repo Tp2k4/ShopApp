@@ -12,6 +12,8 @@ import com.gms.gmshopbackend.repository.PromotionRepository;
 import com.gms.gmshopbackend.response.PromotionResponse;
 import com.gms.gmshopbackend.service.inter.IPromotionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,7 @@ public class PromotionService implements IPromotionService {
     private final PromotionProductRepository promotionProductRepository;
 
     @Override
+    @Cacheable("allPromotions")
     public List<PromotionResponse> getAllPromotions() {
         try {
                 List<Promotion> promotions = promotionRepository.findAll();
@@ -62,6 +65,7 @@ public class PromotionService implements IPromotionService {
 
     @Override
     @Transactional
+    @CacheEvict(value = {"allPromotions", "promotionById"}, allEntries = true)
     public Promotion createPromotion(PromotionDTO promotionDTO) {
         Promotion existingPromotion = promotionRepository.findByName(promotionDTO.getName());
         if (existingPromotion != null) {
@@ -109,6 +113,7 @@ public class PromotionService implements IPromotionService {
     }
 
     @Override
+    @CacheEvict(value = {"allPromotions", "promotionById"}, allEntries = true)
     public Promotion updatePromotion(Long id, PromotionDTO promotionDTO) {
         try {
             Promotion existingPromotion = promotionRepository.findById(id).orElseThrow(
@@ -181,11 +186,13 @@ public class PromotionService implements IPromotionService {
     }
 
     @Override
+    @CacheEvict(value = {"allPromotions", "promotionById"}, allEntries = true)
     public void deletePromotion(Long id) {
 
     }
 
     @Override
+    @CacheEvict(value = {"allPromotions", "promotionById"}, allEntries = true)
     public Promotion setPromotion(Long id) {
         Promotion existingPromotion = promotionRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Promotion not found")
@@ -217,7 +224,7 @@ public class PromotionService implements IPromotionService {
         promotionRepository.save(existingPromotion);
         return existingPromotion;
     }
-
+    @Cacheable(value = "promotionById", key = "#promotionId")
     public Promotion getPromotionById(Long promotionId) {
         try{
             Promotion promotion = promotionRepository.findById(promotionId).orElseThrow(
