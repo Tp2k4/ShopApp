@@ -23,6 +23,7 @@ function HeaderUserNoSearch({
   ...rest
 }: HeaderUserNoSearchProps) {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -80,7 +81,7 @@ function HeaderUserNoSearch({
           ></IconButton>
 
           <IconButton
-            text="Đăng xuất"
+            text={token ? "Đăng xuất" : "Đăng nhập"}
             tooltipposition="bottom"
             iconName="BiLogOut"
             onClick={() => handleLogout(navigate)}
