@@ -50,15 +50,15 @@ function CartItemsBar({
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
         <div className="w-[1/5] h-full">
           <div className="body-text">{index}.</div>
-          <div className="flex flex-col items-center ">
-            <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
-              <img
-                src={CartItemInfos.productImageUrl}
-                alt="product image"
-                className="object-cover w-full h-full"
-              />
-            </div>
+
+          <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
+            <img
+              src={CartItemInfos.productImageUrl}
+              alt="product image"
+              className="object-cover w-full h-full"
+            />
           </div>
+
           <div className="body-text">{CartItemInfos.productName}</div>
         </div>
 
