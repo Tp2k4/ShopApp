@@ -47,8 +47,8 @@ function CartItemsBar({
 
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
-      <div className="flex justify-start w-full gap-[var(--small-gap)]">
-        <div className="w-[1/5] h-full">
+      <div className="w-[1/5] h-full">
+        <div className="flex justify-start w-full gap-[var(--small-gap)]">
           <div className="body-text">{index}.</div>
           <div className="flex flex-col items-center ">
             <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
