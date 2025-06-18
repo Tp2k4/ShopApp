@@ -48,23 +48,25 @@ function CartItemsBar({
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
-        <div className="body-text">{index}.</div>
-        <div className="flex flex-col items-center ">
-          <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
-            <img
-              src={CartItemInfos.productImageUrl}
-              alt="product image"
-              className="object-cover w-full h-full"
-            />
+        <div className="w-[1/6] h-full">
+          <div className="body-text">{index}.</div>
+          <div className="flex flex-col items-center ">
+            <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
+              <img
+                src={CartItemInfos.productImageUrl}
+                alt="product image"
+                className="object-cover w-full h-full"
+              />
+            </div>
           </div>
+          <div className="body-text">{CartItemInfos.productName}</div>
         </div>
-        <div className="body-text">{CartItemInfos.productName}</div>
         <CheckBox
           checked={isChecked}
           onChange={handleCheck}
-          className="pl-50 pr-125"
+          className="w-full"
         />
-        <div className="flex flex-col ">
+        <div className="flex flex-col w-[1/6]">
           <div className="text-right text-red-500 heading3">
             {CartItemInfos.sellPrice.toLocaleString("vi-VN")}đ
           </div>
