@@ -37,7 +37,7 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
         </div>
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="flex gap-[var(--small-gap)]">
-            {data.sellprice < data.originPrice && (
+            {data.sellPrice < data.originPrice && (
               <div className="line-through text-[var(--original-price-color)]">
                 {data.originPrice.toLocaleString("vi-VN")}đ
               </div>
