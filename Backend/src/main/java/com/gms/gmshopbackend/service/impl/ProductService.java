@@ -8,6 +8,8 @@ import com.gms.gmshopbackend.response.ProductNameResponse;
 import com.gms.gmshopbackend.response.ProductResponse;
 import com.gms.gmshopbackend.service.inter.IProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
@@ -37,6 +39,7 @@ public class ProductService implements IProductService {
 
 
     @Override
+    @Cacheable("products")
     public List<ProductResponse> getAllProducts() {
         List<Product> productPage =  productRepository.findAll();
         return productPage.stream().map(ProductResponse::fromProduct).toList();
@@ -58,6 +61,7 @@ public class ProductService implements IProductService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "products", allEntries = true)
     public Product createProduct(ProductDTO productDTO) {
 
         // Kiểm tra nếu sản phẩm đã tồn tại
@@ -115,7 +119,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-
+    @CacheEvict(value = "products", allEntries = true)
     public Product updateProduct(Long id, ProductDTO productDTO) {
 
         try {
@@ -193,6 +197,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @CacheEvict(value = "products", allEntries = true)
     public void deleteProduct(Long id) {
         Product existing_product = productRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Product not found")
@@ -245,6 +250,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Cacheable("productNames")
     public List<ProductNameResponse> getProductNames() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(ProductNameResponse::fromProduct).collect(Collectors.toList());
