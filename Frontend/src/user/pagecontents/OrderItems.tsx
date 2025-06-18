@@ -37,15 +37,17 @@ function OrderItems({ data, ...rest }: OrderItemsProps) {
         </div>
         <div className="flex flex-col gap-[var(--medium-gap)]">
           <div className="flex gap-[var(--small-gap)]">
-            <div className="line-through text-[var(--original-price-color)]">
-              {data.originPrice.toLocaleString("vi-VN")}đ
-            </div>{" "}
+            {data.sellprice < data.originPrice && (
+              <div className="line-through text-[var(--original-price-color)]">
+                {data.originPrice.toLocaleString("vi-VN")}đ
+              </div>
+            )}
             {/* giá gốc */}
             <div className="text-[var(--discounted-price-color)]">
               {data.sellPrice.toLocaleString("vi-VN")}đ
             </div>{" "}
             {/* giá đã giảm */}
-          </div> 
+          </div>
           <div className="flex justify-end">
             <Button
               text="Mua lại"

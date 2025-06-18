@@ -68,9 +68,11 @@ function CartItemsBar({
           <div className="text-right text-red-500 heading3">
             {CartItemInfos.sellPrice.toLocaleString("vi-VN")}đ
           </div>
-          <div className="text-black opacity-[var(--caption-opacity)] body-text text-right line-through decoration-[1px]">
-            {CartItemInfos.price.toLocaleString("vi-VN")}đ
-          </div>
+          {CartItemInfos.sellPrice < CartItemInfos.price && (
+            <div className="text-black opacity-[var(--caption-opacity)] body-text text-right line-through decoration-[1px]">
+              {CartItemInfos.price.toLocaleString("vi-VN")}đ
+            </div>
+          )}
           {/* Thanh tăng giảm số lượng */}
           <div className="flex items-center justify-end gap-1 mt-2">
             <button
