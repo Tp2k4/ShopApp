@@ -139,6 +139,7 @@ public class OrderService implements IOrderService {
 
 
     @Override
+    @CacheEvict(value = {"order", "ordersByUser", "allOrders", "orderHistory", "todayOrders"}, allEntries = true)
     public OrderResponse updateOrder(Long id, OrderDTO orderDTO) {
         User user = userRepository.findById(orderDTO.getUserId()).orElseThrow(
                 () -> new RuntimeException("User not found")
@@ -227,6 +228,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @CacheEvict(value = {"order", "ordersByUser", "allOrders", "orderHistory", "todayOrders"}, allEntries = true)
     public void deleteOrder(Long id) {
         try{
             Optional<Order> existingOrder = orderRepository.findById(id);
@@ -304,7 +306,7 @@ public class OrderService implements IOrderService {
         }
         return count;
     }
-
+    @CacheEvict(value = {"order", "ordersByUser", "allOrders", "orderHistory", "todayOrders"}, allEntries = true)
     public void staffChecked(Long orderId){
         Order existingOrder = orderRepository.findById(orderId).orElseThrow(
                 () -> new RuntimeException("Order not found")
