@@ -41,8 +41,10 @@ public class ProductService implements IProductService {
     @Override
     @Cacheable("products")
     public List<ProductResponse> getAllProducts() {
-        List<Product> productPage =  productRepository.findAll();
+        List<Product> productPage =  productRepository.findByIsActiveTrue();
+
         return productPage.stream().map(ProductResponse::fromProduct).toList();
+
 
     }
 
@@ -91,6 +93,7 @@ public class ProductService implements IProductService {
         product.setStockQuantity(productDTO.getStockQuantity());
         product.setThumbnail(productDTO.getThumbnail());
         product.setCategory(category);
+        product.setIsActive(true);
         product.setBrand(brand);
 
         // ✅ Lưu sản phẩm trước, chưa set specs (tránh lỗi khóa ngoại ngược)
@@ -136,6 +139,7 @@ public class ProductService implements IProductService {
             existing_product.setDescription_3(productDTO.getDescription3());
             existing_product.setStockQuantity(productDTO.getStockQuantity());
             existing_product.setThumbnail(productDTO.getThumbnail());
+            existing_product.setIsActive(true);
 
             Category category = (Category) categoryRepository.findByName(productDTO.getCategoryId()).orElseThrow(
                     () -> new RuntimeException("Category not found")
