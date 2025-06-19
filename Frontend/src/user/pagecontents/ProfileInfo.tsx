@@ -5,7 +5,7 @@ import { Button } from "../../shared/components/button";
 import PopupModifyUserInfo from "../popup/PopupModifyUserInfo";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../shared/paths";
-import { BASE_TEST_API } from "../../shared/paths";
+import { BASE_API } from "../../shared/paths";
 interface ProfileInfoProps {
   className?: string;
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ interface ProfileInfoProps {
 }
 
 function ProfileInfo({ className = "", children, ...rest }: ProfileInfoProps) {
-  const { data: userAccountInfo } = useGet(`${BASE_TEST_API}user/get-user`);
+  const { data: userAccountInfo } = useGet(`${BASE_API}user/get-user`);
 
   const [updatedUserInfo, setUpdatedUserInfo] = useState<any>({
     fullname: "",

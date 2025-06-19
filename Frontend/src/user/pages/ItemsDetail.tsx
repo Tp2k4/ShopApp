@@ -1,6 +1,6 @@
 import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import { useGet } from "../../service/crudService";
-import { BASE_TEST_API } from "../../shared/paths";
+import { BASE_API } from "../../shared/paths";
 import { useParams } from "react-router-dom";
 import ImageGallery from "../pagecontents/ImageGallery";
 import AddItemsButton from "../../shared/components/button/AddItemsButton";
@@ -13,7 +13,7 @@ function ItemsDetail() {
   const [showPopup, setShowPopup] = useState(false);
 
   const { id } = useParams();
-  const { data } = useGet(`${BASE_TEST_API}product/${id}`);
+  const { data } = useGet(`${BASE_API}product/${id}`);
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
   }

@@ -6,13 +6,13 @@ import HomeBanner from "../pagecontents/HomeBanner";
 import HomeSideBar from "../pagecontents/HomeSideBar";
 import ItemCard from "../pagecontents/ItemCard";
 import { useFilter, useSearch } from "../../service/queryService";
-import { BASE_TEST_API } from "../../shared/paths";
+import { BASE_API } from "../../shared/paths";
 
 function UserHome() {
   const { data: productInfos, setData: setProductInfos } = useGet(
-    `${BASE_TEST_API}product`
+    `${BASE_API}product`
   );
-  const { data: thumbnails } = useGet(`${BASE_TEST_API}promotion`);
+  const { data: thumbnails } = useGet(`${BASE_API}promotion`);
 
   const [thumbnailList, setThumbnailList] = useState<any[]>([]);
   console.log(thumbnailList);
@@ -43,7 +43,7 @@ function UserHome() {
   );
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
+    <div className="min-h-full w-full flex flex-col items-center gap-[var(--big-gap)] overflow-y-auto overflow-x-hidden">
       <HeaderUser
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -77,6 +77,7 @@ function UserHome() {
           </div>
         </div>
       </div>
+
       <div className="max-w-[var(--max-width-content)] h-auto">
         <div className="w-full h-full bg-white p-[var(--medium-gap)] rounded-md">
           <div className="grid grid-cols-5 auto-rows-auto gap-[var(--semi-medium-gap)] items-center justify-center">
