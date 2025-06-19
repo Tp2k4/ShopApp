@@ -3,7 +3,6 @@ import { Button, CancelButton } from "../shared/components/button";
 import { InputField } from "../shared/components/form";
 import { handleVerifyOtp } from "../service/authService/handleVerifyOtp";
 import { ROUTES } from "../shared/paths";
-
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";

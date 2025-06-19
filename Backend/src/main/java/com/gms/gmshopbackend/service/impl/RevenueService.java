@@ -32,11 +32,16 @@ public class RevenueService implements IRevenueService {
 
     @Override
     public List<RevenueResponse> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
-        List<Inventory> inventoryList = inventoryRepository.findByTransactionDateBetween(startDate, endDate);
-        return inventoryList.stream().map(RevenueResponse::fromDTO).collect(Collectors.toList());
+        List<Inventory> exportList = inventoryRepository.findByTransactionDateBetween(startDate, endDate)
+                .stream()
+                .filter(inventory -> inventory.getTransactionType().equalsIgnoreCase("export"))
+                .toList();
 
-
+        return exportList.stream()
+                .map(RevenueResponse::fromDTO)
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public double getTodayRevenue() {
