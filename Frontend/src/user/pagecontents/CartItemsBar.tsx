@@ -48,29 +48,34 @@ function CartItemsBar({
   return (
     <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
-        <div className="body-text">{index}.</div>
-        <div className="flex flex-col items-center ">
-          <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
+        <div className="w-[1/5] h-full flex gap-[var(--small-gap)]">
+          <div className="body-text">{index}.</div>
+
+          <div className="w-[100px] h-full aspect-square rounded-md overflow-hidden ">
             <img
               src={CartItemInfos.productImageUrl}
               alt="product image"
               className="object-cover w-full h-full"
             />
           </div>
+
+          <div className="w-full body-text">{CartItemInfos.productName}</div>
         </div>
-        <div className="body-text">{CartItemInfos.productName}</div>
+
         <CheckBox
           checked={isChecked}
           onChange={handleCheck}
-          className="pl-50 pr-125"
+          className="w-full pl-[50px]"
         />
-        <div className="flex flex-col ">
+        <div className="flex flex-col w-[1/5]">
           <div className="text-right text-red-500 heading3">
             {CartItemInfos.sellPrice.toLocaleString("vi-VN")}đ
           </div>
-          <div className="text-black opacity-[var(--caption-opacity)] body-text text-right line-through decoration-[1px]">
-            {CartItemInfos.price.toLocaleString("vi-VN")}đ
-          </div>
+          {CartItemInfos.sellPrice < CartItemInfos.price && (
+            <div className="text-black opacity-[var(--caption-opacity)] body-text text-right line-through decoration-[1px]">
+              {CartItemInfos.price.toLocaleString("vi-VN")}đ
+            </div>
+          )}
           {/* Thanh tăng giảm số lượng */}
           <div className="flex items-center justify-end gap-1 mt-2">
             <button
@@ -99,6 +104,7 @@ function CartItemsBar({
           </div>
         </div>
       </div>
+
       <button
         type="button"
         className="pl-14 opacity-[var(--caption-opacity)] hover:underline hover:opacity-100 w-fit"

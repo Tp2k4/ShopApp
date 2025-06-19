@@ -13,7 +13,9 @@ function ItemsDetail() {
   const [showPopup, setShowPopup] = useState(false);
 
   const { id } = useParams();
-  const { data } = useGet(`https://gm-12tk.onrender.com/api/v1/gmshop/product/${id}`);
+  const { data } = useGet(
+    `https://gm-12tk.onrender.com/api/v1/gmshop/product/${id}`
+  );
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
   }
@@ -33,9 +35,11 @@ function ItemsDetail() {
               <span className="font-semibold text-red-500 heading3">
                 {data.sellPrice?.toLocaleString("vi-VN")}đ
               </span>
-              <span className="text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] heading3">
-                {data.price?.toLocaleString("vi-VN")}đ
-              </span>
+              {data.sellPrice < data.price && (
+                <span className="text-black opacity-[var(--caption-opacity)]  line-through decoration-[1px] heading3">
+                  {data.price?.toLocaleString("vi-VN")}đ
+                </span>
+              )}
             </div>
             <div className="flex flex-col md:flex-row gap-[var(--small-gap)]">
               <AddItemsButton
