@@ -190,9 +190,7 @@ const router = createBrowserRouter([
   {
     path: ROUTES.USER.ITEMS_DETAIL,
     element: (
-      <PrivateRoute roles={["USER"]}>
         <ItemsDetail />
-      </PrivateRoute>
     ),
   },
   {
