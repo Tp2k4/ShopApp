@@ -1,27 +1,25 @@
 import HeaderUserNoSearch from "../../shared/components/ui/HeaderUserNoSearch";
 import { useGet } from "../../service/crudService";
-
+import { BASE_TEST_API } from "../../shared/paths";
 import { useParams } from "react-router-dom";
 import ImageGallery from "../pagecontents/ImageGallery";
 import AddItemsButton from "../../shared/components/button/AddItemsButton";
 import { useState } from "react";
 import PopupConfirm from "../popup/PopupConfirm";
-
+import Footer from "../../shared/components/ui/Footer";
 import { ROUTES } from "../../shared/paths";
 function ItemsDetail() {
   // Popup
   const [showPopup, setShowPopup] = useState(false);
 
   const { id } = useParams();
-  const { data } = useGet(
-    `https://gm-12tk.onrender.com/api/v1/gmshop/product/${id}`
-  );
+  const { data } = useGet(`${BASE_TEST_API}product/${id}`);
   if (!data || !data.specs) {
     return <div>Đang tải dữ liệu...</div>;
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col gap-[var(--medium-gap)] overflow-x-auto overflow-y-auto items-center">
+    <div className="h-full w-screen flex flex-col gap-[var(--medium-gap)] overflow-x-auto overflow-y-auto items-center">
       <HeaderUserNoSearch className="fixed top-0 z-50" />
       <div className="pt-[calc(var(--medium-gap)_+_var(--header-height))] w-full gap-[var(--medium-gap)] flex flex-col max-w-[1200px]">
         <div className="flex flex-col w-full overflow-hidden rounded-md md:flex md:flex-row">
@@ -166,7 +164,7 @@ function ItemsDetail() {
           </div>
         </div>
       </div>
-
+      <Footer className="" />
       {showPopup && <PopupConfirm setShowPopup={setShowPopup} />}
     </div>
   );

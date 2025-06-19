@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ROUTES } from "../../shared/paths"
-
+import { BASE_TEST_API } from "../../shared/paths";
 /*Tự động login khi vừa bật web, nếu có sẵn token 
 (tức đã từng đăng nhập trước rồi) thì tự động login */
 export const autoLogin = () => {
@@ -61,7 +61,7 @@ export const handleLogin = async (
   e.preventDefault();
 
   try {
-    const response = await fetch("https://gm-12tk.onrender.com/api/v1/gmshop/user/login", {
+    const response = await fetch(`${BASE_TEST_API}user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

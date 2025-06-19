@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useGet } from "../../service/crudService";
 import HeaderUser from "../../shared/components/ui/HeaderUser";
+import Footer from "../../shared/components/ui/Footer";
 import HomeBanner from "../pagecontents/HomeBanner";
 import HomeSideBar from "../pagecontents/HomeSideBar";
 import ItemCard from "../pagecontents/ItemCard";
 import { useFilter, useSearch } from "../../service/queryService";
+import { BASE_TEST_API } from "../../shared/paths";
 
 function UserHome() {
   const { data: productInfos, setData: setProductInfos } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/product"
+    `${BASE_TEST_API}product`
   );
-  const { data: thumbnails } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/promotion"
-  );
+  const { data: thumbnails } = useGet(`${BASE_TEST_API}promotion`);
 
   const [thumbnailList, setThumbnailList] = useState<any[]>([]);
   console.log(thumbnailList);
@@ -86,6 +86,7 @@ function UserHome() {
           </div>
         </div>
       </div>
+      <Footer className="" />
     </div>
   );
 }

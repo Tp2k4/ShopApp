@@ -4,7 +4,7 @@ import { ROUTES } from "../../paths";
 import { useLocation } from "react-router-dom";
 import IconNavLabel from "./IconNavLabel";
 import { useGet } from "../../../service/crudService";
-
+import { BASE_TEST_API } from "../../paths";
 interface UserProfileNavigationProps {
   className?: string;
   children?: React.ReactNode;
@@ -18,9 +18,7 @@ function UserProfileNavigation({
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   //================ Nhận accounts từ API
-  const { data: userAccountInfo } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-user"
-  );
+  const { data: userAccountInfo } = useGet(`${BASE_TEST_API}user/get-user`);
 
   return (
     <div

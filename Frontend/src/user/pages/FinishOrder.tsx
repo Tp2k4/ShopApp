@@ -3,6 +3,7 @@ import CartProgressBar from "../pagecontents/CartProgressBar";
 import { Button } from "../../shared/components/button";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../shared/paths";
+import Footer from "../../shared/components/ui/Footer";
 export default function FinishOrder() {
   const navigate = useNavigate();
   return (
@@ -23,6 +24,7 @@ export default function FinishOrder() {
           />
         </div>
       </div>
+      <Footer className="fixed bottom-0" />
     </div>
   );
 }

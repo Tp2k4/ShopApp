@@ -7,15 +7,14 @@ import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { BASE_TEST_API } from "../../shared/paths";
+import Footer from "../../shared/components/ui/Footer";
 export default function Payment() {
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
 
-  const { data: UserInfos } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/user/get-user"
-  );
+  const { data: UserInfos } = useGet(`${BASE_TEST_API}user/get-user`);
 
   const listCartItemsChecked = JSON.parse(
     localStorage.getItem("listCartItemsChecked") || "[]"
@@ -196,6 +195,7 @@ export default function Payment() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -34,4 +34,5 @@ export const ROUTES = {
   },
 };
 
-export const APIS = {};
+export const BASE_API = "https://gm-12tk.onrender.com/api/v1/gmshop/";
+export const BASE_TEST_API = "http://localhost:8020/api/v1/gmshop/";

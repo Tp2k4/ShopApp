@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { useGet } from "../../service/crudService";
 import { Button } from "../../shared/components/button";
 import { useNavigate } from "react-router-dom";
-
+import { BASE_TEST_API } from "../../shared/paths";
+import Footer from "../../shared/components/ui/Footer";
 export default function ShoppingCart() {
   const navigate = useNavigate();
   const { data: CartItemsInfos, setData: setCartItemsInfos } = useGet(
-    "https://gm-12tk.onrender.com/api/v1/gmshop/cart/user"
+    `${BASE_TEST_API}cart/user`
   );
 
   // Theo dõi các sản phẩm trong giỏ hàng đã được chọn để hiển thị giá tổng tiền với truyền sang trang payment
@@ -48,7 +49,7 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center gap-[var(--medium-gap)]">
+    <div className="h-full w-screen flex flex-col items-center gap-[var(--medium-gap)]">
       <HeaderUserNoSearch />
       <div className="w-[var(--max-width-content)] h-full flex flex-col items-start justify-center gap-[var(--medium-gap)] ">
         <Link
@@ -100,6 +101,7 @@ export default function ShoppingCart() {
           </div>
         </div>
       </div>
+      <Footer className="" />
     </div>
   );
 }
