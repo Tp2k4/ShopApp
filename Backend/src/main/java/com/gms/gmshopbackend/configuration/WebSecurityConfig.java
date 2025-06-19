@@ -35,7 +35,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://gaminggear.onrender.com")); // URL của frontend
+        configuration.setAllowedOrigins(Arrays.asList("https://gaminggear.onrender.com", "http://localhost:5173")); // URL của frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true); // Nếu dùng cookies hoặc JWT token

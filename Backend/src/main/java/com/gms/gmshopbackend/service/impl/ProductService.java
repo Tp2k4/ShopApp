@@ -77,8 +77,10 @@ public class ProductService implements IProductService {
 
         // Lấy brand
         Brand brand = brandRepository.findByName(productDTO.getBrandId());
+        Brand newBrand = new Brand() ;
         if(brand == null){
-            throw new RuntimeException("Brand not found");
+            newBrand.setName(productDTO.getBrandId());
+            newBrand = brandRepository.save(newBrand);
         }
 
 
@@ -94,7 +96,7 @@ public class ProductService implements IProductService {
         product.setThumbnail(productDTO.getThumbnail());
         product.setCategory(category);
         product.setIsActive(true);
-        product.setBrand(brand);
+        product.setBrand(brand==null?newBrand:brand);
 
         // ✅ Lưu sản phẩm trước, chưa set specs (tránh lỗi khóa ngoại ngược)
         Product savedProduct = productRepository.save(product);
