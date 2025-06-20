@@ -46,7 +46,7 @@ function CartItemsBar({
   }, [quantity, isChecked]);
 
   return (
-    <div className="flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
+    <div className="w-full flex flex-col p-[var(--medium-gap)] gap-[var(--small-gap)]">
       <div className="flex justify-start w-full gap-[var(--small-gap)]">
         <div className="w-[1/5] h-full flex gap-[var(--small-gap)]">
           <div className="body-text">{index}.</div>
