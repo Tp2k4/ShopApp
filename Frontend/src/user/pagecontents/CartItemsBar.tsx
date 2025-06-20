@@ -51,7 +51,7 @@ function CartItemsBar({
         <div className="w-[1/5] h-full flex gap-[var(--small-gap)]">
           <div className="body-text">{index}.</div>
 
-          <div className="w-[100px] h-full aspect-square rounded-md overflow-hidden ">
+          <div className="w-[100px] aspect-square rounded-md overflow-hidden ">
             <img
               src={CartItemInfos.productImageUrl}
               alt="product image"
