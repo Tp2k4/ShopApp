@@ -164,6 +164,7 @@ const PopupProductModify = ({
                   inputFieldWidth="w-[240px]"
                 />
                 {/* Bảo hành */}
+
                 <LabeledInputField
                   value={productInfo.warranty || ""}
                   onChange={(e: any) =>
